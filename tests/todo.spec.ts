@@ -1,27 +1,32 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
+import { TodoPage } from "../pages/TodoPage.ts";
+import { text } from "../data/texts.ts";
+
+let todo: TodoPage;
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("https://todomvc.com/examples/react/dist/");
-});
-test("The page should have a correct title", async ({ page }) => {
-  await expect(page).toHaveTitle("TodoMVC: React");
+  todo = new TodoPage(page);
+  await todo.visit();
 });
 
-test("The page should have a correct header", async ({ page }) => {
-  await expect(page.locator("h1")).toHaveText("todos");
-});
+test.describe("ToDo Page", () => {
+  test("The page should have a correct title", async () => {
+    await todo.checkTitle();
+  });
 
-test("The user should be able to add a new todo", async ({ page }) => {
-  await page.getByPlaceholder("What needs to be done?").fill("Buy bread");
-  await page.getByPlaceholder("What needs to be done?").press("Enter");
-  await expect(page.getByText("1 item left!")).toBeVisible();
-});
+  test("The page should have a correct header", async () => {
+    await todo.checkHeader();
+  });
 
-test("The user should be able to mark a todo as completed", async ({
-  page,
-}) => {
-  await page.getByPlaceholder("What needs to be done?").fill("Buy milk");
-  await page.getByPlaceholder("What needs to be done?").press("Enter");
-  await page.getByTestId("todo-item-toggle").click();
-  await expect(page.getByText("0 items left!")).toBeVisible();
+  test("Working with todos", async () => {
+    await test.step("Step 1: The user should be able to add a new todo", async () => {
+      await todo.addNewTodo(text.firstTodo);
+      await todo.checkCountOfTodos(text.quantity1);
+    });
+
+    await test.step("Step 2: The user should be able to mark a todo as completed", async () => {
+      await todo.toggleTodo();
+      await todo.checkCountOfTodos(text.quantity0);
+    });
+  });
 });
