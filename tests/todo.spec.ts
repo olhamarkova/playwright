@@ -1,6 +1,8 @@
 import { test } from "@playwright/test";
-import { TodoPage } from "../pages/TodoPage.ts";
-import { text } from "../data/texts.ts";
+import TodoPage from "../pages/TodoPage.ts";
+import { text } from "../dataProviders/pageDP.ts";
+import { todos } from "../dataProviders/todos.ts";
+import { generateItemLeftText } from "../utils/messageGenerator.ts";
 
 let todo: TodoPage;
 
@@ -20,13 +22,15 @@ test.describe("ToDo Page", () => {
 
   test("Working with todos", async () => {
     await test.step("Step 1: The user should be able to add a new todo", async () => {
-      await todo.addNewTodo(text.firstTodo);
-      await todo.checkCountOfTodos(text.quantity1);
+      await todo.addNewTodo(todos.firstTodo);
+      const msg = await generateItemLeftText(1);
+      await todo.checkCountOfTodos(msg);
     });
 
     await test.step("Step 2: The user should be able to mark a todo as completed", async () => {
       await todo.toggleTodo();
-      await todo.checkCountOfTodos(text.quantity0);
+      const msg = await generateItemLeftText(0);
+      await todo.checkCountOfTodos(msg);
     });
   });
 });

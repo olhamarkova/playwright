@@ -1,8 +1,8 @@
 import { type Locator, type Page } from "@playwright/test";
 import { expect } from "@playwright/test";
-import { text } from "../data/texts";
+import { text } from "../dataProviders/pageDP";
 
-export class TodoPage {
+export default class TodoPage {
   readonly page: Page;
   readonly url: string;
   readonly header: Locator;
@@ -11,7 +11,7 @@ export class TodoPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.url = "https://todomvc.com/examples/react/dist/";
+    this.url = process.env.URL!;
     this.header = this.page.locator("h1");
     this.newTodoInput = this.page.getByPlaceholder(text.placeholder);
     this.toggleNewTodo = this.page.getByTestId("todo-item-toggle");
@@ -26,7 +26,7 @@ export class TodoPage {
   }
 
   async checkHeader() {
-    await expect(this.header).toHaveText(text.header);
+    await expect(this.header).toHaveText(text.heading);
   }
 
   async addNewTodo(text: string) {
@@ -42,5 +42,3 @@ export class TodoPage {
     await this.toggleNewTodo.click();
   }
 }
-
-export default TodoPage;
