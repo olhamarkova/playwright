@@ -1,7 +1,6 @@
 import { test } from "@playwright/test";
 import TodoPage from "../pages/TodoPage.ts";
-import { text } from "../dataProviders/pageDP.ts";
-import { todos } from "../dataProviders/todos.ts";
+import { todos } from "../utils/services/data-service.ts";
 import { generateItemLeftText } from "../utils/messageGenerator.ts";
 
 let todo: TodoPage;

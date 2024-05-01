@@ -1,6 +1,6 @@
 import { type Locator, type Page } from "@playwright/test";
 import { expect } from "@playwright/test";
-import { text } from "../dataProviders/pageDP";
+import { text } from "../utils/services/data-service";
 
 export default class TodoPage {
   readonly page: Page;
