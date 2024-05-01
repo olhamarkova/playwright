@@ -2,6 +2,7 @@ import { test } from "@playwright/test";
 import TodoPage from "../pages/TodoPage.ts";
 import { todos } from "../utils/services/data-service.ts";
 import { generateItemLeftText } from "../utils/messageGenerator.ts";
+import { screenshot } from "../utils/screenshot.ts";
 
 let todo: TodoPage;
 
@@ -19,17 +20,21 @@ test.describe("ToDo Page", () => {
     await todo.checkHeader();
   });
 
-  test("Working with todos", async () => {
+  test("Working with todos", async ({ page }) => {
     await test.step("Step 1: The user should be able to add a new todo", async () => {
       await todo.addNewTodo(todos.firstTodo);
       const msg = await generateItemLeftText(1);
       await todo.checkCountOfTodos(msg);
+
+      await screenshot(page, test);
     });
 
     await test.step("Step 2: The user should be able to mark a todo as completed", async () => {
       await todo.toggleTodo();
       const msg = await generateItemLeftText(0);
       await todo.checkCountOfTodos(msg);
+
+      await screenshot(page, test);
     });
   });
 });
