@@ -8,6 +8,7 @@ export default class TodoPage {
   readonly header: Locator;
   readonly newTodoInput: Locator;
   readonly toggleNewTodo: Locator;
+  readonly todoLabel: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -15,6 +16,7 @@ export default class TodoPage {
     this.header = this.page.locator("h1");
     this.newTodoInput = this.page.getByPlaceholder(text.placeholder);
     this.toggleNewTodo = this.page.getByTestId("todo-item-toggle");
+    this.todoLabel = this.page.locator("label[data-testid='todo-item-label']");
   }
 
   async visit() {
@@ -34,8 +36,12 @@ export default class TodoPage {
     await this.newTodoInput.press("Enter");
   }
 
-  async checkCountOfTodos(text: string) {
-    await expect(this.page.getByText(text)).toBeVisible();
+  async validateTodoText(text: string, index: number) {
+    await expect(this.todoLabel.nth(index)).toHaveText(text);
+  }
+
+  async checkCountOfTodos(msg: string) {
+    await expect(this.page.getByText(msg)).toBeVisible();
   }
 
   async toggleTodo() {

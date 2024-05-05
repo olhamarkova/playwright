@@ -25,6 +25,7 @@ test.describe("ToDo Page", () => {
       await todo.addNewTodo(todos.firstTodo);
       const msg = await generateItemLeftText(1);
       await todo.checkCountOfTodos(msg);
+      await todo.validateTodoText(todos.firstTodo, 0);
 
       await screenshot(page, test);
     });
