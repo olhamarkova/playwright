@@ -4,23 +4,20 @@ import BasePage from "../BasePage";
 import { CategoryNames } from "./mainPageTypes";
 
 export class MainPage extends BasePage {
+  readonly navigationCards: Locator;
+  readonly cards: Locator;
+  readonly cardLogos: Locator;
+  readonly cardTitles: Locator;
+
   constructor(page: Page) {
     super(page);
+    this.navigationCards = this.page.locator(".category-cards");
+    this.cards = this.navigationCards.locator(".card");
+    this.cardLogos = this.cards.locator(".avatar");
+    this.cardTitles = this.cards.locator("h5");
   }
-
-  readonly navigationCards = this.page.locator(".category-cards");
-  readonly cards = this.navigationCards.locator(".card");
-  readonly cardLogos = this.cards.locator(".avatar");
-  readonly cardTitles = this.cards.locator("h5");
 
   async goToCategory(categoryName: CategoryNames) {
     await this.cardTitles.getByText(categoryName).click();
-  }
-
-  async checkCategoryLogos() {
-    const logos = this.cardLogos;
-    for (let i = 0; i < (await logos.count()); i++) {
-      expect(logos.nth(i)).toBeVisible();
-    }
   }
 }
