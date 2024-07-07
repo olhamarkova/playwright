@@ -1,4 +1,5 @@
 import { test } from "@playwright/test";
+import { qase } from "playwright-qase-reporter";
 import { MainPage } from "../pages/mainPage/MainPage.ts";
 import { screenshot } from "../utils/screenshot.ts";
 import { copyRightText } from "../data/footerText.ts";
@@ -14,6 +15,8 @@ test.describe("Main Page Smoke Tests", () => {
   test("The Main Page Should Have All The Expected Elements", async ({
     page,
   }) => {
+    qase.id(4);
+    qase.title(test.info().title);
     await test.step("Step 1: Check The Page Title", async () => {
       await mainPage.checkTitle("DEMOQA");
     });
