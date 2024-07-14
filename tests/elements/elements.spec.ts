@@ -1,6 +1,7 @@
 import { test } from "@playwright/test";
 import { qase } from "playwright-qase-reporter";
-import { ElementsPage } from "../../pages/elements/Elements.ts";
+import { ElementsPage } from "../../pages/elements/ElementsPage.ts";
+import { TextBoxPage } from "../../pages/elements/TextBoxPage.ts";
 import { screenshot } from "../../utils/screenshot.ts";
 import {
   copyRightText,
@@ -11,12 +12,15 @@ import {
 import {
   callToAction,
   elementPagesHeadings as headings,
+  textBoxPlaceholders,
 } from "../../pages/elements/elementsData.ts";
 
 let elements: ElementsPage;
+let textBox: TextBoxPage;
 
 test.beforeEach(async ({ page }) => {
   elements = new ElementsPage(page, categoryUrls.elements);
+  textBox = new TextBoxPage(page, subCategoriesUrls.elements.textBox);
   await elements.visit();
 });
 
@@ -36,7 +40,7 @@ test.describe("Elements Page Tests", () => {
     });
 
     await test.step("Step 3: The Logo Should Be Visible", async () => {
-      await elements.checkLogo();
+      await elements.checkElementVisibility(elements.logo);
     });
 
     await test.step("Step 4: The Footer Be Visible And Contain Copyright Info", async () => {
@@ -54,11 +58,33 @@ test.describe("Elements Page Tests", () => {
 
     await test.step("Step 1: The Page Should Be Opened Through Sidebar", async () => {
       await elements.sidebar.goToPage("Text Box");
-      await elements.checkPageUrl(subCategoriesUrls.elements.textBox);
+      await textBox.checkPageUrl(subCategoriesUrls.elements.textBox);
     });
 
     await test.step("Step 2: Check The Page Heading", async () => {
-      await elements.checkHeading(headings.textBox);
+      await textBox.checkHeading(headings.textBox);
     });
+
+    await test.step("Step 3: Check The Form", async () => {
+      await textBox.checkEmptyInput(textBox.fullNameInput);
+      await textBox.checkPlaceholder(
+        textBox.fullNameInput,
+        textBoxPlaceholders.fullName
+      );
+      await textBox.checkEmptyInput(textBox.emailInput);
+      await textBox.checkPlaceholder(
+        textBox.emailInput,
+        textBoxPlaceholders.email
+      );
+      await textBox.checkEmptyInput(textBox.currentAddressInput);
+      await textBox.checkPlaceholder(
+        textBox.currentAddressInput,
+        textBoxPlaceholders.currentAddress
+      );
+      await textBox.checkEmptyInput(textBox.permanentAddress);
+      await textBox.checkElementVisibility(textBox.submitButton);
+    });
+
+    // await screenshot(page, test);
   });
 });

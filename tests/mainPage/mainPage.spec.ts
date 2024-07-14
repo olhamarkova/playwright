@@ -26,11 +26,11 @@ test.describe("Main Page Smoke Tests", () => {
     });
 
     await test.step("Step 2: The Page Should Have A Header", async () => {
-      await mainPage.checkHeader();
+      await mainPage.checkElementVisibility(mainPage.header);
     });
 
     await test.step("Step 3: The Logo Should Be Visible", async () => {
-      await mainPage.checkLogo();
+      await mainPage.checkElementVisibility(mainPage.logo);
     });
 
     await test.step("Step 4: The Navigation Cards Should Be Presented On The Page", async () => {

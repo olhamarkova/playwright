@@ -28,6 +28,22 @@ export default class BasePage {
     await this.logo.click();
   }
 
+  async clickButton(button: Locator) {
+    await button.click();
+  }
+
+  async fillInput(
+    input: Locator,
+    value: string,
+    pressSequentially: boolean = false
+  ) {
+    if (!pressSequentially) {
+      await input.fill(value);
+    } else {
+      input.pressSequentially(value);
+    }
+  }
+
   async checkTextElement(text: string) {
     await expect(this.page.getByText(text)).toBeVisible();
   }
@@ -40,14 +56,6 @@ export default class BasePage {
     await expect(this.heading).toHaveText(headingText);
   }
 
-  async checkHeader() {
-    await expect(this.header).toBeVisible();
-  }
-
-  async checkLogo() {
-    await expect(this.logo).toBeVisible();
-  }
-
   async checkFooter(copyRightText: string) {
     await expect(this.footer).toBeVisible();
     await expect(this.copyRightInfo).toHaveText(copyRightText);
@@ -57,6 +65,24 @@ export default class BasePage {
     for (let i = 0; i < (await elements.count()); i++) {
       expect(elements.nth(i)).toBeVisible();
     }
+  }
+
+  async checkElementVisibility(element: Locator) {
+    await expect(element).toBeVisible();
+  }
+
+  async checkEmptyInput(input: Locator) {
+    await expect(input).toBeVisible();
+    await expect(input).toBeEditable();
+    await expect(input).toBeEmpty();
+  }
+
+  async checkPlaceholder(input: Locator, placeholder: string) {
+    await expect(input).toHaveAttribute("placeholder", placeholder);
+  }
+
+  async checkInputValue(input: Locator, value: string) {
+    await expect(input).toHaveValue(value);
   }
 
   async checkPageUrl(url: string) {

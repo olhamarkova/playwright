@@ -4,3 +4,9 @@ export const callToAction =
 export const elementPagesHeadings = {
   textBox: "Text Box",
 };
+
+export const textBoxPlaceholders = {
+  fullName: "Full Name",
+  email: "name@example.com",
+  currentAddress: "Current Address",
+};
