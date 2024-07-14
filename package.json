@@ -4,17 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:e2e": "npx playwright test tests/",
-    "test:e2e:all": "npx playwright test tests --project=all-browsers-and-tests",
-    "test:e2e:smoke": "npx playwright test --grep @smoke",
-    "test:open": "npx playwright test --ui"
+    "test": "npx playwright test tests/ --project=chrome",
+    "smoke": "npx playwright test tests/ --project=chrome --grep '@smoke'",
+    "test all": "npx playwright test tests/",
+    "test smoke": "npx playwright test --grep @smoke",
+    "test open": "npx playwright test --ui"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.41.1",
-    "@types/node": "^20.11.9"
+    "@types/node": "^20.11.9",
+    "playwright-qase-reporter": "^2.0.5"
   },
   "dependencies": {
     "dotenv": "^16.4.5"

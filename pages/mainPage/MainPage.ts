@@ -17,7 +17,7 @@ export class MainPage extends BasePage {
     this.cardTitles = this.cards.locator("h5");
   }
 
-  async goToCategory(categoryName: CategoryNames) {
+  async goToCategory(categoryName: CategoryNames | string) {
     await this.cardTitles.getByText(categoryName).click();
   }
 }

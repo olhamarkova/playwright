@@ -24,6 +24,10 @@ export default class BasePage {
     await this.page.goto(this.url);
   }
 
+  async goToMainPage() {
+    await this.logo.click();
+  }
+
   async checkTitle(titleText: string) {
     await expect(this.page).toHaveTitle(titleText);
   }
@@ -49,5 +53,9 @@ export default class BasePage {
     for (let i = 0; i < (await elements.count()); i++) {
       expect(elements.nth(i)).toBeVisible();
     }
+  }
+
+  async checkPageUrl(url: string) {
+    await expect(this.page.url()).toContain(url);
   }
 }
