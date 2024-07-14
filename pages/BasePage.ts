@@ -28,6 +28,10 @@ export default class BasePage {
     await this.logo.click();
   }
 
+  async checkTextElement(text: string) {
+    await expect(this.page.getByText(text)).toBeVisible();
+  }
+
   async checkTitle(titleText: string) {
     await expect(this.page).toHaveTitle(titleText);
   }
