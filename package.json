@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test tests/ --project=chrome",
-    "test all": "npx playwright test tests --project=all-browsers-and-tests",
+    "smoke": "npx playwright test tests/ --project=chrome --grep '@smoke'",
+    "test all": "npx playwright test tests/",
     "test smoke": "npx playwright test --grep @smoke",
     "test open": "npx playwright test --ui"
   },

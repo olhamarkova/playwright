@@ -18,10 +18,11 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ["html"],
+    ["list"],
     [
       "playwright-qase-reporter",
       {
-        mode: "testops",
+        mode: "off", //"testops"
         testops: {
           api: {
             token: `${process.env.QASE_TESTOPS_API_TOKEN!}`,
@@ -42,7 +43,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "off",
-    screenshot: "on",
+    screenshot: "only-on-failure",
   },
 
   /* Configure projects for major browsers */

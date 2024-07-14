@@ -1,8 +1,12 @@
 import { test } from "@playwright/test";
 import { qase } from "playwright-qase-reporter";
-import { MainPage } from "../pages/mainPage/MainPage.ts";
-import { screenshot } from "../utils/screenshot.ts";
-import { copyRightText } from "../data/footerText.ts";
+import { MainPage } from "../../pages/mainPage/MainPage.ts";
+import { screenshot } from "../../utils/screenshot.ts";
+import {
+  copyRightText,
+  categories,
+  title,
+} from "../../utils/services/dataService.ts";
 
 let mainPage: MainPage;
 
@@ -12,13 +16,13 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Main Page Smoke Tests", () => {
-  test("The Main Page Should Have All The Expected Elements", async ({
+  test("@smoke The Main Page Should Have All The Expected Elements", async ({
     page,
   }) => {
     qase.id(4);
     qase.title(test.info().title);
     await test.step("Step 1: Check The Page Title", async () => {
-      await mainPage.checkTitle("DEMOQA");
+      await mainPage.checkTitle(title.mainTitle);
     });
 
     await test.step("Step 2: The Page Should Have A Header", async () => {
@@ -39,6 +43,26 @@ test.describe("Main Page Smoke Tests", () => {
       await mainPage.checkFooter(copyRightText);
     });
 
-    await screenshot(page, test);
+    // await screenshot(page, test);
+  });
+
+  test("@smoke The Cards On Main Page Should Lead To Corresponding Pages", async ({
+    page,
+  }) => {
+    qase.id(6);
+    qase.title(test.info().title);
+    const category = Object.values(categories);
+    const url = Object.keys(categories);
+    let step = 1;
+
+    for (let i = 0; i < category.length && url.length; i++) {
+      await test.step(`Step ${step}: Check The Page ${category[i]} Link`, async () => {
+        await mainPage.goToCategory(category[i]);
+        await mainPage.checkPageUrl(url[i]);
+        // await screenshot(page, test);
+        await mainPage.goToMainPage();
+        step++;
+      });
+    }
   });
 });
