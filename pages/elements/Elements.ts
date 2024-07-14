@@ -3,11 +3,11 @@ import { expect } from "@playwright/test";
 import BasePage from "../BasePage";
 import LeftPannel from "../leftPanel/LeftPannel";
 
-let sidebar: LeftPannel;
-
 export class ElementsPage extends BasePage {
+  readonly sidebar: LeftPannel;
+
   constructor(page: Page, url: string) {
     super(page, url);
-    sidebar = new LeftPannel(page);
+    this.sidebar = new LeftPannel(page);
   }
 }

@@ -6,8 +6,12 @@ import {
   copyRightText,
   title,
   categoryUrls,
+  subCategoriesUrls,
 } from "../../utils/services/dataService.ts";
-import { callToAction } from "../../pages/elements/elementsData.ts";
+import {
+  callToAction,
+  elementPagesHeadings as headings,
+} from "../../pages/elements/elementsData.ts";
 
 let elements: ElementsPage;
 
@@ -22,6 +26,7 @@ test.describe("Elements Page Tests", () => {
   }) => {
     //qase.id(7);
     qase.title(test.info().title);
+
     await test.step("Step 1: Check The Elements Page Title", async () => {
       await elements.checkTitle(title.mainTitle);
     });
@@ -39,5 +44,21 @@ test.describe("Elements Page Tests", () => {
     });
 
     // await screenshot(page, test);
+  });
+
+  test("@smoke The TextBox Page Should Have All The Expected Elements", async ({
+    page,
+  }) => {
+    //qase.id(8);
+    qase.title(test.info().title);
+
+    await test.step("Step 1: The Page Should Be Opened Through Sidebar", async () => {
+      await elements.sidebar.goToPage("Text Box");
+      await elements.checkPageUrl(subCategoriesUrls.elements.textBox);
+    });
+
+    await test.step("Step 2: Check The Page Heading", async () => {
+      await elements.checkHeading(headings.textBox);
+    });
   });
 });

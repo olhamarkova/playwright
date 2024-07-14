@@ -6,3 +6,9 @@ export const categoryUrls = {
   interactions: "interaction",
   books: "books",
 };
+
+export const subCategoriesUrls = {
+  elements: {
+    textBox: "text-box",
+  },
+};
