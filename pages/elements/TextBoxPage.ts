@@ -1,9 +1,7 @@
 import { expect, type Locator, type Page } from "@playwright/test";
-import LeftPannel from "../leftPanel/LeftPannel";
 import { InnerPage } from "../core/InnerPage";
 
 export class TextBoxPage extends InnerPage {
-  readonly sidebar: LeftPannel;
   readonly fullNameInput: Locator;
   readonly emailInput: Locator;
   readonly currentAddressInput: Locator;
