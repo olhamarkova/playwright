@@ -10,3 +10,10 @@ export const textBoxPlaceholders = {
   email: "name@example.com",
   currentAddress: "Current Address",
 };
+
+export const userData = {
+  fullName: "test",
+  email: "test@gmail.com",
+  currentAddress: "test street 1",
+  permanentAddress: "test street 2",
+};

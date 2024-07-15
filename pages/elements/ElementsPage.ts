@@ -1,13 +1,8 @@
-import { type Locator, type Page } from "@playwright/test";
-import { expect } from "@playwright/test";
-import BasePage from "../BasePage";
-import LeftPannel from "../leftPanel/LeftPannel";
+import { type Page } from "@playwright/test";
+import { InnerPage } from "../core/InnerPage";
 
-export class ElementsPage extends BasePage {
-  readonly sidebar: LeftPannel;
-
+export class ElementsPage extends InnerPage {
   constructor(page: Page, url: string) {
     super(page, url);
-    this.sidebar = new LeftPannel(page);
   }
 }
