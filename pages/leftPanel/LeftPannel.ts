@@ -14,13 +14,11 @@ export default class LeftPannel {
   }
 
   menuItem(itemTitle: CategoryNames) {
-    return this.page.locator(".element-group span.pr-1 ").getByText(itemTitle);
+    return this.page.locator(".header-text").filter({ hasText: itemTitle });
   }
 
-  menuSubItem(subItemId: number, subItemText: MenuSubItems) {
-    return this.page
-      .locator(`#item-"${subItemId}" span`)
-      .getByText(subItemText);
+  menuSubItem(subItemId: number, subItemText: MenuSubItems | string) {
+    return this.page.locator(`#item-${subItemId} span`).getByText(subItemText);
   }
 
   async openMenu(menuItem: CategoryNames) {
@@ -29,5 +27,14 @@ export default class LeftPannel {
 
   async goToPage(menuSubItem: MenuSubItems) {
     await this.page.getByText(menuSubItem).click();
+  }
+
+  async checkMenuItems(items: string[]) {
+    await items.forEach((el, index) => {
+      if (el === "Book Store" || el === "Profile" || el === "Book Store API") {
+        index++;
+      }
+      expect(this.menuSubItem(index, el)).toBeVisible();
+    });
   }
 }

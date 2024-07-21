@@ -40,9 +40,6 @@ test.describe("Elements Page Tests", () => {
       await elements.checkFooter(copyRightText);
     });
 
-    //add assertions for sidebar - Elemets should be active, submenu should be opened, visible elements
-    //sub pages should be opened through sidebar - separate suite?
-
     // await screenshot(page, test);
   });
 });
