@@ -11,4 +11,7 @@ export const subCategoriesUrls = {
   elements: {
     textBox: "text-box",
   },
+  books: {
+    bookStoreApi: "swagger/",
+  },
 };

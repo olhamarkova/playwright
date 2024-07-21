@@ -1,6 +1,5 @@
 import { type Locator, type Page, expect } from "@playwright/test";
 import { CategoryNames } from "../mainPage/mainPageTypes";
-import { MenuSubItems } from "./leftPanelTypes";
 
 export default class LeftPannel {
   readonly page: Page;
@@ -17,24 +16,35 @@ export default class LeftPannel {
     return this.page.locator(".header-text").filter({ hasText: itemTitle });
   }
 
-  menuSubItem(subItemId: number, subItemText: MenuSubItems | string) {
+  menuSubItem(subItemId: number, subItemText: string) {
     return this.page.locator(`#item-${subItemId} span`).getByText(subItemText);
+  }
+
+  menuSubItemButton(elementId: number) {
+    return this.page.locator(`.show #item-${elementId}`);
   }
 
   async openMenu(menuItem: CategoryNames) {
     await this.menuItem(menuItem).click();
   }
 
-  async goToPage(menuSubItem: MenuSubItems) {
-    await this.page.getByText(menuSubItem).click();
+  async goToPage(menuSubItem: string) {
+    await this.page.getByText(menuSubItem, { exact: true }).click();
   }
 
   async checkMenuItems(items: string[]) {
-    await items.forEach((el, index) => {
+    for (let [index, el] of items.entries()) {
       if (el === "Book Store" || el === "Profile" || el === "Book Store API") {
         index++;
       }
-      expect(this.menuSubItem(index, el)).toBeVisible();
-    });
+      await expect(this.menuSubItem(index, el)).toBeVisible();
+      await this.goToPage(el);
+      if (el === "Book Store API") {
+        return;
+      }
+      await expect(this.menuSubItemButton(index)).toHaveClass(
+        "btn btn-light active"
+      );
+    }
   }
 }
