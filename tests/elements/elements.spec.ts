@@ -9,6 +9,7 @@ import {
   subCategoriesUrls,
 } from "../../utils/services/dataService.ts";
 import { callToAction } from "../../pages/elements/elementsData.ts";
+import { sidebarItems } from "../../pages/leftPanel/leftPanelData.ts";
 
 let elements: ElementsPage;
 
@@ -41,5 +42,26 @@ test.describe("Elements Page Tests", () => {
     });
 
     // await screenshot(page, test);
+  });
+
+  test("@smoke The Elements Menu Subitems Should Lead To Corresponding Pages", async ({
+    page,
+  }) => {
+    //qase.id(11);
+    qase.title(test.info().title);
+
+    const url = Object.values(subCategoriesUrls.elements);
+    let step = 1;
+
+    for (let i = 0; i < url.length; i++) {
+      await test.step(`Step ${step}: Check The Page ${sidebarItems.elements[i]} Link`, async () => {
+        await elements.sidebar.goToPage(sidebarItems.elements[i]);
+        await elements.checkPageUrl(url[i]);
+
+        // await screenshot(page, test);
+
+        step++;
+      });
+    }
   });
 });
