@@ -4,10 +4,10 @@ import { screenshot } from "../../utils/screenshot.ts";
 import {
   categoryUrls,
   subCategoriesUrls,
+  sidebarItems,
 } from "../../utils/services/dataService.ts";
 import { ElementsPage } from "../../pages/elements/ElementsPage.ts";
 import LeftPannel from "../../pages/leftPanel/LeftPannel.ts";
-import { sidebarItems } from "../../pages/leftPanel/leftPanelData.ts";
 
 let elements: ElementsPage;
 let sidebar: LeftPannel;

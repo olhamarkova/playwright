@@ -7,9 +7,9 @@ import {
   title,
   categoryUrls,
   subCategoriesUrls,
+  sidebarItems,
 } from "../../utils/services/dataService.ts";
 import { callToAction } from "../../pages/elements/elementsData.ts";
-import { sidebarItems } from "../../pages/leftPanel/leftPanelData.ts";
 
 let elements: ElementsPage;
 
