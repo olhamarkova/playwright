@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { qase } from "playwright-qase-reporter";
 import { TextBoxPage } from "../../pages/elements/TextBoxPage.ts";
 import { screenshot } from "../../utils/screenshot.ts";
@@ -101,6 +101,46 @@ test.describe("Elements Page Tests", () => {
         "permanentAddress",
         userData.permanentAddress
       );
+    });
+
+    // await screenshot(page, test);
+  });
+
+  test("@negative User Shall See An Error When Submit The Form With Invalid Email", async ({
+    page,
+  }) => {
+    //qase.id(12);
+    qase.title(test.info().title);
+
+    await test.step("Step 1: Fill The Form", async () => {
+      await textBox.fillInput(textBox.fullNameInput, userData.fullName);
+      await textBox.checkInputValue(textBox.fullNameInput, userData.fullName);
+      await textBox.fillInput(textBox.emailInput, "foo");
+      await textBox.checkInputValue(textBox.emailInput, "foo");
+      await textBox.fillInput(
+        textBox.currentAddressInput,
+        userData.currentAddress
+      );
+      await textBox.checkInputValue(
+        textBox.currentAddressInput,
+        userData.currentAddress
+      );
+      await textBox.fillInput(
+        textBox.permanentAddress,
+        userData.permanentAddress
+      );
+      await textBox.checkInputValue(
+        textBox.permanentAddress,
+        userData.permanentAddress
+      );
+
+      await test.step("Step 2: Submit The Form", async () => {
+        await textBox.clickButton(textBox.submitButton);
+        await expect(textBox.emailInput).toHaveCSS(
+          "border",
+          "1px solid rgb(255, 0, 0)"
+        );
+      });
     });
 
     // await screenshot(page, test);

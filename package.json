@@ -8,6 +8,7 @@
     "smoke": "npx playwright test tests/ --project=chrome --grep '@smoke'",
     "all": "npx playwright test tests/",
     "functional": "npx playwright test --grep '@functional'",
+    "negative": "npx playwright test --grep '@negative'",
     "test open": "npx playwright test --ui"
   },
   "keywords": [],
