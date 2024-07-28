@@ -17,3 +17,35 @@ export const userData = {
   currentAddress: "test street 1",
   permanentAddress: "test street 2",
 };
+
+export const checkBoxesMenu = {
+  home: "Home",
+  categories: {
+    desktop: "Desktop",
+    document: "Document",
+    downloads: "Downloads",
+  },
+  desktopSubcategories: {
+    notes: "Notes",
+    commands: "Commands",
+  },
+  documentSubcategories: {
+    workspace: "Workspace",
+    workspaceSubcategories: {
+      react: "React",
+      angular: "Angular",
+      veu: "Veu",
+    },
+    office: "Office",
+    officeSubcategories: {
+      public: "Public",
+      private: "Private",
+      classified: "Classified",
+      general: "General",
+    },
+  },
+  downloadSubcategories: {
+    word: "Word File.doc",
+    excel: "Excel File.doc",
+  },
+};

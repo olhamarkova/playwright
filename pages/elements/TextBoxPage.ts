@@ -8,9 +8,11 @@ export class TextBoxPage extends InnerPage {
   readonly permanentAddress: Locator;
   readonly submitButton: Locator;
   readonly output: Locator;
+  readonly emailBorderCss: string;
 
   constructor(page: Page, url: string) {
     super(page, url);
+    this.emailBorderCss = "1px solid rgb(255, 0, 0)";
     this.fullNameInput = this.page.locator("#userName");
     this.emailInput = this.page.locator("#userEmail");
     this.currentAddressInput = this.page.locator(

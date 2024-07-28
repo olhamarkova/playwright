@@ -138,7 +138,7 @@ test.describe("Elements Page Tests", () => {
         await textBox.clickButton(textBox.submitButton);
         await expect(textBox.emailInput).toHaveCSS(
           "border",
-          "1px solid rgb(255, 0, 0)"
+          textBox.emailBorderCss
         );
       });
     });
