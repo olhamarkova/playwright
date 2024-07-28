@@ -77,6 +77,10 @@ export default class BasePage {
     await expect(input).toBeEmpty();
   }
 
+  async checkElementsCount(element: Locator, count: number) {
+    await expect(element).toHaveCount(count);
+  }
+
   async checkPlaceholder(input: Locator, placeholder: string) {
     await expect(input).toHaveAttribute("placeholder", placeholder);
   }

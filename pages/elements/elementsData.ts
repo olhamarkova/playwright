@@ -3,6 +3,7 @@ export const callToAction =
 
 export const elementPagesHeadings = {
   textBox: "Text Box",
+  checkbox: "Check Box",
 };
 
 export const textBoxPlaceholders = {
