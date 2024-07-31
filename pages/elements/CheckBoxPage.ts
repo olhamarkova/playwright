@@ -3,8 +3,6 @@ import { InnerPage } from "../core/InnerPage";
 import { CheckboxLabels } from "./ElementsTypes";
 
 export class CheckBoxPage extends InnerPage {
-  readonly expandAllButton: Locator;
-  readonly collapseAllButton: Locator;
   readonly toggleButtons: Locator;
   readonly checkboxLabels: Locator;
   readonly sheetIcons: Locator;
@@ -12,12 +10,14 @@ export class CheckBoxPage extends InnerPage {
 
   constructor(page: Page, url: string) {
     super(page, url);
-    this.expandAllButton = this.page.getByLabel("Expand all");
-    this.collapseAllButton = this.page.getByLabel("Collapse all");
     this.toggleButtons = this.page.locator('button[title="Toggle"]');
     this.checkboxLabels = this.page.locator('span[class="rct-title"]');
     this.sheetIcons = this.page.locator("svg.rct-icon-leaf-close");
     this.checkboxes = this.page.locator("input[type='checkbox']");
+  }
+
+  button(buttonName: "Expand" | "Collapse") {
+    return this.page.getByLabel(`${buttonName} all`);
   }
 
   toggleButton(index: number) {
@@ -53,5 +53,15 @@ export class CheckBoxPage extends InnerPage {
     } else {
       await expect(this.checkbox(category)).toBeChecked();
     }
+  }
+
+  async validateAllCheckboxes(toBeChecked: boolean = false) {
+    const checkboxes = this.checkboxes;
+    for (let i = 0; i < (await checkboxes.count()); i++)
+      if (!toBeChecked) {
+        await expect(checkboxes.nth(i)).not.toBeChecked();
+      } else {
+        await expect(checkboxes.nth(i)).toBeChecked();
+      }
   }
 }
