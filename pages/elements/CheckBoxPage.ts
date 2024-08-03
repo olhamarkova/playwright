@@ -1,6 +1,7 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { InnerPage } from "../core/InnerPage";
 import { CheckboxLabels } from "./ElementsTypes";
+import { categories } from "../../data/categories";
 
 export class CheckBoxPage extends InnerPage {
   readonly toggleButtons: Locator;
@@ -41,7 +42,16 @@ export class CheckBoxPage extends InnerPage {
   }
 
   checkbox(category: CheckboxLabels) {
-    return this.page.locator(`#tree-node-${category}`);
+    return this.page.locator(`label[for="tree-node-${category}"] svg`).nth(0);
+  }
+
+  async check(checkbox: Locator | CheckboxLabels, check: boolean = true) {
+    let checkboxElement = this.checkbox(checkbox as CheckboxLabels);
+    if (!check) {
+      await checkboxElement.uncheck();
+    } else {
+      await checkboxElement.check();
+    }
   }
 
   async validateAllCheckboxes(toBeChecked: boolean = false) {
@@ -54,15 +64,18 @@ export class CheckBoxPage extends InnerPage {
       }
   }
 
-  async validateCheckbox(
-    checkbox: CheckboxLabels,
-    toBeChecked?: boolean
-  ): Promise<void> {
+  async validateCheckbox(checkbox: CheckboxLabels, toBeChecked?: boolean) {
     let checkboxElement = this.checkbox(checkbox);
     if (!toBeChecked) {
       await expect(checkboxElement).not.toBeChecked();
     } else {
       await expect(checkboxElement).toBeChecked();
     }
+  }
+
+  async validateParentCategories(category: CheckboxLabels) {
+    await expect(this.checkbox(category)).toHaveClass(
+      "rct-icon rct-icon-half-check"
+    );
   }
 }

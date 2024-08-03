@@ -40,11 +40,12 @@ export class InnerPage extends BasePage {
   /**
    * Check/uncheck checkboxes
    */
-  async check(checkbox: Locator, mark: boolean = true) {
-    if (!mark) {
-      await checkbox.uncheck();
+  async check(checkbox: Locator | CheckboxLabels, check: boolean = true) {
+    let checkboxElement = checkbox as Locator;
+    if (!check) {
+      await checkboxElement.uncheck();
     } else {
-      await checkbox.check();
+      await checkboxElement.check();
     }
   }
 
