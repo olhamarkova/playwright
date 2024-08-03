@@ -4,6 +4,7 @@ export const callToAction =
 export const elementPagesHeadings = {
   textBox: "Text Box",
   checkbox: "Check Box",
+  radioButton: "Radio Button",
 };
 
 export const textBoxPlaceholders = {
@@ -19,34 +20,4 @@ export const userData = {
   permanentAddress: "test street 2",
 };
 
-export const checkBoxesMenu = {
-  home: "Home",
-  categories: {
-    desktop: "Desktop",
-    document: "Document",
-    downloads: "Downloads",
-  },
-  desktopSubcategories: {
-    notes: "Notes",
-    commands: "Commands",
-  },
-  documentSubcategories: {
-    workspace: "Workspace",
-    workspaceSubcategories: {
-      react: "React",
-      angular: "Angular",
-      veu: "Veu",
-    },
-    office: "Office",
-    officeSubcategories: {
-      public: "Public",
-      private: "Private",
-      classified: "Classified",
-      general: "General",
-    },
-  },
-  downloadSubcategories: {
-    word: "Word File.doc",
-    excel: "Excel File.doc",
-  },
-};
+export const questionText = "Do you like the site?";

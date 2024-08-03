@@ -59,4 +59,12 @@ export class InnerPage extends BasePage {
       await expect(checkbox as Locator).toBeChecked();
     }
   }
+
+  async validateDisabledElement<T extends string | Locator>(element: T) {
+    await expect(element as Locator).toBeDisabled();
+  }
+
+  async validateEnabledElement<T extends string | Locator>(element: T) {
+    await expect(element as Locator).toBeEnabled();
+  }
 }

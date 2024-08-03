@@ -2,10 +2,7 @@ import { test } from "@playwright/test";
 import { qase } from "playwright-qase-reporter";
 import { screenshot } from "../../utils/screenshot.ts";
 import { subCategoriesUrls } from "../../utils/services/dataService.ts";
-import {
-  checkBoxesMenu,
-  elementPagesHeadings as headings,
-} from "../../pages/elements/elementsData.ts";
+import { elementPagesHeadings as headings } from "../../pages/elements/elementsData.ts";
 import { CheckBoxPage } from "../../pages/elements/CheckBoxPage.ts";
 import { CheckboxLabels } from "../../pages/elements/ElementsTypes.ts";
 
@@ -110,7 +107,7 @@ test.describe("Checkbox Page Tests", () => {
   test("@functional User Shall Be Able To Check And Uncheck One Category", async ({
     page,
   }) => {
-    //qase.id(15);
+    //qase.id(16);
     qase.title(test.info().title);
 
     await test.step("Step 1: Find The Angular Category", async () => {
