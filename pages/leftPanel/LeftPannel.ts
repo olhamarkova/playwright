@@ -32,7 +32,7 @@ export default class LeftPannel {
     await this.page.getByText(menuSubItem, { exact: true }).click();
   }
 
-  async checkMenuItems(items: string[]) {
+  async validateMenuItems(items: string[]) {
     for (let [index, el] of items.entries()) {
       if (el === "Book Store" || el === "Profile" || el === "Book Store API") {
         index++;

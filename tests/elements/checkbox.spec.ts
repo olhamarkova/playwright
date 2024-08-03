@@ -21,24 +21,28 @@ test.describe("Checkbox Page Tests", () => {
     qase.title(test.info().title);
 
     await test.step("Step 1: Check The Page Heading", async () => {
-      await checkboxPage.checkHeading(headings.checkbox);
+      await checkboxPage.validateHeading(headings.checkbox);
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
-      await checkboxPage.checkElementVisibility(checkboxPage.button("Expand"));
-      await checkboxPage.checkElementVisibility(
+      await checkboxPage.validateElementVisibility(
+        checkboxPage.button("Expand")
+      );
+      await checkboxPage.validateElementVisibility(
         checkboxPage.button("Collapse")
       );
-      await checkboxPage.checkElementVisibility(checkboxPage.toggleButton(1));
+      await checkboxPage.validateElementVisibility(
+        checkboxPage.toggleButton(1)
+      );
     });
 
     await test.step("Step 3: Check The Categories List", async () => {
-      await checkboxPage.checkElementsCount(checkboxPage.checkboxes, 1);
-      await checkboxPage.checkElementsCount(
+      await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 1);
+      await checkboxPage.validateElementsCount(
         checkboxPage.folderIcons("close"),
         1
       );
-      await checkboxPage.checkElementVisibility(
+      await checkboxPage.validateElementVisibility(
         checkboxPage.checkboxLabel("Home")
       );
     });
@@ -54,23 +58,23 @@ test.describe("Checkbox Page Tests", () => {
 
     await test.step("Step 1: Expand All Categories", async () => {
       await checkboxPage.clickButton(checkboxPage.button("Expand"));
-      await checkboxPage.checkElementsVisibility(
+      await checkboxPage.validateElementsVisibility(
         checkboxPage.folderIcons("open")
       );
-      await checkboxPage.checkElementsVisibility(checkboxPage.sheetIcons);
-      await checkboxPage.checkElementsCount(
+      await checkboxPage.validateElementsVisibility(checkboxPage.sheetIcons);
+      await checkboxPage.validateElementsCount(
         checkboxPage.folderIcons("open"),
         6
       );
-      await checkboxPage.checkElementsCount(checkboxPage.sheetIcons, 11);
-      await checkboxPage.checkElementsCount(checkboxPage.checkboxes, 17);
+      await checkboxPage.validateElementsCount(checkboxPage.sheetIcons, 11);
+      await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 17);
       await checkboxPage.validateAllCheckboxes();
     });
 
     await test.step("Step 2: Collapse All Categories", async () => {
       await checkboxPage.clickButton(checkboxPage.button("Collapse"));
-      await checkboxPage.checkElementsCount(checkboxPage.checkboxes, 1);
-      await checkboxPage.checkElementsCount(
+      await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 1);
+      await checkboxPage.validateElementsCount(
         checkboxPage.folderIcons("close"),
         1
       );

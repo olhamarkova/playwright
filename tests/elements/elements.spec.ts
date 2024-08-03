@@ -26,19 +26,19 @@ test.describe("Elements Page Tests", () => {
     qase.title(test.info().title);
 
     await test.step("Step 1: Check The Elements Page Title", async () => {
-      await elements.checkTitle(title.mainTitle);
+      await elements.validateTitle(title.mainTitle);
     });
 
     await test.step("Step 2: The Page Should Have A Call To Action", async () => {
-      await elements.checkTextElement(callToAction);
+      await elements.validateTextElement(callToAction);
     });
 
     await test.step("Step 3: The Logo Should Be Visible", async () => {
-      await elements.checkElementVisibility(elements.logo);
+      await elements.validateElementVisibility(elements.logo);
     });
 
     await test.step("Step 4: The Footer Be Visible And Contain Copyright Info", async () => {
-      await elements.checkFooter(copyRightText);
+      await elements.validateFooter(copyRightText);
     });
 
     // await screenshot(page, test);
@@ -56,7 +56,7 @@ test.describe("Elements Page Tests", () => {
     for (let i = 0; i < url.length; i++) {
       await test.step(`Step ${step}: Check The Page ${sidebarItems.elements[i]} Link`, async () => {
         await elements.sidebar.goToPage(sidebarItems.elements[i]);
-        await elements.checkPageUrl(url[i]);
+        await elements.validatePageUrl(url[i]);
 
         // await screenshot(page, test);
 

@@ -24,27 +24,27 @@ test.describe("Elements Page Tests", () => {
     qase.title(test.info().title);
 
     await test.step("Step 1: Check The Page Heading", async () => {
-      await textBox.checkHeading(headings.textBox);
+      await textBox.validateHeading(headings.textBox);
     });
 
     await test.step("Step 2: Check The Form", async () => {
-      await textBox.checkEmptyInput(textBox.fullNameInput);
-      await textBox.checkPlaceholder(
+      await textBox.validateEmptyInput(textBox.fullNameInput);
+      await textBox.validatePlaceholder(
         textBox.fullNameInput,
         textBoxPlaceholders.fullName
       );
-      await textBox.checkEmptyInput(textBox.emailInput);
-      await textBox.checkPlaceholder(
+      await textBox.validateEmptyInput(textBox.emailInput);
+      await textBox.validatePlaceholder(
         textBox.emailInput,
         textBoxPlaceholders.email
       );
-      await textBox.checkEmptyInput(textBox.currentAddressInput);
-      await textBox.checkPlaceholder(
+      await textBox.validateEmptyInput(textBox.currentAddressInput);
+      await textBox.validatePlaceholder(
         textBox.currentAddressInput,
         textBoxPlaceholders.currentAddress
       );
-      await textBox.checkEmptyInput(textBox.permanentAddress);
-      await textBox.checkElementVisibility(textBox.submitButton);
+      await textBox.validateEmptyInput(textBox.permanentAddress);
+      await textBox.validateElementVisibility(textBox.submitButton);
     });
 
     // await screenshot(page, test);
@@ -58,12 +58,15 @@ test.describe("Elements Page Tests", () => {
 
     await test.step("Step 1: Fill The Full Name Input", async () => {
       await textBox.fillInput(textBox.fullNameInput, userData.fullName);
-      await textBox.checkInputValue(textBox.fullNameInput, userData.fullName);
+      await textBox.validateInputValue(
+        textBox.fullNameInput,
+        userData.fullName
+      );
     });
 
     await test.step("Step 2: Fill The Email Input", async () => {
       await textBox.fillInput(textBox.emailInput, userData.email);
-      await textBox.checkInputValue(textBox.emailInput, userData.email);
+      await textBox.validateInputValue(textBox.emailInput, userData.email);
     });
 
     await test.step("Step 3: Fill The Current Address Input", async () => {
@@ -71,7 +74,7 @@ test.describe("Elements Page Tests", () => {
         textBox.currentAddressInput,
         userData.currentAddress
       );
-      await textBox.checkInputValue(
+      await textBox.validateInputValue(
         textBox.currentAddressInput,
         userData.currentAddress
       );
@@ -82,7 +85,7 @@ test.describe("Elements Page Tests", () => {
         textBox.permanentAddress,
         userData.permanentAddress
       );
-      await textBox.checkInputValue(
+      await textBox.validateInputValue(
         textBox.permanentAddress,
         userData.permanentAddress
       );
@@ -90,14 +93,14 @@ test.describe("Elements Page Tests", () => {
 
     await test.step("Step 5: Submit The Form", async () => {
       await textBox.clickButton(textBox.submitButton);
-      await textBox.checkElementVisibility(textBox.output);
-      await textBox.checkUserInfoOutput("name", userData.fullName);
-      await textBox.checkUserInfoOutput("email", userData.email);
-      await textBox.checkUserInfoOutput(
+      await textBox.validateElementVisibility(textBox.output);
+      await textBox.validateUserInfoOutput("name", userData.fullName);
+      await textBox.validateUserInfoOutput("email", userData.email);
+      await textBox.validateUserInfoOutput(
         "currentAddress",
         userData.currentAddress
       );
-      await textBox.checkUserInfoOutput(
+      await textBox.validateUserInfoOutput(
         "permanentAddress",
         userData.permanentAddress
       );
@@ -114,14 +117,17 @@ test.describe("Elements Page Tests", () => {
 
     await test.step("Step 1: Fill The Form", async () => {
       await textBox.fillInput(textBox.fullNameInput, userData.fullName);
-      await textBox.checkInputValue(textBox.fullNameInput, userData.fullName);
+      await textBox.validateInputValue(
+        textBox.fullNameInput,
+        userData.fullName
+      );
       await textBox.fillInput(textBox.emailInput, "foo");
-      await textBox.checkInputValue(textBox.emailInput, "foo");
+      await textBox.validateInputValue(textBox.emailInput, "foo");
       await textBox.fillInput(
         textBox.currentAddressInput,
         userData.currentAddress
       );
-      await textBox.checkInputValue(
+      await textBox.validateInputValue(
         textBox.currentAddressInput,
         userData.currentAddress
       );
@@ -129,7 +135,7 @@ test.describe("Elements Page Tests", () => {
         textBox.permanentAddress,
         userData.permanentAddress
       );
-      await textBox.checkInputValue(
+      await textBox.validateInputValue(
         textBox.permanentAddress,
         userData.permanentAddress
       );

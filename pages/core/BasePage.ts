@@ -32,64 +32,38 @@ export default class BasePage {
     await button.click();
   }
 
-  async fillInput(
-    input: Locator,
-    value: string,
-    pressSequentially: boolean = false
-  ) {
-    if (!pressSequentially) {
-      await input.fill(value);
-    } else {
-      input.pressSequentially(value);
-    }
-  }
-
-  async checkTextElement(text: string) {
+  async validateTextElement(text: string) {
     await expect(this.page.getByText(text)).toBeVisible();
   }
 
-  async checkTitle(titleText: string) {
+  async validateTitle(titleText: string) {
     await expect(this.page).toHaveTitle(titleText);
   }
 
-  async checkHeading(headingText: string) {
+  async validateHeading(headingText: string) {
     await expect(this.heading).toHaveText(headingText);
   }
 
-  async checkFooter(copyRightText: string) {
+  async validateFooter(copyRightText: string) {
     await expect(this.footer).toBeVisible();
     await expect(this.copyRightInfo).toHaveText(copyRightText);
   }
 
-  async checkElementsVisibility(elements: Locator) {
+  async validateElementsVisibility(elements: Locator) {
     for (let i = 0; i < (await elements.count()); i++) {
       expect(elements.nth(i)).toBeVisible();
     }
   }
 
-  async checkElementVisibility(element: Locator) {
+  async validateElementVisibility(element: Locator) {
     await expect(element).toBeVisible();
   }
 
-  async checkEmptyInput(input: Locator) {
-    await expect(input).toBeVisible();
-    await expect(input).toBeEditable();
-    await expect(input).toBeEmpty();
-  }
-
-  async checkElementsCount(element: Locator, count: number) {
+  async validateElementsCount(element: Locator, count: number) {
     await expect(element).toHaveCount(count);
   }
 
-  async checkPlaceholder(input: Locator, placeholder: string) {
-    await expect(input).toHaveAttribute("placeholder", placeholder);
-  }
-
-  async checkInputValue(input: Locator, value: string) {
-    await expect(input).toHaveValue(value);
-  }
-
-  async checkPageUrl(url: string) {
+  async validatePageUrl(url: string) {
     await expect(this.page.url()).toContain(url);
   }
 }

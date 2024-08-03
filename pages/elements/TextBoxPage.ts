@@ -31,7 +31,7 @@ export class TextBoxPage extends InnerPage {
     return this.output.locator(`#${elementId}`);
   }
 
-  async checkUserInfoOutput(
+  async validateUserInfoOutput(
     elementId: "name" | "email" | "currentAddress" | "permanentAddress",
     text: string
   ) {

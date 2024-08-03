@@ -44,17 +44,6 @@ export class CheckBoxPage extends InnerPage {
     return this.page.locator(`#tree-node-${category}`);
   }
 
-  async validateCheckbox(
-    category: CheckboxLabels,
-    toBeChecked: boolean = false
-  ) {
-    if (!toBeChecked) {
-      await expect(this.checkbox(category)).not.toBeChecked();
-    } else {
-      await expect(this.checkbox(category)).toBeChecked();
-    }
-  }
-
   async validateAllCheckboxes(toBeChecked: boolean = false) {
     const checkboxes = this.checkboxes;
     for (let i = 0; i < (await checkboxes.count()); i++)
@@ -63,5 +52,17 @@ export class CheckBoxPage extends InnerPage {
       } else {
         await expect(checkboxes.nth(i)).toBeChecked();
       }
+  }
+
+  async validateCheckbox(
+    checkbox: CheckboxLabels,
+    toBeChecked?: boolean
+  ): Promise<void> {
+    let checkboxElement = this.checkbox(checkbox);
+    if (!toBeChecked) {
+      await expect(checkboxElement).not.toBeChecked();
+    } else {
+      await expect(checkboxElement).toBeChecked();
+    }
   }
 }
