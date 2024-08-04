@@ -17,7 +17,7 @@ test.describe("Checkbox Page Tests", () => {
   test("@smoke The Checkbox Page Should Have All The Expected Elements", async ({
     page,
   }) => {
-    //qase.id(13);
+    qase.id(7);
     qase.title(test.info().title);
 
     await test.step("Step 1: Check The Page Heading", async () => {
@@ -47,13 +47,11 @@ test.describe("Checkbox Page Tests", () => {
       );
     });
 
-    // await screenshot(page, test);
+    await screenshot(page, test);
   });
 
-  test("@functional User Shall Be Able To Open And Close The List By Clicking On Buttons", async ({
-    page,
-  }) => {
-    //qase.id(14);
+  test("@functional User Shall Be Able To Open And Close The List By Clicking On Buttons", async () => {
+    qase.id(10);
     qase.title(test.info().title);
 
     await test.step("Step 1: Expand All Categories", async () => {
@@ -69,8 +67,6 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.validateElementsCount(checkboxPage.sheetIcons, 11);
       await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 17);
       await checkboxPage.validateAllCheckboxes();
-
-      // await screenshot(page, test);
     });
 
     await test.step("Step 2: Collapse All Categories", async () => {
@@ -81,37 +77,27 @@ test.describe("Checkbox Page Tests", () => {
         1
       );
       await checkboxPage.validateCheckbox(CheckboxLabels.Home);
-
-      // await screenshot(page, test);
     });
   });
 
-  test("@functional User Shall Be Able To Check And Uncheck All The Categories", async ({
-    page,
-  }) => {
-    //qase.id(15);
+  test("@functional User Shall Be Able To Check And Uncheck All The Categories", async () => {
+    qase.id(8);
     qase.title(test.info().title);
 
     await test.step("Step 1: Check All Categories", async () => {
       await checkboxPage.check(CheckboxLabels.Home);
       await checkboxPage.clickButton(checkboxPage.button("Expand"));
       await checkboxPage.validateAllCheckboxes(true);
-
-      // await screenshot(page, test);
     });
 
     await test.step("Step 2: Uncheck All Categories", async () => {
       await checkboxPage.check(CheckboxLabels.Home, false);
       await checkboxPage.validateAllCheckboxes();
-
-      // await screenshot(page, test);
     });
   });
 
-  test("@functional User Shall Be Able To Check And Uncheck One Category", async ({
-    page,
-  }) => {
-    //qase.id(16);
+  test("@functional User Shall Be Able To Check And Uncheck One Category", async () => {
+    qase.id(9);
     qase.title(test.info().title);
 
     await test.step("Step 1: Find The Angular Category", async () => {
@@ -121,8 +107,6 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.validateElementVisibility(
         checkboxPage.checkboxLabel("Angular")
       );
-
-      // await screenshot(page, test);
     });
 
     await test.step("Step 2: Check The Angular Category", async () => {
@@ -131,16 +115,12 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.validateParentCategories(CheckboxLabels.Workspace);
       await checkboxPage.validateParentCategories(CheckboxLabels.Documents);
       await checkboxPage.validateParentCategories(CheckboxLabels.Home);
-
-      // await screenshot(page, test);
     });
 
     await test.step("Step 3: Uncheck The Angular Category", async () => {
       await checkboxPage.check(CheckboxLabels.Angular, false);
       await checkboxPage.validateCheckbox(CheckboxLabels.Angular);
       await checkboxPage.validateAllCheckboxes();
-
-      // await screenshot(page, test);
     });
   });
 });

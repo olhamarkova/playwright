@@ -22,7 +22,7 @@ test.describe("Elements Page Tests", () => {
   test("@smoke The Elements Page Should Have All The Expected Elements", async ({
     page,
   }) => {
-    //qase.id(7);
+    qase.id(11);
     qase.title(test.info().title);
 
     await test.step("Step 1: Check The Elements Page Title", async () => {
@@ -41,13 +41,11 @@ test.describe("Elements Page Tests", () => {
       await elements.validateFooter(copyRightText);
     });
 
-    // await screenshot(page, test);
+    await screenshot(page, test);
   });
 
-  test("@smoke The Elements Menu Subitems Should Lead To Corresponding Pages", async ({
-    page,
-  }) => {
-    //qase.id(11);
+  test("@smoke The Elements Menu Subitems Should Lead To Corresponding Pages", async () => {
+    qase.id(13);
     qase.title(test.info().title);
 
     const url = Object.values(subCategoriesUrls.elements);
@@ -57,8 +55,6 @@ test.describe("Elements Page Tests", () => {
       await test.step(`Step ${step}: Check The Page ${sidebarItems.elements[i]} Link`, async () => {
         await elements.sidebar.goToPage(sidebarItems.elements[i]);
         await elements.validatePageUrl(url[i]);
-
-        // await screenshot(page, test);
 
         step++;
       });

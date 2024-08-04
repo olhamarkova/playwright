@@ -22,7 +22,7 @@ test.describe("Radio Buttons Page Tests", () => {
   test("@smoke The Radio Button Page Should Have All The Expected Elements", async ({
     page,
   }) => {
-    //qase.id(17);
+    qase.id(12);
     qase.title(test.info().title);
 
     await test.step("Step 1: Check The Page Heading", async () => {
@@ -41,20 +41,16 @@ test.describe("Radio Buttons Page Tests", () => {
       await radioButtonPage.validateEnabledRadioBtns();
     });
 
-    // await screenshot(page, test);
+    await screenshot(page, test);
   });
 
-  test("@functional The User Shall Be Able To Choose Any Option", async ({
-    page,
-  }) => {
-    //qase.id(18);
+  test("@functional The User Shall Be Able To Choose Any Option", async () => {
+    qase.id(16);
     qase.title(test.info().title);
 
     await test.step("Step 1: Choose 'Yes'", async () => {
       await radioButtonPage.clickButton(radioButtonPage.labelForRadio("Yes"));
       await radioButtonPage.validateSuccessMessage("Yes");
-
-      // await screenshot(page, test);
     });
 
     await test.step("Step 2: Choose 'Impressive'", async () => {
@@ -62,8 +58,6 @@ test.describe("Radio Buttons Page Tests", () => {
         radioButtonPage.labelForRadio("Impressive")
       );
       await radioButtonPage.validateSuccessMessage("Impressive");
-
-      // await screenshot(page, test);
     });
   });
 });

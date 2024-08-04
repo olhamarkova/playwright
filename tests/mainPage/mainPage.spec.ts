@@ -43,12 +43,10 @@ test.describe("Main Page Smoke Tests", () => {
       await mainPage.validateFooter(copyRightText);
     });
 
-    // await screenshot(page, test);
+    await screenshot(page, test);
   });
 
-  test("@smoke The Cards On Main Page Should Lead To Corresponding Pages", async ({
-    page,
-  }) => {
+  test("@smoke The Cards On Main Page Should Lead To Corresponding Pages", async () => {
     qase.id(6);
     qase.title(test.info().title);
     const category = Object.values(categories);
@@ -59,7 +57,6 @@ test.describe("Main Page Smoke Tests", () => {
       await test.step(`Step ${step}: Check The Page ${category[i]} Link`, async () => {
         await mainPage.goToCategory(category[i]);
         await mainPage.validatePageUrl(url[i]);
-        // await screenshot(page, test);
         await mainPage.goToMainPage();
         step++;
       });

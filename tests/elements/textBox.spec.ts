@@ -16,11 +16,11 @@ test.beforeEach(async ({ page }) => {
   await textBox.visit();
 });
 
-test.describe("Elements Page Tests", () => {
+test.describe("Text Box Page Tests", () => {
   test("@smoke The TextBox Page Should Have All The Expected Elements", async ({
     page,
   }) => {
-    //qase.id(8);
+    qase.id(14);
     qase.title(test.info().title);
 
     await test.step("Step 1: Check The Page Heading", async () => {
@@ -47,13 +47,11 @@ test.describe("Elements Page Tests", () => {
       await textBox.validateElementVisibility(textBox.submitButton);
     });
 
-    // await screenshot(page, test);
+    await screenshot(page, test);
   });
 
-  test("@functional User Shall Be Able To Fill The Form And See The Output", async ({
-    page,
-  }) => {
-    //qase.id(9);
+  test("@functional User Shall Be Able To Fill The Form And See The Output", async () => {
+    qase.id(15);
     qase.title(test.info().title);
 
     await test.step("Step 1: Fill The Full Name Input", async () => {
@@ -105,14 +103,10 @@ test.describe("Elements Page Tests", () => {
         userData.permanentAddress
       );
     });
-
-    // await screenshot(page, test);
   });
 
-  test("@negative User Shall See An Error When Submit The Form With Invalid Email", async ({
-    page,
-  }) => {
-    //qase.id(12);
+  test("@negative User Shall See An Error When Submit The Form With Invalid Email", async () => {
+    qase.id(17);
     qase.title(test.info().title);
 
     await test.step("Step 1: Fill The Form", async () => {
@@ -148,7 +142,5 @@ test.describe("Elements Page Tests", () => {
         );
       });
     });
-
-    // await screenshot(page, test);
   });
 });
