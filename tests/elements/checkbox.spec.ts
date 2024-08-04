@@ -69,6 +69,8 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.validateElementsCount(checkboxPage.sheetIcons, 11);
       await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 17);
       await checkboxPage.validateAllCheckboxes();
+
+      // await screenshot(page, test);
     });
 
     await test.step("Step 2: Collapse All Categories", async () => {
@@ -79,9 +81,9 @@ test.describe("Checkbox Page Tests", () => {
         1
       );
       await checkboxPage.validateCheckbox(CheckboxLabels.Home);
-    });
 
-    // await screenshot(page, test);
+      // await screenshot(page, test);
+    });
   });
 
   test("@functional User Shall Be Able To Check And Uncheck All The Categories", async ({
@@ -94,14 +96,16 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.check(CheckboxLabels.Home);
       await checkboxPage.clickButton(checkboxPage.button("Expand"));
       await checkboxPage.validateAllCheckboxes(true);
+
+      // await screenshot(page, test);
     });
 
     await test.step("Step 2: Uncheck All Categories", async () => {
       await checkboxPage.check(CheckboxLabels.Home, false);
       await checkboxPage.validateAllCheckboxes();
-    });
 
-    // await screenshot(page, test);
+      // await screenshot(page, test);
+    });
   });
 
   test("@functional User Shall Be Able To Check And Uncheck One Category", async ({
@@ -117,6 +121,8 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.validateElementVisibility(
         checkboxPage.checkboxLabel("Angular")
       );
+
+      // await screenshot(page, test);
     });
 
     await test.step("Step 2: Check The Angular Category", async () => {
@@ -125,14 +131,16 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.validateParentCategories(CheckboxLabels.Workspace);
       await checkboxPage.validateParentCategories(CheckboxLabels.Documents);
       await checkboxPage.validateParentCategories(CheckboxLabels.Home);
+
+      // await screenshot(page, test);
     });
 
     await test.step("Step 3: Uncheck The Angular Category", async () => {
       await checkboxPage.check(CheckboxLabels.Angular, false);
       await checkboxPage.validateCheckbox(CheckboxLabels.Angular);
       await checkboxPage.validateAllCheckboxes();
-    });
 
-    // await screenshot(page, test);
+      // await screenshot(page, test);
+    });
   });
 });

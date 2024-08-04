@@ -4,12 +4,18 @@ import { InnerPage } from "../core/InnerPage";
 export class RadioButtonPage extends InnerPage {
   readonly question: Locator;
   readonly radioButtons: Locator;
+  readonly successMsg: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
 
     this.question = this.page.locator("mb-3");
     this.radioButtons = this.page.locator("input[type='radio']");
+    this.successMsg = this.page.locator(".mt-3");
+  }
+
+  labelForRadio(label: "Yes" | "Impressive") {
+    return this.page.getByText(label);
   }
 
   radioButton(label: "yes" | "impressive" | "no") {
@@ -31,5 +37,9 @@ export class RadioButtonPage extends InnerPage {
     for (let i = 0; i < radioBtns.length; i++) {
       await this.validateEnabledElement(radioBtns[i]);
     }
+  }
+
+  async validateSuccessMessage(message: "Yes" | "Impressive") {
+    await expect(this.successMsg).toHaveText(`You have selected ${message}`);
   }
 }
