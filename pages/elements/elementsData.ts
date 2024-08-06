@@ -5,6 +5,7 @@ export const elementPagesHeadings = {
   textBox: "Text Box",
   checkbox: "Check Box",
   radioButton: "Radio Button",
+  webTables: "Web Tables",
 };
 
 export const textBoxPlaceholders = {
