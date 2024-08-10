@@ -119,12 +119,31 @@ test.describe("Web Table Page Tests", () => {
   //   await test.step("Step 2: ", async () => {});
   // });
 
-  // test("@functional The User Shall Be Able To Edit Data In A Record", async () => {
+  test("@functional The User Shall Be Able To Edit Data In A Record", async () => {
+    await test.step("Step 1: Open The form", async () => {
+      await tablePage.validateCellContent(1, 5, "10000");
+      await tablePage.clickButton(tablePage.actionButton("edit", 1));
+      await tablePage.validateElementVisibility(form.form);
+      await tablePage.validateInputValue(
+        form.input(AddRecordInputs.Salary),
+        "10000"
+      );
+    });
 
-  //   await test.step("Step 1: ", async () => {});
+    await test.step("Step 2: Enter A New Value", async () => {
+      await tablePage.clearInput(form.input(AddRecordInputs.Salary));
+      await tablePage.fillInput(form.input(AddRecordInputs.Salary), "20000");
+      await tablePage.validateInputValue(
+        form.input(AddRecordInputs.Salary),
+        "20000"
+      );
+    });
 
-  //   await test.step("Step 2: ", async () => {});
-  // });
+    await test.step("Step 3: Submit The Form", async () => {
+      await tablePage.clickButton(form.submitButton);
+      await tablePage.validateCellContent(1, 5, "20000");
+    });
+  });
 
   // test("@functional The User Shall Be Able To Delete A Record", async () => {
 

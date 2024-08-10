@@ -41,6 +41,10 @@ export class WebTablesPage extends InnerPage {
       .nth(columnNumber - 1);
   }
 
+  actionButton(name: "edit" | "delete", recordNumber: number) {
+    return this.page.locator(`#${name}-record-${recordNumber}`);
+  }
+
   async validateElements(elementNames: string[]) {
     for (let i = 0; i < elementNames.length; i++) {
       await this.validateElementVisibility(this.columnHeader(elementNames[i]));
@@ -50,9 +54,12 @@ export class WebTablesPage extends InnerPage {
   async validateCellContent(
     rowNumber: number,
     columnNumber: number,
-    text: string
+    text?: string
   ) {
-    await expect(this.getCell(rowNumber, columnNumber)).toHaveText(text);
+    if (!text) {
+      await expect(this.getCell(rowNumber, columnNumber)).toBeEmpty();
+    } else
+      await expect(this.getCell(rowNumber, columnNumber)).toHaveText(text!);
   }
 }
 

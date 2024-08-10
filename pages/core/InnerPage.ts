@@ -23,6 +23,10 @@ export class InnerPage extends BasePage {
     }
   }
 
+  async clearInput(input: Locator) {
+    await input.clear();
+  }
+
   async validateEmptyInput(input: Locator) {
     await expect(input).toBeVisible();
     await expect(input).toBeEditable();
