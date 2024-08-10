@@ -145,12 +145,14 @@ test.describe("Web Table Page Tests", () => {
     });
   });
 
-  // test("@functional The User Shall Be Able To Delete A Record", async () => {
-
-  //   await test.step("Step 1: ", async () => {});
-
-  //   await test.step("Step 2: ", async () => {});
-  // });
+  test("@functional The User Shall Be Able To Delete A Record", async () => {
+    await test.step("Step 1: Delete A Record", async () => {
+      await tablePage.clickButton(tablePage.actionButton("delete", 3));
+      for (let i = 0; i < 7; i++) {
+        await tablePage.validateCellContent(3, i);
+      }
+    });
+  });
 
   // test("@functional The User Shall Be Able To Find A Record Using Search", async () => {
 
