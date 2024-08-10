@@ -8,6 +8,7 @@ export const elementPagesHeadings = {
   webTables: "Web Tables",
 };
 
+//Text Box
 export const textBoxPlaceholders = {
   fullName: "Full Name",
   email: "name@example.com",
@@ -21,4 +22,25 @@ export const userData = {
   permanentAddress: "test street 2",
 };
 
+//Radio Buttons
 export const questionText = "Do you like the site?";
+
+//Web Tables
+export const columnHeaders = [
+  "First Name",
+  "Last Name",
+  "Age",
+  "Email",
+  "Salary",
+  "Department",
+  "Action",
+];
+
+export const recordData = {
+  firstName: "John",
+  lastName: "Doe",
+  email: "johndoe@gmail.com",
+  age: "40",
+  salary: "55600",
+  department: "AQA",
+};

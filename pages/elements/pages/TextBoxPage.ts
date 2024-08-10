@@ -1,5 +1,5 @@
 import { expect, type Locator, type Page } from "@playwright/test";
-import { InnerPage } from "../core/InnerPage";
+import { InnerPage } from "../../core/InnerPage";
 
 export class TextBoxPage extends InnerPage {
   readonly fullNameInput: Locator;

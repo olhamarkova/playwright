@@ -59,6 +59,13 @@ export default class BasePage {
     await expect(element).toBeVisible();
   }
 
+  async validateElements(elementNames: string[]) {
+    for (let i = 0; i < elementNames.length; i++) {
+      const element = this.page.locator(elementNames[i]);
+      await this.validateElementVisibility(element);
+    }
+  }
+
   async validateElementsCount(element: Locator, count: number) {
     await expect(element).toHaveCount(count);
   }

@@ -17,3 +17,12 @@ export enum CheckboxLabels {
   Classified = "classified",
   General = "general",
 }
+
+export enum AddRecordInputs {
+  "First Name" = "firstName",
+  "Last Name" = "lastName",
+  Email = "userEmail",
+  Age = "age",
+  Salary = "salary",
+  Department = "department",
+}

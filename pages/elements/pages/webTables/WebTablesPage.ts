@@ -1,7 +1,9 @@
 import { type Page, Locator } from "@playwright/test";
-import { InnerPage } from "../core/InnerPage";
+import { InnerPage } from "../../../core/InnerPage";
+import AddNewRecordForm from "./AddNewRecordForm";
 
 export class WebTablesPage extends InnerPage {
+  readonly addNewRecord: AddNewRecordForm;
   readonly rows: Locator;
   readonly addNewRecordButton: Locator;
   readonly searchField: Locator;
@@ -11,6 +13,7 @@ export class WebTablesPage extends InnerPage {
 
   constructor(page: Page, url: string) {
     super(page, url);
+    this.addNewRecord = new AddNewRecordForm(page);
     this.rows = this.page.locator("div[role='row']");
     this.addNewRecordButton = this.page.locator("#addNewRecordButton");
     this.searchField = this.page.getByPlaceholder("Type to search");
@@ -30,6 +33,12 @@ export class WebTablesPage extends InnerPage {
       .locator("div[role='columnheader'] div.rt-resizable-header-content")
       .filter({ hasText: columnName });
   }
+
+  async validateElements(elementNames: string[]) {
+    for (let i = 0; i < elementNames.length; i++) {
+      await this.validateElementVisibility(this.columnHeader(elementNames[i]));
+    }
+  }
 }
 
 //div[role='row']
@@ -38,12 +47,10 @@ export class WebTablesPage extends InnerPage {
 
 /**
  * cases:
- * - smoke - table has 11 rows, buttons, search, heading etc
  * - add record and check result
  * - change count of rows
  * - edit record
  * - delete record
  * - find record positive
  * - find record negative
- * - resize???
  */

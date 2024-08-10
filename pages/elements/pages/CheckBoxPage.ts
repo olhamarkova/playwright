@@ -1,7 +1,7 @@
 import { expect, type Locator, type Page } from "@playwright/test";
-import { InnerPage } from "../core/InnerPage";
-import { CheckboxLabels } from "./ElementsTypes";
-import { categories } from "../../data/categories";
+import { InnerPage } from "../../core/InnerPage";
+import { CheckboxLabels } from "../ElementsTypes";
+import { categories } from "../../../data/categories";
 
 export class CheckBoxPage extends InnerPage {
   readonly toggleButtons: Locator;
