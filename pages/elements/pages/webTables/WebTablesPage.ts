@@ -1,4 +1,4 @@
-import { type Page, Locator } from "@playwright/test";
+import { type Page, expect, Locator } from "@playwright/test";
 import { InnerPage } from "../../../core/InnerPage";
 import AddNewRecordForm from "./AddNewRecordForm";
 
@@ -34,10 +34,25 @@ export class WebTablesPage extends InnerPage {
       .filter({ hasText: columnName });
   }
 
+  getCell(rowNumber: number, columnNumber: number) {
+    return this.rows
+      .nth(rowNumber)
+      .locator("[role='gridcell']")
+      .nth(columnNumber - 1);
+  }
+
   async validateElements(elementNames: string[]) {
     for (let i = 0; i < elementNames.length; i++) {
       await this.validateElementVisibility(this.columnHeader(elementNames[i]));
     }
+  }
+
+  async validateCellContent(
+    rowNumber: number,
+    columnNumber: number,
+    text: string
+  ) {
+    await expect(this.getCell(rowNumber, columnNumber)).toHaveText(text);
   }
 }
 

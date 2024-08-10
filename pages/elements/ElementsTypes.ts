@@ -19,8 +19,8 @@ export enum CheckboxLabels {
 }
 
 export enum AddRecordInputs {
-  "First Name" = "firstName",
-  "Last Name" = "lastName",
+  First_Name = "firstName",
+  Last_Name = "lastName",
   Email = "userEmail",
   Age = "age",
   Salary = "salary",

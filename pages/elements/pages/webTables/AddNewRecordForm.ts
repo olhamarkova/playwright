@@ -1,4 +1,5 @@
 import { Locator, type Page } from "@playwright/test";
+import { AddRecordInputs } from "../../ElementsTypes";
 
 export default class AddNewRecordForm {
   protected page: Page;
@@ -15,7 +16,7 @@ export default class AddNewRecordForm {
     this.submitButton = this.page.locator("#submit");
   }
 
-  input(id: string) {
+  input(id: AddRecordInputs) {
     return this.page.locator(`#${id}`);
   }
 }
