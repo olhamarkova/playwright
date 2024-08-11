@@ -45,6 +45,13 @@ export class WebTablesPage extends InnerPage {
     return this.page.locator(`#${name}-record-${recordNumber}`);
   }
 
+  async fillForm(data: object) {
+    for (let [key, value] of Object.entries(data)) {
+      await this.fillInput(this.addNewRecord.input(key), value);
+      await this.validateInputValue(this.addNewRecord.input(key), value);
+    }
+  }
+
   async validateElements(elementNames: string[]) {
     for (let i = 0; i < elementNames.length; i++) {
       await this.validateElementVisibility(this.columnHeader(elementNames[i]));
@@ -62,10 +69,9 @@ export class WebTablesPage extends InnerPage {
       await expect(this.getCell(rowNumber, columnNumber)).toHaveText(text!);
   }
 
-  async fillForm(data: object) {
-    for (let [key, value] of Object.entries(data)) {
-      await this.fillInput(this.addNewRecord.input(key), value);
-      await this.validateInputValue(this.addNewRecord.input(key), value);
+  async validateRowContent(rowNumber: number, text?: string) {
+    for (let i = 0; i < 7; i++) {
+      await this.validateCellContent(rowNumber, i, text);
     }
   }
 }

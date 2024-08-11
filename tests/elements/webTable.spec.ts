@@ -101,30 +101,31 @@ test.describe("Web Table Page Tests", () => {
   test("@functional The User Shall Be Able To Delete A Record", async () => {
     await test.step("Step 1: Delete A Record", async () => {
       await tablePage.clickButton(tablePage.actionButton("delete", 3));
-      for (let i = 0; i < 7; i++) {
-        await tablePage.validateCellContent(3, i);
-      }
+      await tablePage.validateRowContent(3);
     });
   });
 
-  // test("@functional The User Shall Be Able To Find A Record Using Search", async () => {
+  test("@functional The User Shall Be Able To Find A Record Using Search", async () => {
+    let search: string | null;
+    await test.step("Step 1: Type A Search Value", async () => {
+      search = await tablePage.getCell(2, 2).textContent();
+      await tablePage.fillInput(tablePage.searchField, search!);
+      await tablePage.validateCellContent(1, 2, search!);
+      await tablePage.validateRowContent(2);
+    });
+  });
+
+  // test("@functional The User Shall Be Able To Sort Data In Columns", async () => {
 
   //   await test.step("Step 1: ", async () => {});
 
   //   await test.step("Step 2: ", async () => {});
   // });
 
-  // test("@functional The User Shall Be Able To Resize The Columns", async () => {
-
-  //   await test.step("Step 1: ", async () => {});
-
-  //   await test.step("Step 2: ", async () => {});
-  // });
-
-  // test("@negative The User Shall See A Message When No Records Found", async () => {
-
-  //   await test.step("Step 1: ", async () => {});
-
-  //   await test.step("Step 2: ", async () => {});
-  // });
+  test("@negative The User Shall See A Message When No Records Found", async () => {
+    await test.step("Step 1: Type An Invalid Search Value", async () => {
+      await tablePage.fillInput(tablePage.searchField, "foo");
+      await tablePage.validateTextElement("No rows found");
+    });
+  });
 });
