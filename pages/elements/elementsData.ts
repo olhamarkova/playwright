@@ -39,7 +39,7 @@ export const columnHeaders = [
 export const recordData = {
   firstName: "John",
   lastName: "Doe",
-  email: "johndoe@gmail.com",
+  userEmail: "johndoe@gmail.com",
   age: "40",
   salary: "55600",
   department: "AQA",

@@ -51,54 +51,7 @@ test.describe("Web Table Page Tests", () => {
     });
 
     await test.step("Step 2: Fill The Form", async () => {
-      await tablePage.fillInput(
-        form.input(AddRecordInputs.First_Name),
-        recordData.firstName
-      );
-      await tablePage.validateInputValue(
-        form.input(AddRecordInputs.First_Name),
-        recordData.firstName
-      );
-      await tablePage.fillInput(
-        form.input(AddRecordInputs.Last_Name),
-        recordData.lastName
-      );
-      await tablePage.validateInputValue(
-        form.input(AddRecordInputs.Last_Name),
-        recordData.lastName
-      );
-      await tablePage.fillInput(
-        form.input(AddRecordInputs.Email),
-        recordData.email
-      );
-      await tablePage.validateInputValue(
-        form.input(AddRecordInputs.Email),
-        recordData.email
-      );
-      await tablePage.fillInput(
-        form.input(AddRecordInputs.Age),
-        recordData.age
-      );
-      await tablePage.validateInputValue(
-        form.input(AddRecordInputs.Age),
-        recordData.age
-      );
-      await tablePage.fillInput(
-        form.input(AddRecordInputs.Salary),
-        recordData.salary
-      );
-      await tablePage.validateInputValue(
-        form.input(AddRecordInputs.Salary),
-        recordData.salary
-      );
-      await tablePage.fillInput(
-        form.input(AddRecordInputs.Department),
-        recordData.department
-      );
-      await tablePage.validateInputValue(
-        form.input(AddRecordInputs.Department),
-        recordData.department
-      );
+      await tablePage.fillForm(recordData);
     });
 
     await test.step("Step 3: Submit The Form", async () => {
@@ -106,7 +59,7 @@ test.describe("Web Table Page Tests", () => {
       await tablePage.validateCellContent(4, 1, recordData.firstName);
       await tablePage.validateCellContent(4, 2, recordData.lastName);
       await tablePage.validateCellContent(4, 3, recordData.age);
-      await tablePage.validateCellContent(4, 4, recordData.email);
+      await tablePage.validateCellContent(4, 4, recordData.userEmail);
       await tablePage.validateCellContent(4, 5, recordData.salary);
       await tablePage.validateCellContent(4, 6, recordData.department);
     });

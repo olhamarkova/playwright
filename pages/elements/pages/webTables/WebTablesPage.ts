@@ -61,6 +61,13 @@ export class WebTablesPage extends InnerPage {
     } else
       await expect(this.getCell(rowNumber, columnNumber)).toHaveText(text!);
   }
+
+  async fillForm(data: object) {
+    for (let [key, value] of Object.entries(data)) {
+      await this.fillInput(this.addNewRecord.input(key), value);
+      await this.validateInputValue(this.addNewRecord.input(key), value);
+    }
+  }
 }
 
 //div[role='row']

@@ -16,7 +16,7 @@ export default class AddNewRecordForm {
     this.submitButton = this.page.locator("#submit");
   }
 
-  input(id: AddRecordInputs) {
+  input(id: AddRecordInputs | string) {
     return this.page.locator(`#${id}`);
   }
 }
