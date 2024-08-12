@@ -6,7 +6,7 @@ import {
   subCategoriesUrls,
   sidebarItems,
 } from "../../utils/services/dataService.ts";
-import { ElementsPage } from "../../pages/elements/ElementsPage.ts";
+import { ElementsPage } from "../../pages/elements/pages/ElementsPage.ts";
 import LeftPannel from "../../pages/leftPanel/LeftPannel.ts";
 
 let elements: ElementsPage;

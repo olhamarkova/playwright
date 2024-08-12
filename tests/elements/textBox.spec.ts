@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { qase } from "playwright-qase-reporter";
-import { TextBoxPage } from "../../pages/elements/TextBoxPage.ts";
+import { TextBoxPage } from "../../pages/elements/pages/TextBoxPage.ts";
 import { screenshot } from "../../utils/screenshot.ts";
 import { subCategoriesUrls } from "../../utils/services/dataService.ts";
 import {

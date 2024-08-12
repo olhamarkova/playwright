@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { screenshot } from "../../utils/screenshot.ts";
 import { subCategoriesUrls } from "../../utils/services/dataService.ts";
 import {
@@ -26,7 +26,7 @@ test.describe("Web Table Page Tests", () => {
     await test.step("Step 1: Check The Page Heading", async () => {
       await tablePage.validateHeading(headings.webTables);
 
-      //await screenshot(page, test);
+      await screenshot(page, test);
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
@@ -65,12 +65,17 @@ test.describe("Web Table Page Tests", () => {
     });
   });
 
-  // test("@functional The User Shall Be Able To Change Count Of Rows On The Table", async () => {
+  test("@functional The User Shall Be Able To Change Count Of Rows On The Table", async () => {
+    await test.step("Step 1: Change Count To 5", async () => {
+      await tablePage.rowsSelector.selectOption("5");
+      await tablePage.validateElementsCount(tablePage.rows, 6);
+    });
 
-  //   await test.step("Step 1: ", async () => {});
-
-  //   await test.step("Step 2: ", async () => {});
-  // });
+    await test.step("Step 2: Change Count To 25", async () => {
+      await tablePage.rowsSelector.selectOption("25");
+      await tablePage.validateElementsCount(tablePage.rows, 26);
+    });
+  });
 
   test("@functional The User Shall Be Able To Edit Data In A Record", async () => {
     await test.step("Step 1: Open The form", async () => {
@@ -115,12 +120,19 @@ test.describe("Web Table Page Tests", () => {
     });
   });
 
-  // test("@functional The User Shall Be Able To Sort Data In Columns", async () => {
-
-  //   await test.step("Step 1: ", async () => {});
-
-  //   await test.step("Step 2: ", async () => {});
-  // });
+  test("@functional The User Shall Be Able To Sort Data In Columns", async () => {
+    let salaries: string[] = [];
+    await test.step("Step 1: Sort Data By Salary", async () => {
+      await tablePage.clickButton(tablePage.columnHeader("Salary"));
+      for (let i = 1; i < 4; i++) {
+        let salary = await tablePage.getCell(i, 5).textContent();
+        salaries.push(salary as string);
+      }
+      for (let i = 1; i < salaries.length; i++) {
+        expect(Number(salaries[i])).toBeGreaterThan(Number(salaries[i - 1]));
+      }
+    });
+  });
 
   test("@negative The User Shall See A Message When No Records Found", async () => {
     await test.step("Step 1: Type An Invalid Search Value", async () => {

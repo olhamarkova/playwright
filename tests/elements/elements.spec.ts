@@ -1,6 +1,6 @@
 import { test } from "@playwright/test";
 import { qase } from "playwright-qase-reporter";
-import { ElementsPage } from "../../pages/elements/ElementsPage.ts";
+import { ElementsPage } from "../../pages/elements/pages/ElementsPage.ts";
 import { screenshot } from "../../utils/screenshot.ts";
 import {
   copyRightText,

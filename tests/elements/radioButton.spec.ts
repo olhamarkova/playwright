@@ -6,7 +6,7 @@ import {
   elementPagesHeadings as headings,
   questionText,
 } from "../../pages/elements/elementsData.ts";
-import { RadioButtonPage } from "../../pages/elements/RadioButtonPage.ts";
+import { RadioButtonPage } from "../../pages/elements/pages/RadioButtonPage.ts";
 
 let radioButtonPage: RadioButtonPage;
 

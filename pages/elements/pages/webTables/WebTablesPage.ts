@@ -75,17 +75,3 @@ export class WebTablesPage extends InnerPage {
     }
   }
 }
-
-//div[role='row']
-//div[role='row'] .nth() [role='gridcell'] .nth()
-//#delete-record-2 number eqls row number
-
-/**
- * cases:
- * - add record and check result
- * - change count of rows
- * - edit record
- * - delete record
- * - find record positive
- * - find record negative
- */

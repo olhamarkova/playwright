@@ -3,7 +3,7 @@ import { qase } from "playwright-qase-reporter";
 import { screenshot } from "../../utils/screenshot.ts";
 import { subCategoriesUrls } from "../../utils/services/dataService.ts";
 import { elementPagesHeadings as headings } from "../../pages/elements/elementsData.ts";
-import { CheckBoxPage } from "../../pages/elements/CheckBoxPage.ts";
+import { CheckBoxPage } from "../../pages/elements/pages/CheckBoxPage.ts";
 import { CheckboxLabels } from "../../pages/elements/ElementsTypes.ts";
 
 let checkboxPage: CheckBoxPage;
