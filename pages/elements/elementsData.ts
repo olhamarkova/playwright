@@ -6,6 +6,7 @@ export const elementPagesHeadings = {
   checkbox: "Check Box",
   radioButton: "Radio Button",
   webTables: "Web Tables",
+  buttons: "Buttons",
 };
 
 //Text Box
@@ -43,4 +44,11 @@ export const recordData = {
   age: "40",
   salary: "55600",
   department: "AQA",
+};
+
+//Buttons
+export const successMessages = {
+  doubleClick: "You have done a double click",
+  rightClick: "You have done a right click",
+  dynamicClick: "You have done a dynamic click",
 };

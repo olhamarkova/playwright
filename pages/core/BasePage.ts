@@ -49,6 +49,10 @@ export default class BasePage {
     await expect(this.copyRightInfo).toHaveText(copyRightText);
   }
 
+  /**
+   * Check the visibility of group of elements by locator
+   * @param elements - locator that returns a group of elements
+   */
   async validateElementsVisibility(elements: Locator) {
     for (let i = 0; i < (await elements.count()); i++) {
       expect(elements.nth(i)).toBeVisible();
@@ -59,7 +63,11 @@ export default class BasePage {
     await expect(element).toBeVisible();
   }
 
-  async validateElements(elementNames: string[]) {
+  /**
+   * Check the visibility of group of elements by their name
+   * @param elementNames - array of strings
+   */
+  async validateElementsByName(elementNames: string[]) {
     for (let i = 0; i < elementNames.length; i++) {
       const element = this.page.locator(elementNames[i]);
       await this.validateElementVisibility(element);

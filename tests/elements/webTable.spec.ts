@@ -38,7 +38,7 @@ test.describe("Web Table Page Tests", () => {
     });
 
     await test.step("Step 3: Check The Table", async () => {
-      await tablePage.validateElements(columnHeaders);
+      await tablePage.validateElementsByName(columnHeaders);
       await tablePage.validateElementsCount(tablePage.rows, 11);
     });
   });

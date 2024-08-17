@@ -52,7 +52,7 @@ export class WebTablesPage extends InnerPage {
     }
   }
 
-  async validateElements(elementNames: string[]) {
+  async validateElementsByName(elementNames: string[]) {
     for (let i = 0; i < elementNames.length; i++) {
       await this.validateElementVisibility(this.columnHeader(elementNames[i]));
     }
