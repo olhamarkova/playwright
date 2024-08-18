@@ -1,10 +1,10 @@
-import { expect, test } from "@playwright/test";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
+import { test } from "@playwright/test";
+import { subCategoriesUrls, title } from "../../utils/services/dataService.ts";
 import {
   elementPagesHeadings as headings,
   linkNames,
+  requestLinks,
   subHeadings,
-  successMessages,
 } from "../../pages/elements/elementsData.ts";
 import { LinksPage } from "../../pages/elements/pages/LinksPage.ts";
 
@@ -16,9 +16,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Links Page Tests", () => {
-  test("@smoke The Links Page Should Have All The Expected Elements", async ({
-    page,
-  }) => {
+  test("@smoke The Links Page Should Have All The Expected Elements", async () => {
     await test.step("Step 1: Check The Page Headings", async () => {
       await linksPage.validateHeading(headings.links);
       await linksPage.validateTextElement(subHeadings[0]);
@@ -26,24 +24,54 @@ test.describe("Links Page Tests", () => {
     });
 
     await test.step("Step 2: Check The Links", async () => {
-      await linksPage.validateElementsByName(linkNames); //1 link has dynamic property - to solve
+      await linksPage.validateElementsByName(linkNames);
+      await linksPage.validateElementVisibility(linksPage.dynamicLink);
       await linksPage.validateElementsCount(linksPage.links, 9);
-      const responsePromise = page.waitForResponse(
-        (resp) =>
-          resp.url().includes(`/created`) && resp.request().method() === "GET"
-      );
-      await linksPage.clickButton(linksPage.link(linkNames[1]));
-      const resp = await responsePromise;
-      expect(resp.status()).toBe(201);
-      expect(resp.statusText()).toBe("Created");
     });
   });
 
-  // test("@functional User Shall Have The Ability To Click The Buttons", async () => {
-  //   await test.step("Step 1: ", async () => {});
+  test("@functional User Shall Have The Ability To Send Requests By Clicking The Links", async ({
+    context,
+    page,
+  }) => {
+    await test.step("Step 1: Validate 'Home' Link", async () => {
+      await linksPage.openNewTab(context, linksPage.link("Home"));
+      await linksPage.validateTitle(title.mainTitle);
+      await page.bringToFront();
+    });
 
-  //   await test.step("Step 2: ", async () => {});
+    await test.step("Step 2: Validate 'Home' Dynamic Link", async () => {
+      await linksPage.openNewTab(context, linksPage.dynamicLink);
+      await linksPage.validateTitle(title.mainTitle);
+      await page.bringToFront();
+    });
 
-  //   await test.step("Step 3: ", async () => {});
-  // });
+    await test.step("Step 3: Validate 'Created' Link", async () => {
+      await linksPage.validateLinkResponse(requestLinks.created, 201);
+    });
+
+    await test.step("Step 4: Validate 'No Content' Link", async () => {
+      await linksPage.validateLinkResponse(requestLinks.noContent, 204);
+    });
+
+    await test.step("Step 5: Validate 'Moved Permanently' Link", async () => {
+      await linksPage.validateLinkResponse(requestLinks.moved, 301);
+    });
+
+    await test.step("Step 6: Validate 'Bad Request' Link", async () => {
+      await linksPage.validateLinkResponse(requestLinks.badRequest, 400);
+    });
+
+    await test.step("Step 7: Validate 'Unauthorized' Link", async () => {
+      await linksPage.validateLinkResponse(requestLinks.unauthorized, 401);
+    });
+
+    await test.step("Step 8: Validate 'Forbidden' Link", async () => {
+      await linksPage.validateLinkResponse(requestLinks.forbidden, 403);
+    });
+
+    await test.step("Step 9: Validate 'Not Found' Link", async () => {
+      await linksPage.validateLinkResponse(requestLinks.notFound, 404);
+    });
+  });
 });

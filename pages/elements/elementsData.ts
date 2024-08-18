@@ -74,7 +74,7 @@ export const linkNames = [
 
 export const requestLinks = {
   created: "/created",
-  noConten: "/no-content",
+  noContent: "/no-content",
   moved: "/moved",
   badRequest: "/bad-request",
   unauthorized: "/unauthorized",
