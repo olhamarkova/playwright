@@ -51,7 +51,6 @@ export class LinksPage extends InnerPage {
     }
   }
 
-  //!!!opens this page but returns to previous
   async openNewTab(context: BrowserContext, link: Locator) {
     const pagePromise = context.waitForEvent("page");
     await this.clickButton(link);

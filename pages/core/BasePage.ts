@@ -33,7 +33,7 @@ export default class BasePage {
   }
 
   async validateTextElement(text: string) {
-    await expect(this.page.getByText(text)).toBeVisible();
+    await expect(this.page.getByText(text, { exact: true })).toBeVisible();
   }
 
   async validateTitle(titleText: string) {

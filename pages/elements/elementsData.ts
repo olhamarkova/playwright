@@ -8,6 +8,7 @@ export const elementPagesHeadings = {
   webTables: "Web Tables",
   buttons: "Buttons",
   links: "Links",
+  images: "Broken Links - Images",
 };
 
 //Text Box
@@ -62,7 +63,6 @@ export const subHeadings = [
 
 export const linkNames = [
   "Home",
-  //"HomeUh4Ys",
   "Created",
   "No Content",
   "Moved",
@@ -91,3 +91,17 @@ export const responseStatuses = new Map([
   [403, "Forbidden"],
   [404, "Not Found"],
 ]);
+
+//Images
+
+export const subHeadingsText = [
+  "Valid image",
+  "Broken image",
+  "Valid Link",
+  "Broken Link",
+];
+
+export const linksText = {
+  valid: "Click Here for Valid Link",
+  broken: "Click Here for Broken Link",
+};
