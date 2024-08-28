@@ -6,8 +6,9 @@
   "scripts": {
     "test": "npx playwright test tests/ --project=chrome",
     "smoke": "npx playwright test tests/ --project=chrome --grep '@smoke'",
-    "test all": "npx playwright test tests/",
-    "test smoke": "npx playwright test --grep @smoke",
+    "all": "npx playwright test tests/",
+    "functional": "npx playwright test --grep '@functional'",
+    "negative": "npx playwright test --grep '@negative'",
     "test open": "npx playwright test --ui"
   },
   "keywords": [],
