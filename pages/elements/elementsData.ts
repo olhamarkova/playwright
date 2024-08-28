@@ -10,6 +10,7 @@ export const elementPagesHeadings = {
   links: "Links",
   images: "Broken Links - Images",
   upload: "Upload and Download",
+  dynamic: "Dynamic Properties",
 };
 
 //Text Box
@@ -94,7 +95,6 @@ export const responseStatuses = new Map([
 ]);
 
 //Images
-
 export const subHeadingsText = [
   "Valid image",
   "Broken image",
@@ -108,5 +108,7 @@ export const linksText = {
 };
 
 //Upload and Download
-
 export const pathToUploadedFile = "C:\\fakepath\\sampleFile.jpeg";
+
+//Dynamic
+export const dynamicText = "This text has random Id";

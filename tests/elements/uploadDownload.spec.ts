@@ -27,13 +27,13 @@ test.describe("Upload and Download Page Tests", () => {
   });
 
   test("@functional User Shall Be Able To Download Files", async () => {
-    await test.step("Step 1: Find the broken image", async () => {
+    await test.step("Step 1: Download A File", async () => {
       await uploadPage.downloadFile();
     });
   });
 
   test("@functional User Shall Be Able To Upload Files", async () => {
-    await test.step("Step 1: Find The Broken Link", async () => {
+    await test.step("Step 1: Upload A File", async () => {
       await uploadPage.uploadFile("test-results/download/", "sampleFile.jpeg");
       await uploadPage.validateTextElement(pathToUploadedFile);
     });
