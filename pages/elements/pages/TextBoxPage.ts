@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { InnerPage } from "../../core/InnerPage";
+import { TextBoxElementID } from "../ElementsTypes";
 
 export class TextBoxPage extends InnerPage {
   readonly fullNameInput: Locator;
@@ -25,16 +26,11 @@ export class TextBoxPage extends InnerPage {
     this.output = this.page.locator("#output");
   }
 
-  userInfoOutput(
-    elementId: "name" | "email" | "currentAddress" | "permanentAddress"
-  ) {
+  userInfoOutput(elementId: TextBoxElementID) {
     return this.output.locator(`#${elementId}`);
   }
 
-  async validateUserInfoOutput(
-    elementId: "name" | "email" | "currentAddress" | "permanentAddress",
-    text: string
-  ) {
+  async validateUserInfoOutput(elementId: TextBoxElementID, text: string) {
     switch (elementId) {
       case "name":
         await expect(this.userInfoOutput(elementId)).toHaveText(`Name:${text}`);

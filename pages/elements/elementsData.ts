@@ -9,6 +9,7 @@ export const elementPagesHeadings = {
   buttons: "Buttons",
   links: "Links",
   images: "Broken Links - Images",
+  upload: "Upload and Download",
 };
 
 //Text Box
@@ -105,3 +106,7 @@ export const linksText = {
   valid: "Click Here for Valid Link",
   broken: "Click Here for Broken Link",
 };
+
+//Upload and Download
+
+export const pathToUploadedFile = "C:\\fakepath\\sampleFile.jpeg";

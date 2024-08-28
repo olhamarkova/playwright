@@ -26,3 +26,9 @@ export enum AddRecordInputs {
   Salary = "salary",
   Department = "department",
 }
+
+export type TextBoxElementID =
+  | "name"
+  | "email"
+  | "currentAddress"
+  | "permanentAddress";

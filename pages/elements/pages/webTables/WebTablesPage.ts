@@ -20,7 +20,7 @@ export class WebTablesPage extends InnerPage {
     this.previousButton = this.page.getByRole("button", {
       name: "Previous",
       exact: true,
-    }); //refactor
+    });
     this.nextButton = this.page.getByRole("button", {
       name: "Next",
       exact: true,
