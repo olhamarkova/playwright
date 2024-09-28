@@ -26,17 +26,19 @@ test.describe("Buttons Page Tests", () => {
 
   test("@functional User Shall Have The Ability To Click The Buttons", async () => {
     await test.step("Step 1: Click The 'Double Click Me' button", async () => {
-      await buttonsPage.dbClickButton.dblclick();
+      await buttonsPage.button.dbClick(buttonsPage.dbClickButton);
       await buttonsPage.validateTextElement(successMessages.doubleClick);
     });
 
     await test.step("Step 2: Click The 'Right Click Me' button", async () => {
-      await buttonsPage.rightClickButton.click({ button: "right" });
+      await buttonsPage.button.clickElement(buttonsPage.rightClickButton, {
+        button: "right",
+      });
       await buttonsPage.validateTextElement(successMessages.rightClick);
     });
 
     await test.step("Step 3: Click The 'Click Me' button", async () => {
-      await buttonsPage.clickMeButton.click();
+      await buttonsPage.button.clickElement(buttonsPage.clickMeButton);
       await buttonsPage.validateTextElement(successMessages.dynamicClick);
     });
   });

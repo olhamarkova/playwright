@@ -2,13 +2,16 @@ import { expect, type Page, Locator } from "@playwright/test";
 import BasePage from "./BasePage";
 import LeftPannel from "../leftPanel/LeftPannel";
 import { CheckboxLabels } from "../elements/ElementsTypes";
+import { Button } from "../../uiElements/button";
 
 export class InnerPage extends BasePage {
   readonly sidebar: LeftPannel;
+  readonly button: Button;
 
   constructor(page: Page, url: string) {
     super(page, url);
     this.sidebar = new LeftPannel(page);
+    this.button = new Button(page);
   }
 
   async fillInput(
