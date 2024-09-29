@@ -7,19 +7,30 @@ export class UiElement {
     this.page = page;
   }
 
-  getLocator(selector: string) {
-    return this.page.locator(selector);
+  getLocator(selector: string, options?: {}): Locator {
+    return this.page.locator(selector, options);
   }
 
-  async isVisible(element: Locator | string) {
+  getByLabel(label: string): Locator {
+    return this.page.getByLabel(label, { exact: true });
+  }
+
+  async isVisible(element: Locator | string): Promise<void> {
     await expect(element as Locator).toBeVisible();
   }
 
-  async isEnabled<T extends string | Locator>(element: T, isEnabled = true) {
+  async isEnabled<T extends string | Locator>(
+    element: T,
+    isEnabled = true
+  ): Promise<void> {
     if (!isEnabled) {
       await expect(element as Locator).toBeDisabled();
     } else {
       await expect(element as Locator).toBeEnabled();
     }
+  }
+
+  async hasCount(element: Locator, count: number): Promise<void> {
+    await expect(element).toHaveCount(count);
   }
 }

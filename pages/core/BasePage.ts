@@ -20,11 +20,11 @@ export default class BasePage {
     this.copyRightInfo = this.footer.locator("span");
   }
 
-  async visit() {
+  async visit(): Promise<void> {
     await this.page.goto(this.url);
   }
 
-  async goToMainPage() {
+  async goToMainPage(): Promise<void> {
     await this.logo.click();
   }
 
@@ -36,7 +36,7 @@ export default class BasePage {
     await expect(this.page.getByText(text, { exact: true })).toBeVisible();
   }
 
-  async validateTitle(titleText: string) {
+  async validateTitle(titleText: string): Promise<void> {
     await expect(this.page).toHaveTitle(titleText);
   }
 

@@ -1,17 +1,22 @@
+//delete after implementing classes for ui elements
+
 import { expect, type Page, Locator } from "@playwright/test";
 import BasePage from "./BasePage";
 import LeftPannel from "../leftPanel/LeftPannel";
 import { CheckboxLabels } from "../elements/ElementsTypes";
 import { Button } from "../../uiElements/button";
+import { Input } from "../../uiElements/input";
 
 export class InnerPage extends BasePage {
   readonly sidebar: LeftPannel;
   readonly button: Button;
+  readonly input: Input;
 
   constructor(page: Page, url: string) {
     super(page, url);
     this.sidebar = new LeftPannel(page);
     this.button = new Button(page);
+    this.input = new Input(page);
   }
 
   async fillInput(
