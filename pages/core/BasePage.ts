@@ -1,23 +1,27 @@
 import { type Locator, type Page } from "@playwright/test";
 import { expect } from "@playwright/test";
+import { Header } from "../../uiElements/header";
+import { Footer } from "../../uiElements/footer";
+import { Heading } from "../../uiElements/heading";
+import { Menubar } from "../../uiElements/menubar";
 
 export default class BasePage {
   protected page: Page;
   protected url: string;
-  readonly heading: Locator;
   readonly header: Locator;
   readonly logo: Locator;
   readonly footer: Locator;
-  readonly copyRightInfo: Locator;
+  readonly navbar: Menubar;
+  readonly heading: Heading;
 
   constructor(page: Page, url: string = "") {
     this.page = page;
     this.url = `${process.env.URL!}${url}`;
-    this.heading = this.page.locator("h1");
-    this.header = this.page.locator("header");
-    this.logo = this.header.locator("img[src='/images/Toolsqa.jpg']");
-    this.footer = this.page.locator("footer");
-    this.copyRightInfo = this.footer.locator("span");
+    this.heading = new Heading(this.page);
+    this.header = new Header(this.page).getHeader();
+    this.logo = new Header(this.page).getLogo();
+    this.footer = new Footer(this.page).getFooter();
+    this.navbar = new Menubar(this.page);
   }
 
   async visit(): Promise<void> {
@@ -28,25 +32,12 @@ export default class BasePage {
     await this.logo.click();
   }
 
-  async clickButton(button: Locator) {
-    await button.click();
+  async hasUrl(url: string) {
+    await expect(this.page.url()).toContain(url);
   }
 
-  async validateTextElement(text: string) {
-    await expect(this.page.getByText(text, { exact: true })).toBeVisible();
-  }
-
-  async validateTitle(titleText: string): Promise<void> {
+  async hasTitle(titleText: string): Promise<void> {
     await expect(this.page).toHaveTitle(titleText);
-  }
-
-  async validateHeading(headingText: string) {
-    await expect(this.heading).toHaveText(headingText);
-  }
-
-  async validateFooter(copyRightText: string) {
-    await expect(this.footer).toBeVisible();
-    await expect(this.copyRightInfo).toHaveText(copyRightText);
   }
 
   /**
@@ -59,10 +50,6 @@ export default class BasePage {
     }
   }
 
-  async validateElementVisibility(element: Locator) {
-    await expect(element).toBeVisible();
-  }
-
   /**
    * Check the visibility of group of elements by their name
    * @param elementNames - array of strings
@@ -70,15 +57,7 @@ export default class BasePage {
   async validateElementsByName(elementNames: string[]) {
     for (let i = 0; i < elementNames.length; i++) {
       const element = this.page.locator(elementNames[i]);
-      await this.validateElementVisibility(element);
+      await expect(element).toBeVisible();
     }
-  }
-
-  async validateElementsCount(element: Locator, count: number) {
-    await expect(element).toHaveCount(count);
-  }
-
-  async validatePageUrl(url: string) {
-    await expect(this.page.url()).toContain(url);
   }
 }

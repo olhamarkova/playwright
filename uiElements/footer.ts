@@ -7,6 +7,10 @@ export class Footer extends UiElement implements Partial<Textual> {
     super(page);
   }
 
+  getFooter(): Locator {
+    return this.getLocator("footer");
+  }
+
   async hasText(element: Locator, text: string, options?: {}): Promise<void> {
     await expect(element).toHaveText(text, options);
   }

@@ -3,8 +3,8 @@ import { subCategoriesUrls } from "../../utils/services/dataService.ts";
 import {
   elementPagesHeadings as headings,
   successMessages,
-} from "../../pages/elements/elementsData.ts";
-import { ButtonsPage } from "../../pages/elements/pages/ButtonsPage.ts";
+} from "../../data/elementsData.ts";
+import { ButtonsPage } from "../../pages/elementsPages/pages/ButtonsPage.ts";
 
 let buttonsPage: ButtonsPage;
 
@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 test.describe("Buttons Page Tests", () => {
   test("@smoke The Buttons Page Should Have All The Expected Elements", async () => {
     await test.step("Step 1: Check The Page Heading", async () => {
-      await buttonsPage.validateHeading(headings.buttons);
+      await buttonsPage.heading.hasText(buttonsPage.title, headings.buttons);
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
@@ -27,19 +27,25 @@ test.describe("Buttons Page Tests", () => {
   test("@functional User Shall Have The Ability To Click The Buttons", async () => {
     await test.step("Step 1: Click The 'Double Click Me' button", async () => {
       await buttonsPage.button.dbClick(buttonsPage.dbClickButton);
-      await buttonsPage.validateTextElement(successMessages.doubleClick);
+      await buttonsPage.textMessage.isElVisible(
+        buttonsPage.successMsg(successMessages.doubleClick)
+      );
     });
 
     await test.step("Step 2: Click The 'Right Click Me' button", async () => {
       await buttonsPage.button.clickElement(buttonsPage.rightClickButton, {
         button: "right",
       });
-      await buttonsPage.validateTextElement(successMessages.rightClick);
+      await buttonsPage.textMessage.isElVisible(
+        buttonsPage.successMsg(successMessages.rightClick)
+      );
     });
 
     await test.step("Step 3: Click The 'Click Me' button", async () => {
       await buttonsPage.button.clickElement(buttonsPage.clickMeButton);
-      await buttonsPage.validateTextElement(successMessages.dynamicClick);
+      await buttonsPage.textMessage.isElVisible(
+        buttonsPage.successMsg(successMessages.dynamicClick)
+      );
     });
   });
 });

@@ -15,11 +15,11 @@ export class UiElement {
     return this.page.getByLabel(label, { exact: true });
   }
 
-  async isVisible(element: Locator | string): Promise<void> {
+  async isElVisible(element: Locator | string): Promise<void> {
     await expect(element as Locator).toBeVisible();
   }
 
-  async isEnabled<T extends string | Locator>(
+  async isElEnabled<T extends string | Locator>(
     element: T,
     isEnabled = true
   ): Promise<void> {

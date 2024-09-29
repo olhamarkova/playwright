@@ -7,19 +7,31 @@ export class Table extends UiElement implements Partial<Clickable> {
     super(page);
   }
 
+  getTable(): Locator {
+    return this.page.getByRole("table");
+  }
+
+  getRows() {
+    return this.page.getByRole("row");
+  }
+
   getRow(index: number, options?: {}): Locator {
     return this.page.getByRole("row", options).nth(index - 1);
   }
 
-  getCell(options?: {}): Locator {
-    return this.page.getByRole("cell", options);
+  getCell(rowNumber: number, columnNumber: number, options?: {}): Locator {
+    return this.getRow(rowNumber)
+      .getByRole("gridcell", options)
+      .nth(columnNumber);
   }
 
-  getColumnheader(options?: {}): Locator {
-    return this.page.getByRole("columnheader", options);
+  getColumnheader(columnName: string, options?: {}): Locator {
+    return this.page
+      .getByRole("columnheader", options)
+      .filter({ hasText: columnName });
   }
 
-  async clickElement(options?: {}): Promise<void> {
-    await this.getCell(options).click(options);
+  async clickElement(element: Locator, options?: {}): Promise<void> {
+    await element.click(options);
   }
 }
