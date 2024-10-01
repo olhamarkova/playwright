@@ -19,10 +19,18 @@ export class Table extends UiElement implements Partial<Clickable> {
     return this.page.getByRole("row", options).nth(index - 1);
   }
 
-  getCell(rowNumber: number, columnNumber: number, options?: {}): Locator {
-    return this.getRow(rowNumber)
+  getCellByRowNumber(
+    rowNumber: number,
+    columnNumber: number,
+    options?: {}
+  ): Locator {
+    return this.getRow(rowNumber - 1)
       .getByRole("gridcell", options)
-      .nth(columnNumber);
+      .nth(columnNumber - 1);
+  }
+
+  getCellByContent(options: {}): Locator {
+    return this.page.getByRole("cell").filter(options);
   }
 
   getColumnheader(columnName: string, options?: {}): Locator {

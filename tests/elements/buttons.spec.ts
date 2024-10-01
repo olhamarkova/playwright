@@ -16,7 +16,10 @@ test.beforeEach(async ({ page }) => {
 test.describe("Buttons Page Tests", () => {
   test("@smoke The Buttons Page Should Have All The Expected Elements", async () => {
     await test.step("Step 1: Check The Page Heading", async () => {
-      await buttonsPage.heading.hasText(buttonsPage.title, headings.buttons);
+      await buttonsPage.heading.hasText(
+        buttonsPage.pageTitle("h1"),
+        headings.buttons
+      );
     });
 
     await test.step("Step 2: Check The Buttons", async () => {

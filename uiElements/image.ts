@@ -15,8 +15,8 @@ export class Image extends UiElement implements Partial<Clickable> {
     return this.page.getByAltText(text, { exact: true });
   }
 
-  getSvg(index: number): Locator {
-    return this.getLocator("svg").nth(index - 1);
+  getSvg(options?: {}): Locator {
+    return this.getLocator("svg", options);
   }
 
   async clickElement(element: Locator, options?: {}): Promise<void> {

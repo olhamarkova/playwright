@@ -11,8 +11,16 @@ export class UiElement {
     return this.page.locator(selector, options);
   }
 
+  getById(id: string): Locator {
+    return this.page.locator(`#${id}`);
+  }
+
   getByLabel(label: string): Locator {
     return this.page.getByLabel(label, { exact: true });
+  }
+
+  getElTitle(title: string, options?: {}): Locator {
+    return this.page.getByTitle(title, options);
   }
 
   async isElVisible(element: Locator | string): Promise<void> {

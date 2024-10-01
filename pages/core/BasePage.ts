@@ -40,6 +40,13 @@ export default class BasePage {
     await expect(this.page).toHaveTitle(titleText);
   }
 
+  pageTitle(
+    heading: "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
+    options?: {}
+  ): Locator {
+    return this.heading.getHeading(heading, options);
+  }
+
   /**
    * Check the visibility of group of elements by locator
    * @param elements - locator that returns a group of elements
