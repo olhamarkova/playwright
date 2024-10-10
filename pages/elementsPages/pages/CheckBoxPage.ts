@@ -17,31 +17,31 @@ export class CheckBoxPage extends BasePage {
     this.icon = new Image(this.page);
   }
 
-  toggleButtons() {
+  toggleButtons(): Locator {
     return this.button.getElByTitle("Toggle");
   }
 
-  expandButton(buttonName: "Expand" | "Collapse") {
+  expandButton(buttonName: "Expand" | "Collapse"): Locator {
     return this.button.getByLabel(`${buttonName} all`);
   }
 
-  toggleButton(index: number) {
+  toggleButton(index: number): Locator {
     return this.toggleButtons().nth(index - 1);
   }
 
-  checkboxLabel(category: CheckboxLabels) {
+  checkboxLabel(category: CheckboxLabels): Locator {
     return this.checkbox.getLocator("label").filter({ hasText: category });
   }
 
-  getCheckbox(category: CheckboxLabels) {
+  getCheckbox(category: CheckboxLabels): Locator {
     return this.checkboxLabel(category).locator("svg").nth(0);
   }
 
-  async check(category: CheckboxLabels) {
+  async check(category: CheckboxLabels): Promise<void> {
     await this.checkbox.clickElement(this.checkboxLabel(category));
   }
 
-  async validateAllCheckboxes(toBeChecked: boolean = false) {
+  async validateAllCheckboxes(toBeChecked: boolean = false): Promise<void> {
     const checkboxes = this.checkbox.getByType();
     for (let i = 0; i < (await checkboxes.count()); i++)
       if (!toBeChecked) {

@@ -21,7 +21,7 @@ export class ButtonsPage extends BasePage {
     this.clickMeButton = this.button.getButton("Click Me");
   }
 
-  successMsg(text: string) {
+  successMsg(text: string): Locator {
     return this.textMessage.getByText(text);
   }
 }

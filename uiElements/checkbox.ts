@@ -1,33 +1,36 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
 import { Checkable } from "../utils/interfaces/checkable";
-import { Clickable } from "../utils/interfaces/clickable";
+import {
+  CheckOptions,
+  GetByRoleOptions,
+  GetLocatorOptions,
+} from "../utils/types/Options";
 
-export class Checkbox
-  extends UiElement
-  implements Checkable, Partial<Clickable>
-{
+export class Checkbox extends UiElement implements Checkable {
   constructor(page: Page) {
     super(page);
   }
 
-  getByType() {
-    return this.page.locator("input[type='checkbox']");
+  getByType(options?: GetLocatorOptions): Locator {
+    return this.page.locator("input[type='checkbox']", options);
   }
 
-  getCheckbox(options?: {}): Locator {
+  getCheckbox(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("checkbox", options);
   }
 
-  async clickElement(element: Locator | string, options?: {}): Promise<void> {
-    await (element as Locator).click(options);
-  }
-
-  async check(element: Locator | string, options?: {}): Promise<void> {
+  async check(
+    element: Locator | string,
+    options?: CheckOptions
+  ): Promise<void> {
     await (element as Locator).check(options);
   }
 
-  async uncheck(element: Locator | string, options?: {}): Promise<void> {
+  async uncheck(
+    element: Locator | string,
+    options?: CheckOptions
+  ): Promise<void> {
     await (element as Locator).uncheck(options);
   }
 
