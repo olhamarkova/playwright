@@ -11,6 +11,10 @@ export class Checkbox
     super(page);
   }
 
+  getByType() {
+    return this.page.locator("input[type='checkbox']");
+  }
+
   getCheckbox(options?: {}): Locator {
     return this.page.getByRole("checkbox", options);
   }

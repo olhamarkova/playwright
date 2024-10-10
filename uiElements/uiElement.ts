@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { GetLocatorOptions } from "../utils/types/Options";
+import { GetLocatorOptions } from "../utils/types/Options.ts";
 
 export class UiElement {
   protected page: Page;

@@ -6,8 +6,6 @@ import { Checkbox } from "../../../uiElements/checkbox";
 import { Image } from "../../../uiElements/image";
 
 export class CheckBoxPage extends BasePage {
-  readonly checkboxLabels: Locator;
-  //readonly sheetIcons: Locator;
   readonly icon: Image;
   readonly button: Button;
   readonly checkbox: Checkbox;
@@ -35,24 +33,8 @@ export class CheckBoxPage extends BasePage {
     return this.checkbox.getLocator("label").filter({ hasText: category });
   }
 
-  folderIcon(category: CheckboxLabels) {
-    return this.checkboxLabel(category).locator("svg").nth(1);
-  }
-
-  folderIcons() {
-    return this.icon.getLocator("label svg").nth(1);
-  }
-
-  sheetIcon(category: CheckboxLabels) {
-    return this.icon.getByLabel(category).nth(1);
-  }
-
   getCheckbox(category: CheckboxLabels) {
     return this.checkboxLabel(category).locator("svg").nth(0);
-  }
-
-  checkboxes() {
-    return this.checkbox.getLocator("input[type='checkbox']");
   }
 
   async check(category: CheckboxLabels) {
@@ -60,7 +42,7 @@ export class CheckBoxPage extends BasePage {
   }
 
   async validateAllCheckboxes(toBeChecked: boolean = false) {
-    const checkboxes = this.checkboxes();
+    const checkboxes = this.checkbox.getByType();
     for (let i = 0; i < (await checkboxes.count()); i++)
       if (!toBeChecked) {
         await expect(checkboxes.nth(i)).not.toBeChecked();

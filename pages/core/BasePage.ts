@@ -25,7 +25,7 @@ export default class BasePage {
   }
 
   async visit(): Promise<void> {
-    await this.page.goto(this.url);
+    await this.page.goto(this.url, { waitUntil: "domcontentloaded" });
   }
 
   async goToMainPage(): Promise<void> {
