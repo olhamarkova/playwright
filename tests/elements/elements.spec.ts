@@ -22,8 +22,6 @@
 //   test("@smoke The Elements Page Should Have All The Expected Elements", async ({
 //     page,
 //   }) => {
-//     qase.id(11);
-//     qase.title(test.info().title);
 
 //     await test.step("Step 1: Check The Elements Page Title", async () => {
 //       await elements.validateTitle(title.mainTitle);
@@ -45,8 +43,6 @@
 //   });
 
 //   test("@smoke The Elements Menu Subitems Should Lead To Corresponding Pages", async () => {
-//     qase.id(13);
-//     qase.title(test.info().title);
 
 //     const url = Object.values(subCategoriesUrls.elements);
 //     let step = 1;

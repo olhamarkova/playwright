@@ -58,4 +58,11 @@ export class UiElement implements Partial<Clickable> {
   async hasAttribute(element: Locator, attribute: string) {
     await expect(element).toHaveAttribute(attribute);
   }
+
+  async hasCSS(
+    element: Locator | string,
+    css: { property: string; value: string }
+  ): Promise<void> {
+    await expect(element as Locator).toHaveCSS(css.property, css.value);
+  }
 }
