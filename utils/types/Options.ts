@@ -44,3 +44,9 @@ export type CheckOptions = {
   timeout?: number;
   trial?: boolean;
 };
+
+export type TextOptions = {
+  ignoreCase?: boolean;
+  timeout?: number;
+  useInnerText?: boolean;
+};
