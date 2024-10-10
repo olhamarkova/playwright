@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
+import { GetLocatorOptions } from "../utils/types/Options";
 
 export class UiElement {
   protected page: Page;
@@ -7,7 +8,7 @@ export class UiElement {
     this.page = page;
   }
 
-  getLocator(selector: string, options?: {}): Locator {
+  getLocator(selector: string, options?: GetLocatorOptions): Locator {
     return this.page.locator(selector, options);
   }
 
@@ -19,7 +20,7 @@ export class UiElement {
     return this.page.getByLabel(label, { exact: true });
   }
 
-  getElTitle(title: string, options?: {}): Locator {
+  getElByTitle(title: string, options?: { exact?: boolean }): Locator {
     return this.page.getByTitle(title, options);
   }
 
@@ -40,5 +41,13 @@ export class UiElement {
 
   async hasCount(element: Locator, count: number): Promise<void> {
     await expect(element).toHaveCount(count);
+  }
+
+  async hasClass(element: Locator, className: string): Promise<void> {
+    await expect(element).toHaveClass(className);
+  }
+
+  async hasAttribute(element: Locator, attribute: string) {
+    await expect(element).toHaveAttribute(attribute);
   }
 }

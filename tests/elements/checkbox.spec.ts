@@ -37,44 +37,44 @@ test.describe("Checkbox Page Tests", () => {
 
     await test.step("Step 3: Check The Categories List", async () => {
       await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes(), 1);
-      await checkboxPage.icon.hasCount(checkboxPage.folderIcons("close"), 1);
+      await checkboxPage.icon.hasCount(checkboxPage.folderIcons(), 1);
       await checkboxPage.checkbox.isElVisible(
         checkboxPage.checkboxLabel(CheckboxLabels.Home)
+      );
+      await checkboxPage.checkbox.isChecked(
+        checkboxPage.getCheckbox(CheckboxLabels.Home),
+        false
       );
     });
 
     // await screenshot(page, test);
   });
 
-  // test("@functional User Shall Be Able To Open And Close The List By Clicking On Buttons", async () => {
-  //   qase.id(10);
-  //   qase.title(test.info().title);
+  test("@functional User Shall Be Able To Open And Close The List By Clicking On Buttons", async () => {
+    // qase.id(10);
+    // qase.title(test.info().title);
 
-  //   await test.step("Step 1: Expand All Categories", async () => {
-  //     await checkboxPage.clickButton(checkboxPage.button("Expand"));
-  //     await checkboxPage.validateElementsVisibility(
-  //       checkboxPage.folderIcons("open")
-  //     );
-  //     await checkboxPage.validateElementsVisibility(checkboxPage.sheetIcons);
-  //     await checkboxPage.validateElementsCount(
-  //       checkboxPage.folderIcons("open"),
-  //       6
-  //     );
-  //     await checkboxPage.validateElementsCount(checkboxPage.sheetIcons, 11);
-  //     await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 17);
-  //     await checkboxPage.validateAllCheckboxes();
-  //   });
+    await test.step("Step 1: Expand All Categories", async () => {
+      await checkboxPage.button.clickElement(
+        checkboxPage.expandButton("Expand")
+      );
+      await checkboxPage.validateElementsVisibility(checkboxPage.folderIcons());
+      await checkboxPage.icon.hasCount(checkboxPage.folderIcons(), 6);
+      await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes(), 17);
+      await checkboxPage.validateAllCheckboxes();
+    });
 
-  //   await test.step("Step 2: Collapse All Categories", async () => {
-  //     await checkboxPage.clickButton(checkboxPage.button("Collapse"));
-  //     await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 1);
-  //     await checkboxPage.validateElementsCount(
-  //       checkboxPage.folderIcons("close"),
-  //       1
-  //     );
-  //     await checkboxPage.validateCheckbox(CheckboxLabels.Home);
-  //   });
-  // });
+    await test.step("Step 2: Collapse All Categories", async () => {
+      await checkboxPage.button.clickElement(
+        checkboxPage.expandButton("Collapse")
+      );
+      await checkboxPage.icon.hasCount(checkboxPage.folderIcons(), 1);
+      await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes(), 1);
+      await checkboxPage.checkbox.isElVisible(
+        checkboxPage.getCheckbox(CheckboxLabels.Home)
+      );
+    });
+  });
 
   // test("@functional User Shall Be Able To Check And Uncheck All The Categories", async () => {
   //   qase.id(8);

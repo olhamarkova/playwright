@@ -1,5 +1,5 @@
 import { type Locator, type Page, expect } from "@playwright/test";
-import { CategoryNames } from "../utils/types/mainPageTypes";
+import { CategoryNames } from "../utils/types/MainPageTypes";
 import { UiElement } from "./uiElement";
 import { Clickable } from "../utils/interfaces/clickable";
 

@@ -7,7 +7,7 @@ import { Image } from "../../../uiElements/image";
 
 export class CheckBoxPage extends BasePage {
   readonly checkboxLabels: Locator;
-  readonly sheetIcons: Locator;
+  //readonly sheetIcons: Locator;
   readonly icon: Image;
   readonly button: Button;
   readonly checkbox: Checkbox;
@@ -17,12 +17,10 @@ export class CheckBoxPage extends BasePage {
     this.button = new Button(this.page);
     this.checkbox = new Checkbox(this.page);
     this.icon = new Image(this.page);
-    //this.checkboxLabels = this.page.locator('span[class="rct-title"]');
-    //this.sheetIcons = this.page.locator("svg.rct-icon-leaf-close");
   }
 
   toggleButtons() {
-    return this.button.getElTitle("Toggle");
+    return this.button.getElByTitle("Toggle");
   }
 
   expandButton(buttonName: "Expand" | "Collapse") {
@@ -37,12 +35,12 @@ export class CheckBoxPage extends BasePage {
     return this.checkbox.getLocator("label").filter({ hasText: category });
   }
 
-  folderIcons(className: "open" | "close") {
-    return this.icon.getLocator(`.rct-icon-parent-${className}`);
+  folderIcon(category: CheckboxLabels) {
+    return this.checkboxLabel(category).locator("svg").nth(1);
   }
 
-  folderIcon(className: "open" | "close", index: number) {
-    return this.folderIcons(className).nth(index - 1);
+  folderIcons() {
+    return this.icon.getLocator("label svg").nth(1);
   }
 
   sheetIcon(category: CheckboxLabels) {
@@ -69,20 +67,5 @@ export class CheckBoxPage extends BasePage {
       } else {
         await expect(checkboxes.nth(i)).toBeChecked();
       }
-  }
-
-  async validateCheckbox(checkbox: CheckboxLabels, toBeChecked?: boolean) {
-    let checkboxElement = this.getCheckbox(checkbox);
-    if (!toBeChecked) {
-      await expect(checkboxElement).not.toBeChecked();
-    } else {
-      await expect(checkboxElement).toBeChecked();
-    }
-  }
-
-  async validateParentCategories(category: CheckboxLabels) {
-    await expect(this.checkboxLabel(category)).toHaveClass(
-      "rct-icon rct-icon-half-check"
-    );
   }
 }
