@@ -1,12 +1,9 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { CheckboxLabels } from "../../../utils/types/ElementsTypes";
 import BasePage from "../../core/BasePage";
-import { Button } from "../../../uiElements/button";
-import { Checkbox } from "../../../uiElements/checkbox";
-import { Image } from "../../../uiElements/image";
+import { Button, Checkbox } from "../../../utils/services/uiService";
 
 export class CheckBoxPage extends BasePage {
-  readonly icon: Image;
   readonly button: Button;
   readonly checkbox: Checkbox;
 
@@ -14,7 +11,6 @@ export class CheckBoxPage extends BasePage {
     super(page, url);
     this.button = new Button(this.page);
     this.checkbox = new Checkbox(this.page);
-    this.icon = new Image(this.page);
   }
 
   toggleButtons(): Locator {

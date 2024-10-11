@@ -32,11 +32,11 @@ export class UiElement implements Partial<Clickable> {
     await (element as Locator).click(options);
   }
 
-  async isElVisible(element: Locator | string): Promise<void> {
+  async isElementVisible(element: Locator | string): Promise<void> {
     await expect(element as Locator).toBeVisible();
   }
 
-  async isElEnabled<T extends string | Locator>(
+  async isElementEnabled<T extends string | Locator>(
     element: T,
     isEnabled = true
   ): Promise<void> {
@@ -64,5 +64,15 @@ export class UiElement implements Partial<Clickable> {
     css: { property: string; value: string }
   ): Promise<void> {
     await expect(element as Locator).toHaveCSS(css.property, css.value);
+  }
+
+  /**
+   * Check the visibility of group of elements by locator
+   * @param elements - locator that returns a group of similar elements (i.e., all buttons on the page)
+   */
+  async areElementsVisible(elements: Locator): Promise<void> {
+    for (let i = 0; i < (await elements.count()); i++) {
+      this.isElementVisible(elements.nth(i));
+    }
   }
 }

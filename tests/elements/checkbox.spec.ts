@@ -22,13 +22,13 @@ test.describe("Checkbox Page Tests", () => {
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
-      await checkboxPage.button.isElVisible(
+      await checkboxPage.button.isElementVisible(
         checkboxPage.expandButton("Expand")
       );
-      await checkboxPage.button.isElVisible(
+      await checkboxPage.button.isElementVisible(
         checkboxPage.expandButton("Collapse")
       );
-      await checkboxPage.button.isElVisible(checkboxPage.toggleButton(1));
+      await checkboxPage.button.isElementVisible(checkboxPage.toggleButton(1));
     });
 
     await test.step("Step 3: Check The Categories List", async () => {
@@ -36,7 +36,7 @@ test.describe("Checkbox Page Tests", () => {
         checkboxPage.checkbox.getByType(),
         1
       );
-      await checkboxPage.checkbox.isElVisible(
+      await checkboxPage.checkbox.isElementVisible(
         checkboxPage.checkboxLabel(CheckboxLabels.Home)
       );
       await checkboxPage.checkbox.isChecked(
@@ -68,7 +68,7 @@ test.describe("Checkbox Page Tests", () => {
         checkboxPage.checkbox.getByType(),
         1
       );
-      await checkboxPage.checkbox.isElVisible(
+      await checkboxPage.checkbox.isElementVisible(
         checkboxPage.getCheckbox(CheckboxLabels.Home)
       );
     });
@@ -94,7 +94,7 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.button.clickElement(checkboxPage.toggleButton(1));
       await checkboxPage.button.clickElement(checkboxPage.toggleButton(3));
       await checkboxPage.button.clickElement(checkboxPage.toggleButton(4));
-      await checkboxPage.checkbox.isElVisible(
+      await checkboxPage.checkbox.isElementVisible(
         checkboxPage.checkboxLabel(CheckboxLabels.Angular)
       );
     });

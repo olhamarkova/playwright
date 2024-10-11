@@ -26,19 +26,22 @@ test.describe("Dynamic Properties Page Tests", () => {
         dynamicPage.pageTitle("h1"),
         headings.dynamic
       );
-      await dynamicPage.text.isElVisible(
+      await dynamicPage.text.isElementVisible(
         dynamicPage.text.getByText(dynamicText)
       );
     });
 
     await test.step("Step 2: Check The Disabled Button", async () => {
-      await dynamicPage.button.isElEnabled(dynamicPage.disabledButton, false);
+      await dynamicPage.button.isElementEnabled(
+        dynamicPage.disabledButton,
+        false
+      );
       await dynamicPage.button.hasCSS(dynamicPage.changeColorButton, {
         property: "color",
         value: dynamicButtonsColor.before,
       });
       await page.waitForTimeout(5000);
-      await dynamicPage.button.isElEnabled(dynamicPage.disabledButton);
+      await dynamicPage.button.isElementEnabled(dynamicPage.disabledButton);
       await dynamicPage.button.hasCSS(dynamicPage.changeColorButton, {
         property: "color",
         value: dynamicButtonsColor.after,
@@ -49,7 +52,7 @@ test.describe("Dynamic Properties Page Tests", () => {
   test("@smoke Validate The Invisible Button", async () => {
     await test.step("Step 1: Check The Invisible Button", async () => {
       await dynamicPage.invisibleButton.waitFor();
-      await dynamicPage.button.isElVisible(dynamicPage.invisibleButton);
+      await dynamicPage.button.isElementVisible(dynamicPage.invisibleButton);
     });
   });
 });

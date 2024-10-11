@@ -42,7 +42,7 @@ export type BookStoreMenuItems =
   | "Profile"
   | "Book Store API";
 
-export type MenuSubItems =
+export type NavbarItems =
   | ElementsMenuSubItems
   | FormMenuSubItems
   | WindowsMenuSubItems

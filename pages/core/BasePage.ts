@@ -1,27 +1,29 @@
 import { type Locator, type Page } from "@playwright/test";
 import { expect } from "@playwright/test";
-import { Header } from "../../uiElements/header";
-import { Footer } from "../../uiElements/footer";
-import { Heading } from "../../uiElements/heading";
-import { Menubar } from "../../uiElements/menubar";
+import {
+  Navbar,
+  Header,
+  Footer,
+  Heading,
+} from "../../utils/services/uiService";
 
 export default class BasePage {
   protected page: Page;
   protected url: string;
-  readonly header: Locator;
+  readonly header: Header;
   readonly logo: Locator;
-  readonly footer: Locator;
-  readonly navbar: Menubar;
+  readonly footer: Footer;
+  readonly navbar: Navbar;
   readonly heading: Heading;
 
   constructor(page: Page, url: string = "") {
     this.page = page;
     this.url = `${process.env.URL!}${url}`;
     this.heading = new Heading(this.page);
-    this.header = new Header(this.page).getHeader();
+    this.header = new Header(this.page);
     this.logo = new Header(this.page).getLogo();
-    this.footer = new Footer(this.page).getFooter();
-    this.navbar = new Menubar(this.page);
+    this.footer = new Footer(this.page);
+    this.navbar = new Navbar(this.page);
   }
 
   async visit(): Promise<void> {
@@ -45,26 +47,5 @@ export default class BasePage {
     options?: {}
   ): Locator {
     return this.heading.getHeading(heading, options);
-  }
-
-  /**
-   * Check the visibility of group of elements by locator
-   * @param elements - locator that returns a group of elements
-   */
-  async validateElementsVisibility(elements: Locator) {
-    for (let i = 0; i < (await elements.count()); i++) {
-      expect(elements.nth(i)).toBeVisible();
-    }
-  }
-
-  /**
-   * Check the visibility of group of elements by their name
-   * @param elementNames - array of strings
-   */
-  async validateElementsByName(elementNames: string[]) {
-    for (let i = 0; i < elementNames.length; i++) {
-      const element = this.page.locator(elementNames[i]);
-      await expect(element).toBeVisible();
-    }
   }
 }

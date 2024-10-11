@@ -2,8 +2,10 @@ import { type Locator, type Page, expect } from "@playwright/test";
 import { CategoryNames } from "../utils/types/MainPageTypes";
 import { UiElement } from "./uiElement";
 import { Clickable } from "../utils/interfaces/clickable";
+import { activeMenuButton } from "../data/classes";
+import { NavbarItems } from "../utils/types/NavbarTypes";
 
-export class Menubar extends UiElement implements Partial<Clickable> {
+export class Navbar extends UiElement implements Partial<Clickable> {
   readonly leftPannel: Locator;
   readonly menuItems: Locator;
 
@@ -21,20 +23,12 @@ export class Menubar extends UiElement implements Partial<Clickable> {
     return this.page.getByRole("menuitem").filter({ hasText: itemTitle });
   }
 
-  // menuItem(itemTitle: CategoryNames) {
-  //   return this.page.locator(".header-text").filter({ hasText: itemTitle });
-  // }
-
-  menuSubItem(subItemId: number, subItemText: string): Locator {
-    return this.getLocator(`#item-${subItemId} span`).getByText(subItemText);
+  menuSubItem(subItemText: NavbarItems): Locator {
+    return this.page.getByText(subItemText, { exact: true });
   }
 
   menuSubItemButton(elementId: number) {
     return this.getLocator(`.show #item-${elementId}`);
-  }
-
-  async clickElement(element: string) {
-    await this.page.getByText(element, { exact: true }).click();
   }
 
   async validateMenuItems(items: string[]) {
@@ -42,14 +36,12 @@ export class Menubar extends UiElement implements Partial<Clickable> {
       if (el === "Book Store" || el === "Profile" || el === "Book Store API") {
         index++;
       }
-      await expect(this.menuSubItem(index, el)).toBeVisible();
+      await this.isElementVisible(this.menuSubItem(el as NavbarItems));
       await this.clickElement(el);
       if (el === "Book Store API") {
         return;
       }
-      await expect(this.menuSubItemButton(index)).toHaveClass(
-        "btn btn-light active"
-      );
+      await this.hasClass(this.menuSubItemButton(index), activeMenuButton);
     }
   }
 }

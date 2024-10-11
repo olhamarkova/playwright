@@ -1,7 +1,6 @@
 import { type Page, Locator } from "@playwright/test";
 import BasePage from "../../core/BasePage";
-import { Button } from "../../../uiElements/button";
-import { Text } from "../../../uiElements/span";
+import { Button, Text } from "../../../utils/services/uiService";
 
 export class DynamicPage extends BasePage {
   readonly disabledButton: Locator;

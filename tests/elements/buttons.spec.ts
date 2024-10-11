@@ -23,14 +23,14 @@ test.describe("Buttons Page Tests", () => {
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
-      await buttonsPage.validateElementsVisibility(buttonsPage.buttons);
+      await buttonsPage.button.areElementsVisible(buttonsPage.buttons);
     });
   });
 
   test("@functional User Shall Have The Ability To Click The Buttons", async () => {
     await test.step("Step 1: Click The 'Double Click Me' button", async () => {
       await buttonsPage.button.dbClick(buttonsPage.dbClickButton);
-      await buttonsPage.textMessage.isElVisible(
+      await buttonsPage.textMessage.isElementVisible(
         buttonsPage.successMsg(successMessages.doubleClick)
       );
     });
@@ -39,14 +39,14 @@ test.describe("Buttons Page Tests", () => {
       await buttonsPage.button.clickElement(buttonsPage.rightClickButton, {
         button: "right",
       });
-      await buttonsPage.textMessage.isElVisible(
+      await buttonsPage.textMessage.isElementVisible(
         buttonsPage.successMsg(successMessages.rightClick)
       );
     });
 
     await test.step("Step 3: Click The 'Click Me' button", async () => {
       await buttonsPage.button.clickElement(buttonsPage.clickMeButton);
-      await buttonsPage.textMessage.isElVisible(
+      await buttonsPage.textMessage.isElementVisible(
         buttonsPage.successMsg(successMessages.dynamicClick)
       );
     });

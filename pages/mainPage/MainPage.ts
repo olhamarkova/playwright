@@ -1,6 +1,6 @@
 import { type Locator, type Page } from "@playwright/test";
 import BasePage from "../core/BasePage";
-import { CategoryNames } from "../../utils/types/mainPageTypes";
+import { CategoryNames } from "../../utils/types/MainPageTypes";
 
 export class MainPage extends BasePage {
   readonly navigationCards: Locator;

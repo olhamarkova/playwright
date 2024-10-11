@@ -1,7 +1,6 @@
 import { type Page, Locator } from "@playwright/test";
-import { Button } from "../../../uiElements/button";
+import { Button, Text } from "../../../utils/services/uiService";
 import BasePage from "../../core/BasePage";
-import { Text } from "../../../uiElements/span";
 
 export class ButtonsPage extends BasePage {
   readonly dbClickButton: Locator;
