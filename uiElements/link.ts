@@ -15,11 +15,7 @@ export class Link
     return this.page.getByRole("link", { name: name, exact: true });
   }
 
-  getByText(text: string, options?: {}): Locator {
-    return this.page.getByText(text, options);
-  }
-
-  async clickElement(element: string, options?: {}): Promise<void> {
-    await this.getLink(element).click(options);
+  getByText(text: string): Locator {
+    return this.page.getByText(text, { exact: true });
   }
 }

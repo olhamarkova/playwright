@@ -8,8 +8,8 @@ export class Text extends UiElement implements Textual {
     super(page);
   }
 
-  getByText(text: string, options?: { exact?: boolean }): Locator {
-    return this.page.getByText(text, options);
+  getByText(text: string): Locator {
+    return this.page.getByText(text, { exact: true });
   }
 
   async hasText(

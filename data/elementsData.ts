@@ -109,6 +109,11 @@ export const subHeadingsText = [
   "Broken Link",
 ];
 
+export const imagesSrc = {
+  validImage: "/images/Toolsqa.jpg",
+  brokenImage: "/images/Toolsqa_1.jpg",
+};
+
 export const linksText = {
   valid: "Click Here for Valid Link",
   broken: "Click Here for Broken Link",
