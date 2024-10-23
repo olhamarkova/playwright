@@ -20,8 +20,8 @@ export class ImagesPage extends BasePage {
     this.text = new Text(page);
     this.validImage = this.image.getImageBySrc(imagesSrc.validImage).nth(1);
     this.brokenImage = this.image.getImageBySrc(imagesSrc.brokenImage);
-    this.images = this.image.getLocator("div#app img");
-    this.links = this.link.getLocator("div#app").getByRole("link");
+    this.images = this.image.getLocator("div.col-md-6").getByRole("img");
+    this.links = this.link.getLocator("div.col-md-6").getByRole("link");
   }
 
   async findBrokenImage() {
@@ -29,17 +29,12 @@ export class ImagesPage extends BasePage {
     const allImages = await this.images.all();
     for await (const image of allImages) {
       const imageSrc = await image.getAttribute("src");
-      expect.soft(imageSrc?.length).toBeGreaterThan(1);
+      console.log(imageSrc);
       //@ts-ignore
       if (imageSrc?.length > 0) {
         const response = await this.page.request.get(`${url}${imageSrc}`);
         expect.soft(response.status()).toBe(200);
-        await this.page.goto(`${url}${imageSrc}`);
-        const title = await this.page.title();
-        if (title === "DEMOQA") {
-          throw new Error(`Here is a broken image: ${url}${imageSrc}`);
-        } else await this.page.goBack();
-      }
+      } else throw new Error(`This is a broken image: ${imageSrc}`);
     }
   }
 

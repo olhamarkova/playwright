@@ -1,19 +1,20 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
 import { Textual } from "../utils/interfaces/textual";
+import { GetLocatorOptions, TextOptions } from "../utils/types/Options";
 
 export class Heading extends UiElement implements Textual {
   constructor(page: Page) {
     super(page);
   }
 
-  getByText(text: string, options?: {}): Locator {
-    return this.page.getByRole("heading").getByText(text, options);
+  getByText(text: string, isExact: boolean = true): Locator {
+    return this.page.getByRole("heading").getByText(text, { exact: isExact });
   }
 
   getHeading(
     heading: "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
-    options?: {}
+    options?: GetLocatorOptions
   ): Locator {
     return this.getLocator(heading, options);
   }
@@ -21,7 +22,7 @@ export class Heading extends UiElement implements Textual {
   async hasText(
     element: Locator | string,
     text: string,
-    options?: {}
+    options?: TextOptions
   ): Promise<void> {
     await expect(element as Locator).toHaveText(text, options);
   }
@@ -29,7 +30,7 @@ export class Heading extends UiElement implements Textual {
   async containText(
     element: Locator | string,
     text: string,
-    options: {}
+    options?: TextOptions
   ): Promise<void> {
     await expect(element as Locator).toContainText(text, options);
   }

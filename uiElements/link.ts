@@ -11,8 +11,12 @@ export class Link
     super(page);
   }
 
-  getLink(name: string): Locator {
-    return this.page.getByRole("link", { name: name, exact: true });
+  getLinks() {
+    return this.page.getByRole("link");
+  }
+
+  getLink(name: string, isExact: boolean = true): Locator {
+    return this.page.getByRole("link", { name: name, exact: isExact });
   }
 
   getByText(text: string): Locator {
