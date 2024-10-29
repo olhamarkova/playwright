@@ -29,7 +29,9 @@ export class ImagesPage extends BasePage {
     const allImages = await this.images.all();
     for await (const image of allImages) {
       const imageSrc = await image.getAttribute("src");
-      console.log(imageSrc);
+      if (!imageSrc || imageSrc.length === 0) {
+        throw new Error(`This is a broken image: ${image}`);
+      }
       //@ts-ignore
       if (imageSrc?.length > 0) {
         const response = await this.page.request.get(`${url}${imageSrc}`);
