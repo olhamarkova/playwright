@@ -32,3 +32,5 @@ export type TextBoxElementID =
   | "email"
   | "currentAddress"
   | "permanentAddress";
+
+export type RadioLabels = "yes" | "impressive" | "no";

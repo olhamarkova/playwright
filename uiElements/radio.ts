@@ -1,17 +1,21 @@
 import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
-import { Clickable } from "../utils/interfaces/clickable";
+import { GetByRoleOptions } from "../utils/types/Options";
 
-export class Radio extends UiElement implements Partial<Clickable> {
+export class Radio extends UiElement {
   constructor(page: Page) {
     super(page);
   }
 
-  getRadio(index: number, options?: {}): Locator {
+  getRadio(options?: GetByRoleOptions) {
+    return this.page.getByRole("radio", options);
+  }
+
+  getRadioByIndex(index: number, options?: GetByRoleOptions): Locator {
     return this.page.getByRole("radio", options).nth(index - 1);
   }
 
-  async clickElement(
+  async clickRadio(
     element: Locator,
     label?: string,
     options?: {}
