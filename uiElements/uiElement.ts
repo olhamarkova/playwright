@@ -21,6 +21,10 @@ export class UiElement implements Partial<Clickable> {
     return this.page.getByLabel(label, { exact: true });
   }
 
+  getLabel(elementName: string): Locator {
+    return this.page.locator(`label[for='${elementName}']`);
+  }
+
   getElByTitle(title: string, options?: { exact?: boolean }): Locator {
     return this.page.getByTitle(title, options);
   }
