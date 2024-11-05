@@ -1,13 +1,22 @@
 import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
 import { Writable } from "./../utils/interfaces/writable";
+import { GetByRoleOptions } from "../utils/types/Options";
+import { Button, Input, Heading } from "../utils/services/uiService";
 
 export class Form extends UiElement implements Partial<Writable> {
+  readonly button: Button;
+  readonly input: Input;
+  readonly heading: Heading;
+
   constructor(page: Page) {
     super(page);
+    this.button = new Button(this.page);
+    this.input = new Input(this.page);
+    this.heading = new Heading(this.page);
   }
 
-  getForm(options?: {}): Locator {
+  getForm(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("form", options);
   }
 

@@ -11,3 +11,5 @@ export { Navbar as Navbar } from "../../uiElements/navbar";
 export { Radio as Radio } from "../../uiElements/radio";
 export { Table as Table } from "../../uiElements/table";
 export { Text as Text } from "../../uiElements/text";
+export { Selector as Selector } from "../../uiElements/selector";
+export { Modal as Modal } from "../../uiElements/modal";

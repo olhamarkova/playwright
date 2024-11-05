@@ -1,27 +1,23 @@
 import { Locator, type Page } from "@playwright/test";
 import { AddRecordInputs } from "../../../../utils/types/ElementsTypes";
-import { Form } from "../../../../uiElements/form";
-import { Button } from "../../../../uiElements/button";
-import { Heading } from "../../../../uiElements/heading";
-import { Modal } from "../../../../uiElements/modal";
-import { Input } from "../../../../uiElements/input";
+import { Form, Modal } from "../../../../utils/services/uiService";
 
-export default class AddNewRecordForm {
-  protected page: Page;
-  readonly modal: Locator;
+export default class AddNewRecordForm extends Form {
+  readonly modal: Modal;
+
+  readonly addRecordForm: Locator;
   readonly modalTitle: Locator;
-  readonly form: Locator;
   readonly submitButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
-    this.modal = new Modal(this.page).getModal();
-    this.modalTitle = new Heading(this.page).getHeading("h4");
-    this.form = new Form(this.page).getForm();
-    this.submitButton = new Button(this.page).getButton("Submit");
+    super(page);
+    this.modal = new Modal(this.page);
+
+    this.modalTitle = this.modal.getById("registration-form-modal");
+    this.submitButton = this.button.getButton("Submit");
   }
 
-  input(id: AddRecordInputs | string) {
-    return new Input(this.page).getLocator(`#${id}`);
+  formInput(id: AddRecordInputs | string) {
+    return this.input.getById(`${id}`);
   }
 }
