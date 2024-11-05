@@ -1,18 +1,23 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
 import { Writable } from "../utils/interfaces/writable";
+import { GetByRoleOptions } from "../utils/types/Options";
 
 export class Input extends UiElement implements Writable {
   constructor(page: Page) {
     super(page);
   }
 
-  getTextbox(options?: {}): Locator {
+  getTextbox(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("textbox", options);
   }
 
-  getByPlaceholder(placeholder: string, options?: {}): Locator {
-    return this.page.getByPlaceholder(placeholder, options);
+  getByPlaceholder(placeholder: string, exact = true): Locator {
+    return this.page.getByPlaceholder(placeholder, { exact });
+  }
+
+  getTextAreaById(id: string): Locator {
+    return this.page.locator(`textarea[id='${id}']`);
   }
 
   async fillOut(element: Locator | string, value: string): Promise<void> {
