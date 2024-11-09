@@ -22,7 +22,7 @@ export class Form extends UiElement implements Partial<Writable> {
 
   /**
    * Fiil a form inputs with provided data
-   * @param element should be the locator that returns group of elements
+   * @param element should be the locator that returns group of elements (all inputs on the form)
    * @param value an array with string values
    */
   async fillOut(element: Locator, value: string[]): Promise<void> {

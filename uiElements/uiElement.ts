@@ -2,13 +2,14 @@ import { Locator, Page, expect } from "@playwright/test";
 import { ClickOptions, GetLocatorOptions } from "../utils/types/Options.ts";
 import { Clickable } from "../utils/interfaces/clickable.ts";
 
-export class UiElement implements Partial<Clickable> {
+export class UiElement implements Clickable {
   protected page: Page;
 
   constructor(page: Page) {
     this.page = page;
   }
 
+  //Locators
   getLocator(selector: string, options?: GetLocatorOptions): Locator {
     return this.page.locator(selector, options);
   }
@@ -29,6 +30,7 @@ export class UiElement implements Partial<Clickable> {
     return this.page.getByTitle(title, options);
   }
 
+  //Actions
   async clickElement(
     element: Locator | string,
     options?: ClickOptions
@@ -36,6 +38,14 @@ export class UiElement implements Partial<Clickable> {
     await (element as Locator).click(options);
   }
 
+  async dbClick(
+    element: Locator | string,
+    options?: ClickOptions
+  ): Promise<void> {
+    await (element as Locator).dblclick(options);
+  }
+
+  //Assertions
   async isElementVisible(element: Locator | string): Promise<void> {
     await expect(element as Locator).toBeVisible();
   }

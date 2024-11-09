@@ -1,34 +1,31 @@
-import { type Locator, type Page, expect } from "@playwright/test";
+import { type Locator, type Page } from "@playwright/test";
 import { CategoryNames } from "../utils/types/MainPageTypes";
 import { UiElement } from "./uiElement";
 import { Clickable } from "../utils/interfaces/clickable";
 import { activeMenuButton } from "../data/classes";
 import { NavbarItems } from "../utils/types/NavbarTypes";
+import { Link, Button } from "../utils/services/uiService";
 
-export class Navbar extends UiElement implements Partial<Clickable> {
-  readonly leftPannel: Locator;
-  readonly menuItems: Locator;
+export class Navbar extends UiElement implements Clickable {
+  readonly navLink: Link;
+  readonly button: Button;
 
   constructor(page: Page) {
     super(page);
-    this.leftPannel = this.getLocator(".left-pannel"); //
-    this.menuItems = this.getLocator(".accordion .element-group");
-  }
-
-  getMenu(): Locator {
-    return this.page.getByRole("menubar");
+    this.navLink = new Link(this.page);
+    this.button = new Button(this.page);
   }
 
   getMenuItem(itemTitle: CategoryNames): Locator {
-    return this.page.getByRole("menuitem").filter({ hasText: itemTitle });
+    return this.navLink.getByText(itemTitle);
   }
 
   menuSubItem(subItemText: NavbarItems): Locator {
-    return this.page.getByText(subItemText, { exact: true });
+    return this.navLink.getByText(subItemText);
   }
 
   menuSubItemButton(elementId: number) {
-    return this.getLocator(`.show #item-${elementId}`);
+    return this.button.getLocator(`.show #item-${elementId}`);
   }
 
   async validateMenuItems(items: string[]) {
@@ -37,7 +34,7 @@ export class Navbar extends UiElement implements Partial<Clickable> {
         index++;
       }
       await this.isElementVisible(this.menuSubItem(el as NavbarItems));
-      await this.clickElement(el);
+      await this.clickElement(this.menuSubItem(el as NavbarItems));
       if (el === "Book Store API") {
         return;
       }

@@ -43,11 +43,13 @@ test.describe("Main Page Smoke Tests", () => {
   test("@smoke The Cards On Main Page Should Lead To Corresponding Pages", async () => {
     const pages = Object.entries(categories);
     let step = 1;
+
     for (const [key, value] of pages) {
       await test.step(`Step ${step}: Check The Page ${value} Link`, async () => {
         await mainPage.goToCategory(value);
         await mainPage.hasUrl(key);
         await mainPage.goToMainPage();
+
         step++;
       });
     }

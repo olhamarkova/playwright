@@ -10,12 +10,4 @@ export class Button extends UiElement implements Clickable {
   getButton(name: string): Locator {
     return this.page.getByRole("button", { name: name, exact: true });
   }
-
-  async clickElement(element: Locator | string, options?: {}): Promise<void> {
-    await (element as Locator).click(options);
-  }
-
-  async dbClick(element: Locator | string, options?: {}): Promise<void> {
-    await (element as Locator).dblclick(options);
-  }
 }

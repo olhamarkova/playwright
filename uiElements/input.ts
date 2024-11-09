@@ -12,8 +12,8 @@ export class Input extends UiElement implements Writable {
     return this.page.getByRole("textbox", options);
   }
 
-  getByPlaceholder(placeholder: string, exact = true): Locator {
-    return this.page.getByPlaceholder(placeholder, { exact });
+  getByPlaceholder(placeholder: string, isExact: boolean = true): Locator {
+    return this.page.getByPlaceholder(placeholder, { exact: isExact });
   }
 
   getTextAreaById(id: string): Locator {

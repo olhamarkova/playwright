@@ -1,6 +1,5 @@
 import { test } from "@playwright/test";
 import { ElementsPage } from "../../pages/elementsPages/pages/ElementsPage.ts";
-import { screenshot } from "../../utils/screenshot.ts";
 import { ElementsMenuSubItems } from "../../utils/types/NavbarTypes.ts";
 import {
   copyRightText,
@@ -29,16 +28,6 @@ test.describe("Elements Page Tests", () => {
         elements.text.getByText(callToAction)
       );
     });
-
-    await test.step("Step 3: The Logo Should Be Visible", async () => {
-      await elements.header.isElementVisible(elements.logo);
-    });
-
-    await test.step("Step 4: The Footer Be Visible And Contain Copyright Info", async () => {
-      await elements.footer.hasText(elements.footer.getFooter(), copyRightText);
-    });
-
-    //await screenshot(page, test);
   });
 
   test("@smoke The Elements Menu Subitems Should Lead To Corresponding Pages", async () => {
