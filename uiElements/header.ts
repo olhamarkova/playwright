@@ -1,8 +1,7 @@
-import { Locator, Page, expect } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
-import { Clickable } from "../utils/interfaces/clickable";
 
-export class Header extends UiElement implements Partial<Clickable> {
+export class Header extends UiElement {
   constructor(page: Page) {
     super(page);
   }
@@ -13,9 +12,5 @@ export class Header extends UiElement implements Partial<Clickable> {
 
   getLogo(): Locator {
     return this.getHeader().getByRole("img");
-  }
-
-  async clickElement(element: Locator, options?: {}): Promise<void> {
-    await element.click(options);
   }
 }
