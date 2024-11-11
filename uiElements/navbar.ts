@@ -24,11 +24,11 @@ export class Navbar extends UiElement implements Clickable {
     return this.navLink.getByText(subItemText);
   }
 
-  menuSubItemButton(elementId: number) {
+  menuSubItemButton(elementId: number): Locator {
     return this.button.getLocator(`.show #item-${elementId}`);
   }
 
-  async validateMenuItems(items: string[]) {
+  async validateMenuItems(items: string[]): Promise<void> {
     for (let [index, el] of items.entries()) {
       if (el === "Book Store" || el === "Profile" || el === "Book Store API") {
         index++;

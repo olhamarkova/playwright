@@ -44,8 +44,6 @@ test.describe("Checkbox Page Tests", () => {
         false
       );
     });
-
-    // await screenshot(page, test);
   });
 
   test("@functional User Shall Be Able To Open And Close The List By Clicking On Buttons", async () => {

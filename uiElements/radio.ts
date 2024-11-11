@@ -1,13 +1,14 @@
 import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
-import { GetByRoleOptions } from "../utils/types/Options";
+import { ClickOptions, GetByRoleOptions } from "../utils/types/Options";
+import { Clickable } from "../utils/interfaces/clickable";
 
-export class Radio extends UiElement {
+export class Radio extends UiElement implements Clickable {
   constructor(page: Page) {
     super(page);
   }
 
-  getRadio(options?: GetByRoleOptions) {
+  getRadio(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("radio", options);
   }
 
@@ -15,15 +16,7 @@ export class Radio extends UiElement {
     return this.page.getByRole("radio", options).nth(index - 1);
   }
 
-  async clickRadio(
-    element: Locator,
-    label?: string,
-    options?: {}
-  ): Promise<void> {
-    if (label) {
-      await this.getByLabel(label).click(options);
-    } else {
-      await element.click(options);
-    }
+  async clickRadioLabel(label: string, options?: ClickOptions): Promise<void> {
+    await this.getByLabel(label).click(options);
   }
 }

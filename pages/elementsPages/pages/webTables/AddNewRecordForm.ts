@@ -17,7 +17,7 @@ export default class AddNewRecordForm extends Form {
     this.submitButton = this.button.getButton("Submit");
   }
 
-  formInput(id: AddRecordInputs | string) {
+  formInput(id: AddRecordInputs | string): Locator {
     return this.input.getById(`${id}`);
   }
 }

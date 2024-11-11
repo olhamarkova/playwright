@@ -64,12 +64,12 @@ test.describe("Web Table Page Tests", () => {
 
   test("@functional The User Shall Be Able To Change Count Of Rows On The Table", async () => {
     await test.step("Step 1: Change Count To 5", async () => {
-      await tablePage.rowsSelector.selectOption("5");
+      await tablePage.selector.chooseOption(tablePage.rowsSelector, "5");
       await tablePage.table.hasCount(tablePage.rows, 6);
     });
 
     await test.step("Step 2: Change Count To 25", async () => {
-      await tablePage.rowsSelector.selectOption("25");
+      await tablePage.selector.chooseOption(tablePage.rowsSelector, "25");
       await tablePage.table.hasCount(tablePage.rows, 26);
     });
   });

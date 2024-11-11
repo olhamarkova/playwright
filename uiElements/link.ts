@@ -8,15 +8,11 @@ export class Link extends UiElement implements Clickable, Partial<Textual> {
     super(page);
   }
 
-  getLinks() {
+  getLinks(): Locator {
     return this.page.getByRole("link");
   }
 
-  getLink(name: string, isExact: boolean = true): Locator {
+  getByName(name: string, isExact: boolean = true): Locator {
     return this.page.getByRole("link", { name: name, exact: isExact });
-  }
-
-  getByText(text: string): Locator {
-    return this.page.getByText(text, { exact: true });
   }
 }

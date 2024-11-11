@@ -11,11 +11,11 @@ export class Table extends UiElement {
     return this.page.getByRole("table");
   }
 
-  getRows() {
+  getRows(): Locator {
     return this.page.getByRole("row");
   }
 
-  getRow(index: number, options?: GetByRoleOptions): Locator {
+  getRowByIndex(index: number, options?: GetByRoleOptions): Locator {
     return this.page.getByRole("row", options).nth(index - 1);
   }
 
@@ -24,7 +24,7 @@ export class Table extends UiElement {
     columnNumber: number,
     options?: GetByRoleOptions
   ): Locator {
-    return this.getRow(rowNumber)
+    return this.getRowByIndex(rowNumber)
       .getByRole("gridcell", options)
       .nth(columnNumber - 1);
   }

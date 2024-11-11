@@ -34,7 +34,7 @@ export default class BasePage {
     await this.logo.click();
   }
 
-  async hasUrl(url: string) {
+  async hasUrl(url: string): Promise<void> {
     await expect(this.page.url()).toContain(url);
   }
 

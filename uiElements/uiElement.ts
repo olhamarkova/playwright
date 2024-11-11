@@ -26,8 +26,12 @@ export class UiElement implements Clickable {
     return this.page.locator(`label[for='${elementName}']`);
   }
 
-  getElByTitle(title: string, options?: { exact?: boolean }): Locator {
-    return this.page.getByTitle(title, options);
+  getElByTitle(title: string, isExact: boolean): Locator {
+    return this.page.getByTitle(title, { exact: isExact });
+  }
+
+  getByText(text: string): Locator {
+    return this.page.getByText(text, { exact: true });
   }
 
   //Actions

@@ -41,18 +41,18 @@ export class WebTablesPage extends BasePage {
     this.rowsSelector = this.selector.getByAriaLabel("rows per page");
   }
 
-  actionButton(name: "edit" | "delete", recordNumber: number) {
+  actionButton(name: "edit" | "delete", recordNumber: number): Locator {
     return this.button.getLocator(`#${name}-record-${recordNumber}`);
   }
 
-  async fillForm(data: object) {
+  async fillForm(data: object): Promise<void> {
     for (let [key, value] of Object.entries(data)) {
       await this.input.fillOut(this.addNewRecord.formInput(key), value);
       await this.input.hasValue(this.addNewRecord.formInput(key), value);
     }
   }
 
-  async validateElementsByName(elementNames: string[]) {
+  async validateElementsByName(elementNames: string[]): Promise<void> {
     for (let i = 0; i < elementNames.length; i++) {
       await this.table.isElementVisible(
         this.table.getColumnheader(elementNames[i])
@@ -64,7 +64,7 @@ export class WebTablesPage extends BasePage {
     rowNumber: number,
     columnNumber: number,
     text?: string
-  ) {
+  ): Promise<void> {
     if (!text) {
       await expect(
         this.table.getCellByRowNumber(rowNumber, columnNumber)
@@ -75,7 +75,7 @@ export class WebTablesPage extends BasePage {
       ).toHaveText(text!);
   }
 
-  async validateRowContent(rowNumber: number, text?: string) {
+  async validateRowContent(rowNumber: number, text?: string): Promise<void> {
     for (let i = 0; i < 7; i++) {
       await this.validateCellContent(rowNumber, i, text);
     }

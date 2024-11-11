@@ -42,7 +42,7 @@ test.describe("Links Page Tests", () => {
     page,
   }) => {
     await test.step("Step 1: Validate 'Home' Link", async () => {
-      await linksPage.openNewTab(context, linksPage.link.getLink("Home"));
+      await linksPage.openNewTab(context, linksPage.link.getByName("Home"));
       await linksPage.hasTitle(title.mainTitle);
       await page.bringToFront();
     });

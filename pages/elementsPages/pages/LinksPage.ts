@@ -14,12 +14,12 @@ export class LinksPage extends BasePage {
     this.link = new Link(this.page);
     this.links = this.link.getLocator("p a");
     this.subHeadings = this.heading.getHeading("h5");
-    this.dynamicLink = this.link.getLink("Home", false).nth(1);
+    this.dynamicLink = this.link.getByName("Home", false).nth(1);
   }
 
   async validateElementsByName(elementNames: string[]) {
     for (let i = 0; i < elementNames.length; i++) {
-      const element = this.link.getLink(elementNames[i]);
+      const element = this.link.getByName(elementNames[i]);
       await this.link.isElementVisible(element);
     }
   }
@@ -35,9 +35,9 @@ export class LinksPage extends BasePage {
         responseName = responses.get(status) as string;
       }
       if (status === 301) {
-        await this.link.clickElement(this.link.getLink("Moved"));
+        await this.link.clickElement(this.link.getByName("Moved"));
       } else {
-        await this.link.clickElement(this.link.getLink(responseName!));
+        await this.link.clickElement(this.link.getByName(responseName!));
       }
       const resp = await responsePromise;
       expect(resp.status()).toBe(status);

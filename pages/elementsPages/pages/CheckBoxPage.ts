@@ -13,16 +13,12 @@ export class CheckBoxPage extends BasePage {
     this.checkbox = new Checkbox(this.page);
   }
 
-  toggleButtons(): Locator {
-    return this.button.getElByTitle("Toggle");
-  }
-
   expandButton(buttonName: "Expand" | "Collapse"): Locator {
     return this.button.getByLabel(`${buttonName} all`);
   }
 
   toggleButton(index: number): Locator {
-    return this.toggleButtons().nth(index - 1);
+    return this.button.getElByTitle("Toggle", true).nth(index - 1);
   }
 
   checkboxLabel(category: CheckboxLabels): Locator {
