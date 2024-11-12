@@ -1,10 +1,9 @@
 import { test } from "@playwright/test";
-import { qase } from "playwright-qase-reporter";
-import { screenshot } from "../../utils/screenshot.ts";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
-import { elementPagesHeadings as headings } from "../../pages/elements/elementsData.ts";
-import { CheckBoxPage } from "../../pages/elements/pages/CheckBoxPage.ts";
-import { CheckboxLabels } from "../../pages/elements/ElementsTypes.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { elementPagesHeadings as headings } from "../../modules/elementsPages/support/data.ts";
+import { CheckBoxPage } from "../../modules/elementsPages/pages/CheckBoxPage.ts";
+import { CheckboxLabels } from "../../modules/elementsPages/support/types.ts";
+import { halfCheckedBox } from "../../modules/elementsPages/support/classes.ts";
 
 let checkboxPage: CheckBoxPage;
 
@@ -14,112 +13,115 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Checkbox Page Tests", () => {
-  test("@smoke The Checkbox Page Should Have All The Expected Elements", async ({
-    page,
-  }) => {
-    qase.id(7);
-    qase.title(test.info().title);
-
+  test("@smoke The Checkbox Page Should Have All The Expected Elements", async () => {
     await test.step("Step 1: Check The Page Heading", async () => {
-      await checkboxPage.validateHeading(headings.checkbox);
+      await checkboxPage.heading.hasText(
+        checkboxPage.pageTitle("h1"),
+        headings.checkbox
+      );
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
-      await checkboxPage.validateElementVisibility(
-        checkboxPage.button("Expand")
+      await checkboxPage.button.isElementVisible(
+        checkboxPage.expandButton("Expand")
       );
-      await checkboxPage.validateElementVisibility(
-        checkboxPage.button("Collapse")
+      await checkboxPage.button.isElementVisible(
+        checkboxPage.expandButton("Collapse")
       );
-      await checkboxPage.validateElementVisibility(
-        checkboxPage.toggleButton(1)
-      );
+      await checkboxPage.button.isElementVisible(checkboxPage.toggleButton(1));
     });
 
     await test.step("Step 3: Check The Categories List", async () => {
-      await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 1);
-      await checkboxPage.validateElementsCount(
-        checkboxPage.folderIcons("close"),
+      await checkboxPage.checkbox.hasCount(
+        checkboxPage.checkbox.getByType(),
         1
       );
-      await checkboxPage.validateElementVisibility(
-        checkboxPage.checkboxLabel("Home")
+      await checkboxPage.checkbox.isElementVisible(
+        checkboxPage.checkboxLabel(CheckboxLabels.Home)
+      );
+      await checkboxPage.checkbox.isChecked(
+        checkboxPage.getCheckbox(CheckboxLabels.Home),
+        false
       );
     });
-
-    await screenshot(page, test);
   });
 
   test("@functional User Shall Be Able To Open And Close The List By Clicking On Buttons", async () => {
-    qase.id(10);
-    qase.title(test.info().title);
-
     await test.step("Step 1: Expand All Categories", async () => {
-      await checkboxPage.clickButton(checkboxPage.button("Expand"));
-      await checkboxPage.validateElementsVisibility(
-        checkboxPage.folderIcons("open")
+      await checkboxPage.button.clickElement(
+        checkboxPage.expandButton("Expand")
       );
-      await checkboxPage.validateElementsVisibility(checkboxPage.sheetIcons);
-      await checkboxPage.validateElementsCount(
-        checkboxPage.folderIcons("open"),
-        6
+      await checkboxPage.checkbox.hasCount(
+        checkboxPage.checkbox.getByType(),
+        17
       );
-      await checkboxPage.validateElementsCount(checkboxPage.sheetIcons, 11);
-      await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 17);
       await checkboxPage.validateAllCheckboxes();
     });
 
     await test.step("Step 2: Collapse All Categories", async () => {
-      await checkboxPage.clickButton(checkboxPage.button("Collapse"));
-      await checkboxPage.validateElementsCount(checkboxPage.checkboxes, 1);
-      await checkboxPage.validateElementsCount(
-        checkboxPage.folderIcons("close"),
+      await checkboxPage.button.clickElement(
+        checkboxPage.expandButton("Collapse")
+      );
+      await checkboxPage.checkbox.hasCount(
+        checkboxPage.checkbox.getByType(),
         1
       );
-      await checkboxPage.validateCheckbox(CheckboxLabels.Home);
+      await checkboxPage.checkbox.isElementVisible(
+        checkboxPage.getCheckbox(CheckboxLabels.Home)
+      );
     });
   });
 
   test("@functional User Shall Be Able To Check And Uncheck All The Categories", async () => {
-    qase.id(8);
-    qase.title(test.info().title);
-
     await test.step("Step 1: Check All Categories", async () => {
       await checkboxPage.check(CheckboxLabels.Home);
-      await checkboxPage.clickButton(checkboxPage.button("Expand"));
+      await checkboxPage.button.clickElement(
+        checkboxPage.expandButton("Expand")
+      );
       await checkboxPage.validateAllCheckboxes(true);
     });
 
     await test.step("Step 2: Uncheck All Categories", async () => {
-      await checkboxPage.check(CheckboxLabels.Home, false);
+      await checkboxPage.check(CheckboxLabels.Home);
       await checkboxPage.validateAllCheckboxes();
     });
   });
 
   test("@functional User Shall Be Able To Check And Uncheck One Category", async () => {
-    qase.id(9);
-    qase.title(test.info().title);
-
     await test.step("Step 1: Find The Angular Category", async () => {
-      await checkboxPage.clickButton(checkboxPage.toggleButton(1));
-      await checkboxPage.clickButton(checkboxPage.toggleButton(3));
-      await checkboxPage.clickButton(checkboxPage.toggleButton(4));
-      await checkboxPage.validateElementVisibility(
-        checkboxPage.checkboxLabel("Angular")
+      await checkboxPage.button.clickElement(checkboxPage.toggleButton(1));
+      await checkboxPage.button.clickElement(checkboxPage.toggleButton(3));
+      await checkboxPage.button.clickElement(checkboxPage.toggleButton(4));
+      await checkboxPage.checkbox.isElementVisible(
+        checkboxPage.checkboxLabel(CheckboxLabels.Angular)
       );
     });
 
     await test.step("Step 2: Check The Angular Category", async () => {
       await checkboxPage.check(CheckboxLabels.Angular);
-      await checkboxPage.validateCheckbox(CheckboxLabels.Angular, true);
-      await checkboxPage.validateParentCategories(CheckboxLabels.Workspace);
-      await checkboxPage.validateParentCategories(CheckboxLabels.Documents);
-      await checkboxPage.validateParentCategories(CheckboxLabels.Home);
+      await checkboxPage.checkbox.isChecked(
+        checkboxPage.getCheckbox(CheckboxLabels.Angular),
+        true
+      );
+      const parentCategories = [
+        CheckboxLabels.Workspace,
+        CheckboxLabels.Documents,
+        CheckboxLabels.Home,
+      ];
+      for (let i = 0; i < parentCategories.length; i++) {
+        await checkboxPage.checkbox.hasClass(
+          checkboxPage.getCheckbox(parentCategories[i]),
+          halfCheckedBox
+        );
+      }
     });
 
     await test.step("Step 3: Uncheck The Angular Category", async () => {
-      await checkboxPage.check(CheckboxLabels.Angular, false);
-      await checkboxPage.validateCheckbox(CheckboxLabels.Angular);
+      await checkboxPage.check(CheckboxLabels.Angular);
+      await checkboxPage.checkbox.isChecked(
+        checkboxPage.getCheckbox(CheckboxLabels.Angular),
+        false
+      );
       await checkboxPage.validateAllCheckboxes();
     });
   });

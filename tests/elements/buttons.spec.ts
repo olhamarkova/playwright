@@ -1,10 +1,10 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   successMessages,
-} from "../../pages/elements/elementsData.ts";
-import { ButtonsPage } from "../../pages/elements/pages/ButtonsPage.ts";
+} from "../../modules/elementsPages/support/data.ts";
+import { ButtonsPage } from "../../modules/elementsPages/pages/ButtonsPage.ts";
 
 let buttonsPage: ButtonsPage;
 
@@ -16,28 +16,39 @@ test.beforeEach(async ({ page }) => {
 test.describe("Buttons Page Tests", () => {
   test("@smoke The Buttons Page Should Have All The Expected Elements", async () => {
     await test.step("Step 1: Check The Page Heading", async () => {
-      await buttonsPage.validateHeading(headings.buttons);
+      await buttonsPage.heading.hasText(
+        buttonsPage.pageTitle("h1"),
+        headings.buttons
+      );
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
-      await buttonsPage.validateElementsVisibility(buttonsPage.buttons);
+      await buttonsPage.button.areElementsVisible(buttonsPage.buttons);
     });
   });
 
   test("@functional User Shall Have The Ability To Click The Buttons", async () => {
     await test.step("Step 1: Click The 'Double Click Me' button", async () => {
-      await buttonsPage.dbClickButton.dblclick();
-      await buttonsPage.validateTextElement(successMessages.doubleClick);
+      await buttonsPage.button.dbClick(buttonsPage.dbClickButton);
+      await buttonsPage.textMessage.isElementVisible(
+        buttonsPage.successMsg(successMessages.doubleClick)
+      );
     });
 
     await test.step("Step 2: Click The 'Right Click Me' button", async () => {
-      await buttonsPage.rightClickButton.click({ button: "right" });
-      await buttonsPage.validateTextElement(successMessages.rightClick);
+      await buttonsPage.button.clickElement(buttonsPage.rightClickButton, {
+        button: "right",
+      });
+      await buttonsPage.textMessage.isElementVisible(
+        buttonsPage.successMsg(successMessages.rightClick)
+      );
     });
 
     await test.step("Step 3: Click The 'Click Me' button", async () => {
-      await buttonsPage.clickMeButton.click();
-      await buttonsPage.validateTextElement(successMessages.dynamicClick);
+      await buttonsPage.button.clickElement(buttonsPage.clickMeButton);
+      await buttonsPage.textMessage.isElementVisible(
+        buttonsPage.successMsg(successMessages.dynamicClick)
+      );
     });
   });
 });
