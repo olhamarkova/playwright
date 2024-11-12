@@ -1,12 +1,7 @@
 import { test } from "@playwright/test";
-import { qase } from "playwright-qase-reporter";
-import { MainPage } from "../../pages/mainPage/MainPage.ts";
-import { screenshot } from "../../utils/screenshot.ts";
-import {
-  copyRightText,
-  categories,
-  title,
-} from "../../utils/services/dataService.ts";
+import { MainPage } from "../../modules/mainPage/MainPage";
+import { copyRightText, title } from "../../modules/core/support/data";
+import { categories } from "../../modules/mainPage/support/categories";
 
 let mainPage: MainPage;
 
@@ -16,48 +11,42 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Main Page Smoke Tests", () => {
-  test("@smoke The Main Page Should Have All The Expected Elements", async ({
-    page,
-  }) => {
-    qase.id(4);
-    qase.title(test.info().title);
+  test("@smoke The Main Page Should Have All The Expected Elements", async () => {
     await test.step("Step 1: Check The Page Title", async () => {
-      await mainPage.validateTitle(title.mainTitle);
+      await mainPage.hasTitle(title.mainTitle);
     });
 
     await test.step("Step 2: The Page Should Have A Header", async () => {
-      await mainPage.validateElementVisibility(mainPage.header);
+      await mainPage.header.isElementVisible(mainPage.header.getHeader());
     });
 
     await test.step("Step 3: The Logo Should Be Visible", async () => {
-      await mainPage.validateElementVisibility(mainPage.logo);
+      await mainPage.header.isElementVisible(mainPage.logo);
     });
 
     await test.step("Step 4: The Navigation Cards Should Be Presented On The Page", async () => {
-      await mainPage.validateElementsVisibility(mainPage.cards);
-      await mainPage.validateElementsVisibility(mainPage.cardLogos);
-      await mainPage.validateElementsVisibility(mainPage.cardTitles);
+      await mainPage.icon.areElementsVisible(mainPage.cardLogos);
+      await mainPage.heading.areElementsVisible(mainPage.cardTitles);
     });
 
     await test.step("Step 5: The Footer Be Visible And Contain Copyright Info", async () => {
-      await mainPage.validateFooter(copyRightText);
+      await mainPage.footer.isElementVisible(mainPage.footer.getFooter());
+      await mainPage.footer.isElementVisible(
+        mainPage.footer.getCopyrightText(copyRightText)
+      );
     });
-
-    await screenshot(page, test);
   });
 
   test("@smoke The Cards On Main Page Should Lead To Corresponding Pages", async () => {
-    qase.id(6);
-    qase.title(test.info().title);
-    const category = Object.values(categories);
-    const url = Object.keys(categories);
+    const pages = Object.entries(categories);
     let step = 1;
 
-    for (let i = 0; i < category.length && url.length; i++) {
-      await test.step(`Step ${step}: Check The Page ${category[i]} Link`, async () => {
-        await mainPage.goToCategory(category[i]);
-        await mainPage.validatePageUrl(url[i]);
+    for (const [key, value] of pages) {
+      await test.step(`Step ${step}: Check The Page ${value} Link`, async () => {
+        await mainPage.goToCategory(value);
+        await mainPage.hasUrl(key);
         await mainPage.goToMainPage();
+
         step++;
       });
     }
