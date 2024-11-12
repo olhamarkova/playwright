@@ -1,4 +1,4 @@
-import { expect, request, BrowserContext } from "@playwright/test";
+import { request, BrowserContext } from "@playwright/test";
 
 export default class BookStoreAPICalls {
   readonly context: BrowserContext;

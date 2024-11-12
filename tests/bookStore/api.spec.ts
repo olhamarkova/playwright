@@ -1,10 +1,15 @@
 import { expect, test } from "@playwright/test";
-import UserAPICalls from "../../utils/apiRequests/user.ts";
-import BookStoreAPICalls from "../../utils/apiRequests/bookStore.ts";
+import UserAPICalls from "../../modules/bookStore/apiRequests/user.ts";
+import BookStoreAPICalls from "../../modules/bookStore/apiRequests/bookStore.ts";
 import {
   generateRandomPassword,
   generateRandomUsername,
 } from "../../utils/generateUserCreds.ts";
+import { BookSchema } from "../../modules/bookStore/apiRequests/models.ts";
+import Ajv from "ajv";
+
+const ajv = new Ajv();
+const validate = ajv.compile(BookSchema);
 
 let api: UserAPICalls;
 let booksApi: BookStoreAPICalls;
@@ -82,6 +87,11 @@ test.describe.serial("API Tests", () => {
       expect(allBooks.statusMessage).toBe("OK");
       expect(allBooks.responseBody).toBeInstanceOf(Object);
       expect(allBooks.responseBody.isbn).toEqual(isbn);
+      const isSchemaValid = validate(allBooks.responseBody);
+      if (!isSchemaValid) {
+        console.log(validate.errors);
+      }
+      expect(isSchemaValid).toBe(true);
     });
 
     await test.step("Step 3: Add List Of Books To User", async () => {
