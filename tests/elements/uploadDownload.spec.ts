@@ -1,10 +1,10 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   pathToUploadedFile,
-} from "../../pages/elements/elementsData.ts";
-import { UploadPage } from "../../pages/elements/pages/UploadPage.ts";
+} from "../../modules/elementsPages/support/data.ts";
+import { UploadPage } from "../../modules/elementsPages/pages/UploadPage.ts";
 
 let uploadPage: UploadPage;
 
@@ -16,13 +16,19 @@ test.beforeEach(async ({ page }) => {
 test.describe("Upload and Download Page Tests", () => {
   test("@smoke The Upload and Download Page Should Have All The Expected Elements", async () => {
     await test.step("Step 1: Check The Page Headings", async () => {
-      await uploadPage.validateHeading(headings.upload);
-      await uploadPage.validateTextElement("Select a file");
+      await uploadPage.heading.hasText(
+        uploadPage.pageTitle("h1"),
+        headings.upload
+      );
+      await uploadPage.textBox.hasText(
+        uploadPage.selectFileLabel,
+        "Select a file"
+      );
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
-      await uploadPage.validateElementVisibility(uploadPage.downloadButton);
-      await uploadPage.validateElementVisibility(uploadPage.uploadButton);
+      await uploadPage.button.isElementVisible(uploadPage.downloadButton);
+      await uploadPage.button.isElementVisible(uploadPage.uploadButton);
     });
   });
 
@@ -35,7 +41,7 @@ test.describe("Upload and Download Page Tests", () => {
   test("@functional User Shall Be Able To Upload Files", async () => {
     await test.step("Step 1: Upload A File", async () => {
       await uploadPage.uploadFile("test-results/download/", "sampleFile.jpeg");
-      await uploadPage.validateTextElement(pathToUploadedFile);
+      await uploadPage.textBox.hasText(uploadPage.filePath, pathToUploadedFile);
     });
   });
 });

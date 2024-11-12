@@ -1,11 +1,11 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   linksText,
   subHeadingsText,
-} from "../../pages/elements/elementsData.ts";
-import { ImagesPage } from "../../pages/elements/pages/ImagesPage.ts";
+} from "../../modules/elementsPages/support/data.ts";
+import { ImagesPage } from "../../modules/elementsPages/pages/ImagesPage.ts";
 
 let imagesPage: ImagesPage;
 
@@ -17,24 +17,29 @@ test.beforeEach(async ({ page }) => {
 test.describe("Images And Links Page Tests", () => {
   test("@smoke The Images And Links Page Should Have All The Expected Elements", async () => {
     await test.step("Step 1: Check The Page Headings", async () => {
-      await imagesPage.validateHeading(headings.images);
+      await imagesPage.heading.hasText(
+        imagesPage.pageTitle("h1"),
+        headings.images
+      );
       for (let i = 0; i < subHeadingsText.length; i++) {
-        await imagesPage.validateTextElement(subHeadingsText[i]);
+        await imagesPage.text.isElementVisible(
+          imagesPage.text.getByText(subHeadingsText[i])
+        );
       }
     });
 
     await test.step("Step 2: Check The Links", async () => {
-      await imagesPage.validateElementVisibility(
-        imagesPage.link(linksText.valid)
+      await imagesPage.link.isElementVisible(
+        imagesPage.link.getByText(linksText.valid)
       );
-      await imagesPage.validateElementVisibility(
-        imagesPage.link(linksText.broken)
+      await imagesPage.link.isElementVisible(
+        imagesPage.link.getByText(linksText.broken)
       );
     });
 
     await test.step("Step 3: Check The Images", async () => {
-      await imagesPage.validateElementVisibility(imagesPage.validImage);
-      await imagesPage.validateElementVisibility(imagesPage.brokenImage); //pass though image is broken
+      await imagesPage.image.isElementVisible(imagesPage.validImage);
+      await imagesPage.image.isElementVisible(imagesPage.brokenImage); //pass though image is broken
     });
   });
 

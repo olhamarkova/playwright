@@ -1,10 +1,11 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
 import {
   dynamicText,
   elementPagesHeadings as headings,
-} from "../../pages/elements/elementsData.ts";
-import { DynamicPage } from "../../pages/elements/pages/DynamicPage.ts";
+} from "../../modules/elementsPages/support/data.ts";
+import { DynamicPage } from "../../modules/elementsPages/pages/DynamicPage.ts";
+import { dynamicButtonsColor } from "../../modules/elementsPages/support/classes.ts";
 
 let dynamicPage: DynamicPage;
 
@@ -21,27 +22,37 @@ test.describe("Dynamic Properties Page Tests", () => {
     page,
   }) => {
     await test.step("Step 1: Check The Page Headings", async () => {
-      await dynamicPage.validateHeading(headings.dynamic);
-      await dynamicPage.validateTextElement(dynamicText);
+      await dynamicPage.heading.hasText(
+        dynamicPage.pageTitle("h1"),
+        headings.dynamic
+      );
+      await dynamicPage.text.isElementVisible(
+        dynamicPage.text.getByText(dynamicText)
+      );
     });
 
     await test.step("Step 2: Check The Disabled Button", async () => {
-      await dynamicPage.validateElementVisibility(dynamicPage.disabledButton);
-      await dynamicPage.validateDisabledElement(dynamicPage.disabledButton);
-      await dynamicPage.validateElementVisibility(
-        dynamicPage.changeColorButton
+      await dynamicPage.button.isElementEnabled(
+        dynamicPage.disabledButton,
+        false
       );
-      await dynamicPage.validateButtonClass("before");
+      await dynamicPage.button.hasCSS(dynamicPage.changeColorButton, {
+        property: "color",
+        value: dynamicButtonsColor.before,
+      });
       await page.waitForTimeout(5000);
-      await dynamicPage.validateEnabledElement(dynamicPage.disabledButton);
-      await dynamicPage.validateButtonClass("after");
+      await dynamicPage.button.isElementEnabled(dynamicPage.disabledButton);
+      await dynamicPage.button.hasCSS(dynamicPage.changeColorButton, {
+        property: "color",
+        value: dynamicButtonsColor.after,
+      });
     });
   });
 
   test("@smoke Validate The Invisible Button", async () => {
     await test.step("Step 1: Check The Invisible Button", async () => {
       await dynamicPage.invisibleButton.waitFor();
-      await dynamicPage.validateElementVisibility(dynamicPage.invisibleButton);
+      await dynamicPage.button.isElementVisible(dynamicPage.invisibleButton);
     });
   });
 });
