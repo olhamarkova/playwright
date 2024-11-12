@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
-import { Writable } from "../utils/interfaces/writable";
-import { GetByRoleOptions } from "./support/OptionsTypes";
+import { Writable } from "./support/interfaces/writable";
+import { GetByRoleOptions } from "./support/types/OptionsTypes";
 
 export class Input extends UiElement implements Writable {
   constructor(page: Page) {

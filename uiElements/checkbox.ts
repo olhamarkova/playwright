@@ -1,11 +1,11 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
-import { Checkable } from "../utils/interfaces/checkable";
+import { Checkable } from "./support/interfaces/checkable";
 import {
   CheckOptions,
   GetByRoleOptions,
   GetLocatorOptions,
-} from "./support/OptionsTypes";
+} from "./support/types/OptionsTypes";
 
 export class Checkbox extends UiElement implements Checkable {
   constructor(page: Page) {

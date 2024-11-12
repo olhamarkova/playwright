@@ -1,6 +1,9 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { ClickOptions, GetLocatorOptions } from "./support/OptionsTypes.ts";
-import { Clickable } from "../utils/interfaces/clickable.ts";
+import {
+  ClickOptions,
+  GetLocatorOptions,
+} from "./support/types/OptionsTypes.ts";
+import { Clickable } from "./support/interfaces/clickable.ts";
 
 export class UiElement implements Clickable {
   protected page: Page;
@@ -73,7 +76,7 @@ export class UiElement implements Clickable {
     await expect(element).toHaveClass(className);
   }
 
-  async hasAttribute(element: Locator, attribute: string) {
+  async hasAttribute(element: Locator, attribute: string): Promise<void> {
     await expect(element).toHaveAttribute(attribute);
   }
 

@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
-import { GetByRoleOptions } from "./support/OptionsTypes";
+import { GetByRoleOptions } from "./support/types/OptionsTypes";
 import { Button, Text, Heading } from "./support/uiService";
 
 export class Modal extends UiElement {

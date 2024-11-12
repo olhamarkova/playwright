@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
-import { Clickable } from "../utils/interfaces/clickable";
-import { Textual } from "../utils/interfaces/textual";
+import { Clickable } from "./support/interfaces/clickable";
+import { Textual } from "./support/interfaces/textual";
 
 export class Link extends UiElement implements Clickable, Partial<Textual> {
   constructor(page: Page) {

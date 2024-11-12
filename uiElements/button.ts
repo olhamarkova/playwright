@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { Clickable } from "../utils/interfaces/clickable";
+import { Clickable } from "./support/interfaces/clickable";
 import { UiElement } from "./uiElement";
 
 export class Button extends UiElement implements Clickable {
