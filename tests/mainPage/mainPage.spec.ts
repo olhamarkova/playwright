@@ -1,10 +1,7 @@
 import { test } from "@playwright/test";
-import { MainPage } from "../../pages/mainPage/MainPage.ts";
-import {
-  copyRightText,
-  categories,
-  title,
-} from "../../utils/services/dataService.ts";
+import { MainPage } from "../../modules/mainPage/MainPage";
+import { copyRightText, title } from "../../modules/core/support/data";
+import { categories } from "../../modules/mainPage/support/categories";
 
 let mainPage: MainPage;
 

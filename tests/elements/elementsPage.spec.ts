@@ -1,14 +1,13 @@
 import { test } from "@playwright/test";
-import { ElementsPage } from "../../pages/elementsPages/pages/ElementsPage.ts";
-import { ElementsMenuSubItems } from "../../utils/types/NavbarTypes.ts";
+import { ElementsPage } from "../../modules/elementsPages/pages/ElementsPage.ts";
+import { ElementsMenuSubItems } from "../../uiElements/support/types/NavbarTypes.ts";
 import {
-  copyRightText,
-  title,
   categoryUrls,
   subCategoriesUrls,
-  sidebarItems,
-} from "../../utils/services/dataService.ts";
-import { callToAction } from "../../data/elementsData.ts";
+} from "../../modules/core/support/data.ts";
+import { title } from "../../modules/core/support/data.ts";
+import { sidebarItems } from "../../modules/mainPage/support/categories.ts";
+import { callToAction } from "../../modules/elementsPages/support/data.ts";
 
 let elements: ElementsPage;
 

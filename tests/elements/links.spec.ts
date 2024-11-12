@@ -1,12 +1,13 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls, title } from "../../utils/services/dataService.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { title } from "../../modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   linkNames,
   requestLinks,
   subHeadings,
-} from "../../data/elementsData.ts";
-import { LinksPage } from "../../pages/elementsPages/pages/LinksPage.ts";
+} from "../../modules/elementsPages/support/data.ts";
+import { LinksPage } from "../../modules/elementsPages/pages/LinksPage.ts";
 
 let linksPage: LinksPage;
 

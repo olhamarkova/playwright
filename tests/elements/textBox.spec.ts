@@ -1,11 +1,11 @@
-import { expect, test } from "@playwright/test";
-import { TextBoxPage } from "../../pages/elementsPages/pages/TextBoxPage.ts";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
+import { test } from "@playwright/test";
+import { TextBoxPage } from "../../modules/elementsPages/pages/TextBoxPage.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   textBoxPlaceholders,
   userData,
-} from "../../data/elementsData.ts";
+} from "../../modules/elementsPages/support/data.ts";
 
 let textBox: TextBoxPage;
 

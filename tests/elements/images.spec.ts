@@ -1,11 +1,11 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   linksText,
   subHeadingsText,
-} from "../../data/elementsData.ts";
-import { ImagesPage } from "../../pages/elementsPages/pages/ImagesPage.ts";
+} from "../../modules/elementsPages/support/data.ts";
+import { ImagesPage } from "../../modules/elementsPages/pages/ImagesPage.ts";
 
 let imagesPage: ImagesPage;
 

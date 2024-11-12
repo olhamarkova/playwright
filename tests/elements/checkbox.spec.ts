@@ -1,9 +1,9 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
-import { elementPagesHeadings as headings } from "../../data/elementsData.ts";
-import { CheckBoxPage } from "../../pages/elementsPages/pages/CheckBoxPage.ts";
-import { CheckboxLabels } from "../../utils/types/ElementsTypes.ts";
-import { halfCheckedBox } from "../../data/classes.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { elementPagesHeadings as headings } from "../../modules/elementsPages/support/data.ts";
+import { CheckBoxPage } from "../../modules/elementsPages/pages/CheckBoxPage.ts";
+import { CheckboxLabels } from "../../modules/elementsPages/support/types.ts";
+import { halfCheckedBox } from "../../modules/elementsPages/support/classes.ts";
 
 let checkboxPage: CheckBoxPage;
 

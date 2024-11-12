@@ -1,7 +1,7 @@
 import { type Locator, type Page } from "@playwright/test";
 import { CategoryNames } from "../modules/mainPage/support/types";
 import { UiElement } from "./uiElement";
-import { Clickable } from "../utils/interfaces/clickable";
+import { Clickable } from "./support/interfaces/clickable";
 import { activeMenuButton } from "../modules/elementsPages/support/classes";
 import { NavbarItems } from "./support/types/NavbarTypes";
 import { Link, Button } from "./support/uiService";

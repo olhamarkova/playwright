@@ -1,13 +1,13 @@
 import { test, expect } from "@playwright/test";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
 import {
   columnHeaders,
   elementPagesHeadings as headings,
   recordData,
-} from "../../data/elementsData.ts";
-import { WebTablesPage } from "../../pages/elementsPages/pages/webTables/WebTablesPage.ts";
-import { AddRecordInputs } from "../../utils/types/ElementsTypes.ts";
-import AddNewRecordForm from "../../pages/elementsPages/pages/webTables/AddNewRecordForm.ts";
+} from "../../modules/elementsPages/support/data.ts";
+import { WebTablesPage } from "../../modules/elementsPages/pages/webTables/WebTablesPage.ts";
+import { AddRecordInputs } from "../../modules/elementsPages/support/types.ts";
+import AddNewRecordForm from "../../modules/elementsPages/pages/webTables/AddNewRecordForm.ts";
 
 let tablePage: WebTablesPage;
 let form: AddNewRecordForm;

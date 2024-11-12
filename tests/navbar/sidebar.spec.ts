@@ -1,10 +1,10 @@
 import { test } from "@playwright/test";
+import { sidebarItems } from "../../modules/mainPage/support/categories.ts";
+import { ElementsPage } from "../../modules/elementsPages/pages/ElementsPage.ts";
 import {
   categoryUrls,
   subCategoriesUrls,
-  sidebarItems,
-} from "../../utils/services/dataService.ts";
-import { ElementsPage } from "../../pages/elementsPages/pages/ElementsPage.ts";
+} from "../../modules/core/support/data.ts";
 
 let elements: ElementsPage;
 

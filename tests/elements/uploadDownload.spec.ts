@@ -1,10 +1,10 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../utils/services/dataService.ts";
+import { subCategoriesUrls } from "../../modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   pathToUploadedFile,
-} from "../../data/elementsData.ts";
-import { UploadPage } from "../../pages/elementsPages/pages/UploadPage.ts";
+} from "../../modules/elementsPages/support/data.ts";
+import { UploadPage } from "../../modules/elementsPages/pages/UploadPage.ts";
 
 let uploadPage: UploadPage;
 
