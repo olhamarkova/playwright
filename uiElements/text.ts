@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
 import { Textual } from "../utils/interfaces/textual";
-import { TextOptions } from "../utils/types/Options";
+import { TextOptions } from "./support/OptionsTypes";
 
 export class Text extends UiElement implements Textual {
   constructor(page: Page) {

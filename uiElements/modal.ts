@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
-import { GetByRoleOptions } from "../utils/types/Options";
-import { Button, Text, Heading } from "../utils/services/uiService";
+import { GetByRoleOptions } from "./support/OptionsTypes";
+import { Button, Text, Heading } from "./support/uiService";
 
 export class Modal extends UiElement {
   readonly button: Button;

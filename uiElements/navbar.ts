@@ -1,10 +1,10 @@
 import { type Locator, type Page } from "@playwright/test";
-import { CategoryNames } from "../utils/types/MainPageTypes";
+import { CategoryNames } from "../modules/mainPage/support/mainPageTypes";
 import { UiElement } from "./uiElement";
 import { Clickable } from "../utils/interfaces/clickable";
-import { activeMenuButton } from "../data/classes";
-import { NavbarItems } from "../utils/types/NavbarTypes";
-import { Link, Button } from "../utils/services/uiService";
+import { activeMenuButton } from "../modules/elementsPages/support/classes";
+import { NavbarItems } from "./support/NavbarTypes";
+import { Link, Button } from "./support/uiService";
 
 export class Navbar extends UiElement implements Clickable {
   readonly navLink: Link;

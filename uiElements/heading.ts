@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
 import { Textual } from "../utils/interfaces/textual";
-import { GetLocatorOptions, TextOptions } from "../utils/types/Options";
+import { GetLocatorOptions, TextOptions } from "./support/OptionsTypes";
 
 export class Heading extends UiElement implements Textual {
   constructor(page: Page) {

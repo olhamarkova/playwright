@@ -5,7 +5,7 @@ import {
   CheckOptions,
   GetByRoleOptions,
   GetLocatorOptions,
-} from "../utils/types/Options";
+} from "./support/OptionsTypes";
 
 export class Checkbox extends UiElement implements Checkable {
   constructor(page: Page) {

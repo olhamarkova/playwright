@@ -1,3 +1,4 @@
+//URLs
 export const categoryUrls = {
   elements: "elements",
   forms: "forms",
@@ -22,4 +23,12 @@ export const subCategoriesUrls = {
   books: {
     bookStoreApi: "swagger/",
   },
+};
+
+//Footer Text
+export const copyRightText = "© 2013-2020 TOOLSQA.COM | ALL RIGHTS RESERVED.";
+
+//Title
+export const title = {
+  mainTitle: "DEMOQA",
 };

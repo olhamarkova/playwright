@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
-import { GetByRoleOptions, GetLocatorOptions } from "../utils/types/Options";
+import { GetByRoleOptions, GetLocatorOptions } from "./support/OptionsTypes";
 
 export class Table extends UiElement {
   constructor(page: Page) {

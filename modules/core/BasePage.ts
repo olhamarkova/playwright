@@ -1,11 +1,10 @@
-import { type Locator, type Page } from "@playwright/test";
-import { expect } from "@playwright/test";
+import { type Locator, type Page, expect } from "@playwright/test";
 import {
   Navbar,
   Header,
   Footer,
   Heading,
-} from "../../utils/services/uiService";
+} from "../../uiElements/support/uiService";
 
 export default class BasePage {
   protected page: Page;

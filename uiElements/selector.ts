@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
 import { Clickable } from "../utils/interfaces/clickable";
-import { GetByRoleOptions } from "../utils/types/Options";
+import { GetByRoleOptions } from "./support/OptionsTypes";
 
 export class Selector extends UiElement implements Clickable {
   constructor(page: Page) {

@@ -1,6 +1,6 @@
 import { Locator, type Page } from "@playwright/test";
-import { AddRecordInputs } from "../../../../utils/types/ElementsTypes";
-import { Form, Modal } from "../../../../utils/services/uiService";
+import { AddRecordInputs } from "../../support/types";
+import { Form, Modal } from "../../../../uiElements/support/uiService";
 
 export default class AddNewRecordForm extends Form {
   readonly modal: Modal;
