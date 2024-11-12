@@ -1,7 +1,7 @@
 import { type Page, BrowserContext, Locator, expect } from "@playwright/test";
-import { responseStatuses } from "../../../data/elementsData";
+import { responseStatuses } from "../../elementsPages/support/data";
 import BasePage from "../../core/BasePage";
-import { Link } from "../../../uiElements/link";
+import { Link } from "../../../uiElements/support/uiService";
 
 export class LinksPage extends BasePage {
   readonly link: Link;
@@ -17,14 +17,14 @@ export class LinksPage extends BasePage {
     this.dynamicLink = this.link.getByName("Home", false).nth(1);
   }
 
-  async validateElementsByName(elementNames: string[]) {
+  async validateElementsByName(elementNames: string[]): Promise<void> {
     for (let i = 0; i < elementNames.length; i++) {
       const element = this.link.getByName(elementNames[i]);
       await this.link.isElementVisible(element);
     }
   }
 
-  async validateLinkResponse(link: string, status: number) {
+  async validateLinkResponse(link: string, status: number): Promise<void> {
     const responsePromise = this.page.waitForResponse(
       (resp) => resp.url().includes(link) && resp.request().method() === "GET"
     );
@@ -47,7 +47,7 @@ export class LinksPage extends BasePage {
     }
   }
 
-  async openNewTab(context: BrowserContext, link: Locator) {
+  async openNewTab(context: BrowserContext, link: Locator): Promise<void> {
     const pagePromise = context.waitForEvent("page");
     await this.link.clickElement(link);
     const newPage = await pagePromise;

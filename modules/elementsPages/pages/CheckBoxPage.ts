@@ -1,7 +1,7 @@
 import { expect, type Locator, type Page } from "@playwright/test";
-import { CheckboxLabels } from "../../../utils/types/ElementsTypes";
 import BasePage from "../../core/BasePage";
-import { Button, Checkbox } from "../../../utils/services/uiService";
+import { Button, Checkbox } from "../../../uiElements/support/uiService";
+import { CheckboxLabels } from "../../elementsPages/support/types";
 
 export class CheckBoxPage extends BasePage {
   readonly button: Button;

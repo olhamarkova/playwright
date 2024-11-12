@@ -2,7 +2,7 @@ import { type Page, Locator, expect } from "@playwright/test";
 import BasePage from "../../core/BasePage";
 import fs from "fs";
 import path from "path";
-import { Button, Text } from "../../../utils/services/uiService";
+import { Button, Text } from "../../../uiElements/support/uiService";
 
 export class UploadPage extends BasePage {
   readonly button: Button;
@@ -24,7 +24,7 @@ export class UploadPage extends BasePage {
     this.filePath = this.textBox.getById("uploadedFilePath");
   }
 
-  async uploadFile(filePath: string, fileName: string) {
+  async uploadFile(filePath: string, fileName: string): Promise<void> {
     const fileChooserPromise = this.page.waitForEvent("filechooser");
     await this.uploadButton.click();
     const fileChooser = await fileChooserPromise;
@@ -32,7 +32,7 @@ export class UploadPage extends BasePage {
     await fileChooser.setFiles(path.join(filePath, fileName));
   }
 
-  async downloadFile(fileName?: string) {
+  async downloadFile(fileName?: string): Promise<void> {
     const downloadPromise = this.page.waitForEvent("download");
     await this.downloadButton.click();
     const download = await downloadPromise;

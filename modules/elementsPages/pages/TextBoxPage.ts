@@ -1,7 +1,7 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import BasePage from "../../core/BasePage";
-import { TextBoxElementID } from "../../../utils/types/ElementsTypes";
-import { Input, Text, Button } from "../../../utils/services/uiService";
+import { TextBoxElementID } from "../../elementsPages/support/types";
+import { Input, Text, Button } from "../../../uiElements/support/uiService";
 
 export class TextBoxPage extends BasePage {
   readonly input: Input;
@@ -31,11 +31,14 @@ export class TextBoxPage extends BasePage {
     this.output = this.textBox.getById("output");
   }
 
-  userInfoOutput(elementId: TextBoxElementID) {
+  userInfoOutput(elementId: TextBoxElementID): Locator {
     return this.output.locator(`#${elementId}`);
   }
 
-  async validateUserInfoOutput(elementId: TextBoxElementID, text: string) {
+  async validateUserInfoOutput(
+    elementId: TextBoxElementID,
+    text: string
+  ): Promise<void> {
     switch (elementId) {
       case "name":
         await expect(this.userInfoOutput(elementId)).toHaveText(`Name:${text}`);

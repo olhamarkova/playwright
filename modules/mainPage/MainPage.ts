@@ -1,7 +1,7 @@
 import { type Locator, type Page } from "@playwright/test";
 import BasePage from "../core/BasePage";
-import { CategoryNames } from "../../utils/types/MainPageTypes";
-import { Image } from "../../utils/services/uiService";
+import { CategoryNames } from "./support/types";
+import { Image } from "../../uiElements/support/uiService";
 
 export class MainPage extends BasePage {
   readonly icon: Image;

@@ -1,5 +1,5 @@
 import { type Page, Locator } from "@playwright/test";
-import { Button, Text } from "../../../utils/services/uiService";
+import { Button, Text } from "../../../uiElements/support/uiService";
 import BasePage from "../../core/BasePage";
 
 export class ButtonsPage extends BasePage {

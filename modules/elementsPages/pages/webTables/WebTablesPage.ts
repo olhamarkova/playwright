@@ -6,7 +6,7 @@ import {
   Input,
   Selector,
   Text,
-} from "../../../../utils/services/uiService";
+} from "../../../../uiElements/support/uiService";
 import AddNewRecordForm from "./AddNewRecordForm";
 
 export class WebTablesPage extends BasePage {
