@@ -9,7 +9,7 @@ import { BookSchema } from "../../modules/bookStore/apiRequests/models.ts";
 import Ajv from "ajv";
 
 const ajv = new Ajv();
-const validate = ajv.compile(BookSchema);
+const validateBookSchema = ajv.compile(BookSchema);
 
 let api: UserAPICalls;
 let booksApi: BookStoreAPICalls;
@@ -20,9 +20,9 @@ const password = process.env.PASSWORD!;
 const userName = generateRandomUsername();
 const userPass = generateRandomPassword();
 
-test.beforeEach(async ({ context }) => {
-  api = new UserAPICalls(context);
-  booksApi = new BookStoreAPICalls(context);
+test.beforeEach(async ({ page }) => {
+  api = new UserAPICalls(page);
+  booksApi = new BookStoreAPICalls(page);
 });
 
 test.describe.serial("API Tests", () => {
@@ -85,16 +85,15 @@ test.describe.serial("API Tests", () => {
       const allBooks = await booksApi.getBookByIsbn(isbn);
       expect(allBooks.statusCode).toBe(200);
       expect(allBooks.statusMessage).toBe("OK");
-      expect(allBooks.responseBody).toBeInstanceOf(Object);
-      expect(allBooks.responseBody.isbn).toEqual(isbn);
-      const isSchemaValid = validate(allBooks.responseBody);
+      const isSchemaValid = validateBookSchema(allBooks.responseBody);
       if (!isSchemaValid) {
-        console.log(validate.errors);
+        console.log(validateBookSchema.errors);
       }
       expect(isSchemaValid).toBe(true);
+      expect(allBooks.responseBody.isbn).toEqual(isbn);
     });
 
-    await test.step("Step 3: Add List Of Books To User", async () => {
+    await test.step("Step 3: Add A List Of Books To A User", async () => {
       const newUser = await api.createUser(myUsertoken, {
         userName: userName,
         password: userPass,
@@ -112,9 +111,53 @@ test.describe.serial("API Tests", () => {
       );
       expect(addBook.statusCode).toBe(201);
       expect(addBook.statusMessage).toBe("Created");
-      expect(addBook.responseBody).toBeInstanceOf(Object);
-      expect(addBook.responseBody.books).toBeInstanceOf(Array);
       expect(addBook.responseBody.books[0].isbn).toEqual(isbn);
+      expect(addBook.statusCode).toBe(201);
+    });
+
+    await test.step("Step 4: Delete A Book From A User", async () => {
+      const deleteBook = await booksApi.deleteBookByIsbn(
+        newUserId,
+        isbn,
+        newUserToken
+      );
+      expect(deleteBook.statusCode).toBe(204);
+    });
+
+    await test.step("Step 5: Delete All Books From A User", async () => {
+      const allBooks = await booksApi.getBooks();
+      expect(allBooks.statusCode).toBe(200);
+      isbn = allBooks.responseBody.books[1].isbn;
+      const addBook = await booksApi.addListOfBooks(
+        newUserId,
+        isbn,
+        newUserToken
+      );
+      expect(addBook.statusCode).toBe(201);
+      const deleteBooks = await booksApi.deleteBooks(newUserId, newUserToken);
+      expect(deleteBooks.statusCode).toBe(204);
+    });
+
+    await test.step("Step 6: Replase Book ISBN", async () => {
+      const allBooks = await booksApi.getBooks();
+      expect(allBooks.statusCode).toBe(200);
+      isbn = allBooks.responseBody.books[0].isbn;
+      let newIsbn = allBooks.responseBody.books[2].isbn;
+      const addBook = await booksApi.addListOfBooks(
+        newUserId,
+        isbn,
+        newUserToken
+      );
+      expect(addBook.statusCode).toBe(201);
+      const updateBook = await booksApi.replaceBook(
+        newUserId,
+        isbn,
+        newIsbn,
+        newUserToken
+      );
+      expect(updateBook.statusCode).toBe(200);
+      expect(updateBook.body.books[0].isbn).toEqual(newIsbn);
+      expect(updateBook.body.userId).toEqual(newUserId);
     });
   });
 });

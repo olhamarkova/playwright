@@ -1,10 +1,10 @@
-import { expect, request, BrowserContext } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 
 export default class UserAPICalls {
-  readonly context: BrowserContext;
+  protected page: Page;
 
-  constructor(context: BrowserContext) {
-    this.context = context;
+  constructor(page: Page) {
+    this.page = page;
   }
 
   async token(login: string, password: string): Promise<string> {
@@ -12,8 +12,7 @@ export default class UserAPICalls {
   }
 
   async isUserAuthorized(login: string, password: string): Promise<boolean> {
-    const apiContext = await request.newContext();
-    const response = await apiContext.post("Account/v1/Authorized", {
+    const response = await this.page.request.post("Account/v1/Authorized", {
       data: {
         userName: login,
         password: password,
@@ -32,8 +31,7 @@ export default class UserAPICalls {
   }
 
   async generateToken(login: string, password: string) {
-    const apiContext = await request.newContext();
-    const response = await apiContext.post("Account/v1/GenerateToken", {
+    const response = await this.page.request.post("Account/v1/GenerateToken", {
       failOnStatusCode: false,
       data: {
         userName: login,
@@ -52,8 +50,7 @@ export default class UserAPICalls {
     token: string,
     payload: { userName: string; password: string }
   ) {
-    const apiContext = await request.newContext();
-    const response = await apiContext.post("Account/v1/User", {
+    const response = await this.page.request.post("Account/v1/User", {
       failOnStatusCode: false,
       data: {
         userName: payload.userName,
@@ -74,8 +71,7 @@ export default class UserAPICalls {
   }
 
   async getUser(token: string, userId: string) {
-    const apiContext = await request.newContext();
-    const response = await apiContext.get(`Account/v1/User/${userId}`, {
+    const response = await this.page.request.get(`Account/v1/User/${userId}`, {
       failOnStatusCode: false,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -90,15 +86,17 @@ export default class UserAPICalls {
   }
 
   async deleteUser(token: string, userId: string) {
-    const apiContext = await request.newContext();
-    const response = await apiContext.delete(`Account/v1/User/${userId}`, {
-      failOnStatusCode: false,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await this.page.request.delete(
+      `Account/v1/User/${userId}`,
+      {
+        failOnStatusCode: false,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return {
       statusCode: response.status(),
       statusMessage: response.statusText(),

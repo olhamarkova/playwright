@@ -1,15 +1,14 @@
-import { request, BrowserContext } from "@playwright/test";
+import { type Page } from "@playwright/test";
 
 export default class BookStoreAPICalls {
-  readonly context: BrowserContext;
+  protected page: Page;
 
-  constructor(context: BrowserContext) {
-    this.context = context;
+  constructor(page: Page) {
+    this.page = page;
   }
 
   async getBooks() {
-    const apiContext = await request.newContext();
-    const response = await apiContext.get("BookStore/v1/Books", {
+    const response = await this.page.request.get("BookStore/v1/Books", {
       failOnStatusCode: false,
     });
     const body = await response.json();
@@ -21,8 +20,7 @@ export default class BookStoreAPICalls {
   }
 
   async getBookByIsbn(isbn: string) {
-    const apiContext = await request.newContext();
-    const response = await apiContext.get("BookStore/v1/Book", {
+    const response = await this.page.request.get("BookStore/v1/Book", {
       failOnStatusCode: false,
       params: { ISBN: isbn },
     });
@@ -35,8 +33,7 @@ export default class BookStoreAPICalls {
   }
 
   async addListOfBooks(userId: string, isbn: string, token: string) {
-    const apiContext = await request.newContext();
-    const response = await apiContext.post("BookStore/v1/Books", {
+    const response = await this.page.request.post("BookStore/v1/Books", {
       failOnStatusCode: false,
       data: {
         userId: userId,
@@ -55,6 +52,63 @@ export default class BookStoreAPICalls {
       statusCode: response.status(),
       statusMessage: response.statusText(),
       responseBody: body,
+    };
+  }
+
+  async deleteBooks(userId: string, token: string) {
+    const response = await this.page.request.delete(
+      `BookStore/v1/Books?UserId=${userId}`,
+      {
+        failOnStatusCode: false,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return {
+      statusCode: response.status(),
+      statusMessage: response.statusText(),
+    };
+  }
+
+  async deleteBookByIsbn(userId: string, isbn: string, token: string) {
+    const response = await this.page.request.delete("BookStore/v1/Book", {
+      failOnStatusCode: false,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        isbn,
+        userId,
+      },
+    });
+    return {
+      statusCode: response.status(),
+      statusMessage: response.statusText(),
+    };
+  }
+
+  async replaceBook(
+    userId: string,
+    isbn: string,
+    newIsbn: string,
+    token: string
+  ) {
+    const response = await this.page.request.put(`BookStore/v1/Books/${isbn}`, {
+      failOnStatusCode: false,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        userId,
+        isbn: newIsbn,
+      },
+    });
+    const body = await response.json();
+    return {
+      statusCode: response.status(),
+      statusMessage: response.statusText(),
+      body,
     };
   }
 }
