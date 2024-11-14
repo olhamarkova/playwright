@@ -5,7 +5,7 @@ import {
   generateRandomPassword,
   generateRandomUsername,
 } from "../../utils/generateUserCreds.ts";
-import { BookSchema } from "../../modules/bookStore/apiRequests/models.ts";
+import { BookSchema } from "../../modules/bookStore/apiRequests/support/models.ts";
 import Ajv from "ajv";
 
 const ajv = new Ajv();
@@ -28,18 +28,25 @@ test.beforeEach(async ({ page }) => {
 test.describe.serial("API Tests", () => {
   let userId: string;
 
-  test("@functional User API Requests", async () => {
+  test("@functional @api User API Requests", async () => {
     await test.step("Step 1: Create A New User", async () => {
+      //Log in as admin, get a token for requests
       const generateTokenResponse = await api.generateToken(login, password);
       let myUsertoken = await generateTokenResponse.responseBody.token;
+
+      //Create a new user
       const createdUser = await api.createUser(myUsertoken, {
         userName: userName,
         password: userPass,
       });
+
+      //Assertions
       expect(createdUser.statusCode).toBe(201);
       expect(createdUser.statusMessage).toBe("Created");
       expect(createdUser.responseBody.username).toBe(userName);
       expect(createdUser.responseBody.books).toBeInstanceOf(Array);
+
+      //Get a user ID and a new token for it
       userId = createdUser.responseBody.userID;
       const generateTokenForNewUser = await api.generateToken(
         userName,
@@ -67,10 +74,11 @@ test.describe.serial("API Tests", () => {
     });
   });
 
-  test("@functional Book Store API Requests", async () => {
+  test("@functional @api Book Store API Requests", async () => {
     let isbn: string;
     let newUserId: string;
     let newUserToken: string;
+
     await test.step("Step 1: Get All Books", async () => {
       const allBooks = await booksApi.getBooks();
       expect(allBooks.statusCode).toBe(200);
@@ -85,6 +93,8 @@ test.describe.serial("API Tests", () => {
       const allBooks = await booksApi.getBookByIsbn(isbn);
       expect(allBooks.statusCode).toBe(200);
       expect(allBooks.statusMessage).toBe("OK");
+
+      //Schema validation
       const isSchemaValid = validateBookSchema(allBooks.responseBody);
       if (!isSchemaValid) {
         console.log(validateBookSchema.errors);
@@ -94,6 +104,7 @@ test.describe.serial("API Tests", () => {
     });
 
     await test.step("Step 3: Add A List Of Books To A User", async () => {
+      //Create a new user
       const newUser = await api.createUser(myUsertoken, {
         userName: userName,
         password: userPass,
@@ -103,7 +114,11 @@ test.describe.serial("API Tests", () => {
         userName,
         userPass
       );
+
+      //Get a token for a new user
       newUserToken = await generateTokenForNewUser.responseBody.token;
+
+      //Add book to the user
       const addBook = await booksApi.addListOfBooks(
         newUserId,
         isbn,
@@ -125,6 +140,7 @@ test.describe.serial("API Tests", () => {
     });
 
     await test.step("Step 5: Delete All Books From A User", async () => {
+      //Add a book to a user
       const allBooks = await booksApi.getBooks();
       expect(allBooks.statusCode).toBe(200);
       isbn = allBooks.responseBody.books[1].isbn;
@@ -134,21 +150,28 @@ test.describe.serial("API Tests", () => {
         newUserToken
       );
       expect(addBook.statusCode).toBe(201);
+
+      //Delete book
       const deleteBooks = await booksApi.deleteBooks(newUserId, newUserToken);
       expect(deleteBooks.statusCode).toBe(204);
     });
 
     await test.step("Step 6: Replase Book ISBN", async () => {
+      //Get ISBNs for two books
       const allBooks = await booksApi.getBooks();
       expect(allBooks.statusCode).toBe(200);
       isbn = allBooks.responseBody.books[0].isbn;
       let newIsbn = allBooks.responseBody.books[2].isbn;
+
+      //Add a book to the user
       const addBook = await booksApi.addListOfBooks(
         newUserId,
         isbn,
         newUserToken
       );
       expect(addBook.statusCode).toBe(201);
+
+      //Update a book
       const updateBook = await booksApi.replaceBook(
         newUserId,
         isbn,
@@ -156,8 +179,8 @@ test.describe.serial("API Tests", () => {
         newUserToken
       );
       expect(updateBook.statusCode).toBe(200);
-      expect(updateBook.body.books[0].isbn).toEqual(newIsbn);
-      expect(updateBook.body.userId).toEqual(newUserId);
+      expect(updateBook.responseBody.books[0].isbn).toEqual(newIsbn);
+      expect(updateBook.responseBody.userId).toEqual(newUserId);
     });
   });
 });

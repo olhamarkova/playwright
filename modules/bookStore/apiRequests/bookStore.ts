@@ -1,4 +1,5 @@
 import { type Page } from "@playwright/test";
+import { ResponseData } from "./support/types";
 
 export default class BookStoreAPICalls {
   protected page: Page;
@@ -7,7 +8,7 @@ export default class BookStoreAPICalls {
     this.page = page;
   }
 
-  async getBooks() {
+  async getBooks(): Promise<ResponseData> {
     const response = await this.page.request.get("BookStore/v1/Books", {
       failOnStatusCode: false,
     });
@@ -19,7 +20,7 @@ export default class BookStoreAPICalls {
     };
   }
 
-  async getBookByIsbn(isbn: string) {
+  async getBookByIsbn(isbn: string): Promise<ResponseData> {
     const response = await this.page.request.get("BookStore/v1/Book", {
       failOnStatusCode: false,
       params: { ISBN: isbn },
@@ -32,7 +33,11 @@ export default class BookStoreAPICalls {
     };
   }
 
-  async addListOfBooks(userId: string, isbn: string, token: string) {
+  async addListOfBooks(
+    userId: string,
+    isbn: string,
+    token: string
+  ): Promise<ResponseData> {
     const response = await this.page.request.post("BookStore/v1/Books", {
       failOnStatusCode: false,
       data: {
@@ -55,7 +60,10 @@ export default class BookStoreAPICalls {
     };
   }
 
-  async deleteBooks(userId: string, token: string) {
+  async deleteBooks(
+    userId: string,
+    token: string
+  ): Promise<Omit<ResponseData, "responseBody">> {
     const response = await this.page.request.delete(
       `BookStore/v1/Books?UserId=${userId}`,
       {
@@ -71,7 +79,11 @@ export default class BookStoreAPICalls {
     };
   }
 
-  async deleteBookByIsbn(userId: string, isbn: string, token: string) {
+  async deleteBookByIsbn(
+    userId: string,
+    isbn: string,
+    token: string
+  ): Promise<Omit<ResponseData, "responseBody">> {
     const response = await this.page.request.delete("BookStore/v1/Book", {
       failOnStatusCode: false,
       headers: {
@@ -93,7 +105,7 @@ export default class BookStoreAPICalls {
     isbn: string,
     newIsbn: string,
     token: string
-  ) {
+  ): Promise<ResponseData> {
     const response = await this.page.request.put(`BookStore/v1/Books/${isbn}`, {
       failOnStatusCode: false,
       headers: {
@@ -108,7 +120,7 @@ export default class BookStoreAPICalls {
     return {
       statusCode: response.status(),
       statusMessage: response.statusText(),
-      body,
+      responseBody: body,
     };
   }
 }

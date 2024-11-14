@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import { ResponseData } from "./support/types";
 
 export default class UserAPICalls {
   protected page: Page;
@@ -30,7 +31,7 @@ export default class UserAPICalls {
     return body;
   }
 
-  async generateToken(login: string, password: string) {
+  async generateToken(login: string, password: string): Promise<ResponseData> {
     const response = await this.page.request.post("Account/v1/GenerateToken", {
       failOnStatusCode: false,
       data: {
@@ -49,7 +50,7 @@ export default class UserAPICalls {
   async createUser(
     token: string,
     payload: { userName: string; password: string }
-  ) {
+  ): Promise<ResponseData> {
     const response = await this.page.request.post("Account/v1/User", {
       failOnStatusCode: false,
       data: {
@@ -70,7 +71,7 @@ export default class UserAPICalls {
     };
   }
 
-  async getUser(token: string, userId: string) {
+  async getUser(token: string, userId: string): Promise<ResponseData> {
     const response = await this.page.request.get(`Account/v1/User/${userId}`, {
       failOnStatusCode: false,
       headers: {
@@ -85,7 +86,10 @@ export default class UserAPICalls {
     };
   }
 
-  async deleteUser(token: string, userId: string) {
+  async deleteUser(
+    token: string,
+    userId: string
+  ): Promise<Omit<ResponseData, "responseBody">> {
     const response = await this.page.request.delete(
       `Account/v1/User/${userId}`,
       {
