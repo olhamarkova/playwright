@@ -1,11 +1,6 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import { UiElement } from "./uiElement";
 import { Selector, Button } from "./support/uiService";
-import {
-  CheckOptions,
-  GetByRoleOptions,
-  GetLocatorOptions,
-} from "./support/types/OptionsTypes";
 import { Clickable } from "./support/interfaces/clickable";
 import { Days, Month, DayNames } from "./support/types/DatepickerTypes";
 
