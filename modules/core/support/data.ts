@@ -20,6 +20,7 @@ export const subCategoriesUrls = {
     uploadDownload: "upload-download",
     dynamicProperties: "dynamic-properties",
   },
+  practiceForm: "automation-practice-form",
   books: {
     bookStoreApi: "swagger/",
   },

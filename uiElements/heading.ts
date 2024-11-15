@@ -21,7 +21,7 @@ export class Heading extends UiElement implements Textual {
 
   async hasText(
     element: Locator | string,
-    text: string,
+    text: string | string[],
     options?: TextOptions
   ): Promise<void> {
     await expect(element as Locator).toHaveText(text, options);

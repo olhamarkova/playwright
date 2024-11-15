@@ -3,17 +3,9 @@ import { Clickable } from "./support/interfaces/clickable";
 import { UiElement } from "./uiElement";
 import { TextOptions } from "./support/types/OptionsTypes";
 
-export class Button extends UiElement implements Clickable {
+export class Chicklet extends UiElement implements Clickable {
   constructor(page: Page) {
     super(page);
-  }
-
-  getButton(name: string): Locator {
-    return this.page.getByRole("button", { name: name, exact: true });
-  }
-
-  getSubmitButton(): Locator {
-    return this.page.locator("button[type='submit']");
   }
 
   async hasText(

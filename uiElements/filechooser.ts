@@ -12,7 +12,7 @@ export class Filechooser extends UiElement implements Clickable {
     this.button = new Button(this.page);
   }
 
-  getChooseFileButton() {
+  getChooseFileButton(): Locator {
     return this.button.getLocator("input[type='file']");
   }
 

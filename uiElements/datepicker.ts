@@ -15,11 +15,11 @@ export class Datepicker extends UiElement implements Clickable {
   }
 
   getDatepicker(): Locator {
-    return this.getLocator(".react-datepicker");
+    return this.getByClass("react-datepicker");
   }
 
   getDateSelector(className: "month" | "year"): Locator {
-    return this.selector.getByClass(`react-datepicker__${className}-select`);
+    return this.getByClass(`react-datepicker__${className}-select`);
   }
 
   navigationButton(buttonAriaLabel: "Previous Month" | "Next Month"): Locator {
@@ -27,12 +27,12 @@ export class Datepicker extends UiElement implements Clickable {
   }
 
   getDay(day: Days): Locator {
-    return this.button.getLocator(`.react-datepicker__day--${day}`);
+    return this.button.getByClass(`react-datepicker__day--0${day}`);
   }
 
   getDayName(dayName: DayNames): Locator {
     return this.button
-      .getLocator(".react-datepicker__day-name")
+      .getByClass("react-datepicker__day-name")
       .filter({ hasText: dayName });
   }
 

@@ -37,6 +37,10 @@ export class UiElement implements Clickable {
     return this.page.getByText(text, { exact: true });
   }
 
+  getByClass(className: string): Locator {
+    return this.page.locator(`.${className}`);
+  }
+
   //Actions
   async clickElement(
     element: Locator | string,

@@ -11,6 +11,7 @@ export const elementPagesHeadings = {
   images: "Broken Links - Images",
   upload: "Upload and Download",
   dynamic: "Dynamic Properties",
+  form: "Practice Form",
 };
 
 //Text Box
