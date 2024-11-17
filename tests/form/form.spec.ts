@@ -2,8 +2,12 @@ import { test } from "@playwright/test";
 import { subCategoriesUrls } from "../../modules/core/support/data.ts";
 import { elementPagesHeadings as headings } from "../../modules/elementsPages/support/data.ts";
 import { PracticeFormPage } from "../../modules/form/PracticeFormPage.ts";
-import { formTitle, studentData } from "../../modules/form/support/data.ts";
-import { Genders } from "../../modules/form/support/types.ts";
+import {
+  formTitle,
+  resultsModalTitle,
+  studentData,
+} from "../../modules/form/support/data.ts";
+import { Genders, Hobbies } from "../../modules/form/support/types.ts";
 import { Month } from "../../uiElements/support/types/DatepickerTypes.ts";
 
 let formPage: PracticeFormPage;
@@ -105,6 +109,66 @@ test.describe("Practice Form Tests", () => {
         "Maths",
         "Chemistry",
       ]);
+    });
+
+    await test.step("Step 7: Choose The Hobby", async () => {
+      await formPage.checkbox.check(formPage.hobbiesCheckbox(Hobbies.Reading), {
+        force: true,
+      }); //covered by advertisement
+      await formPage.checkbox.isChecked(
+        formPage.hobbiesCheckbox(Hobbies.Reading),
+        true
+      );
+    });
+
+    await test.step("Step 8: Add A Photo", async () => {
+      await formPage.filechooser.uploadFile(
+        formPage.filechooser.getChooseFileButton(),
+        "photo.jpg"
+      );
+    });
+
+    await test.step("Step 9: Add An Address", async () => {
+      await formPage.form.input.fillOut(
+        formPage.addressTextArea,
+        studentData.currentAddress
+      );
+      await formPage.form.input.hasValue(
+        formPage.addressTextArea,
+        studentData.currentAddress
+      );
+    });
+
+    await test.step("Step 10: Select A State And A City", async () => {
+      await formPage.selector.clickElement(
+        formPage.stateAndCitySelector("state")
+      );
+      await formPage.selector.clickElement(
+        formPage.selector.getByText("Haryana")
+      );
+
+      await formPage.selector.clickElement(
+        formPage.stateAndCitySelector("city")
+      );
+      await formPage.selector.clickElement(
+        formPage.selector.getByText("Karnal")
+      );
+    });
+
+    await test.step("Step 11: Submit The Form", async () => {
+      await formPage.form.button.clickElement(
+        formPage.form.button.getSubmitButton()
+      );
+      await formPage.resultsModal.title.hasText(
+        formPage.resultsModalHeading,
+        resultsModalTitle
+      );
+      await formPage.validateResultsTable();
+      await formPage.closeModal();
+      await formPage.resultsModal.isElementVisible(
+        formPage.resultsModal.getModal(),
+        false
+      );
     });
   });
 });

@@ -57,8 +57,11 @@ export class UiElement implements Clickable {
   }
 
   //Assertions
-  async isElementVisible(element: Locator | string): Promise<void> {
-    await expect(element as Locator).toBeVisible();
+  async isElementVisible(
+    element: Locator | string,
+    isVisible = true
+  ): Promise<void> {
+    await expect(element as Locator).toBeVisible({ visible: isVisible });
   }
 
   async isElementEnabled<T extends string | Locator>(

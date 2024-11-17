@@ -42,8 +42,7 @@ test.describe("Upload and Download Page Tests", () => {
     await test.step("Step 1: Upload A File", async () => {
       await uploadPage.filechooser.uploadFile(
         uploadPage.uploadButton,
-        "downloads/",
-        "testPicture.jpg"
+        "photo.jpg"
       );
       await uploadPage.textBox.hasText(uploadPage.filePath, pathToUploadedFile);
     });

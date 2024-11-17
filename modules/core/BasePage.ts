@@ -7,7 +7,7 @@ import {
 } from "../../uiElements/support/uiService";
 
 export default class BasePage {
-  protected page: Page;
+  readonly page: Page;
   protected url: string;
   readonly header: Header;
   readonly logo: Locator;

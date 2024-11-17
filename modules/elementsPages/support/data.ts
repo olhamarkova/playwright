@@ -121,7 +121,7 @@ export const linksText = {
 };
 
 //Upload and Download
-export const pathToUploadedFile = "C:\\fakepath\\testPicture.jpg";
+export const pathToUploadedFile = "C:\\fakepath\\photo.jpg";
 
 //Dynamic
 export const dynamicText = "This text has random Id";

@@ -16,15 +16,11 @@ export class Filechooser extends UiElement implements Clickable {
     return this.button.getLocator("input[type='file']");
   }
 
-  async uploadFile(
-    button: Locator,
-    filePath: string,
-    fileName: string
-  ): Promise<void> {
+  async uploadFile(button: Locator, fileName: string): Promise<void> {
     const fileChooserPromise = this.page.waitForEvent("filechooser");
     await button.click();
     const fileChooser = await fileChooserPromise;
 
-    await fileChooser.setFiles(path.join(filePath, fileName));
+    await fileChooser.setFiles(path.join("downloads/", fileName));
   }
 }

@@ -1,4 +1,4 @@
-import { type Locator, type Page } from "@playwright/test";
+import { type Locator, type Page, expect } from "@playwright/test";
 import {
   Form,
   Radio,
@@ -7,9 +7,12 @@ import {
   Datepicker,
   Filechooser,
   Chicklet,
+  Modal,
+  Table,
 } from "../../uiElements/support/uiService";
 import BasePage from "../core/BasePage";
-import { FormInputIds, Genders } from "./support/types";
+import { FormInputIds, Genders, Hobbies } from "./support/types";
+import { studentInfo } from "./support/data";
 
 export class PracticeFormPage extends BasePage {
   readonly form: Form;
@@ -19,11 +22,14 @@ export class PracticeFormPage extends BasePage {
   readonly datepicker: Datepicker;
   readonly filechooser: Filechooser;
   readonly chicklet: Chicklet;
+  readonly resultsModal: Modal;
+  readonly resultsTable: Table;
 
   readonly formTitle: Locator;
   readonly addressTextArea: Locator;
   readonly subjectInput: Locator;
   readonly subjectLabel: Locator;
+  readonly resultsModalHeading: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
@@ -34,6 +40,8 @@ export class PracticeFormPage extends BasePage {
     this.datepicker = new Datepicker(this.page);
     this.filechooser = new Filechooser(this.page);
     this.chicklet = new Chicklet(this.page);
+    this.resultsModal = new Modal(this.page);
+    this.resultsTable = new Table(this.page);
 
     this.formTitle = this.heading.getByClass("practice-form-wrapper h5");
     this.addressTextArea = this.form.input.getTextAreaById("currentAddress");
@@ -42,6 +50,9 @@ export class PracticeFormPage extends BasePage {
     );
     this.subjectLabel = this.chicklet.getByClass(
       "subjects-auto-complete__multi-value__label"
+    );
+    this.resultsModalHeading = this.resultsModal.getById(
+      "example-modal-sizes-title-lg"
     );
   }
 
@@ -53,11 +64,43 @@ export class PracticeFormPage extends BasePage {
     return this.radio.getLabel(`gender-radio-${gender}`);
   }
 
-  hobbiesCheckbox(hobby: string) {
+  hobbiesCheckbox(hobby: Hobbies) {
     return this.checkbox.getById(`hobbies-checkbox-${hobby}`);
   }
 
   stateAndCitySelector(selectorId: "state" | "city") {
     return this.selector.getById(selectorId);
+  }
+
+  getResultsTableCell(rowNumber: number, cellContent: string) {
+    return this.resultsTable.getLocator(
+      `//table//tr[${rowNumber}]/td[contains(.,"${cellContent}")]`
+    );
+  }
+
+  async validateResultsTable() {
+    let rowNumber = 1;
+
+    for (const [label, value] of studentInfo.entries()) {
+      const isLabelValid = await this.getResultsTableCell(
+        rowNumber,
+        label
+      ).isVisible();
+      if (isLabelValid) {
+        await this.resultsTable.isElementVisible(
+          this.getResultsTableCell(rowNumber, value)
+        );
+      }
+
+      rowNumber++;
+    }
+  }
+
+  async closeModal() {
+    //'Close' button is covered by advertisement and force click doesn't work here.
+    await this.page.evaluate(async () => {
+      const closeButton = document.getElementById("closeLargeModal");
+      closeButton!.click();
+    });
   }
 }
