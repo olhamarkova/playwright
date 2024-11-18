@@ -1,4 +1,4 @@
-import { type Locator, type Page, expect } from "@playwright/test";
+import { type Locator, type Page } from "@playwright/test";
 import {
   Form,
   Radio,
@@ -12,7 +12,6 @@ import {
 } from "../../uiElements/support/uiService";
 import BasePage from "../core/BasePage";
 import { FormInputIds, Genders, Hobbies } from "./support/types";
-import { studentInfo } from "./support/data";
 
 export class PracticeFormPage extends BasePage {
   readonly form: Form;
@@ -78,7 +77,10 @@ export class PracticeFormPage extends BasePage {
     );
   }
 
-  async validateResultsTable() {
+  /**
+   * Ensures that every row contains correct columns and data
+   */
+  async validateResultsTable(studentInfo: Map<string, string>) {
     let rowNumber = 1;
 
     for (const [label, value] of studentInfo.entries()) {
@@ -96,11 +98,15 @@ export class PracticeFormPage extends BasePage {
     }
   }
 
+  //'Close' button is covered by advertisement and Playwright's force click doesn't work here.
   async closeModal() {
-    //'Close' button is covered by advertisement and force click doesn't work here.
     await this.page.evaluate(async () => {
       const closeButton = document.getElementById("closeLargeModal");
-      closeButton!.click();
+      if (!closeButton) {
+        throw new Error("Such a button does not exist!");
+      } else {
+        closeButton!.click();
+      }
     });
   }
 }

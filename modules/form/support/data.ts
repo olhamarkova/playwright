@@ -19,8 +19,7 @@ export const studentData = {
 
 export const pickedDate = studentData.birthDate.replace("e,", "");
 
-const splittedDate = studentData.birthDate.split(",");
-const dateOfBirth = `${splittedDate[0]},${splittedDate[1].trim()}`;
+const dateOfBirth = studentData.birthDate.replace(", ", ",");
 const subjects = studentData.subjects.toString().replace(",", ", ");
 
 export const studentInfo = new Map<string, string>([

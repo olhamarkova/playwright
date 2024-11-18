@@ -7,6 +7,7 @@ import {
   pickedDate,
   resultsModalTitle,
   studentData,
+  studentInfo,
 } from "../../modules/form/support/data.ts";
 import { Genders, Hobbies } from "../../modules/form/support/types.ts";
 import { Month } from "../../uiElements/support/types/DatepickerTypes.ts";
@@ -29,7 +30,7 @@ test.describe("Practice Form Tests", () => {
     });
   });
 
-  test("@functional A user Sould Be Able To Fill The Form", async () => {
+  test("@functional A User Should Be Able To Fill The Form", async () => {
     await test.step("Step 1: Fill The Name", async () => {
       await formPage.form.input.fillOut(
         formPage.formInputs("firstName"),
@@ -68,7 +69,7 @@ test.describe("Practice Form Tests", () => {
       );
     });
 
-    await test.step("Step 4: Enter Mobile Number", async () => {
+    await test.step("Step 4: Enter A Mobile Number", async () => {
       await formPage.form.input.fillOut(
         formPage.formInputs("userNumber"),
         studentData.mobile
@@ -168,7 +169,7 @@ test.describe("Practice Form Tests", () => {
         formPage.resultsModalHeading,
         resultsModalTitle
       );
-      await formPage.validateResultsTable();
+      await formPage.validateResultsTable(studentInfo);
       await formPage.closeModal();
       await formPage.resultsModal.isElementVisible(
         formPage.resultsModal.getModal(),
