@@ -13,3 +13,6 @@ export { Table as Table } from "../table";
 export { Text as Text } from "../text";
 export { Selector as Selector } from "../selector";
 export { Modal as Modal } from "../modal";
+export { Datepicker as Datepicker } from "../datepicker";
+export { Filechooser as Filechooser } from "../filechooser";
+export { Chicklet as Chicklet } from "../chicklet";

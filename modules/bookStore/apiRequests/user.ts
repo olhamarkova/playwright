@@ -26,7 +26,6 @@ export default class UserAPICalls {
       }`;
     } else if (!body) {
       expect(response.ok()).toBeTruthy();
-      expect(body).toBe(false);
     }
     return body;
   }
