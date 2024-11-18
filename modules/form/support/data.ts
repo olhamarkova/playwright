@@ -1,26 +1,37 @@
-export const studentData = {
-  firstName: "Jane",
-  lastName: "Doe",
-  email: "jdoe@testemail.com",
-  mobile: "1234567890",
-  currentAddress: "Test str., 456, 45 apt.",
-  state: "Haryana",
-  city: "Karnal",
-};
-
 export const formTitle = "Student Registration Form";
 
 export const resultsModalTitle = "Thanks for submitting the form";
 
+export const studentData = {
+  firstName: "Jane",
+  lastName: "Doe",
+  email: "jdoe@testemail.com",
+  gender: "Female",
+  mobile: "1234567890",
+  birthDate: "25 June, 1990",
+  subjects: ["Maths", "Chemistry"],
+  currentAddress: "Test str., 456, 45 apt.",
+  picture: "photo.jpg",
+  hobby: "Reading",
+  state: "Haryana",
+  city: "Karnal",
+};
+
+export const pickedDate = studentData.birthDate.replace("e,", "");
+
+const splittedDate = studentData.birthDate.split(",");
+const dateOfBirth = `${splittedDate[0]},${splittedDate[1].trim()}`;
+const subjects = studentData.subjects.toString().replace(",", ", ");
+
 export const studentInfo = new Map<string, string>([
-  ["Student Name", "Jane Doe"],
-  ["Student Email", "jdoe@testemail.com"],
-  ["Gender", "Female"],
-  ["Mobile", "1234567890"],
-  ["Date of Birth", "25 June,1990"],
-  ["Subjects", "Maths, Chemistry"],
-  ["Hobbies", "Reading"],
-  ["Picture", "photo.jpg"],
-  ["Address", "Test str., 456, 45 apt."],
-  ["State and City", "Haryana Karnal"],
+  ["Student Name", `${studentData.firstName} ${studentData.lastName}`],
+  ["Student Email", `${studentData.email}`],
+  ["Gender", `${studentData.gender}`],
+  ["Mobile", `${studentData.mobile}`],
+  ["Date of Birth", `${dateOfBirth}`],
+  ["Subjects", `${subjects}`],
+  ["Hobbies", `${studentData.hobby}`],
+  ["Picture", `${studentData.picture}`],
+  ["Address", `${studentData.currentAddress}`],
+  ["State and City", `${studentData.state} ${studentData.city}`],
 ]);

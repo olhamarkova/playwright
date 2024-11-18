@@ -4,6 +4,7 @@ import { elementPagesHeadings as headings } from "../../modules/elementsPages/su
 import { PracticeFormPage } from "../../modules/form/PracticeFormPage.ts";
 import {
   formTitle,
+  pickedDate,
   resultsModalTitle,
   studentData,
 } from "../../modules/form/support/data.ts";
@@ -88,7 +89,7 @@ test.describe("Practice Form Tests", () => {
       await formPage.datepicker.chooseDayByNumber(25);
       await formPage.form.input.hasValue(
         formPage.formInputs("dateOfBirthInput"),
-        "25 Jun 1990"
+        pickedDate
       );
     });
 
@@ -98,17 +99,21 @@ test.describe("Practice Form Tests", () => {
         formPage.subjectInput,
         "Ma"
       );
-      await formPage.form.clickElement(formPage.form.getByText("Maths"));
+      await formPage.form.clickElement(
+        formPage.form.getByText(studentData.subjects[0])
+      );
       await formPage.form.clickElement(formPage.subjectInput);
       await formPage.form.input.fillOutSequentially(
         formPage.subjectInput,
         "Che"
       );
-      await formPage.form.clickElement(formPage.form.getByText("Chemistry"));
-      await formPage.chicklet.hasText(formPage.subjectLabel, [
-        "Maths",
-        "Chemistry",
-      ]);
+      await formPage.form.clickElement(
+        formPage.form.getByText(studentData.subjects[1])
+      );
+      await formPage.chicklet.hasText(
+        formPage.subjectLabel,
+        studentData.subjects
+      );
     });
 
     await test.step("Step 7: Choose The Hobby", async () => {
@@ -124,7 +129,7 @@ test.describe("Practice Form Tests", () => {
     await test.step("Step 8: Add A Photo", async () => {
       await formPage.filechooser.uploadFile(
         formPage.filechooser.getChooseFileButton(),
-        "photo.jpg"
+        studentData.picture
       );
     });
 
@@ -144,14 +149,14 @@ test.describe("Practice Form Tests", () => {
         formPage.stateAndCitySelector("state")
       );
       await formPage.selector.clickElement(
-        formPage.selector.getByText("Haryana")
+        formPage.selector.getByText(studentData.state)
       );
 
       await formPage.selector.clickElement(
         formPage.stateAndCitySelector("city")
       );
       await formPage.selector.clickElement(
-        formPage.selector.getByText("Karnal")
+        formPage.selector.getByText(studentData.city)
       );
     });
 
