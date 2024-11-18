@@ -40,7 +40,10 @@ test.describe("Upload and Download Page Tests", () => {
 
   test("@functional User Shall Be Able To Upload Files", async () => {
     await test.step("Step 1: Upload A File", async () => {
-      await uploadPage.uploadFile("test-results/download/", "sampleFile.jpeg");
+      await uploadPage.filechooser.uploadFile(
+        uploadPage.uploadButton,
+        "photo.jpg"
+      );
       await uploadPage.textBox.hasText(uploadPage.filePath, pathToUploadedFile);
     });
   });

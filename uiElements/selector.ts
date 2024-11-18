@@ -12,6 +12,10 @@ export class Selector extends UiElement implements Clickable {
     return this.page.locator(`select[aria-label='${ariaLabel}']`);
   }
 
+  getByClass(className: string): Locator {
+    return this.getLocator(`select[class=".${className}"]`);
+  }
+
   getCombobox(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("combobox", options);
   }

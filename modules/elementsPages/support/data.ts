@@ -11,6 +11,7 @@ export const elementPagesHeadings = {
   images: "Broken Links - Images",
   upload: "Upload and Download",
   dynamic: "Dynamic Properties",
+  form: "Practice Form",
 };
 
 //Text Box
@@ -120,7 +121,7 @@ export const linksText = {
 };
 
 //Upload and Download
-export const pathToUploadedFile = "C:\\fakepath\\sampleFile.jpeg";
+export const pathToUploadedFile = "C:\\fakepath\\photo.jpg";
 
 //Dynamic
 export const dynamicText = "This text has random Id";

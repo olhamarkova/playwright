@@ -1,19 +1,12 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { Clickable } from "./support/interfaces/clickable";
+import { Textual } from "./support/interfaces/textual";
 import { UiElement } from "./uiElement";
 import { TextOptions } from "./support/types/OptionsTypes";
 
-export class Button extends UiElement implements Clickable {
+export class Chicklet extends UiElement implements Clickable, Partial<Textual> {
   constructor(page: Page) {
     super(page);
-  }
-
-  getButton(name: string): Locator {
-    return this.page.getByRole("button", { name: name, exact: true });
-  }
-
-  getSubmitButton(): Locator {
-    return this.page.locator("button[type='submit']");
   }
 
   async hasText(
@@ -21,6 +14,6 @@ export class Button extends UiElement implements Clickable {
     text: string | string[],
     options?: TextOptions
   ): Promise<void> {
-    await expect(element as Locator).toHaveText(text, options);
+    await expect(element).toHaveText(text, options);
   }
 }
