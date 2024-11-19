@@ -1,16 +1,16 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
-import { elementPagesHeadings as headings } from "../../modules/elementsPages/support/data.ts";
-import { PracticeFormPage } from "../../modules/form/PracticeFormPage.ts";
+import { subCategoriesUrls } from "../../app/modules/core/support/data.ts";
+import { elementPagesHeadings as headings } from "../../app/modules/elementsPages/support/data.ts";
+import { PracticeFormPage } from "../../app/modules/form/PracticeFormPage.ts";
 import {
   formTitle,
   pickedDate,
   resultsModalTitle,
   studentData,
   studentInfo,
-} from "../../modules/form/support/data.ts";
-import { Genders, Hobbies } from "../../modules/form/support/types.ts";
-import { Month } from "../../uiElements/support/types/DatepickerTypes.ts";
+} from "../../app/modules/form/support/data.ts";
+import { Genders, Hobbies } from "../../app/modules/form/support/types.ts";
+import { Month } from "../../app/components/support/types/DatepickerTypes.ts";
 
 let formPage: PracticeFormPage;
 

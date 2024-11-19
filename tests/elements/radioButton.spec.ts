@@ -1,10 +1,10 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { subCategoriesUrls } from "../../app/modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   questionText,
-} from "../../modules/elementsPages/support/data.ts";
-import { RadioButtonPage } from "../../modules/elementsPages/pages/RadioButtonPage.ts";
+} from "../../app/modules/elementsPages/support/data.ts";
+import { RadioButtonPage } from "../../app/modules/elementsPages/pages/RadioButtonPage.ts";
 
 let radioButtonPage: RadioButtonPage;
 

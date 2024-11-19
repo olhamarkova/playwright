@@ -1,20 +1,25 @@
 import { test, expect } from "@playwright/test";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { subCategoriesUrls } from "../../app/modules/core/support/data.ts";
 import {
   columnHeaders,
   elementPagesHeadings as headings,
   recordData,
-} from "../../modules/elementsPages/support/data.ts";
-import { WebTablesPage } from "../../modules/elementsPages/pages/webTables/WebTablesPage.ts";
-import { AddRecordInputs } from "../../modules/elementsPages/support/types.ts";
-import AddNewRecordForm from "../../modules/elementsPages/pages/webTables/AddNewRecordForm.ts";
+} from "../../app/modules/elementsPages/support/data.ts";
+import { AddRecordInputs } from "../../app/modules/elementsPages/support/types.ts";
+import { WebTableManager } from "../../app/modules/elementsPages/pages/webTables/PageObjectManager.ts";
 
-let tablePage: WebTablesPage;
-let form: AddNewRecordForm;
+let form: any;
+let tablePage: any;
 
 test.beforeEach(async ({ page }) => {
-  tablePage = new WebTablesPage(page, subCategoriesUrls.elements.webTables);
-  form = tablePage.addNewRecord;
+  tablePage = new WebTableManager(
+    page,
+    subCategoriesUrls.elements.webTables
+  ).getTable();
+  form = new WebTableManager(
+    page,
+    subCategoriesUrls.elements.webTables
+  ).getForm();
   await tablePage.visit();
 });
 

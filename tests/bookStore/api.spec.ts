@@ -1,11 +1,11 @@
 import { expect, test } from "@playwright/test";
-import UserAPICalls from "../../modules/bookStore/apiRequests/user.ts";
-import BookStoreAPICalls from "../../modules/bookStore/apiRequests/bookStore.ts";
+import UserAPICalls from "../../app/modules/bookStore/apiRequests/user.ts";
+import BookStoreAPICalls from "../../app/modules/bookStore/apiRequests/bookStore.ts";
 import {
   generateRandomPassword,
   generateRandomUsername,
 } from "../../utils/generateUserCreds.ts";
-import { BookSchema } from "../../modules/bookStore/apiRequests/support/models.ts";
+import { BookSchema } from "../../app/modules/bookStore/apiRequests/support/models.ts";
 import Ajv from "ajv";
 
 const ajv = new Ajv();

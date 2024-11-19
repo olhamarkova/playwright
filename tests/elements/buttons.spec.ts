@@ -1,10 +1,10 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { subCategoriesUrls } from "../../app/modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   successMessages,
-} from "../../modules/elementsPages/support/data.ts";
-import { ButtonsPage } from "../../modules/elementsPages/pages/ButtonsPage.ts";
+} from "../../app/modules/elementsPages/support/data.ts";
+import { ButtonsPage } from "../../app/modules/elementsPages/pages/ButtonsPage.ts";
 
 let buttonsPage: ButtonsPage;
 

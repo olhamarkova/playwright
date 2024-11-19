@@ -1,11 +1,11 @@
 import { test } from "@playwright/test";
-import { TextBoxPage } from "../../modules/elementsPages/pages/TextBoxPage.ts";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { TextBoxPage } from "../../app/modules/elementsPages/pages/TextBoxPage.ts";
+import { subCategoriesUrls } from "../../app/modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   textBoxPlaceholders,
   userData,
-} from "../../modules/elementsPages/support/data.ts";
+} from "../../app/modules/elementsPages/support/data.ts";
 
 let textBox: TextBoxPage;
 

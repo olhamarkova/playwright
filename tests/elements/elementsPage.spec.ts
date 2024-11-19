@@ -1,13 +1,13 @@
 import { test } from "@playwright/test";
-import { ElementsPage } from "../../modules/elementsPages/pages/ElementsPage.ts";
-import { ElementsMenuSubItems } from "../../uiElements/support/types/NavbarTypes.ts";
+import { ElementsPage } from "../../app/modules/elementsPages/pages/ElementsPage.ts";
+import { ElementsMenuSubItems } from "../../app/components/support/types/NavbarTypes.ts";
 import {
   categoryUrls,
   subCategoriesUrls,
-} from "../../modules/core/support/data.ts";
-import { title } from "../../modules/core/support/data.ts";
-import { sidebarItems } from "../../modules/mainPage/support/categories.ts";
-import { callToAction } from "../../modules/elementsPages/support/data.ts";
+  title,
+  sidebarItems,
+} from "../../app/modules/core/support/data.ts";
+import { callToAction } from "../../app/modules/elementsPages/support/data.ts";
 
 let elements: ElementsPage;
 

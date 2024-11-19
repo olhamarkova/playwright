@@ -1,11 +1,11 @@
 import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { subCategoriesUrls } from "../../app/modules/core/support/data.ts";
 import {
   dynamicText,
   elementPagesHeadings as headings,
-} from "../../modules/elementsPages/support/data.ts";
-import { DynamicPage } from "../../modules/elementsPages/pages/DynamicPage.ts";
-import { dynamicButtonsColor } from "../../modules/elementsPages/support/classes.ts";
+} from "../../app/modules/elementsPages/support/data.ts";
+import { DynamicPage } from "../../app/modules/elementsPages/pages/DynamicPage.ts";
+import { dynamicButtonsColor } from "../../app/modules/elementsPages/support/classes.ts";
 
 let dynamicPage: DynamicPage;
 
