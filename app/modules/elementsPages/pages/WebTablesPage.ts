@@ -1,13 +1,13 @@
 import { type Page, expect, Locator } from "@playwright/test";
-import BasePage from "../../../core/BasePage";
+import BasePage from "../../core/BasePage";
 import {
   Table,
   Button,
   Input,
   Selector,
   Text,
-} from "../../../../components/support/uiService";
-import AddNewRecordForm from "./AddNewRecordForm";
+} from "../../../components/support/uiService";
+import AddNewRecordForm from "../../../components/addNewRecordForm";
 
 export class WebTablesPage extends BasePage {
   readonly addNewRecord: AddNewRecordForm;
@@ -43,13 +43,6 @@ export class WebTablesPage extends BasePage {
 
   actionButton(name: "edit" | "delete", recordNumber: number): Locator {
     return this.button.getLocator(`#${name}-record-${recordNumber}`);
-  }
-
-  async fillForm(data: object): Promise<void> {
-    for (let [key, value] of Object.entries(data)) {
-      await this.input.fillOut(this.addNewRecord.formInput(key), value);
-      await this.input.hasValue(this.addNewRecord.formInput(key), value);
-    }
   }
 
   async validateElementsByName(elementNames: string[]): Promise<void> {

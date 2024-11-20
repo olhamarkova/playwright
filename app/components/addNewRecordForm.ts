@@ -1,11 +1,12 @@
+//Form on the Web Tables Page
+
 import { Locator, type Page } from "@playwright/test";
-import { AddRecordInputs } from "../../support/types";
-import { Form, Modal } from "../../../../components/support/uiService";
+import { AddRecordInputs } from "../modules/elementsPages/support/types";
+import { Form, Modal } from "./support/uiService";
 
 export default class AddNewRecordForm extends Form {
   readonly modal: Modal;
 
-  readonly addRecordForm: Locator;
   readonly modalTitle: Locator;
   readonly submitButton: Locator;
 
@@ -19,5 +20,12 @@ export default class AddNewRecordForm extends Form {
 
   formInput(id: AddRecordInputs | string): Locator {
     return this.input.getById(`${id}`);
+  }
+
+  async fillForm(data: object): Promise<void> {
+    for (let [key, value] of Object.entries(data)) {
+      await this.input.fillOut(this.formInput(key), value);
+      await this.input.hasValue(this.formInput(key), value);
+    }
   }
 }

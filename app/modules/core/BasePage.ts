@@ -1,4 +1,9 @@
-import { type Locator, type Page, expect } from "@playwright/test";
+import {
+  type Locator,
+  type Page,
+  expect,
+  type BrowserContext,
+} from "@playwright/test";
 import {
   Navbar,
   Header,
@@ -25,6 +30,13 @@ export default class BasePage {
     this.navbar = new Navbar(this.page);
   }
 
+  pageTitle(
+    heading: "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
+    options?: {}
+  ): Locator {
+    return this.heading.getHeading(heading, options);
+  }
+
   async visit(): Promise<void> {
     await this.page.goto(this.url, { waitUntil: "domcontentloaded" });
   }
@@ -41,10 +53,18 @@ export default class BasePage {
     await expect(this.page).toHaveTitle(titleText);
   }
 
-  pageTitle(
-    heading: "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
-    options?: {}
-  ): Locator {
-    return this.heading.getHeading(heading, options);
+  async openNewTab(context: BrowserContext, element: Locator): Promise<void> {
+    const pagePromise = context.waitForEvent("page");
+    await element.click();
+    const newPage = await pagePromise;
+    await newPage.waitForLoadState();
+  }
+
+  async wait(time: number) {
+    await this.page.waitForTimeout(time);
+  }
+
+  async bringToFront() {
+    await this.page.bringToFront();
   }
 }

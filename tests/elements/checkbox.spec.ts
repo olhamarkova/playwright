@@ -1,19 +1,16 @@
-import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../app/modules/core/support/data.ts";
+import { test } from "../../fixtures/pagesFixture.ts";
 import { elementPagesHeadings as headings } from "../../app/modules/elementsPages/support/data.ts";
-import { CheckBoxPage } from "../../app/modules/elementsPages/pages/CheckBoxPage.ts";
 import { CheckboxLabels } from "../../app/modules/elementsPages/support/types.ts";
 import { halfCheckedBox } from "../../app/modules/elementsPages/support/classes.ts";
 
-let checkboxPage: CheckBoxPage;
-
-test.beforeEach(async ({ page }) => {
-  checkboxPage = new CheckBoxPage(page, subCategoriesUrls.elements.checkbox);
-  await checkboxPage.visit();
-});
-
 test.describe("Checkbox Page Tests", () => {
-  test("@smoke The Checkbox Page Should Have All The Expected Elements", async () => {
+  test.beforeEach(async ({ checkboxPage }) => {
+    await checkboxPage.visit();
+  });
+
+  test("@smoke The Checkbox Page Should Have All The Expected Elements", async ({
+    checkboxPage,
+  }) => {
     await test.step("Step 1: Check The Page Heading", async () => {
       await checkboxPage.heading.hasText(
         checkboxPage.pageTitle("h1"),
@@ -46,7 +43,9 @@ test.describe("Checkbox Page Tests", () => {
     });
   });
 
-  test("@functional User Shall Be Able To Open And Close The List By Clicking On Buttons", async () => {
+  test("@functional User Shall Be Able To Open And Close The List By Clicking On Buttons", async ({
+    checkboxPage,
+  }) => {
     await test.step("Step 1: Expand All Categories", async () => {
       await checkboxPage.button.clickElement(
         checkboxPage.expandButton("Expand")
@@ -72,7 +71,9 @@ test.describe("Checkbox Page Tests", () => {
     });
   });
 
-  test("@functional User Shall Be Able To Check And Uncheck All The Categories", async () => {
+  test("@functional User Shall Be Able To Check And Uncheck All The Categories", async ({
+    checkboxPage,
+  }) => {
     await test.step("Step 1: Check All Categories", async () => {
       await checkboxPage.check(CheckboxLabels.Home);
       await checkboxPage.button.clickElement(
@@ -87,7 +88,9 @@ test.describe("Checkbox Page Tests", () => {
     });
   });
 
-  test("@functional User Shall Be Able To Check And Uncheck One Category", async () => {
+  test("@functional User Shall Be Able To Check And Uncheck One Category", async ({
+    checkboxPage,
+  }) => {
     await test.step("Step 1: Find The Angular Category", async () => {
       await checkboxPage.button.clickElement(checkboxPage.toggleButton(1));
       await checkboxPage.button.clickElement(checkboxPage.toggleButton(3));

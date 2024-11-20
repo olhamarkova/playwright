@@ -46,12 +46,4 @@ export class LinksPage extends BasePage {
       throw new Error("Something went wrong. Please check your data");
     }
   }
-
-  async openNewTab(context: BrowserContext, link: Locator): Promise<void> {
-    const pagePromise = context.waitForEvent("page");
-    await this.link.clickElement(link);
-    const newPage = await pagePromise;
-    await newPage.waitForLoadState();
-    await expect(newPage).toHaveURL(`${process.env.URL}`);
-  }
 }
