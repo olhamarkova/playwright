@@ -1,17 +1,18 @@
-import { test } from "@playwright/test";
-import { MainPage } from "../../modules/mainPage/MainPage";
-import { copyRightText, title } from "../../modules/core/support/data";
-import { categories } from "../../modules/mainPage/support/categories";
-
-let mainPage: MainPage;
-
-test.beforeEach(async ({ page }) => {
-  mainPage = new MainPage(page);
-  await mainPage.visit();
-});
+import { test } from "../../fixtures/pagesFixture";
+import {
+  copyRightText,
+  title,
+  categories,
+} from "../../app/modules/core/support/data";
 
 test.describe("Main Page Smoke Tests", () => {
-  test("@smoke The Main Page Should Have All The Expected Elements", async () => {
+  test.beforeEach(async ({ mainPage }) => {
+    await mainPage.visit();
+  });
+
+  test("@smoke The Main Page Should Have All The Expected Elements", async ({
+    mainPage,
+  }) => {
     await test.step("Step 1: Check The Page Title", async () => {
       await mainPage.hasTitle(title.mainTitle);
     });
@@ -37,7 +38,9 @@ test.describe("Main Page Smoke Tests", () => {
     });
   });
 
-  test("@smoke The Cards On Main Page Should Lead To Corresponding Pages", async () => {
+  test("@smoke The Cards On Main Page Should Lead To Corresponding Pages", async ({
+    mainPage,
+  }) => {
     const pages = Object.entries(categories);
     let step = 1;
 

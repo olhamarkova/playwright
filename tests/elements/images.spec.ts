@@ -1,21 +1,18 @@
-import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { test } from "../../fixtures/pagesFixture.ts";
 import {
   elementPagesHeadings as headings,
   linksText,
   subHeadingsText,
-} from "../../modules/elementsPages/support/data.ts";
-import { ImagesPage } from "../../modules/elementsPages/pages/ImagesPage.ts";
-
-let imagesPage: ImagesPage;
-
-test.beforeEach(async ({ page }) => {
-  imagesPage = new ImagesPage(page, subCategoriesUrls.elements.brokenLinks);
-  await imagesPage.visit();
-});
+} from "../../app/modules/elementsPages/support/data.ts";
 
 test.describe("Images And Links Page Tests", () => {
-  test("@smoke The Images And Links Page Should Have All The Expected Elements", async () => {
+  test.beforeEach(async ({ imagesPage }) => {
+    await imagesPage.visit();
+  });
+
+  test("@smoke The Images And Links Page Should Have All The Expected Elements", async ({
+    imagesPage,
+  }) => {
     await test.step("Step 1: Check The Page Headings", async () => {
       await imagesPage.heading.hasText(
         imagesPage.pageTitle("h1"),
@@ -43,13 +40,13 @@ test.describe("Images And Links Page Tests", () => {
     });
   });
 
-  test("@negative Validate Images", async () => {
+  test("@negative Validate Images", async ({ imagesPage }) => {
     await test.step("Step 1: Find the broken image", async () => {
       await imagesPage.findBrokenImage();
     });
   });
 
-  test("@negative Validate Links", async () => {
+  test("@negative Validate Links", async ({ imagesPage }) => {
     await test.step("Step 1: Find The Broken Link", async () => {
       await imagesPage.findBrokenLink();
     });

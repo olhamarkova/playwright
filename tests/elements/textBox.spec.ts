@@ -1,125 +1,144 @@
-import { test } from "@playwright/test";
-import { TextBoxPage } from "../../modules/elementsPages/pages/TextBoxPage.ts";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
+import { test } from "../../fixtures/pagesFixture.ts";
 import {
   elementPagesHeadings as headings,
   textBoxPlaceholders,
   userData,
-} from "../../modules/elementsPages/support/data.ts";
-
-let textBox: TextBoxPage;
-
-test.beforeEach(async ({ page }) => {
-  textBox = new TextBoxPage(page, subCategoriesUrls.elements.textBox);
-  await textBox.visit();
-});
+} from "../../app/modules/elementsPages/support/data.ts";
 
 test.describe("Text Box Page Tests", () => {
-  test("@smoke The TextBox Page Should Have All The Expected Elements", async () => {
+  test.beforeEach(async ({ textBoxPage }) => {
+    await textBoxPage.visit();
+  });
+
+  test("@smoke The TextBox Page Should Have All The Expected Elements", async ({
+    textBoxPage,
+  }) => {
     await test.step("Step 1: Check The Page Heading", async () => {
-      await textBox.heading.hasText(textBox.pageTitle("h1"), headings.textBox);
+      await textBoxPage.heading.hasText(
+        textBoxPage.pageTitle("h1"),
+        headings.textBox
+      );
     });
 
     await test.step("Step 2: Check The Form", async () => {
-      await textBox.input.isEmpty(textBox.fullNameInput);
-      await textBox.input.hasPlaceholder(
-        textBox.fullNameInput,
+      await textBoxPage.input.isEmpty(textBoxPage.fullNameInput);
+      await textBoxPage.input.hasPlaceholder(
+        textBoxPage.fullNameInput,
         textBoxPlaceholders.fullName
       );
-      await textBox.input.isEmpty(textBox.emailInput);
-      await textBox.input.hasPlaceholder(
-        textBox.emailInput,
+      await textBoxPage.input.isEmpty(textBoxPage.emailInput);
+      await textBoxPage.input.hasPlaceholder(
+        textBoxPage.emailInput,
         textBoxPlaceholders.email
       );
-      await textBox.input.isEmpty(textBox.currentAddressInput);
-      await textBox.input.hasPlaceholder(
-        textBox.currentAddressInput,
+      await textBoxPage.input.isEmpty(textBoxPage.currentAddressInput);
+      await textBoxPage.input.hasPlaceholder(
+        textBoxPage.currentAddressInput,
         textBoxPlaceholders.currentAddress
       );
-      await textBox.input.isEmpty(textBox.permanentAddress);
-      await textBox.textBox.isElementVisible(textBox.submitButton);
+      await textBoxPage.input.isEmpty(textBoxPage.permanentAddress);
+      await textBoxPage.textBox.isElementVisible(textBoxPage.submitButton);
     });
   });
 
-  test("@functional User Shall Be Able To Fill The Form And See The Output", async () => {
+  test("@functional User Shall Be Able To Fill The Form And See The Output", async ({
+    textBoxPage,
+  }) => {
     await test.step("Step 1: Fill The Full Name Input", async () => {
-      await textBox.input.fillOut(textBox.fullNameInput, userData.fullName);
-      await textBox.input.hasValue(textBox.fullNameInput, userData.fullName);
+      await textBoxPage.input.fillOut(
+        textBoxPage.fullNameInput,
+        userData.fullName
+      );
+      await textBoxPage.input.hasValue(
+        textBoxPage.fullNameInput,
+        userData.fullName
+      );
     });
 
     await test.step("Step 2: Fill The Email Input", async () => {
-      await textBox.input.fillOut(textBox.emailInput, userData.email);
-      await textBox.input.hasValue(textBox.emailInput, userData.email);
+      await textBoxPage.input.fillOut(textBoxPage.emailInput, userData.email);
+      await textBoxPage.input.hasValue(textBoxPage.emailInput, userData.email);
     });
 
     await test.step("Step 3: Fill The Current Address Input", async () => {
-      await textBox.input.fillOut(
-        textBox.currentAddressInput,
+      await textBoxPage.input.fillOut(
+        textBoxPage.currentAddressInput,
         userData.currentAddress
       );
-      await textBox.input.hasValue(
-        textBox.currentAddressInput,
+      await textBoxPage.input.hasValue(
+        textBoxPage.currentAddressInput,
         userData.currentAddress
       );
     });
 
     await test.step("Step 4: Fill The Permanent Address Input", async () => {
-      await textBox.input.fillOut(
-        textBox.permanentAddress,
+      await textBoxPage.input.fillOut(
+        textBoxPage.permanentAddress,
         userData.permanentAddress
       );
-      await textBox.input.hasValue(
-        textBox.permanentAddress,
+      await textBoxPage.input.hasValue(
+        textBoxPage.permanentAddress,
         userData.permanentAddress
       );
     });
 
     await test.step("Step 5: Submit The Form", async () => {
-      await textBox.button.clickElement(textBox.submitButton);
-      await textBox.textBox.isElementVisible(textBox.output);
-      await textBox.validateUserInfoOutput("name", userData.fullName);
-      await textBox.validateUserInfoOutput("email", userData.email);
-      await textBox.validateUserInfoOutput(
+      await textBoxPage.button.clickElement(textBoxPage.submitButton);
+      await textBoxPage.textBox.isElementVisible(textBoxPage.output);
+      await textBoxPage.validateUserInfoOutput("name", userData.fullName);
+      await textBoxPage.validateUserInfoOutput("email", userData.email);
+      await textBoxPage.validateUserInfoOutput(
         "currentAddress",
         userData.currentAddress
       );
-      await textBox.validateUserInfoOutput(
+      await textBoxPage.validateUserInfoOutput(
         "permanentAddress",
         userData.permanentAddress
       );
     });
   });
 
-  test("@negative User Shall See An Error When Submit The Form With Invalid Email", async () => {
+  test("@negative User Shall See An Error When Submit The Form With Invalid Email", async ({
+    textBoxPage,
+  }) => {
     const inputBorderCss = {
       property: "border",
-      value: textBox.emailBorderCss,
+      value: textBoxPage.emailBorderCss,
     };
     await test.step("Step 1: Fill The Form", async () => {
-      await textBox.input.fillOut(textBox.fullNameInput, userData.fullName);
-      await textBox.input.hasValue(textBox.fullNameInput, userData.fullName);
-      await textBox.input.fillOut(textBox.emailInput, "foo");
-      await textBox.input.hasValue(textBox.emailInput, "foo");
-      await textBox.input.fillOut(
-        textBox.currentAddressInput,
+      await textBoxPage.input.fillOut(
+        textBoxPage.fullNameInput,
+        userData.fullName
+      );
+      await textBoxPage.input.hasValue(
+        textBoxPage.fullNameInput,
+        userData.fullName
+      );
+      await textBoxPage.input.fillOut(textBoxPage.emailInput, "foo");
+      await textBoxPage.input.hasValue(textBoxPage.emailInput, "foo");
+      await textBoxPage.input.fillOut(
+        textBoxPage.currentAddressInput,
         userData.currentAddress
       );
-      await textBox.input.hasValue(
-        textBox.currentAddressInput,
+      await textBoxPage.input.hasValue(
+        textBoxPage.currentAddressInput,
         userData.currentAddress
       );
-      await textBox.input.fillOut(
-        textBox.permanentAddress,
+      await textBoxPage.input.fillOut(
+        textBoxPage.permanentAddress,
         userData.permanentAddress
       );
-      await textBox.input.hasValue(
-        textBox.permanentAddress,
+      await textBoxPage.input.hasValue(
+        textBoxPage.permanentAddress,
         userData.permanentAddress
       );
 
       await test.step("Step 2: Submit The Form", async () => {
-        await textBox.button.clickElement(textBox.submitButton);
-        await textBox.textBox.hasCSS(textBox.emailInput, inputBorderCss);
+        await textBoxPage.button.clickElement(textBoxPage.submitButton);
+        await textBoxPage.textBox.hasCSS(
+          textBoxPage.emailInput,
+          inputBorderCss
+        );
       });
     });
   });

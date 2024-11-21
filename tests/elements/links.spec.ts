@@ -1,33 +1,28 @@
-import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
-import { title } from "../../modules/core/support/data.ts";
+import { test } from "../../fixtures/pagesFixture.ts";
+import { title } from "../../app/modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
   linkNames,
   requestLinks,
   subHeadings,
-} from "../../modules/elementsPages/support/data.ts";
-import { LinksPage } from "../../modules/elementsPages/pages/LinksPage.ts";
-
-let linksPage: LinksPage;
-
-test.beforeEach(async ({ page }) => {
-  linksPage = new LinksPage(page, subCategoriesUrls.elements.links);
-  await linksPage.visit();
-});
+} from "../../app/modules/elementsPages/support/data.ts";
 
 test.describe("Links Page Tests", () => {
-  test("@smoke The Links Page Should Have All The Expected Elements", async () => {
+  test.beforeEach(async ({ linksPage }) => {
+    await linksPage.visit();
+  });
+
+  test("@smoke The Links Page Should Have All The Expected Elements", async ({
+    linksPage,
+  }) => {
     await test.step("Step 1: Check The Page Headings", async () => {
       await linksPage.heading.hasText(
         linksPage.heading.getHeading("h1"),
         headings.links
       );
-      await linksPage.heading.isElementVisible(
-        linksPage.heading.getHeading("h5", { hasText: subHeadings[0] })
-      );
-      await linksPage.heading.isElementVisible(
-        linksPage.heading.getHeading("h5", { hasText: subHeadings[1] })
+      await linksPage.heading.hasText(
+        linksPage.heading.getHeading("h5"),
+        subHeadings
       );
     });
 
@@ -40,18 +35,18 @@ test.describe("Links Page Tests", () => {
 
   test("@functional User Shall Have The Ability To Send Requests By Clicking The Links", async ({
     context,
-    page,
+    linksPage,
   }) => {
     await test.step("Step 1: Validate 'Home' Link", async () => {
       await linksPage.openNewTab(context, linksPage.link.getByName("Home"));
       await linksPage.hasTitle(title.mainTitle);
-      await page.bringToFront();
+      await linksPage.bringToFront();
     });
 
     await test.step("Step 2: Validate 'Home' Dynamic Link", async () => {
       await linksPage.openNewTab(context, linksPage.dynamicLink);
       await linksPage.hasTitle(title.mainTitle);
-      await page.bringToFront();
+      await linksPage.bringToFront();
     });
 
     await test.step("Step 3: Validate 'Created' Link", async () => {
