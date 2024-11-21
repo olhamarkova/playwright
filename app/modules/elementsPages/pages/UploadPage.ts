@@ -24,8 +24,8 @@ export class UploadPage extends BasePage {
     this.filechooser = new Filechooser(this.page);
 
     this.selectFileLabel = this.textBox.getLabel("uploadFile");
-    this.downloadButton = this.filechooser.getChooseFileButton();
-    this.uploadButton = this.button.getById("uploadFile");
+    this.downloadButton = this.button.getById("downloadButton");
+    this.uploadButton = this.filechooser.getChooseFileButton();
     this.filePath = this.textBox.getById("uploadedFilePath");
   }
 

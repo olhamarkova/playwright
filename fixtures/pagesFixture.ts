@@ -1,8 +1,5 @@
 import { test as base } from "@playwright/test";
-import {
-  categoryUrls,
-  subCategoriesUrls,
-} from "../app/modules/core/support/data";
+import { pageUrls } from "../app/modules/core/support/data";
 import { MainPage } from "../app/modules/mainPage/MainPage";
 import { ElementsPage } from "../app/modules/elementsPages/pages/ElementsPage";
 import { WebTablesPage } from "../app/modules/elementsPages/pages/WebTablesPage";
@@ -36,50 +33,56 @@ export const test = base.extend<Pages>({
     return await use(new MainPage(page));
   },
   async elementsPage({ page }, use) {
-    return await use(new ElementsPage(page, categoryUrls.elements));
+    return await use(new ElementsPage(page, pageUrls.categories.elements));
   },
   async tablePage({ page }, use) {
     return await use(
-      new WebTablesPage(page, subCategoriesUrls.elements.webTables)
+      new WebTablesPage(page, pageUrls.subCategories.elements.webTables)
     );
   },
   async buttonPage({ page }, use) {
-    return await use(new ButtonsPage(page, subCategoriesUrls.elements.buttons));
+    return await use(
+      new ButtonsPage(page, pageUrls.subCategories.elements.buttons)
+    );
   },
   async checkboxPage({ page }, use) {
     return await use(
-      new CheckBoxPage(page, subCategoriesUrls.elements.checkbox)
+      new CheckBoxPage(page, pageUrls.subCategories.elements.checkbox)
     );
   },
   async dynamicPage({ page }, use) {
     return await use(
-      new DynamicPage(page, subCategoriesUrls.elements.dynamicProperties)
+      new DynamicPage(page, pageUrls.subCategories.elements.dynamicProperties)
     );
   },
   async imagesPage({ page }, use) {
     return await use(
-      new ImagesPage(page, subCategoriesUrls.elements.brokenLinks)
+      new ImagesPage(page, pageUrls.subCategories.elements.brokenLinks)
     );
   },
   async linksPage({ page }, use) {
-    return await use(new LinksPage(page, subCategoriesUrls.elements.links));
+    return await use(
+      new LinksPage(page, pageUrls.subCategories.elements.links)
+    );
   },
   async radioPage({ page }, use) {
     return await use(
-      new RadioButtonPage(page, subCategoriesUrls.elements.radioButton)
+      new RadioButtonPage(page, pageUrls.subCategories.elements.radioButton)
     );
   },
   async textBoxPage({ page }, use) {
-    return await use(new TextBoxPage(page, subCategoriesUrls.elements.textBox));
+    return await use(
+      new TextBoxPage(page, pageUrls.subCategories.elements.textBox)
+    );
   },
   async uploadPage({ page }, use) {
     return await use(
-      new UploadPage(page, subCategoriesUrls.elements.uploadDownload)
+      new UploadPage(page, pageUrls.subCategories.elements.uploadDownload)
     );
   },
   async formPage({ page }, use) {
     return await use(
-      new PracticeFormPage(page, subCategoriesUrls.practiceForm)
+      new PracticeFormPage(page, pageUrls.subCategories.practiceForm)
     );
   },
 });

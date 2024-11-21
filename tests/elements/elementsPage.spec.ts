@@ -3,7 +3,7 @@ import { ElementsMenuSubItems } from "../../app/components/support/types/NavbarT
 import {
   title,
   sidebarItems,
-  subCategoriesUrls,
+  pageUrls,
 } from "../../app/modules/core/support/data.ts";
 import { callToAction } from "../../app/modules/elementsPages/support/data.ts";
 
@@ -29,7 +29,7 @@ test.describe("Elements Page Tests", () => {
   test("@smoke The Elements Menu Subitems Should Lead To Corresponding Pages", async ({
     elementsPage,
   }) => {
-    const url = Object.values(subCategoriesUrls.elements);
+    const url = Object.values(pageUrls.subCategories.elements);
     let step = 1;
 
     for (let i = 0; i < url.length; i++) {

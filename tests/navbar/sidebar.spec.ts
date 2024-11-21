@@ -1,8 +1,5 @@
 import { test } from "../../fixtures/pagesFixture.ts";
-import {
-  sidebarItems,
-  subCategoriesUrls,
-} from "../../app/modules/core/support/data.ts";
+import { sidebarItems, pageUrls } from "../../app/modules/core/support/data.ts";
 
 test.describe("Left Panel(Sidebar) Tests", () => {
   test.beforeEach(async ({ elementsPage }) => {
@@ -51,7 +48,7 @@ test.describe("Left Panel(Sidebar) Tests", () => {
       await elementsPage.navbar.validateMenuItems(
         sidebarItems.bookStoreApplication
       );
-      await elementsPage.hasUrl(subCategoriesUrls.books.bookStoreApi);
+      await elementsPage.hasUrl(pageUrls.subCategories.books.bookStoreApi);
     });
   });
 });
