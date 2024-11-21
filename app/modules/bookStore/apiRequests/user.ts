@@ -1,5 +1,8 @@
 import { expect, type Page } from "@playwright/test";
 import { ResponseData } from "./support/types";
+import { EndpointGenerator } from "./support/endpoints";
+
+const uri = EndpointGenerator.forUser();
 
 export default class UserAPICalls {
   protected page: Page;
@@ -13,7 +16,7 @@ export default class UserAPICalls {
   }
 
   async isUserAuthorized(login: string, password: string): Promise<boolean> {
-    const response = await this.page.request.post("Account/v1/Authorized", {
+    const response = await this.page.request.post(`${uri}Authorized`, {
       data: {
         userName: login,
         password: password,
@@ -31,7 +34,7 @@ export default class UserAPICalls {
   }
 
   async generateToken(login: string, password: string): Promise<ResponseData> {
-    const response = await this.page.request.post("Account/v1/GenerateToken", {
+    const response = await this.page.request.post(`${uri}GenerateToken`, {
       failOnStatusCode: false,
       data: {
         userName: login,
@@ -50,7 +53,7 @@ export default class UserAPICalls {
     token: string,
     payload: { userName: string; password: string }
   ): Promise<ResponseData> {
-    const response = await this.page.request.post("Account/v1/User", {
+    const response = await this.page.request.post(`${uri}User`, {
       failOnStatusCode: false,
       data: {
         userName: payload.userName,
@@ -71,7 +74,7 @@ export default class UserAPICalls {
   }
 
   async getUser(token: string, userId: string): Promise<ResponseData> {
-    const response = await this.page.request.get(`Account/v1/User/${userId}`, {
+    const response = await this.page.request.get(`${uri}User/${userId}`, {
       failOnStatusCode: false,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -89,17 +92,14 @@ export default class UserAPICalls {
     token: string,
     userId: string
   ): Promise<Omit<ResponseData, "responseBody">> {
-    const response = await this.page.request.delete(
-      `Account/v1/User/${userId}`,
-      {
-        failOnStatusCode: false,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await this.page.request.delete(`${uri}User/${userId}`, {
+      failOnStatusCode: false,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
     return {
       statusCode: response.status(),
       statusMessage: response.statusText(),

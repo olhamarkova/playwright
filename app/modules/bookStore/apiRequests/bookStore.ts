@@ -1,5 +1,8 @@
 import { type Page } from "@playwright/test";
 import { ResponseData } from "./support/types";
+import { EndpointGenerator } from "./support/endpoints";
+
+const uri = EndpointGenerator.forBooks();
 
 export default class BookStoreAPICalls {
   protected page: Page;
@@ -9,7 +12,7 @@ export default class BookStoreAPICalls {
   }
 
   async getBooks(): Promise<ResponseData> {
-    const response = await this.page.request.get("BookStore/v1/Books", {
+    const response = await this.page.request.get(`${uri}Books`, {
       failOnStatusCode: false,
     });
     const body = await response.json();
@@ -21,7 +24,7 @@ export default class BookStoreAPICalls {
   }
 
   async getBookByIsbn(isbn: string): Promise<ResponseData> {
-    const response = await this.page.request.get("BookStore/v1/Book", {
+    const response = await this.page.request.get(`${uri}Book`, {
       failOnStatusCode: false,
       params: { ISBN: isbn },
     });
@@ -38,7 +41,7 @@ export default class BookStoreAPICalls {
     isbn: string,
     token: string
   ): Promise<ResponseData> {
-    const response = await this.page.request.post("BookStore/v1/Books", {
+    const response = await this.page.request.post(`${uri}Books`, {
       failOnStatusCode: false,
       data: {
         userId: userId,
@@ -65,7 +68,7 @@ export default class BookStoreAPICalls {
     token: string
   ): Promise<Omit<ResponseData, "responseBody">> {
     const response = await this.page.request.delete(
-      `BookStore/v1/Books?UserId=${userId}`,
+      `${uri}Books?UserId=${userId}`,
       {
         failOnStatusCode: false,
         headers: {
@@ -84,7 +87,7 @@ export default class BookStoreAPICalls {
     isbn: string,
     token: string
   ): Promise<Omit<ResponseData, "responseBody">> {
-    const response = await this.page.request.delete("BookStore/v1/Book", {
+    const response = await this.page.request.delete(`${uri}Book`, {
       failOnStatusCode: false,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -106,7 +109,7 @@ export default class BookStoreAPICalls {
     newIsbn: string,
     token: string
   ): Promise<ResponseData> {
-    const response = await this.page.request.put(`BookStore/v1/Books/${isbn}`, {
+    const response = await this.page.request.put(`${uri}Books/${isbn}`, {
       failOnStatusCode: false,
       headers: {
         Authorization: `Bearer ${token}`,
