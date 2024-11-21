@@ -71,6 +71,9 @@ export const pageUrls = {
       dynamicProperties: "dynamic-properties",
     },
     practiceForm: "automation-practice-form",
+    alertsAndFrames: {
+      windows: "browser-windows",
+    },
     books: {
       bookStoreApi: "swagger/",
     },

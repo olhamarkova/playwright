@@ -12,6 +12,7 @@ import { RadioButtonPage } from "../app/modules/elementsPages/pages/RadioButtonP
 import { TextBoxPage } from "../app/modules/elementsPages/pages/TextBoxPage";
 import { UploadPage } from "../app/modules/elementsPages/pages/UploadPage";
 import { PracticeFormPage } from "../app/modules/form/PracticeFormPage";
+import { WindowsPage } from "../app/modules/alertsAndFrames/WindowsPage";
 
 type Pages = {
   mainPage: MainPage;
@@ -26,6 +27,7 @@ type Pages = {
   textBoxPage: TextBoxPage;
   uploadPage: UploadPage;
   formPage: PracticeFormPage;
+  windowsPage: WindowsPage;
 };
 
 export const test = base.extend<Pages>({
@@ -83,6 +85,11 @@ export const test = base.extend<Pages>({
   async formPage({ page }, use) {
     return await use(
       new PracticeFormPage(page, pageUrls.subCategories.practiceForm)
+    );
+  },
+  async windowsPage({ page }, use) {
+    return await use(
+      new WindowsPage(page, pageUrls.subCategories.alertsAndFrames.windows)
     );
   },
 });
