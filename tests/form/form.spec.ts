@@ -1,26 +1,21 @@
-import { test } from "@playwright/test";
-import { subCategoriesUrls } from "../../modules/core/support/data.ts";
-import { elementPagesHeadings as headings } from "../../modules/elementsPages/support/data.ts";
-import { PracticeFormPage } from "../../modules/form/PracticeFormPage.ts";
+import { test } from "../../fixtures/pagesFixture.ts";
+import { elementPagesHeadings as headings } from "../../app/modules/elementsPages/support/data.ts";
 import {
   formTitle,
   pickedDate,
   resultsModalTitle,
   studentData,
   studentInfo,
-} from "../../modules/form/support/data.ts";
-import { Genders, Hobbies } from "../../modules/form/support/types.ts";
-import { Month } from "../../uiElements/support/types/DatepickerTypes.ts";
-
-let formPage: PracticeFormPage;
-
-test.beforeEach(async ({ page }) => {
-  formPage = new PracticeFormPage(page, subCategoriesUrls.practiceForm);
-  await formPage.visit();
-});
+} from "../../app/modules/form/support/data.ts";
+import { Genders, Hobbies } from "../../app/modules/form/support/types.ts";
+import { Month } from "../../app/components/support/types/DatepickerTypes.ts";
 
 test.describe("Practice Form Tests", () => {
-  test("@smoke The Form Should Be Visible", async () => {
+  test.beforeEach(async ({ formPage }) => {
+    await formPage.visit();
+  });
+
+  test("@smoke The Form Should Be Visible", async ({ formPage }) => {
     await test.step("Step 1: Check The Page Heading", async () => {
       await formPage.heading.hasText(formPage.pageTitle("h1"), headings.form);
     });
@@ -30,7 +25,9 @@ test.describe("Practice Form Tests", () => {
     });
   });
 
-  test("@functional A User Should Be Able To Fill The Form", async () => {
+  test("@functional A User Should Be Able To Fill The Form", async ({
+    formPage,
+  }) => {
     await test.step("Step 1: Fill The Name", async () => {
       await formPage.form.input.fillOut(
         formPage.formInputs("firstName"),

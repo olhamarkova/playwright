@@ -1,58 +1,54 @@
-import { test } from "@playwright/test";
-import { sidebarItems } from "../../modules/mainPage/support/categories.ts";
-import { ElementsPage } from "../../modules/elementsPages/pages/ElementsPage.ts";
-import {
-  categoryUrls,
-  subCategoriesUrls,
-} from "../../modules/core/support/data.ts";
-
-let elements: ElementsPage;
-
-test.beforeEach(async ({ page }) => {
-  elements = new ElementsPage(page, categoryUrls.elements);
-  await elements.visit();
-});
+import { test } from "../../fixtures/pagesFixture.ts";
+import { sidebarItems, pageUrls } from "../../app/modules/core/support/data.ts";
 
 test.describe("Left Panel(Sidebar) Tests", () => {
-  test("@smoke The Sidebar Should Contain All The Expected Items", async () => {
+  test.beforeEach(async ({ elementsPage }) => {
+    await elementsPage.visit();
+  });
+
+  test("@smoke The Sidebar Should Contain All The Expected Items", async ({
+    elementsPage,
+  }) => {
     await test.step("Step 1: Check Elements Subcategories", async () => {
-      await elements.navbar.validateMenuItems(sidebarItems.elements);
+      await elementsPage.navbar.validateMenuItems(sidebarItems.elements);
     });
 
     await test.step("Step 2: Check Forms Subcategories", async () => {
-      await elements.navbar.clickElement(elements.navbar.getMenuItem("Forms"));
-      await elements.navbar.validateMenuItems(sidebarItems.forms);
+      await elementsPage.navbar.clickElement(
+        elementsPage.navbar.getMenuItem("Forms")
+      );
+      await elementsPage.navbar.validateMenuItems(sidebarItems.forms);
     });
 
     await test.step("Step 3: Check Alert, Frame & Windows Subcategories", async () => {
-      await elements.navbar.clickElement(
-        elements.navbar.getMenuItem("Alerts, Frame & Windows")
+      await elementsPage.navbar.clickElement(
+        elementsPage.navbar.getMenuItem("Alerts, Frame & Windows")
       );
-      await elements.navbar.validateMenuItems(sidebarItems.alerts);
+      await elementsPage.navbar.validateMenuItems(sidebarItems.alerts);
     });
 
     await test.step("Step 4: Check Widgets Subcategories", async () => {
-      await elements.navbar.clickElement(
-        elements.navbar.getMenuItem("Widgets")
+      await elementsPage.navbar.clickElement(
+        elementsPage.navbar.getMenuItem("Widgets")
       );
-      await elements.navbar.validateMenuItems(sidebarItems.widgets);
+      await elementsPage.navbar.validateMenuItems(sidebarItems.widgets);
     });
 
     await test.step("Step 5: Check Interactions Subcategories", async () => {
-      await elements.navbar.clickElement(
-        elements.navbar.getMenuItem("Interactions")
+      await elementsPage.navbar.clickElement(
+        elementsPage.navbar.getMenuItem("Interactions")
       );
-      await elements.navbar.validateMenuItems(sidebarItems.interactions);
+      await elementsPage.navbar.validateMenuItems(sidebarItems.interactions);
     });
 
     await test.step("Step 6: Check Book Store Application Subcategories", async () => {
-      await elements.navbar.clickElement(
-        elements.navbar.getMenuItem("Book Store Application")
+      await elementsPage.navbar.clickElement(
+        elementsPage.navbar.getMenuItem("Book Store Application")
       );
-      await elements.navbar.validateMenuItems(
+      await elementsPage.navbar.validateMenuItems(
         sidebarItems.bookStoreApplication
       );
-      await elements.hasUrl(subCategoriesUrls.books.bookStoreApi);
+      await elementsPage.hasUrl(pageUrls.subCategories.books.bookStoreApi);
     });
   });
 });
