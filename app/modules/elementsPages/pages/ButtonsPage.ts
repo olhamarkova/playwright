@@ -15,9 +15,9 @@ export class ButtonsPage extends BasePage {
     this.button = new Button(this.page);
     this.textMessage = new Text(this.page);
     this.buttons = this.button.getLocator("button.btn-primary");
-    this.dbClickButton = this.button.getButton("Double Click Me");
-    this.rightClickButton = this.button.getButton("Right Click Me");
-    this.clickMeButton = this.button.getButton("Click Me");
+    this.dbClickButton = this.button.getByName("Double Click Me");
+    this.rightClickButton = this.button.getByName("Right Click Me");
+    this.clickMeButton = this.button.getByName("Click Me");
   }
 
   successMsg(text: string): Locator {

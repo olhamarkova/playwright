@@ -1,4 +1,4 @@
-import { type Page, BrowserContext, Locator, expect } from "@playwright/test";
+import { type Page, Locator, expect } from "@playwright/test";
 import { responseStatuses } from "../../elementsPages/support/data";
 import BasePage from "../../core/BasePage";
 import { Link } from "../../../components/support/uiService";

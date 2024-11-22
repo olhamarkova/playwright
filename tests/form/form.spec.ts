@@ -159,9 +159,7 @@ test.describe("Practice Form Tests", () => {
     });
 
     await test.step("Step 11: Submit The Form", async () => {
-      await formPage.form.button.clickElement(
-        formPage.form.button.getSubmitButton()
-      );
+      await formPage.form.button.clickElement(formPage.submitBtn);
       await formPage.resultsModal.title.hasText(
         formPage.resultsModalHeading,
         resultsModalTitle

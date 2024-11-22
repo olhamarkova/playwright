@@ -8,12 +8,12 @@ export class Button extends UiElement implements Clickable {
     super(page);
   }
 
-  getButton(name: string): Locator {
+  getByName(name: string): Locator {
     return this.page.getByRole("button", { name: name, exact: true });
   }
 
-  getSubmitButton(): Locator {
-    return this.page.locator("button[type='submit']");
+  getByType(type: "submit" | "button"): Locator {
+    return this.page.locator(`button[type="${type}"]`);
   }
 
   async hasText(

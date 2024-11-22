@@ -34,10 +34,10 @@ export class WebTablesPage extends BasePage {
     this.text = new Text(this.page);
 
     this.rows = this.table.getRows();
-    this.addNewRecordButton = this.button.getButton("Add");
+    this.addNewRecordButton = this.button.getByName("Add");
     this.searchField = this.input.getByPlaceholder("Type to search");
-    this.previousButton = this.button.getButton("Previous");
-    this.nextButton = this.button.getButton("Next");
+    this.previousButton = this.button.getByName("Previous");
+    this.nextButton = this.button.getByName("Next");
     this.rowsSelector = this.selector.getByAriaLabel("rows per page");
   }
 

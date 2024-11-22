@@ -53,11 +53,20 @@ export default class BasePage {
     await expect(this.page).toHaveTitle(titleText);
   }
 
-  async openNewTab(context: BrowserContext, element: Locator): Promise<void> {
+  async openNewTab(context: BrowserContext, element: Locator): Promise<Page> {
     const pagePromise = context.waitForEvent("page");
     await element.click();
     const newPage = await pagePromise;
     await newPage.waitForLoadState();
+    return newPage;
+  }
+
+  async openPopup(element: Locator) {
+    const popup = this.page.waitForEvent("popup");
+    await element.click();
+    const newPopup = await popup;
+    await newPopup.waitForLoadState();
+    return newPopup;
   }
 
   async wait(time: number) {

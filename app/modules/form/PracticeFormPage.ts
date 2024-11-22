@@ -29,6 +29,7 @@ export class PracticeFormPage extends BasePage {
   readonly subjectInput: Locator;
   readonly subjectLabel: Locator;
   readonly resultsModalHeading: Locator;
+  readonly submitBtn: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
@@ -53,6 +54,7 @@ export class PracticeFormPage extends BasePage {
     this.resultsModalHeading = this.resultsModal.getById(
       "example-modal-sizes-title-lg"
     );
+    this.submitBtn = this.form.button.getByType("submit");
   }
 
   formInputs(inputId: FormInputIds): Locator {

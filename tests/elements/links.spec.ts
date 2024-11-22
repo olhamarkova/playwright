@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/pagesFixture.ts";
+import { test, expect } from "../../fixtures/pagesFixture.ts";
 import { title } from "../../app/modules/core/support/data.ts";
 import {
   elementPagesHeadings as headings,
@@ -38,14 +38,20 @@ test.describe("Links Page Tests", () => {
     linksPage,
   }) => {
     await test.step("Step 1: Validate 'Home' Link", async () => {
-      await linksPage.openNewTab(context, linksPage.link.getByName("Home"));
-      await linksPage.hasTitle(title.mainTitle);
+      const newPage = await linksPage.openNewTab(
+        context,
+        linksPage.link.getByName("Home")
+      );
+      await expect(newPage).toHaveTitle(title.mainTitle);
       await linksPage.bringToFront();
     });
 
     await test.step("Step 2: Validate 'Home' Dynamic Link", async () => {
-      await linksPage.openNewTab(context, linksPage.dynamicLink);
-      await linksPage.hasTitle(title.mainTitle);
+      const newPage = await linksPage.openNewTab(
+        context,
+        linksPage.dynamicLink
+      );
+      await expect(newPage).toHaveTitle(title.mainTitle);
       await linksPage.bringToFront();
     });
 

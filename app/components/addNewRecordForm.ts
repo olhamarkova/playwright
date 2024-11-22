@@ -15,7 +15,7 @@ export default class AddNewRecordForm extends Form {
     this.modal = new Modal(this.page);
 
     this.modalTitle = this.modal.getById("registration-form-modal");
-    this.submitButton = this.button.getButton("Submit");
+    this.submitButton = this.button.getByName("Submit");
   }
 
   formInput(id: AddRecordInputs | string): Locator {

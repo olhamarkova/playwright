@@ -14,7 +14,7 @@ export class WindowsPage extends BasePage {
     this.button = new Button(this.page);
 
     this.newTabButton = this.button.getById("tabButton");
-    this.newWindowButton = this.button.getById("windowButtonWrapper");
-    this.newWindowMsgButton = this.button.getById("msgWindowButtonWrapper");
+    this.newWindowButton = this.button.getById("windowButton");
+    this.newWindowMsgButton = this.button.getById("messageWindowButton");
   }
 }
