@@ -34,7 +34,7 @@ test.describe.serial("New Tabs And Windows", async () => {
       context,
       windowsPage.newTabButton
     );
-    await expect(newPage.locator("h1")).toHaveText("This is a sample page");
+    await expect(newPage.locator("h1")).toHaveText(newWindowsContent.title);
     await newPage.close();
   });
 
@@ -42,7 +42,7 @@ test.describe.serial("New Tabs And Windows", async () => {
     windowsPage,
   }) => {
     const childPage = await windowsPage.openPopup(windowsPage.newWindowButton);
-    await expect(childPage.locator("h1")).toHaveText("This is a sample page");
+    await expect(childPage.locator("h1")).toHaveText(newWindowsContent.title);
     await childPage.close();
   });
 

@@ -13,6 +13,7 @@ import { TextBoxPage } from "../app/modules/elementsPages/pages/TextBoxPage";
 import { UploadPage } from "../app/modules/elementsPages/pages/UploadPage";
 import { PracticeFormPage } from "../app/modules/form/PracticeFormPage";
 import { WindowsPage } from "../app/modules/alertsAndFrames/WindowsPage";
+import { AlertsPage } from "../app/modules/alertsAndFrames/AlertsPage";
 
 type Pages = {
   mainPage: MainPage;
@@ -28,6 +29,7 @@ type Pages = {
   uploadPage: UploadPage;
   formPage: PracticeFormPage;
   windowsPage: WindowsPage;
+  alertsPage: AlertsPage;
 };
 
 export const test = base.extend<Pages>({
@@ -90,6 +92,11 @@ export const test = base.extend<Pages>({
   async windowsPage({ page }, use) {
     return await use(
       new WindowsPage(page, pageUrls.subCategories.alertsAndFrames.windows)
+    );
+  },
+  async alertsPage({ page }, use) {
+    return await use(
+      new AlertsPage(page, pageUrls.subCategories.alertsAndFrames.alerts)
     );
   },
 });

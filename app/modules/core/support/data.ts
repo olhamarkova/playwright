@@ -73,6 +73,7 @@ export const pageUrls = {
     practiceForm: "automation-practice-form",
     alertsAndFrames: {
       windows: "browser-windows",
+      alerts: "alerts",
     },
     books: {
       bookStoreApi: "swagger/",

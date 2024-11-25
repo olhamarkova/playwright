@@ -69,6 +69,21 @@ export default class BasePage {
     return newPopup;
   }
 
+  async confirmAlert(
+    dialogMessage: string,
+    confirm: boolean = true
+  ): Promise<void> {
+    this.page.on("dialog", async (dialog) => {
+      console.log(dialog.message);
+      expect(dialog.message()).toBe(dialogMessage);
+      if (confirm) {
+        await dialog.accept();
+      } else {
+        await dialog.dismiss();
+      }
+    });
+  }
+
   async wait(time: number) {
     await this.page.waitForTimeout(time);
   }
