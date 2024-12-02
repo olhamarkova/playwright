@@ -15,7 +15,10 @@ export const alertMessages = {
   alert: "You clicked a button",
   delayedAlert: "This alert appeared after 5 seconds",
   confirmAlert: "Do you confirm action?",
+  prompt: "Please enter your name",
 };
 
-export const resultMessage = (response: "Cancel" | "OK"): string =>
-  `You selected ${response}`;
+export const resultMessage = {
+  confirm: (response: "Cancel" | "OK"): string => `You selected ${response}`,
+  prompt: "You entered something",
+};

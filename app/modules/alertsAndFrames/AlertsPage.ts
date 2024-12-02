@@ -7,7 +7,6 @@ export class AlertsPage extends BasePage {
   readonly text: Text;
 
   readonly buttons: Locator;
-  readonly confirmationMsg: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
@@ -15,7 +14,6 @@ export class AlertsPage extends BasePage {
     this.text = new Text(this.page);
 
     this.buttons = this.button.getByName("Click me");
-    this.confirmationMsg = this.text.getById("confirmResult");
   }
 
   clickMeButton(
@@ -35,5 +33,19 @@ export class AlertsPage extends BasePage {
     ]);
     expect(dialog.message()).toBe(msg);
     await dialog.accept();
+  }
+
+  async confirmPromptBox(
+    dialogMessage: string,
+    confirm: boolean = true
+  ): Promise<void> {
+    this.page.on("dialog", async (dialog) => {
+      expect(dialog.message()).toBe(dialogMessage);
+      if (confirm) {
+        await dialog.accept("something");
+      } else {
+        await dialog.dismiss();
+      }
+    });
   }
 }

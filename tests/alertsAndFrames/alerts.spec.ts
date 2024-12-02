@@ -42,8 +42,19 @@ test.describe.serial("Handling Alerts", async () => {
     await alertsPage.confirmAlert(alertMessages.confirmAlert, false);
     await alertsPage.button.clickElement(alertsPage.clickMeButton("confirm"));
     await alertsPage.text.hasText(
-      alertsPage.confirmationMsg,
-      resultMessage("Cancel")
+      alertsPage.resultMsg("confirmResult"),
+      resultMessage.confirm("Cancel")
+    );
+  });
+
+  test("@functional User Shall Be Able To See A Prompt Box", async ({
+    alertsPage,
+  }) => {
+    await alertsPage.confirmPromptBox(alertMessages.prompt);
+    await alertsPage.button.clickElement(alertsPage.clickMeButton("promt"));
+    await alertsPage.text.hasText(
+      alertsPage.resultMsg("promptResult"),
+      resultMessage.prompt
     );
   });
 });
