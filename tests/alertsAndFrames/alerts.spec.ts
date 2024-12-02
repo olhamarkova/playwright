@@ -1,5 +1,6 @@
 import { pageTitles } from "../../app/modules/alertsAndFrames/support/data";
 import { test, expect } from "../../fixtures/pagesFixture";
+import { ai } from "@zerostep/playwright";
 
 test.describe.serial("Handling Alerts", async () => {
   test.beforeEach(async ({ alertsPage }) => {
@@ -37,14 +38,12 @@ test.describe.serial("Handling Alerts", async () => {
     await alertsPage.confirmDelayedAlert("This alert appeared after 5 seconds");
   });
 
-  // test("@functional The Button 'New Window Message' Should Open New Window With A Message", async ({
-  //   windowsPage,
-  // }) => {
-  //   const windowMsg = await windowsPage.openPopup(
-  //     windowsPage.newWindowMsgButton
-  //   );
-  //   await expect(windowMsg.locator("body")).toContainText(
-  //     newWindowsContent.message
-  //   );
-  // });
+  test("@functional The Button 'New Window Message' Should Open New Window With A Message", async ({
+    page,
+  }) => {
+    const aiArgs = { page, test };
+    const buttonsCount = await ai("How many buttons are on the page", aiArgs);
+    console.log(`There are ${buttonsCount} buttons`);
+    expect(buttonsCount).toEqual("4");
+  });
 });

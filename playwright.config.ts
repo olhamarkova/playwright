@@ -12,7 +12,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   //retries: process.env.CI ? 2 : 0,
-  retries: 2,
+  //retries: 2,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -23,7 +23,7 @@ export default defineConfig({
     baseURL: process.env.URL!,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "off",
+    trace: "on",
     screenshot: "only-on-failure",
   },
 
