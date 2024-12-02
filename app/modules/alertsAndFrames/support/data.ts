@@ -9,3 +9,13 @@ export const newWindowsContent = {
   message:
     "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.",
 };
+
+//Alerts page
+export const alertMessages = {
+  alert: "You clicked a button",
+  delayedAlert: "This alert appeared after 5 seconds",
+  confirmAlert: "Do you confirm action?",
+};
+
+export const resultMessage = (response: "Cancel" | "OK"): string =>
+  `You selected ${response}`;

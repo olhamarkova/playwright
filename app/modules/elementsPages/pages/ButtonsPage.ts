@@ -14,6 +14,7 @@ export class ButtonsPage extends BasePage {
     super(page, url);
     this.button = new Button(this.page);
     this.textMessage = new Text(this.page);
+
     this.buttons = this.button.getLocator("button.btn-primary");
     this.dbClickButton = this.button.getByName("Double Click Me");
     this.rightClickButton = this.button.getByName("Right Click Me");

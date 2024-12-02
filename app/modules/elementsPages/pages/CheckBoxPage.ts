@@ -6,11 +6,14 @@ import { CheckboxLabels } from "../../elementsPages/support/types";
 export class CheckBoxPage extends BasePage {
   readonly button: Button;
   readonly checkbox: Checkbox;
+  readonly checkboxes: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
     this.button = new Button(this.page);
     this.checkbox = new Checkbox(this.page);
+
+    this.checkboxes = this.checkbox.getByType();
   }
 
   expandButton(buttonName: "Expand" | "Collapse"): Locator {

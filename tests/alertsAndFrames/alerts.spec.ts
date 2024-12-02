@@ -1,6 +1,9 @@
-import { pageTitles } from "../../app/modules/alertsAndFrames/support/data";
-import { test, expect } from "../../fixtures/pagesFixture";
-import { ai } from "@zerostep/playwright";
+import {
+  alertMessages,
+  pageTitles,
+  resultMessage,
+} from "../../app/modules/alertsAndFrames/support/data";
+import { test } from "../../fixtures/pagesFixture";
 
 test.describe.serial("Handling Alerts", async () => {
   test.beforeEach(async ({ alertsPage }) => {
@@ -18,32 +21,29 @@ test.describe.serial("Handling Alerts", async () => {
     });
 
     test.step("Step 2: All Buttons Should Be Visible", async () => {
-      await alertsPage.button.hasCount(
-        alertsPage.button.getByName("Click me"),
-        4
-      );
+      await alertsPage.button.hasCount(alertsPage.buttons, 4);
     });
   });
 
   test("@functional User Shall Be Able To Handle An Alert", async ({
     alertsPage,
   }) => {
-    await alertsPage.confirmAlert("You clicked a button");
+    await alertsPage.confirmAlert(alertMessages.alert);
     await alertsPage.button.clickElement(alertsPage.clickMeButton("alert"));
   });
 
-  test("@functional The Button 'New Window' Should Open New Window", async ({
+  test("@functional User Shall See An Alert In 5 Seconds", async ({
     alertsPage,
   }) => {
-    await alertsPage.confirmDelayedAlert("This alert appeared after 5 seconds");
+    await alertsPage.confirmDelayedAlert(alertMessages.delayedAlert);
   });
 
-  test("@functional The Button 'New Window Message' Should Open New Window With A Message", async ({
-    page,
-  }) => {
-    const aiArgs = { page, test };
-    const buttonsCount = await ai("How many buttons are on the page", aiArgs);
-    console.log(`There are ${buttonsCount} buttons`);
-    expect(buttonsCount).toEqual("4");
+  test("@functional User Shall Cancel An Alert", async ({ alertsPage }) => {
+    await alertsPage.confirmAlert(alertMessages.confirmAlert, false);
+    await alertsPage.button.clickElement(alertsPage.clickMeButton("confirm"));
+    await alertsPage.text.hasText(
+      alertsPage.confirmationMsg,
+      resultMessage("Cancel")
+    );
   });
 });

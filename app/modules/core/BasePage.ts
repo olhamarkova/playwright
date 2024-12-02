@@ -10,6 +10,8 @@ import {
   Footer,
   Heading,
 } from "../../components/support/uiService.ts";
+import { Headings } from "./support/types.ts";
+import { GetLocatorOptions } from "../../components/support/types/OptionsTypes.ts";
 
 export default class BasePage {
   protected page: Page;
@@ -30,10 +32,7 @@ export default class BasePage {
     this.navbar = new Navbar(this.page);
   }
 
-  pageTitle(
-    heading: "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
-    options?: {}
-  ): Locator {
+  pageTitle(heading: Headings, options?: GetLocatorOptions): Locator {
     return this.heading.getHeading(heading, options);
   }
 
@@ -74,7 +73,6 @@ export default class BasePage {
     confirm: boolean = true
   ): Promise<void> {
     this.page.on("dialog", async (dialog) => {
-      console.log(dialog.message);
       expect(dialog.message()).toBe(dialogMessage);
       if (confirm) {
         await dialog.accept();

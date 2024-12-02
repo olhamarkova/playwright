@@ -12,6 +12,7 @@ export class LinksPage extends BasePage {
   constructor(page: Page, url: string) {
     super(page, url);
     this.link = new Link(this.page);
+
     this.links = this.link.getLocator("p a");
     this.subHeadings = this.heading.getHeading("h5");
     this.dynamicLink = this.link.getByName("Home", false).nth(1);

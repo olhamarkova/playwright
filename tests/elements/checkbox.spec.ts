@@ -29,10 +29,7 @@ test.describe("Checkbox Page Tests", () => {
     });
 
     await test.step("Step 3: Check The Categories List", async () => {
-      await checkboxPage.checkbox.hasCount(
-        checkboxPage.checkbox.getByType(),
-        1
-      );
+      await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes, 1);
       await checkboxPage.checkbox.isElementVisible(
         checkboxPage.checkboxLabel(CheckboxLabels.Home)
       );
@@ -50,10 +47,7 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.button.clickElement(
         checkboxPage.expandButton("Expand")
       );
-      await checkboxPage.checkbox.hasCount(
-        checkboxPage.checkbox.getByType(),
-        17
-      );
+      await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes, 17);
       await checkboxPage.validateAllCheckboxes();
     });
 
@@ -61,10 +55,7 @@ test.describe("Checkbox Page Tests", () => {
       await checkboxPage.button.clickElement(
         checkboxPage.expandButton("Collapse")
       );
-      await checkboxPage.checkbox.hasCount(
-        checkboxPage.checkbox.getByType(),
-        1
-      );
+      await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes, 1);
       await checkboxPage.checkbox.isElementVisible(
         checkboxPage.getCheckbox(CheckboxLabels.Home)
       );

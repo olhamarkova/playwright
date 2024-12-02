@@ -6,10 +6,16 @@ export class AlertsPage extends BasePage {
   readonly button: Button;
   readonly text: Text;
 
+  readonly buttons: Locator;
+  readonly confirmationMsg: Locator;
+
   constructor(page: Page, url: string) {
     super(page, url);
     this.button = new Button(this.page);
     this.text = new Text(this.page);
+
+    this.buttons = this.button.getByName("Click me");
+    this.confirmationMsg = this.text.getById("confirmResult");
   }
 
   clickMeButton(
