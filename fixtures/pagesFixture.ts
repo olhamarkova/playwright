@@ -14,6 +14,7 @@ import { UploadPage } from "../app/modules/elementsPages/pages/UploadPage";
 import { PracticeFormPage } from "../app/modules/form/PracticeFormPage";
 import { WindowsPage } from "../app/modules/alertsAndFrames/WindowsPage";
 import { AlertsPage } from "../app/modules/alertsAndFrames/AlertsPage";
+import { FramesPage } from "../app/modules/alertsAndFrames/FramesPage";
 
 type Pages = {
   mainPage: MainPage;
@@ -30,6 +31,7 @@ type Pages = {
   formPage: PracticeFormPage;
   windowsPage: WindowsPage;
   alertsPage: AlertsPage;
+  framesPage: FramesPage;
 };
 
 export const test = base.extend<Pages>({
@@ -97,6 +99,11 @@ export const test = base.extend<Pages>({
   async alertsPage({ page }, use) {
     return await use(
       new AlertsPage(page, pageUrls.subCategories.alertsAndFrames.alerts)
+    );
+  },
+  async framesPage({ page }, use) {
+    return await use(
+      new FramesPage(page, pageUrls.subCategories.alertsAndFrames.frames)
     );
   },
 });

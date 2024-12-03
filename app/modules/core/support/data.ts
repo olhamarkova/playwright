@@ -74,6 +74,7 @@ export const pageUrls = {
     alertsAndFrames: {
       windows: "browser-windows",
       alerts: "alerts",
+      frames: "frames",
     },
     books: {
       bookStoreApi: "swagger/",

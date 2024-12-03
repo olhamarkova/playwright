@@ -1,6 +1,7 @@
 export const pageTitles = {
   windows: "Browser Windows",
   alerts: "Alerts",
+  frames: "Frames",
 };
 
 //Windows Page
