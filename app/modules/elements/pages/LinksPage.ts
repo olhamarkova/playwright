@@ -36,9 +36,9 @@ export class LinksPage extends BasePage {
         responseName = responses.get(status) as string;
       }
       if (status === 301) {
-        await this.link.clickElement(this.link.getByName("Moved"));
+        await this.link.click(this.link.getByName("Moved"));
       } else {
-        await this.link.clickElement(this.link.getByName(responseName!));
+        await this.link.click(this.link.getByName(responseName!));
       }
       const resp = await responsePromise;
       expect(resp.status()).toBe(status);
