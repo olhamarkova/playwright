@@ -1,6 +1,6 @@
-import { test } from "../../fixtures/pagesFixture.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
 import { title } from "../../app/modules/core/support/data.ts";
-import { callToAction } from "../../app/modules/elementsPages/support/data.ts";
+import { callToAction } from "../../app/modules/elements/support/data.ts";
 
 test.describe("Elements Page Tests", () => {
   test.beforeEach(async ({ elementsPage }) => {
@@ -15,7 +15,7 @@ test.describe("Elements Page Tests", () => {
     });
 
     await test.step("Step 2: The Page Should Have Call To Action", async () => {
-      await elementsPage.text.isElementVisible(
+      await elementsPage.text.isVisible(
         elementsPage.text.getByText(callToAction)
       );
     });

@@ -1,9 +1,9 @@
-import { test, expect } from "../../fixtures/pagesFixture.ts";
+import { test, expect } from "../../fixtures/pages-fixture.ts";
 import {
   columnHeaders,
   recordData,
-} from "../../app/modules/elementsPages/support/data.ts";
-import { AddRecordInputs } from "../../app/modules/elementsPages/support/types.ts";
+} from "../../app/modules/elements/support/data.ts";
+import { AddRecordInputs } from "../../app/modules/elements/support/types.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Web Table Page Tests", () => {
@@ -16,17 +16,17 @@ test.describe("Web Table Page Tests", () => {
   }) => {
     await test.step("Step 1: Check The Page Heading", async () => {
       await tablePage.heading.hasText(
-        tablePage.pageTitle("h1"),
+        tablePage.mainHeading(),
         headings.webTables
       );
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
-      await tablePage.table.isElementVisible(tablePage.addNewRecordButton);
-      await tablePage.table.isElementVisible(tablePage.searchField);
-      await tablePage.table.isElementVisible(tablePage.rowsSelector);
-      await tablePage.button.isElementEnabled(tablePage.previousButton, false);
-      await tablePage.button.isElementEnabled(tablePage.nextButton, false);
+      await tablePage.table.isVisible(tablePage.addNewRecordButton);
+      await tablePage.table.isVisible(tablePage.searchField);
+      await tablePage.table.isVisible(tablePage.rowsSelector);
+      await tablePage.button.isEnabled(tablePage.previousButton, false);
+      await tablePage.button.isEnabled(tablePage.nextButton, false);
     });
 
     await test.step("Step 3: Check The Table", async () => {
@@ -39,7 +39,7 @@ test.describe("Web Table Page Tests", () => {
     tablePage,
   }) => {
     await test.step("Step 1: Open The Form", async () => {
-      await tablePage.button.clickElement(tablePage.addNewRecordButton);
+      await tablePage.button.click(tablePage.addNewRecordButton);
       await tablePage.addNewRecord.heading.hasText(
         tablePage.addNewRecord.modalTitle,
         "Registration Form"
@@ -51,13 +51,13 @@ test.describe("Web Table Page Tests", () => {
     });
 
     await test.step("Step 3: Submit The Form", async () => {
-      await tablePage.button.clickElement(tablePage.addNewRecord.submitButton);
-      await tablePage.validateCellContent(5, 1, recordData.firstName);
-      await tablePage.validateCellContent(5, 2, recordData.lastName);
-      await tablePage.validateCellContent(5, 3, recordData.age);
-      await tablePage.validateCellContent(5, 4, recordData.userEmail);
-      await tablePage.validateCellContent(5, 5, recordData.salary);
-      await tablePage.validateCellContent(5, 6, recordData.department);
+      await tablePage.button.click(tablePage.addNewRecord.submitButton);
+      await tablePage.validateCell(5, 1, recordData.firstName);
+      await tablePage.validateCell(5, 2, recordData.lastName);
+      await tablePage.validateCell(5, 3, recordData.age);
+      await tablePage.validateCell(5, 4, recordData.userEmail);
+      await tablePage.validateCell(5, 5, recordData.salary);
+      await tablePage.validateCell(5, 6, recordData.department);
     });
   });
 
@@ -79,8 +79,8 @@ test.describe("Web Table Page Tests", () => {
     tablePage,
   }) => {
     await test.step("Step 1: Open The form", async () => {
-      await tablePage.validateCellContent(2, 5, "10000");
-      await tablePage.button.clickElement(tablePage.actionButton("edit", 1));
+      await tablePage.validateCell(2, 5, "10000");
+      await tablePage.button.click(tablePage.actionButton("edit", 1));
       await tablePage.addNewRecord.input.hasValue(
         tablePage.addNewRecord.formInput(AddRecordInputs.Salary),
         "10000"
@@ -102,10 +102,10 @@ test.describe("Web Table Page Tests", () => {
     });
 
     await test.step("Step 3: Submit The Form", async () => {
-      await tablePage.addNewRecord.button.clickElement(
+      await tablePage.addNewRecord.button.click(
         tablePage.addNewRecord.submitButton
       );
-      await tablePage.validateCellContent(2, 5, "20000");
+      await tablePage.validateCell(2, 5, "20000");
     });
   });
 
@@ -113,8 +113,8 @@ test.describe("Web Table Page Tests", () => {
     tablePage,
   }) => {
     await test.step("Step 1: Delete A Record", async () => {
-      await tablePage.button.clickElement(tablePage.actionButton("delete", 3));
-      await tablePage.validateRowContent(4);
+      await tablePage.button.click(tablePage.actionButton("delete", 3));
+      await tablePage.validateRow(4);
     });
   });
 
@@ -125,8 +125,8 @@ test.describe("Web Table Page Tests", () => {
     await test.step("Step 1: Type A Search Value", async () => {
       search = await tablePage.table.getCellByRowNumber(2, 2).textContent();
       await tablePage.input.fillOut(tablePage.searchField, search!);
-      await tablePage.validateCellContent(2, 2, search!);
-      await tablePage.validateRowContent(3);
+      await tablePage.validateCell(2, 2, search!);
+      await tablePage.validateRow(3);
     });
   });
 
@@ -135,9 +135,7 @@ test.describe("Web Table Page Tests", () => {
   }) => {
     let salaries: string[] = [];
     await test.step("Step 1: Sort Data By Salary", async () => {
-      await tablePage.button.clickElement(
-        tablePage.table.getColumnheader("Salary")
-      );
+      await tablePage.button.click(tablePage.table.getColumnheader("Salary"));
       for (let i = 2; i < 5; i++) {
         let salary = await tablePage.table
           .getCellByRowNumber(i, 5)
@@ -155,9 +153,7 @@ test.describe("Web Table Page Tests", () => {
   }) => {
     await test.step("Step 1: Type An Invalid Search Value", async () => {
       await tablePage.input.fillOut(tablePage.searchField, "foo");
-      await tablePage.text.isElementVisible(
-        tablePage.text.getByText("No rows found")
-      );
+      await tablePage.text.isVisible(tablePage.text.getByText("No rows found"));
     });
   });
 });

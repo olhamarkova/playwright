@@ -1,10 +1,10 @@
-import { test, expect } from "../../fixtures/pagesFixture.ts";
+import { test, expect } from "../../fixtures/pages-fixture.ts";
 import { title, headings } from "../../app/modules/core/support/data.ts";
 import {
   linkNames,
   requestLinks,
   subHeadings,
-} from "../../app/modules/elementsPages/support/data.ts";
+} from "../../app/modules/elements/support/data.ts";
 
 test.describe("Links Page Tests", () => {
   test.beforeEach(async ({ linksPage }) => {
@@ -15,10 +15,7 @@ test.describe("Links Page Tests", () => {
     linksPage,
   }) => {
     await test.step("Step 1: Check The Page Headings", async () => {
-      await linksPage.heading.hasText(
-        linksPage.heading.getHeading("h1"),
-        headings.links
-      );
+      await linksPage.heading.hasText(linksPage.mainHeading(), headings.links);
       await linksPage.heading.hasText(
         linksPage.heading.getHeading("h5"),
         subHeadings
@@ -26,8 +23,8 @@ test.describe("Links Page Tests", () => {
     });
 
     await test.step("Step 2: Check The Links", async () => {
-      await linksPage.validateElementsByName(linkNames);
-      await linksPage.link.isElementVisible(linksPage.dynamicLink);
+      await linksPage.validateLinks(linkNames);
+      await linksPage.link.isVisible(linksPage.dynamicLink);
       await linksPage.link.hasCount(linksPage.links, 9);
     });
   });

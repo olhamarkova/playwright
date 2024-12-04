@@ -1,5 +1,5 @@
-import { test } from "../../fixtures/pagesFixture.ts";
-import { questionText } from "../../app/modules/elementsPages/support/data.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
+import { questionText } from "../../app/modules/elements/support/data.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Radio Buttons Page Tests", () => {
@@ -22,12 +22,9 @@ test.describe("Radio Buttons Page Tests", () => {
     });
 
     await test.step("Step 3: Check The Buttons", async () => {
-      await radioPage.radio.areElementsVisible(radioPage.radioButtons);
-      await radioPage.radio.isElementEnabled(
-        radioPage.radioButton("no"),
-        false
-      );
-      await radioPage.validateEnabledRadioBtns();
+      await radioPage.radio.areVisible(radioPage.radioButtons);
+      await radioPage.radio.isEnabled(radioPage.radioButton("no"), false);
+      await radioPage.validateEnabledRadio();
     });
   });
 
@@ -35,12 +32,12 @@ test.describe("Radio Buttons Page Tests", () => {
     radioPage,
   }) => {
     await test.step("Step 1: Choose 'Yes'", async () => {
-      await radioPage.radio.clickElement(radioPage.labelForRadio("Yes"));
+      await radioPage.radio.click(radioPage.labelForRadio("Yes"));
       await radioPage.validateSuccessMessage("Yes");
     });
 
     await test.step("Step 2: Choose 'Impressive'", async () => {
-      await radioPage.radio.clickElement(radioPage.labelForRadio("Impressive"));
+      await radioPage.radio.click(radioPage.labelForRadio("Impressive"));
       await radioPage.validateSuccessMessage("Impressive");
     });
   });

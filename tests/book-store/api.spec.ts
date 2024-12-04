@@ -1,4 +1,4 @@
-import { expect, apiTest } from "../../fixtures/apiFixture.ts";
+import { expect, apiTest } from "../../fixtures/api-fixture.ts";
 import {
   generateRandomPassword,
   generateRandomUsername,

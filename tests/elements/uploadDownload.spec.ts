@@ -1,5 +1,5 @@
-import { test } from "../../fixtures/pagesFixture.ts";
-import { pathToUploadedFile } from "../../app/modules/elementsPages/support/data.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
+import { pathToUploadedFile } from "../../app/modules/elements/support/data.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Upload and Download Page Tests", () => {
@@ -12,7 +12,7 @@ test.describe("Upload and Download Page Tests", () => {
   }) => {
     await test.step("Step 1: Check The Page Headings", async () => {
       await uploadPage.heading.hasText(
-        uploadPage.pageTitle("h1"),
+        uploadPage.mainHeading(),
         headings.upload
       );
       await uploadPage.textBox.hasText(
@@ -22,8 +22,8 @@ test.describe("Upload and Download Page Tests", () => {
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
-      await uploadPage.button.isElementVisible(uploadPage.downloadButton);
-      await uploadPage.button.isElementVisible(uploadPage.uploadButton);
+      await uploadPage.button.isVisible(uploadPage.downloadButton);
+      await uploadPage.button.isVisible(uploadPage.uploadButton);
     });
   });
 

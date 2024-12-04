@@ -1,7 +1,7 @@
-import { test } from "../../fixtures/pagesFixture.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
-import { CheckboxLabels } from "../../app/modules/elementsPages/support/types.ts";
-import { halfCheckedBox } from "../../app/modules/elementsPages/support/classes.ts";
+import { CheckboxLabels } from "../../app/modules/elements/support/types.ts";
+import { halfCheckedBox } from "../../app/modules/elements/support/classes.ts";
 
 test.describe("Checkbox Page Tests", () => {
   test.beforeEach(async ({ checkboxPage }) => {
@@ -13,24 +13,22 @@ test.describe("Checkbox Page Tests", () => {
   }) => {
     await test.step("Step 1: Check The Page Heading", async () => {
       await checkboxPage.heading.hasText(
-        checkboxPage.pageTitle("h1"),
+        checkboxPage.mainHeading(),
         headings.checkbox
       );
     });
 
     await test.step("Step 2: Check The Buttons", async () => {
-      await checkboxPage.button.isElementVisible(
-        checkboxPage.expandButton("Expand")
-      );
-      await checkboxPage.button.isElementVisible(
+      await checkboxPage.button.isVisible(checkboxPage.expandButton("Expand"));
+      await checkboxPage.button.isVisible(
         checkboxPage.expandButton("Collapse")
       );
-      await checkboxPage.button.isElementVisible(checkboxPage.toggleButton(1));
+      await checkboxPage.button.isVisible(checkboxPage.toggleButton(1));
     });
 
     await test.step("Step 3: Check The Categories List", async () => {
       await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes, 1);
-      await checkboxPage.checkbox.isElementVisible(
+      await checkboxPage.checkbox.isVisible(
         checkboxPage.checkboxLabel(CheckboxLabels.Home)
       );
       await checkboxPage.checkbox.isChecked(
@@ -44,19 +42,15 @@ test.describe("Checkbox Page Tests", () => {
     checkboxPage,
   }) => {
     await test.step("Step 1: Expand All Categories", async () => {
-      await checkboxPage.button.clickElement(
-        checkboxPage.expandButton("Expand")
-      );
+      await checkboxPage.button.click(checkboxPage.expandButton("Expand"));
       await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes, 17);
-      await checkboxPage.validateAllCheckboxes();
+      await checkboxPage.validateCheckboxes();
     });
 
     await test.step("Step 2: Collapse All Categories", async () => {
-      await checkboxPage.button.clickElement(
-        checkboxPage.expandButton("Collapse")
-      );
+      await checkboxPage.button.click(checkboxPage.expandButton("Collapse"));
       await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes, 1);
-      await checkboxPage.checkbox.isElementVisible(
+      await checkboxPage.checkbox.isVisible(
         checkboxPage.getCheckbox(CheckboxLabels.Home)
       );
     });
@@ -67,15 +61,13 @@ test.describe("Checkbox Page Tests", () => {
   }) => {
     await test.step("Step 1: Check All Categories", async () => {
       await checkboxPage.check(CheckboxLabels.Home);
-      await checkboxPage.button.clickElement(
-        checkboxPage.expandButton("Expand")
-      );
-      await checkboxPage.validateAllCheckboxes(true);
+      await checkboxPage.button.click(checkboxPage.expandButton("Expand"));
+      await checkboxPage.validateCheckboxes(true);
     });
 
     await test.step("Step 2: Uncheck All Categories", async () => {
       await checkboxPage.check(CheckboxLabels.Home);
-      await checkboxPage.validateAllCheckboxes();
+      await checkboxPage.validateCheckboxes();
     });
   });
 
@@ -83,10 +75,10 @@ test.describe("Checkbox Page Tests", () => {
     checkboxPage,
   }) => {
     await test.step("Step 1: Find The Angular Category", async () => {
-      await checkboxPage.button.clickElement(checkboxPage.toggleButton(1));
-      await checkboxPage.button.clickElement(checkboxPage.toggleButton(3));
-      await checkboxPage.button.clickElement(checkboxPage.toggleButton(4));
-      await checkboxPage.checkbox.isElementVisible(
+      await checkboxPage.button.click(checkboxPage.toggleButton(1));
+      await checkboxPage.button.click(checkboxPage.toggleButton(3));
+      await checkboxPage.button.click(checkboxPage.toggleButton(4));
+      await checkboxPage.checkbox.isVisible(
         checkboxPage.checkboxLabel(CheckboxLabels.Angular)
       );
     });
@@ -116,7 +108,7 @@ test.describe("Checkbox Page Tests", () => {
         checkboxPage.getCheckbox(CheckboxLabels.Angular),
         false
       );
-      await checkboxPage.validateAllCheckboxes();
+      await checkboxPage.validateCheckboxes();
     });
   });
 });

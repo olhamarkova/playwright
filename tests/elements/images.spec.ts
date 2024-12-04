@@ -1,8 +1,8 @@
-import { test } from "../../fixtures/pagesFixture.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
 import {
   linksText,
   subHeadingsText,
-} from "../../app/modules/elementsPages/support/data.ts";
+} from "../../app/modules/elements/support/data.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Images And Links Page Tests", () => {
@@ -15,28 +15,28 @@ test.describe("Images And Links Page Tests", () => {
   }) => {
     await test.step("Step 1: Check The Page Headings", async () => {
       await imagesPage.heading.hasText(
-        imagesPage.pageTitle("h1"),
+        imagesPage.mainHeading(),
         headings.images
       );
       for (let i = 0; i < subHeadingsText.length; i++) {
-        await imagesPage.text.isElementVisible(
+        await imagesPage.text.isVisible(
           imagesPage.text.getByText(subHeadingsText[i])
         );
       }
     });
 
     await test.step("Step 2: Check The Links", async () => {
-      await imagesPage.link.isElementVisible(
+      await imagesPage.link.isVisible(
         imagesPage.link.getByText(linksText.valid)
       );
-      await imagesPage.link.isElementVisible(
+      await imagesPage.link.isVisible(
         imagesPage.link.getByText(linksText.broken)
       );
     });
 
     await test.step("Step 3: Check The Images", async () => {
-      await imagesPage.image.isElementVisible(imagesPage.validImage);
-      await imagesPage.image.isElementVisible(imagesPage.brokenImage); //pass though image is broken
+      await imagesPage.image.isVisible(imagesPage.validImage);
+      await imagesPage.image.isVisible(imagesPage.brokenImage); //pass though image is broken
     });
   });
 

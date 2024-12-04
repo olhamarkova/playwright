@@ -1,8 +1,8 @@
-import { test } from "../../fixtures/pagesFixture.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
 import {
   textBoxPlaceholders,
   userData,
-} from "../../app/modules/elementsPages/support/data.ts";
+} from "../../app/modules/elements/support/data.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Text Box Page Tests", () => {
@@ -15,7 +15,7 @@ test.describe("Text Box Page Tests", () => {
   }) => {
     await test.step("Step 1: Check The Page Heading", async () => {
       await textBoxPage.heading.hasText(
-        textBoxPage.pageTitle("h1"),
+        textBoxPage.mainHeading(),
         headings.textBox
       );
     });
@@ -37,7 +37,7 @@ test.describe("Text Box Page Tests", () => {
         textBoxPlaceholders.currentAddress
       );
       await textBoxPage.input.isEmpty(textBoxPage.permanentAddress);
-      await textBoxPage.textBox.isElementVisible(textBoxPage.submitButton);
+      await textBoxPage.textBox.isVisible(textBoxPage.submitButton);
     });
   });
 
@@ -83,8 +83,8 @@ test.describe("Text Box Page Tests", () => {
     });
 
     await test.step("Step 5: Submit The Form", async () => {
-      await textBoxPage.button.clickElement(textBoxPage.submitButton);
-      await textBoxPage.textBox.isElementVisible(textBoxPage.output);
+      await textBoxPage.button.click(textBoxPage.submitButton);
+      await textBoxPage.textBox.isVisible(textBoxPage.output);
       await textBoxPage.validateUserInfoOutput("name", userData.fullName);
       await textBoxPage.validateUserInfoOutput("email", userData.email);
       await textBoxPage.validateUserInfoOutput(
@@ -134,7 +134,7 @@ test.describe("Text Box Page Tests", () => {
       );
 
       await test.step("Step 2: Submit The Form", async () => {
-        await textBoxPage.button.clickElement(textBoxPage.submitButton);
+        await textBoxPage.button.click(textBoxPage.submitButton);
         await textBoxPage.textBox.hasCSS(
           textBoxPage.emailInput,
           inputBorderCss
