@@ -1,7 +1,6 @@
 import { test, expect } from "../../fixtures/pagesFixture.ts";
-import { title } from "../../app/modules/core/support/data.ts";
+import { title, headings } from "../../app/modules/core/support/data.ts";
 import {
-  elementPagesHeadings as headings,
   linkNames,
   requestLinks,
   subHeadings,

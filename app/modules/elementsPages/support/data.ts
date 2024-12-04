@@ -1,19 +1,6 @@
 export const callToAction =
   "Please select an item from left to start practice.";
 
-export const elementPagesHeadings = {
-  textBox: "Text Box",
-  checkbox: "Check Box",
-  radioButton: "Radio Button",
-  webTables: "Web Tables",
-  buttons: "Buttons",
-  links: "Links",
-  images: "Broken Links - Images",
-  upload: "Upload and Download",
-  dynamic: "Dynamic Properties",
-  form: "Practice Form",
-};
-
 //Text Box
 export const textBoxPlaceholders = {
   fullName: "Full Name",

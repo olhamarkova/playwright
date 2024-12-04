@@ -89,3 +89,21 @@ export const copyRightText = "© 2013-2020 TOOLSQA.COM | ALL RIGHTS RESERVED.";
 export const title = {
   mainTitle: "DEMOQA",
 };
+
+//H1 headings
+export const headings = {
+  textBox: "Text Box",
+  checkbox: "Check Box",
+  radioButton: "Radio Button",
+  webTables: "Web Tables",
+  buttons: "Buttons",
+  links: "Links",
+  images: "Broken Links - Images",
+  upload: "Upload and Download",
+  dynamic: "Dynamic Properties",
+  form: "Practice Form",
+  windows: "Browser Windows",
+  alerts: "Alerts",
+  frames: "Frames",
+  formTitle: "Student Registration Form",
+};

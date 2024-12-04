@@ -1,5 +1,5 @@
 import { test } from "../../fixtures/pagesFixture.ts";
-import { elementPagesHeadings as headings } from "../../app/modules/elementsPages/support/data.ts";
+import { headings } from "../../app/modules/core/support/data.ts";
 import {
   formTitle,
   pickedDate,

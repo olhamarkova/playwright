@@ -1,8 +1,6 @@
 import { test } from "../../fixtures/pagesFixture.ts";
-import {
-  elementPagesHeadings as headings,
-  successMessages,
-} from "../../app/modules/elementsPages/support/data.ts";
+import { successMessages } from "../../app/modules/elementsPages/support/data.ts";
+import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Buttons Page Tests", () => {
   test.beforeEach(async ({ buttonPage }) => {

@@ -1,8 +1,6 @@
 import { test } from "../../fixtures/pagesFixture.ts";
-import {
-  dynamicText,
-  elementPagesHeadings as headings,
-} from "../../app/modules/elementsPages/support/data.ts";
+import { dynamicText } from "../../app/modules/elementsPages/support/data.ts";
+import { headings } from "../../app/modules/core/support/data.ts";
 import { dynamicButtonsColor } from "../../app/modules/elementsPages/support/classes.ts";
 
 test.describe("Dynamic Properties Page Tests", () => {

@@ -1,8 +1,6 @@
 import { test } from "../../fixtures/pagesFixture.ts";
-import {
-  elementPagesHeadings as headings,
-  pathToUploadedFile,
-} from "../../app/modules/elementsPages/support/data.ts";
+import { pathToUploadedFile } from "../../app/modules/elementsPages/support/data.ts";
+import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Upload and Download Page Tests", () => {
   test.beforeEach(async ({ uploadPage }) => {

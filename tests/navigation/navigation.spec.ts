@@ -1,12 +1,13 @@
 import { test } from "../../fixtures/pagesFixture.ts";
 import { sidebarItems, pageUrls } from "../../app/modules/core/support/data.ts";
+import { ElementsMenuSubItems } from "../../app/components/support/types/NavbarTypes.ts";
 
-test.describe("Left Panel(Sidebar) Tests", () => {
+test.describe("Navigation Tests", () => {
   test.beforeEach(async ({ elementsPage }) => {
     await elementsPage.visit();
   });
 
-  test("@smoke The Sidebar Should Contain All The Expected Items", async ({
+  test("@smoke The Navbar Should Contain All The Expected Items", async ({
     elementsPage,
   }) => {
     await test.step("Step 1: Check Elements Subcategories", async () => {
@@ -50,5 +51,25 @@ test.describe("Left Panel(Sidebar) Tests", () => {
       );
       await elementsPage.hasUrl(pageUrls.subCategories.books.bookStoreApi);
     });
+  });
+
+  test("@smoke Navbar Subitems Should Lead To Corresponding Pages", async ({
+    elementsPage,
+  }) => {
+    const url = Object.values(pageUrls.subCategories.elements);
+    let step = 1;
+
+    for (let i = 0; i < url.length; i++) {
+      await test.step(`Step ${step}: Check The Page ${sidebarItems.elements[i]} Link`, async () => {
+        await elementsPage.navbar.clickElement(
+          elementsPage.navbar.menuSubItem(
+            sidebarItems.elements[i] as ElementsMenuSubItems
+          )
+        );
+        await elementsPage.hasUrl(url[i]);
+
+        step++;
+      });
+    }
   });
 });

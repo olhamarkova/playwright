@@ -1,8 +1,6 @@
-import {
-  newWindowsContent,
-  pageTitles,
-} from "../../app/modules/alertsAndFrames/support/data";
 import { test, expect } from "../../fixtures/pagesFixture";
+import { headings } from "../../app/modules/core/support/data.ts";
+import { newWindowsContent } from "../../app/modules/alertsAndFrames/support/data";
 
 test.describe.serial("New Tabs And Windows", async () => {
   test.beforeEach(async ({ windowsPage }) => {
@@ -15,7 +13,7 @@ test.describe.serial("New Tabs And Windows", async () => {
     test.step("Step 1: The Page Should Have The Correct Heading", async () => {
       await windowsPage.heading.hasText(
         windowsPage.pageTitle("h1"),
-        pageTitles.windows
+        headings.windows
       );
     });
 

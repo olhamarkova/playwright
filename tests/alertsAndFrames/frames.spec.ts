@@ -1,8 +1,6 @@
-import {
-  newWindowsContent,
-  pageTitles,
-} from "../../app/modules/alertsAndFrames/support/data";
 import { test } from "../../fixtures/pagesFixture";
+import { headings } from "../../app/modules/core/support/data.ts";
+import { newWindowsContent } from "../../app/modules/alertsAndFrames/support/data";
 
 test.describe.serial("Handling Frames", async () => {
   test.beforeEach(async ({ framesPage }) => {
@@ -14,7 +12,7 @@ test.describe.serial("Handling Frames", async () => {
   }) => {
     await framesPage.heading.hasText(
       framesPage.pageTitle("h1"),
-      pageTitles.frames
+      headings.frames
     );
     await framesPage.validateFrameHeading("frame1", newWindowsContent.title);
     await framesPage.validateFrameHeading("frame2", newWindowsContent.title);

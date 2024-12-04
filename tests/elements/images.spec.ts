@@ -1,9 +1,9 @@
 import { test } from "../../fixtures/pagesFixture.ts";
 import {
-  elementPagesHeadings as headings,
   linksText,
   subHeadingsText,
 } from "../../app/modules/elementsPages/support/data.ts";
+import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Images And Links Page Tests", () => {
   test.beforeEach(async ({ imagesPage }) => {

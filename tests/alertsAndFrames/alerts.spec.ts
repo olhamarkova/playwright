@@ -1,9 +1,9 @@
+import { test } from "../../fixtures/pagesFixture";
+import { headings } from "../../app/modules/core/support/data.ts";
 import {
   alertMessages,
-  pageTitles,
   resultMessage,
 } from "../../app/modules/alertsAndFrames/support/data";
-import { test } from "../../fixtures/pagesFixture";
 
 test.describe.serial("Handling Alerts", async () => {
   test.beforeEach(async ({ alertsPage }) => {
@@ -16,7 +16,7 @@ test.describe.serial("Handling Alerts", async () => {
     test.step("Step 1: The Page Should Have The Correct Heading", async () => {
       await alertsPage.heading.hasText(
         alertsPage.pageTitle("h1"),
-        pageTitles.alerts
+        headings.alerts
       );
     });
 

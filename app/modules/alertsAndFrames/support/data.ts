@@ -1,9 +1,3 @@
-export const pageTitles = {
-  windows: "Browser Windows",
-  alerts: "Alerts",
-  frames: "Frames",
-};
-
 //Windows Page
 export const newWindowsContent = {
   title: "This is a sample page",

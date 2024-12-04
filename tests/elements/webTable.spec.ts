@@ -1,10 +1,10 @@
 import { test, expect } from "../../fixtures/pagesFixture.ts";
 import {
   columnHeaders,
-  elementPagesHeadings as headings,
   recordData,
 } from "../../app/modules/elementsPages/support/data.ts";
 import { AddRecordInputs } from "../../app/modules/elementsPages/support/types.ts";
+import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Web Table Page Tests", () => {
   test.beforeEach(async ({ tablePage }) => {
