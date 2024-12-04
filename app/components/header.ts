@@ -7,11 +7,11 @@ export class Header extends Component implements Clickable {
     super(page);
   }
 
-  getHeader(): Locator {
+  header(): Locator {
     return this.getLocator("header");
   }
 
-  getLogo(): Locator {
-    return this.getHeader().getByRole("img");
+  logo(): Locator {
+    return this.header().getByRole("img");
   }
 }

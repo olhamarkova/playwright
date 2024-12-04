@@ -16,29 +16,29 @@ export class Navbar extends Component implements Clickable {
     this.button = new Button(this.page);
   }
 
-  getMenuItem(itemTitle: CategoryNames): Locator {
+  item(itemTitle: CategoryNames): Locator {
     return this.navLink.getByText(itemTitle);
   }
 
-  menuSubItem(subItemText: NavbarItems): Locator {
-    return this.navLink.getByText(subItemText);
+  subitem(subitemText: NavbarItems): Locator {
+    return this.navLink.getByText(subitemText);
   }
 
-  menuSubItemButton(elementId: number): Locator {
+  subitemButton(elementId: number): Locator {
     return this.button.getLocator(`.show #item-${elementId}`);
   }
 
-  async validateMenuItems(items: string[]): Promise<void> {
+  async validateItems(items: string[]): Promise<void> {
     for (let [index, el] of items.entries()) {
       if (el === "Book Store" || el === "Profile" || el === "Book Store API") {
         index++;
       }
-      await this.isElementVisible(this.menuSubItem(el as NavbarItems));
-      await this.clickElement(this.menuSubItem(el as NavbarItems));
+      await this.isElementVisible(this.subitem(el as NavbarItems));
+      await this.clickElement(this.subitem(el as NavbarItems));
       if (el === "Book Store API") {
         return;
       }
-      await this.hasClass(this.menuSubItemButton(index), activeMenuButton);
+      await this.hasClass(this.subitemButton(index), activeMenuButton);
     }
   }
 }

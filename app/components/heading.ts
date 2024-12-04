@@ -1,26 +1,24 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
-import { Textual } from "./support/interfaces/textual";
+import { Textual } from "./support/interfaces/interfaces";
 import { GetLocatorOptions, TextOptions } from "./support/types/OptionsTypes";
+import { Headings } from "../modules/core/support/types";
 
 export class Heading extends Component implements Textual {
   constructor(page: Page) {
     super(page);
   }
 
-  getByText(text: string, isExact: boolean = true): Locator {
-    return this.page.getByRole("heading").getByText(text, { exact: isExact });
+  getByText(text: string): Locator {
+    return this.page.getByRole("heading").getByText(text, { exact: true });
   }
 
-  getHeading(
-    heading: "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
-    options?: GetLocatorOptions
-  ): Locator {
+  getHeading(heading: Headings, options?: GetLocatorOptions): Locator {
     return this.getLocator(heading, options);
   }
 
   async hasText(
-    element: Locator | string,
+    element: Locator,
     text: string | string[],
     options?: TextOptions
   ): Promise<void> {
@@ -28,7 +26,7 @@ export class Heading extends Component implements Textual {
   }
 
   async containText(
-    element: Locator | string,
+    element: Locator,
     text: string,
     options?: TextOptions
   ): Promise<void> {

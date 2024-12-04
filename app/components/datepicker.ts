@@ -18,7 +18,7 @@ export class Datepicker extends Component implements Clickable {
     return this.getByClass("react-datepicker");
   }
 
-  getDateSelector(className: "month" | "year"): Locator {
+  dateSelector(className: "month" | "year"): Locator {
     return this.getByClass(`react-datepicker__${className}-select`);
   }
 
@@ -26,25 +26,25 @@ export class Datepicker extends Component implements Clickable {
     return this.button.getLocator(`button[aria-label="${buttonAriaLabel}"]`);
   }
 
-  getDay(day: Days): Locator {
+  day(day: Days): Locator {
     return this.button.getByClass(`react-datepicker__day--0${day}`);
   }
 
-  getDayName(dayName: DayNames): Locator {
+  dayName(dayName: DayNames): Locator {
     return this.button
       .getByClass("react-datepicker__day-name")
       .filter({ hasText: dayName });
   }
 
   async chooseYear(year: string): Promise<void> {
-    await this.selector.chooseOption(this.getDateSelector("year"), year);
+    await this.selector.chooseOption(this.dateSelector("year"), year);
   }
 
   async chooseMonth(month: Month): Promise<void> {
-    await this.selector.chooseOption(this.getDateSelector("month"), month);
+    await this.selector.chooseOption(this.dateSelector("month"), month);
   }
 
   async chooseDayByNumber(day: Days): Promise<void> {
-    await this.button.clickElement(this.getDay(day));
+    await this.button.clickElement(this.day(day));
   }
 }

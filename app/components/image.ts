@@ -11,7 +11,7 @@ export class Image extends Component implements Clickable {
     super(page);
   }
 
-  getImage(options?: GetByRoleOptions): Locator {
+  image(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("img", options);
   }
 
@@ -23,7 +23,7 @@ export class Image extends Component implements Clickable {
     return this.page.getByAltText(text, { exact: true });
   }
 
-  getSvg(options?: GetLocatorOptions): Locator {
+  svg(options?: GetLocatorOptions): Locator {
     return this.getLocator("svg", options);
   }
 }

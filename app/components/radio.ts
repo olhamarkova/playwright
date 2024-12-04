@@ -8,12 +8,8 @@ export class Radio extends Component implements Clickable {
     super(page);
   }
 
-  getRadio(options?: GetByRoleOptions): Locator {
+  radio(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("radio", options);
-  }
-
-  getRadioByIndex(index: number, options?: GetByRoleOptions): Locator {
-    return this.page.getByRole("radio", options).nth(index - 1);
   }
 
   async clickRadioLabel(label: string, options?: ClickOptions): Promise<void> {

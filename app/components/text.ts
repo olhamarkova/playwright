@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
-import { Textual } from "./support/interfaces/textual";
+import { Textual } from "./support/interfaces/interfaces";
 import { TextOptions } from "./support/types/OptionsTypes";
 
 export class Text extends Component implements Textual {
@@ -9,18 +9,18 @@ export class Text extends Component implements Textual {
   }
 
   async hasText(
-    element: Locator | string,
+    element: Locator,
     text: string,
     options?: TextOptions
   ): Promise<void> {
-    await expect(element as Locator).toHaveText(text, options);
+    await expect(element).toHaveText(text, options);
   }
 
   async containText(
-    element: Locator | string,
+    element: Locator,
     text: string,
     options?: TextOptions
   ): Promise<void> {
-    await expect(element as Locator).toContainText(text, options);
+    await expect(element).toContainText(text, options);
   }
 }

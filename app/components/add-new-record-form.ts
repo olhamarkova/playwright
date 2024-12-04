@@ -18,12 +18,15 @@ export default class AddNewRecordForm extends Form {
     this.submitButton = this.button.getByName("Submit");
   }
 
-  formInput(id: AddRecordInputs | string): Locator {
+  formInput<T extends AddRecordInputs>(id: T): Locator {
     return this.input.getById(`${id}`);
   }
 
-  async fillForm(data: object): Promise<void> {
-    for (let [key, value] of Object.entries(data)) {
+  async fillForm(data: Record<AddRecordInputs, string>): Promise<void> {
+    for (const [key, value] of Object.entries(data) as [
+      AddRecordInputs,
+      string
+    ][]) {
       await this.input.fillOut(this.formInput(key), value);
       await this.input.hasValue(this.formInput(key), value);
     }

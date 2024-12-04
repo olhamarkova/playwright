@@ -1,6 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { Clickable } from "./support/interfaces/interfaces";
-import { Textual } from "./support/interfaces/textual";
+import { Clickable, Textual } from "./support/interfaces/interfaces";
 import { Component } from "./core/component";
 import { TextOptions } from "./support/types/OptionsTypes";
 

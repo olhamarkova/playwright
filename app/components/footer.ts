@@ -6,11 +6,11 @@ export class Footer extends Component {
     super(page);
   }
 
-  getFooter(): Locator {
+  footer(): Locator {
     return this.getLocator("footer");
   }
 
-  getCopyrightText(text: string): Locator {
-    return this.getFooter().getByText(text);
+  copyrightText(text: string): Locator {
+    return this.footer().getByText(text);
   }
 }

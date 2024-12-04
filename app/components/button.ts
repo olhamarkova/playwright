@@ -21,6 +21,6 @@ export class Button extends Component implements Clickable {
     text: string | string[],
     options?: TextOptions
   ): Promise<void> {
-    await expect(element as Locator).toHaveText(text, options);
+    await expect(element).toHaveText(text, options);
   }
 }

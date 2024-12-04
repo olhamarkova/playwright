@@ -12,7 +12,7 @@ export class Filechooser extends Component implements Clickable {
     this.button = new Button(this.page);
   }
 
-  getChooseFileButton(): Locator {
+  chooseFileButton(): Locator {
     return this.button.getLocator("input[type='file']");
   }
 

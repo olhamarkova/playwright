@@ -1,7 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
-import { Writable } from "./support/interfaces/writable";
-import { GetByRoleOptions } from "./support/types/OptionsTypes";
+import { Writable } from "./support/interfaces/interfaces";
 import { Button, Input, Heading } from "./support/uiService";
 
 export class Form extends Component implements Partial<Writable> {
@@ -14,10 +13,6 @@ export class Form extends Component implements Partial<Writable> {
     this.button = new Button(this.page);
     this.input = new Input(this.page);
     this.heading = new Heading(this.page);
-  }
-
-  getForm(options?: GetByRoleOptions): Locator {
-    return this.page.getByRole("form", options);
   }
 
   /**

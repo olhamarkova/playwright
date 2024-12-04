@@ -15,7 +15,7 @@ export class Modal extends Component {
     this.title = new Heading(this.page);
   }
 
-  getModal(options?: GetByRoleOptions): Locator {
+  modal(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("dialog", options);
   }
 }
