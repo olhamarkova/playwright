@@ -5,7 +5,7 @@ import {
   Link,
   Text,
 } from "../../../components/support/component-service";
-import { imagesSrc } from "../../elementsPages/support/data";
+import { imagesSrc } from "../../elements/support/data";
 
 export class ImagesPage extends BasePage {
   readonly image: Image;
@@ -26,8 +26,8 @@ export class ImagesPage extends BasePage {
 
     this.validImage = this.image.getImageBySrc(imagesSrc.validImage).nth(1);
     this.brokenImage = this.image.getImageBySrc(imagesSrc.brokenImage);
-    this.images = this.image.getLocator("div.col-md-6").getByRole("img");
-    this.links = this.link.getLocator("div.col-md-6").getByRole("link");
+    this.images = this.image.getByLocator("div.col-md-6").getByRole("img");
+    this.links = this.link.getByLocator("div.col-md-6").getByRole("link");
   }
 
   async findBrokenImage(): Promise<void> {

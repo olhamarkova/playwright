@@ -1,5 +1,5 @@
 import { type Page, Locator, expect } from "@playwright/test";
-import { responseStatuses } from "../../elementsPages/support/data";
+import { responseStatuses } from "../../elements/support/data";
 import BasePage from "../../core/BasePage";
 import { Link } from "../../../components/support/component-service";
 
@@ -13,15 +13,15 @@ export class LinksPage extends BasePage {
     super(page, url);
     this.link = new Link(this.page);
 
-    this.links = this.link.getLocator("p a");
+    this.links = this.link.getByLocator("p a");
     this.subHeadings = this.heading.getHeading("h5");
     this.dynamicLink = this.link.getByName("Home", false).nth(1);
   }
 
-  async validateElementsByName(elementNames: string[]): Promise<void> {
+  async validateLinks(elementNames: string[]): Promise<void> {
     for (let i = 0; i < elementNames.length; i++) {
       const element = this.link.getByName(elementNames[i]);
-      await this.link.isElementVisible(element);
+      await this.link.isVisible(element);
     }
   }
 

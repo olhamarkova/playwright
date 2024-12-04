@@ -33,7 +33,7 @@ export class WebTablesPage extends BasePage {
     this.selector = new Selector(this.page);
     this.text = new Text(this.page);
 
-    this.rows = this.table.getRows();
+    this.rows = this.table.rows();
     this.addNewRecordButton = this.button.getByName("Add");
     this.searchField = this.input.getByPlaceholder("Type to search");
     this.previousButton = this.button.getByName("Previous");
@@ -42,18 +42,16 @@ export class WebTablesPage extends BasePage {
   }
 
   actionButton(name: "edit" | "delete", recordNumber: number): Locator {
-    return this.button.getLocator(`#${name}-record-${recordNumber}`);
+    return this.button.getByLocator(`#${name}-record-${recordNumber}`);
   }
 
   async validateElementsByName(elementNames: string[]): Promise<void> {
     for (let i = 0; i < elementNames.length; i++) {
-      await this.table.isElementVisible(
-        this.table.getColumnheader(elementNames[i])
-      );
+      await this.table.isVisible(this.table.getColumnheader(elementNames[i]));
     }
   }
 
-  async validateCellContent(
+  async validateCell(
     rowNumber: number,
     columnNumber: number,
     text?: string
@@ -68,9 +66,9 @@ export class WebTablesPage extends BasePage {
       ).toHaveText(text!);
   }
 
-  async validateRowContent(rowNumber: number, text?: string): Promise<void> {
+  async validateRow(rowNumber: number, text?: string): Promise<void> {
     for (let i = 0; i < 7; i++) {
-      await this.validateCellContent(rowNumber, i, text);
+      await this.validateCell(rowNumber, i, text);
     }
   }
 }

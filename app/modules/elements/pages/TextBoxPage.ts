@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import BasePage from "../../core/BasePage";
-import { TextBoxElementID } from "../../elementsPages/support/types";
+import { TextBoxElementID } from "../../elements/support/types";
 import {
   Input,
   Text,
@@ -29,8 +29,8 @@ export class TextBoxPage extends BasePage {
     this.emailBorderCss = "1px solid rgb(255, 0, 0)";
     this.fullNameInput = this.input.getById("userName");
     this.emailInput = this.input.getById("userEmail");
-    this.currentAddressInput = this.input.getTextAreaById("currentAddress");
-    this.permanentAddress = this.input.getTextAreaById("permanentAddress");
+    this.currentAddressInput = this.input.getTextareaById("currentAddress");
+    this.permanentAddress = this.input.getTextareaById("permanentAddress");
     this.submitButton = this.button.getById("submit");
     this.output = this.textBox.getById("output");
   }

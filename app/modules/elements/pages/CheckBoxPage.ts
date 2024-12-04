@@ -24,11 +24,11 @@ export class CheckBoxPage extends BasePage {
   }
 
   toggleButton(index: number): Locator {
-    return this.button.getElByTitle("Toggle", true).nth(index - 1);
+    return this.button.getByTitle("Toggle", true).nth(index - 1);
   }
 
   checkboxLabel(category: CheckboxLabels): Locator {
-    return this.checkbox.getLocator("label").filter({ hasText: category });
+    return this.checkbox.getByLocator("label").filter({ hasText: category });
   }
 
   getCheckbox(category: CheckboxLabels): Locator {
@@ -36,7 +36,7 @@ export class CheckBoxPage extends BasePage {
   }
 
   async check(category: CheckboxLabels): Promise<void> {
-    await this.checkbox.clickElement(this.checkboxLabel(category));
+    await this.checkbox.click(this.checkboxLabel(category));
   }
 
   async validateCheckboxes(checked: boolean = false): Promise<void> {

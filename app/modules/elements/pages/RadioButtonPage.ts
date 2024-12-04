@@ -1,7 +1,7 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import BasePage from "../../core/BasePage";
 import { Radio, Text } from "../../../components/support/component-service";
-import { RadioLabels } from "../../elementsPages/support/types";
+import { RadioLabels } from "../../elements/support/types";
 
 export class RadioButtonPage extends BasePage {
   readonly radio: Radio;
@@ -16,9 +16,9 @@ export class RadioButtonPage extends BasePage {
     this.radio = new Radio(this.page);
     this.textBox = new Text(this.page);
 
-    this.question = this.textBox.getLocator(".mb-3");
-    this.radioButtons = this.radio.getRadio();
-    this.successMsg = this.textBox.getLocator(".mt-3");
+    this.question = this.textBox.getByLocator(".mb-3");
+    this.radioButtons = this.radio.radio();
+    this.successMsg = this.textBox.getByLocator(".mt-3");
   }
 
   labelForRadio(label: "Yes" | "Impressive"): Locator {
@@ -26,13 +26,13 @@ export class RadioButtonPage extends BasePage {
   }
 
   radioButton(label: RadioLabels): Locator {
-    return this.radio.getLocator(`#${label}Radio`);
+    return this.radio.getByLocator(`#${label}Radio`);
   }
 
-  async validateEnabledRadioBtns(): Promise<void> {
+  async validateEnabledRadio(): Promise<void> {
     const radioBtns = ["yes", "impressive"];
     for (let i = 0; i < radioBtns.length; i++) {
-      await this.radio.isElementEnabled(
+      await this.radio.isEnabled(
         this.radioButton(radioBtns[i] as Exclude<RadioLabels, "no">)
       );
     }
