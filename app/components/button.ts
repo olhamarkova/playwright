@@ -1,9 +1,9 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { Clickable } from "./support/interfaces/clickable";
-import { UiElement } from "./core/component";
+import { Clickable } from "./support/interfaces/interfaces";
+import { Component } from "./core/component";
 import { TextOptions } from "./support/types/OptionsTypes";
 
-export class Button extends UiElement implements Clickable {
+export class Button extends Component implements Clickable {
   constructor(page: Page) {
     super(page);
   }

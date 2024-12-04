@@ -1,8 +1,8 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { Clickable } from "./support/interfaces/clickable";
+import { Component } from "./core/component";
+import { Clickable } from "./support/interfaces/interfaces";
 
-export class Header extends UiElement implements Clickable {
+export class Header extends Component implements Clickable {
   constructor(page: Page) {
     super(page);
   }

@@ -1,10 +1,10 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
+import { Component } from "./core/component";
 import { Writable } from "./support/interfaces/writable";
 import { GetByRoleOptions } from "./support/types/OptionsTypes";
 import { Button, Input, Heading } from "./support/uiService";
 
-export class Form extends UiElement implements Partial<Writable> {
+export class Form extends Component implements Partial<Writable> {
   readonly button: Button;
   readonly input: Input;
   readonly heading: Heading;

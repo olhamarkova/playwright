@@ -1,10 +1,10 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { Clickable } from "./support/interfaces/clickable";
+import { Clickable } from "./support/interfaces/interfaces";
 import { Textual } from "./support/interfaces/textual";
-import { UiElement } from "./core/component";
+import { Component } from "./core/component";
 import { TextOptions } from "./support/types/OptionsTypes";
 
-export class Chicklet extends UiElement implements Clickable, Partial<Textual> {
+export class Chicklet extends Component implements Clickable, Partial<Textual> {
   constructor(page: Page) {
     super(page);
   }

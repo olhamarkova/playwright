@@ -1,9 +1,9 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
+import { Component } from "./core/component";
 import { ClickOptions, GetByRoleOptions } from "./support/types/OptionsTypes";
-import { Clickable } from "./support/interfaces/clickable";
+import { Clickable } from "./support/interfaces/interfaces";
 
-export class Radio extends UiElement implements Clickable {
+export class Radio extends Component implements Clickable {
   constructor(page: Page) {
     super(page);
   }

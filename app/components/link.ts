@@ -1,9 +1,9 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { Clickable } from "./support/interfaces/clickable";
+import { Component } from "./core/component";
+import { Clickable } from "./support/interfaces/interfaces";
 import { Textual } from "./support/interfaces/textual";
 
-export class Link extends UiElement implements Clickable, Partial<Textual> {
+export class Link extends Component implements Clickable, Partial<Textual> {
   constructor(page: Page) {
     super(page);
   }

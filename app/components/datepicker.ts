@@ -1,10 +1,10 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
+import { Component } from "./core/component";
 import { Selector, Button } from "./support/uiService";
-import { Clickable } from "./support/interfaces/clickable";
+import { Clickable } from "./support/interfaces/interfaces";
 import { Days, Month, DayNames } from "./support/types/DatepickerTypes";
 
-export class Datepicker extends UiElement implements Clickable {
+export class Datepicker extends Component implements Clickable {
   readonly selector: Selector;
   readonly button: Button;
 

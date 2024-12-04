@@ -1,8 +1,8 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
+import { Component } from "./core/component";
 import { GetLocatorOptions } from "./support/types/OptionsTypes";
 
-export class Frame extends UiElement {
+export class Frame extends Component {
   constructor(page: Page) {
     super(page);
   }

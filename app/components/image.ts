@@ -1,12 +1,12 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { Clickable } from "./support/interfaces/clickable";
+import { Component } from "./core/component";
+import { Clickable } from "./support/interfaces/interfaces";
 import {
   GetByRoleOptions,
   GetLocatorOptions,
 } from "./support/types/OptionsTypes";
 
-export class Image extends UiElement implements Clickable {
+export class Image extends Component implements Clickable {
   constructor(page: Page) {
     super(page);
   }

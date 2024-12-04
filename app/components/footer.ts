@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
+import { Component } from "./core/component";
 
-export class Footer extends UiElement {
+export class Footer extends Component {
   constructor(page: Page) {
     super(page);
   }

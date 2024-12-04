@@ -1,9 +1,9 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
+import { Component } from "./core/component";
 import { Textual } from "./support/interfaces/textual";
 import { GetLocatorOptions, TextOptions } from "./support/types/OptionsTypes";
 
-export class Heading extends UiElement implements Textual {
+export class Heading extends Component implements Textual {
   constructor(page: Page) {
     super(page);
   }

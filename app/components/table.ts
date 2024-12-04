@@ -1,11 +1,11 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
+import { Component } from "./core/component";
 import {
   GetByRoleOptions,
   GetLocatorOptions,
 } from "./support/types/OptionsTypes";
 
-export class Table extends UiElement {
+export class Table extends Component {
   constructor(page: Page) {
     super(page);
   }

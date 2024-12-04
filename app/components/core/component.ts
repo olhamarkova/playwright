@@ -3,9 +3,9 @@ import {
   ClickOptions,
   GetLocatorOptions,
 } from "../support/types/OptionsTypes.ts";
-import { Clickable } from "../support/interfaces/clickable.ts";
+import { Clickable } from "../support/interfaces/interfaces.ts";
 
-export class UiElement implements Clickable {
+export class Component implements Clickable {
   protected page: Page;
 
   constructor(page: Page) {
