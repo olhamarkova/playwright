@@ -6,8 +6,8 @@ import {
   Input,
   Selector,
   Text,
-} from "../../../components/support/uiService";
-import AddNewRecordForm from "../../../components/addNewRecordForm";
+} from "../../../components/support/component-service";
+import AddNewRecordForm from "../../../components/add-new-record-form";
 
 export class WebTablesPage extends BasePage {
   readonly addNewRecord: AddNewRecordForm;

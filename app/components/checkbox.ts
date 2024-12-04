@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
 import { Checkable } from "./support/interfaces/interfaces";
-import { CheckOptions, GetLocatorOptions } from "./support/types/OptionsTypes";
+import { CheckOptions, GetLocatorOptions } from "./support/types/options";
 
 export class Checkbox extends Component implements Checkable {
   constructor(page: Page) {

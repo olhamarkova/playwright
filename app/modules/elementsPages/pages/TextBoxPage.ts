@@ -1,7 +1,11 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import BasePage from "../../core/BasePage";
 import { TextBoxElementID } from "../../elementsPages/support/types";
-import { Input, Text, Button } from "../../../components/support/uiService";
+import {
+  Input,
+  Text,
+  Button,
+} from "../../../components/support/component-service";
 
 export class TextBoxPage extends BasePage {
   readonly input: Input;

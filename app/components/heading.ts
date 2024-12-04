@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
 import { Textual } from "./support/interfaces/interfaces";
-import { GetLocatorOptions, TextOptions } from "./support/types/OptionsTypes";
+import { GetLocatorOptions, TextOptions } from "./support/types/options";
 import { Headings } from "../modules/core/support/types";
 
 export class Heading extends Component implements Textual {

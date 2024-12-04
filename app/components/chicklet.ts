@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { Clickable, Textual } from "./support/interfaces/interfaces";
 import { Component } from "./core/component";
-import { TextOptions } from "./support/types/OptionsTypes";
+import { TextOptions } from "./support/types/options";
 
 export class Chicklet extends Component implements Clickable, Partial<Textual> {
   constructor(page: Page) {

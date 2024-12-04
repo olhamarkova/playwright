@@ -9,9 +9,9 @@ import {
   Header,
   Footer,
   Heading,
-} from "../../components/support/uiService.ts";
+} from "../../components/support/component-service.ts";
 import { Headings } from "./support/types.ts";
-import { GetLocatorOptions } from "../../components/support/types/OptionsTypes.ts";
+import { GetLocatorOptions } from "../../components/support/types/options.ts";
 
 export default class BasePage {
   protected page: Page;
@@ -27,13 +27,13 @@ export default class BasePage {
     this.url = `${process.env.URL!}${url}`;
     this.heading = new Heading(this.page);
     this.header = new Header(this.page);
-    this.logo = new Header(this.page).getLogo();
+    this.logo = new Header(this.page).logo();
     this.footer = new Footer(this.page);
     this.navbar = new Navbar(this.page);
   }
 
-  pageTitle(heading: Headings, options?: GetLocatorOptions): Locator {
-    return this.heading.getHeading(heading, options);
+  mainHeading(options?: GetLocatorOptions): Locator {
+    return this.heading.getHeading("h1", options);
   }
 
   async visit(): Promise<void> {
@@ -69,17 +69,25 @@ export default class BasePage {
   }
 
   async confirmAlert(
-    dialogMessage: string,
-    confirm: boolean = true
+    element: Locator,
+    message: string,
+    prompt?: string
   ): Promise<void> {
-    this.page.on("dialog", async (dialog) => {
-      expect(dialog.message()).toBe(dialogMessage);
-      if (confirm) {
-        await dialog.accept();
-      } else {
-        await dialog.dismiss();
-      }
-    });
+    const [dialog] = await Promise.all([
+      this.page.waitForEvent("dialog"),
+      element.click(),
+    ]);
+    expect(dialog.message()).toBe(message);
+    await dialog.accept(prompt ? prompt : "");
+  }
+
+  async dismsissAlert(element: Locator, message?: string) {
+    const [dialog] = await Promise.all([
+      this.page.waitForEvent("dialog"),
+      element.click(),
+    ]);
+    if (message) expect(dialog.message()).toBe(message);
+    await dialog.dismiss();
   }
 
   async wait(time: number) {

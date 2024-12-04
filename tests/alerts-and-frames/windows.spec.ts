@@ -1,6 +1,6 @@
-import { test, expect } from "../../fixtures/pagesFixture";
+import { test, expect } from "../../fixtures/pagesFixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
-import { newWindowsContent } from "../../app/modules/alertsAndFrames/support/data";
+import { newWindowsContent } from "../../app/modules/alerts-and-frames/support/data.ts";
 
 test.describe.serial("New Tabs And Windows", async () => {
   test.beforeEach(async ({ windowsPage }) => {
@@ -12,15 +12,17 @@ test.describe.serial("New Tabs And Windows", async () => {
   }) => {
     test.step("Step 1: The Page Should Have The Correct Heading", async () => {
       await windowsPage.heading.hasText(
-        windowsPage.pageTitle("h1"),
+        windowsPage.mainHeading(),
         headings.windows
       );
     });
 
     test.step("Step 2: All Buttons Should Be Visible", async () => {
-      await windowsPage.button.isElementVisible(windowsPage.newTabButton);
-      await windowsPage.button.isElementVisible(windowsPage.newWindowButton);
-      await windowsPage.button.isElementVisible(windowsPage.newWindowMsgButton);
+      await windowsPage.buttons.isElementVisible(windowsPage.button("tab"));
+      await windowsPage.buttons.isElementVisible(windowsPage.button("window"));
+      await windowsPage.buttons.isElementVisible(
+        windowsPage.button("messageWindow")
+      );
     });
   });
 
@@ -30,7 +32,7 @@ test.describe.serial("New Tabs And Windows", async () => {
   }) => {
     const newPage = await windowsPage.openNewTab(
       context,
-      windowsPage.newTabButton
+      windowsPage.button("tab")
     );
     await expect(newPage.locator("h1")).toHaveText(newWindowsContent.title);
     await newPage.close();
@@ -39,7 +41,7 @@ test.describe.serial("New Tabs And Windows", async () => {
   test("@functional The Button 'New Window' Should Open New Window", async ({
     windowsPage,
   }) => {
-    const childPage = await windowsPage.openPopup(windowsPage.newWindowButton);
+    const childPage = await windowsPage.openPopup(windowsPage.button("window"));
     await expect(childPage.locator("h1")).toHaveText(newWindowsContent.title);
     await childPage.close();
   });
@@ -48,7 +50,7 @@ test.describe.serial("New Tabs And Windows", async () => {
     windowsPage,
   }) => {
     const windowMsg = await windowsPage.openPopup(
-      windowsPage.newWindowMsgButton
+      windowsPage.button("messageWindow")
     );
     await expect(windowMsg.locator("body")).toContainText(
       newWindowsContent.message

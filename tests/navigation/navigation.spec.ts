@@ -1,6 +1,6 @@
 import { test } from "../../fixtures/pagesFixture.ts";
 import { sidebarItems, pageUrls } from "../../app/modules/core/support/data.ts";
-import { ElementsMenuSubItems } from "../../app/components/support/types/NavbarTypes.ts";
+import { ElementsMenuSubItems } from "../../app/components/support/types/navbar.ts";
 
 test.describe("Navigation Tests", () => {
   test.beforeEach(async ({ elementsPage }) => {

@@ -2,7 +2,7 @@
 
 import { Locator, type Page } from "@playwright/test";
 import { AddRecordInputs } from "../modules/elementsPages/support/types";
-import { Form, Modal } from "./support/uiService";
+import { Form, Modal } from "./support/component-service";
 
 export default class AddNewRecordForm extends Form {
   readonly modal: Modal;

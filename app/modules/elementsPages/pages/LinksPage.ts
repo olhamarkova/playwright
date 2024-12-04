@@ -1,7 +1,7 @@
 import { type Page, Locator, expect } from "@playwright/test";
 import { responseStatuses } from "../../elementsPages/support/data";
 import BasePage from "../../core/BasePage";
-import { Link } from "../../../components/support/uiService";
+import { Link } from "../../../components/support/component-service";
 
 export class LinksPage extends BasePage {
   readonly link: Link;

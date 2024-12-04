@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
 import { Textual } from "./support/interfaces/interfaces";
-import { TextOptions } from "./support/types/OptionsTypes";
+import { TextOptions } from "./support/types/options";
 
 export class Text extends Component implements Textual {
   constructor(page: Page) {

@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { Clickable } from "./support/interfaces/interfaces";
 import { Component } from "./core/component";
-import { TextOptions } from "./support/types/OptionsTypes";
+import { TextOptions } from "./support/types/options";
 
 export class Button extends Component implements Clickable {
   constructor(page: Page) {

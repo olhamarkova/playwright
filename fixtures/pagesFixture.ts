@@ -12,9 +12,9 @@ import { RadioButtonPage } from "../app/modules/elementsPages/pages/RadioButtonP
 import { TextBoxPage } from "../app/modules/elementsPages/pages/TextBoxPage";
 import { UploadPage } from "../app/modules/elementsPages/pages/UploadPage";
 import { PracticeFormPage } from "../app/modules/form/PracticeFormPage";
-import { WindowsPage } from "../app/modules/alertsAndFrames/WindowsPage";
-import { AlertsPage } from "../app/modules/alertsAndFrames/AlertsPage";
-import { FramesPage } from "../app/modules/alertsAndFrames/FramesPage";
+import { WindowsPage } from "../app/modules/alerts-and-frames/WindowsPage";
+import { AlertsPage } from "../app/modules/alerts-and-frames/AlertsPage";
+import { FramesPage } from "../app/modules/alerts-and-frames/FramesPage";
 
 type Pages = {
   mainPage: MainPage;

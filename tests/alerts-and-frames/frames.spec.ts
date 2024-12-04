@@ -1,6 +1,6 @@
-import { test } from "../../fixtures/pagesFixture";
+import { test } from "../../fixtures/pagesFixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
-import { newWindowsContent } from "../../app/modules/alertsAndFrames/support/data";
+import { newWindowsContent } from "../../app/modules/alerts-and-frames/support/data.ts";
 
 test.describe.serial("Handling Frames", async () => {
   test.beforeEach(async ({ framesPage }) => {
@@ -10,10 +10,7 @@ test.describe.serial("Handling Frames", async () => {
   test("@smoke A User Should Land To The Correct Page And See Frames", async ({
     framesPage,
   }) => {
-    await framesPage.heading.hasText(
-      framesPage.pageTitle("h1"),
-      headings.frames
-    );
+    await framesPage.heading.hasText(framesPage.mainHeading(), headings.frames);
     await framesPage.validateFrameHeading("frame1", newWindowsContent.title);
     await framesPage.validateFrameHeading("frame2", newWindowsContent.title);
   });

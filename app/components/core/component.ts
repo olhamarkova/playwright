@@ -1,8 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import {
-  ClickOptions,
-  GetLocatorOptions,
-} from "../support/types/OptionsTypes.ts";
+import { ClickOptions, GetLocatorOptions } from "../support/types/options.ts";
 import { Clickable } from "../support/interfaces/interfaces.ts";
 
 export class Component implements Clickable {

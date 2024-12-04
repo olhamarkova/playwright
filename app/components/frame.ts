@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
-import { GetLocatorOptions } from "./support/types/OptionsTypes";
+import { GetLocatorOptions } from "./support/types/options";
 
 export class Frame extends Component {
   constructor(page: Page) {

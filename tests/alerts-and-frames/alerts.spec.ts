@@ -1,9 +1,9 @@
-import { test } from "../../fixtures/pagesFixture";
+import { test } from "../../fixtures/pagesFixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 import {
   alertMessages,
   resultMessage,
-} from "../../app/modules/alertsAndFrames/support/data";
+} from "../../app/modules/alerts-and-frames/support/data.ts";
 
 test.describe.serial("Handling Alerts", async () => {
   test.beforeEach(async ({ alertsPage }) => {
@@ -15,7 +15,7 @@ test.describe.serial("Handling Alerts", async () => {
   }) => {
     test.step("Step 1: The Page Should Have The Correct Heading", async () => {
       await alertsPage.heading.hasText(
-        alertsPage.pageTitle("h1"),
+        alertsPage.mainHeading(),
         headings.alerts
       );
     });
@@ -28,21 +28,28 @@ test.describe.serial("Handling Alerts", async () => {
   test("@functional User Shall Be Able To Handle An Alert", async ({
     alertsPage,
   }) => {
-    await alertsPage.confirmAlert(alertMessages.alert);
-    await alertsPage.button.clickElement(alertsPage.clickMeButton("alert"));
+    await alertsPage.confirmAlert(
+      alertsPage.clickMeButton("alert"),
+      alertMessages.alert
+    );
   });
 
   test("@functional User Shall See An Alert In 5 Seconds", async ({
     alertsPage,
   }) => {
-    await alertsPage.confirmDelayedAlert(alertMessages.delayedAlert);
+    await alertsPage.confirmAlert(
+      alertsPage.clickMeButton("timerAlert"),
+      alertMessages.delayedAlert
+    );
   });
 
-  test("@functional User Shall Cancel An Alert", async ({ alertsPage }) => {
-    await alertsPage.confirmAlert(alertMessages.confirmAlert, false);
-    await alertsPage.button.clickElement(alertsPage.clickMeButton("confirm"));
+  test("@functional User Shall Dismiss An Alert", async ({ alertsPage }) => {
+    await alertsPage.dismsissAlert(
+      alertsPage.clickMeButton("confirm"),
+      alertMessages.confirmAlert
+    );
     await alertsPage.text.hasText(
-      alertsPage.resultMsg("confirmResult"),
+      alertsPage.resultMessage("confirm"),
       resultMessage.confirm("Cancel")
     );
   });
@@ -50,10 +57,14 @@ test.describe.serial("Handling Alerts", async () => {
   test("@functional User Shall Be Able To See A Prompt Box", async ({
     alertsPage,
   }) => {
-    await alertsPage.confirmPromptBox(alertMessages.prompt);
+    await alertsPage.confirmAlert(
+      alertsPage.clickMeButton("promt"),
+      alertMessages.prompt,
+      "something"
+    );
     await alertsPage.button.clickElement(alertsPage.clickMeButton("promt"));
     await alertsPage.text.hasText(
-      alertsPage.resultMsg("promptResult"),
+      alertsPage.resultMessage("prompt"),
       resultMessage.prompt
     );
   });

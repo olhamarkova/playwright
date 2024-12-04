@@ -1,10 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
 import { Clickable } from "./support/interfaces/interfaces";
-import {
-  GetByRoleOptions,
-  GetLocatorOptions,
-} from "./support/types/OptionsTypes";
+import { GetByRoleOptions, GetLocatorOptions } from "./support/types/options";
 
 export class Image extends Component implements Clickable {
   constructor(page: Page) {

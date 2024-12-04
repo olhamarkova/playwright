@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
-import { Button } from "./support/uiService";
+import { Button } from "./support/component-service";
 import { Clickable } from "./support/interfaces/interfaces";
 import path from "path";
 

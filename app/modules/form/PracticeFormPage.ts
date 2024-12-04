@@ -9,7 +9,7 @@ import {
   Chicklet,
   Modal,
   Table,
-} from "../../components/support/uiService";
+} from "../../components/support/component-service";
 import BasePage from "../core/BasePage";
 import { FormInputIds, Genders, Hobbies } from "./support/types";
 

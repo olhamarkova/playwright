@@ -1,6 +1,10 @@
 import { type Page, Locator, expect } from "@playwright/test";
 import BasePage from "../../core/BasePage";
-import { Image, Link, Text } from "../../../components/support/uiService";
+import {
+  Image,
+  Link,
+  Text,
+} from "../../../components/support/component-service";
 import { imagesSrc } from "../../elementsPages/support/data";
 
 export class ImagesPage extends BasePage {

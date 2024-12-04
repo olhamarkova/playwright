@@ -1,6 +1,6 @@
 import { Locator, type Page, expect } from "@playwright/test";
 import BasePage from "../core/BasePage";
-import { Text, Frame } from "../../components/support/uiService";
+import { Text, Frame } from "../../components/support/component-service";
 import { Frames } from "./support/types";
 
 export class FramesPage extends BasePage {

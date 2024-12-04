@@ -8,7 +8,7 @@ import {
   studentInfo,
 } from "../../app/modules/form/support/data.ts";
 import { Genders, Hobbies } from "../../app/modules/form/support/types.ts";
-import { Month } from "../../app/components/support/types/DatepickerTypes.ts";
+import { Month } from "../../app/components/support/types/datepicker.ts";
 
 test.describe("Practice Form Tests", () => {
   test.beforeEach(async ({ formPage }) => {

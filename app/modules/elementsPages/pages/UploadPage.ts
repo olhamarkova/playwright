@@ -5,7 +5,7 @@ import {
   Button,
   Text,
   Filechooser,
-} from "../../../components/support/uiService";
+} from "../../../components/support/component-service";
 
 export class UploadPage extends BasePage {
   readonly button: Button;

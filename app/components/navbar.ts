@@ -3,8 +3,8 @@ import { CategoryNames } from "../modules/mainPage/support/types";
 import { Component } from "./core/component";
 import { Clickable } from "./support/interfaces/interfaces";
 import { activeMenuButton } from "../modules/elementsPages/support/classes";
-import { NavbarItems } from "./support/types/NavbarTypes";
-import { Link, Button } from "./support/uiService";
+import { NavbarItems } from "./support/types/navbar";
+import { Link, Button } from "./support/component-service";
 
 export class Navbar extends Component implements Clickable {
   readonly navLink: Link;

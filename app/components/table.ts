@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
-import { GetByRoleOptions } from "./support/types/OptionsTypes";
+import { GetByRoleOptions } from "./support/types/options";
 
 export class Table extends Component {
   constructor(page: Page) {

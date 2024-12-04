@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
 import { Writable } from "./support/interfaces/interfaces";
-import { Button, Input, Heading } from "./support/uiService";
+import { Button, Input, Heading } from "./support/component-service";
 
 export class Form extends Component implements Partial<Writable> {
   readonly button: Button;

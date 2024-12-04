@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import BasePage from "../../core/BasePage";
-import { Radio, Text } from "../../../components/support/uiService";
+import { Radio, Text } from "../../../components/support/component-service";
 import { RadioLabels } from "../../elementsPages/support/types";
 
 export class RadioButtonPage extends BasePage {

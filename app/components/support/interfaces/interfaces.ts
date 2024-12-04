@@ -1,5 +1,5 @@
 import { Locator } from "@playwright/test";
-import { ClickOptions, CheckOptions, TextOptions } from "../types/OptionsTypes";
+import { ClickOptions, CheckOptions, TextOptions } from "../types/options";
 
 export interface Clickable {
   clickElement(element: Locator, options?: ClickOptions): void;
