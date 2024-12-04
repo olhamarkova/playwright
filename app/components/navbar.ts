@@ -2,7 +2,6 @@ import { type Locator, type Page } from "@playwright/test";
 import { CategoryNames } from "../modules/mainPage/support/types";
 import { Component } from "./core/component";
 import { Clickable } from "./support/interfaces/interfaces";
-import { activeMenuButton } from "../modules/elementsPages/support/classes";
 import { NavbarItems } from "./support/types/navbar";
 import { Link, Button } from "./support/component-service";
 
@@ -38,7 +37,7 @@ export class Navbar extends Component implements Clickable {
       if (el === "Book Store API") {
         return;
       }
-      await this.hasClass(this.subitemButton(index), activeMenuButton);
+      await this.hasClass(this.subitemButton(index), "btn btn-light active");
     }
   }
 }

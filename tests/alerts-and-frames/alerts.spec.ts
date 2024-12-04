@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/pagesFixture.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 import {
   alertMessages,
@@ -62,7 +62,6 @@ test.describe.serial("Handling Alerts", async () => {
       alertMessages.prompt,
       "something"
     );
-    await alertsPage.button.clickElement(alertsPage.clickMeButton("promt"));
     await alertsPage.text.hasText(
       alertsPage.resultMessage("prompt"),
       resultMessage.prompt

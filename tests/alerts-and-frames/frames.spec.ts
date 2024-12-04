@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/pagesFixture.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 import { newWindowsContent } from "../../app/modules/alerts-and-frames/support/data.ts";
 

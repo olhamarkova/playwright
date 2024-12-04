@@ -1,4 +1,4 @@
-import { test, expect } from "../../fixtures/pagesFixture.ts";
+import { test, expect } from "../../fixtures/pages-fixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 import { newWindowsContent } from "../../app/modules/alerts-and-frames/support/data.ts";
 
@@ -18,11 +18,9 @@ test.describe.serial("New Tabs And Windows", async () => {
     });
 
     test.step("Step 2: All Buttons Should Be Visible", async () => {
-      await windowsPage.buttons.isElementVisible(windowsPage.button("tab"));
-      await windowsPage.buttons.isElementVisible(windowsPage.button("window"));
-      await windowsPage.buttons.isElementVisible(
-        windowsPage.button("messageWindow")
-      );
+      await windowsPage.buttons.isVisible(windowsPage.button("tab"));
+      await windowsPage.buttons.isVisible(windowsPage.button("window"));
+      await windowsPage.buttons.isVisible(windowsPage.button("messageWindow"));
     });
   });
 
