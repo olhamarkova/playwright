@@ -10,8 +10,8 @@ export class Component implements Clickable {
   }
 
   //Locators
-  getLocator(selector: string, options?: GetLocatorOptions): Locator {
-    return this.page.locator(selector, options);
+  getByLocator(locator: string, options?: GetLocatorOptions): Locator {
+    return this.page.locator(locator, options);
   }
 
   getById(id: string): Locator {
@@ -26,7 +26,7 @@ export class Component implements Clickable {
     return this.page.locator(`label[for='${elementName}']`);
   }
 
-  getElByTitle(title: string, isExact: boolean): Locator {
+  getByTitle(title: string, isExact: boolean): Locator {
     return this.page.getByTitle(title, { exact: isExact });
   }
 
@@ -39,37 +39,23 @@ export class Component implements Clickable {
   }
 
   //Actions
-  async clickElement(
-    element: Locator | string,
-    options?: ClickOptions
-  ): Promise<void> {
-    await (element as Locator).click(options);
+  async click(element: Locator, options?: ClickOptions): Promise<void> {
+    await element.click(options);
   }
 
-  async dbClick(
-    element: Locator | string,
-    options?: ClickOptions
-  ): Promise<void> {
-    await (element as Locator).dblclick(options);
+  async dbClick(element: Locator, options?: ClickOptions): Promise<void> {
+    await element.dblclick(options);
   }
 
   //Assertions
-  async isElementVisible(
-    element: Locator | string,
-    isVisible = true
-  ): Promise<void> {
-    await expect(element as Locator).toBeVisible({ visible: isVisible });
+  async isVisible(element: Locator, isVisible = true): Promise<void> {
+    await expect(element).toBeVisible({ visible: isVisible });
   }
 
-  async isElementEnabled<T extends string | Locator>(
-    element: T,
-    isEnabled = true
-  ): Promise<void> {
-    if (!isEnabled) {
-      await expect(element as Locator).toBeDisabled();
-    } else {
-      await expect(element as Locator).toBeEnabled();
-    }
+  async isEnabled(element: Locator, isEnabled = true): Promise<void> {
+    isEnabled
+      ? await expect(element).toBeDisabled()
+      : await expect(element).toBeEnabled();
   }
 
   async hasCount(element: Locator, count: number): Promise<void> {
@@ -85,19 +71,19 @@ export class Component implements Clickable {
   }
 
   async hasCSS(
-    element: Locator | string,
+    element: Locator,
     css: { property: string; value: string }
   ): Promise<void> {
-    await expect(element as Locator).toHaveCSS(css.property, css.value);
+    await expect(element).toHaveCSS(css.property, css.value);
   }
 
   /**
    * Check the visibility of group of elements by locator
    * @param elements - locator that returns a group of similar elements (i.e., all buttons on the page)
    */
-  async areElementsVisible(elements: Locator): Promise<void> {
+  async areVisible(elements: Locator): Promise<void> {
     for (let i = 0; i < (await elements.count()); i++) {
-      this.isElementVisible(elements.nth(i));
+      this.isVisible(elements.nth(i));
     }
   }
 }

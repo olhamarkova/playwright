@@ -8,7 +8,7 @@ export class Header extends Component implements Clickable {
   }
 
   header(): Locator {
-    return this.getLocator("header");
+    return this.getByLocator("header");
   }
 
   logo(): Locator {

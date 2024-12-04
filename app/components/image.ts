@@ -21,6 +21,6 @@ export class Image extends Component implements Clickable {
   }
 
   svg(options?: GetLocatorOptions): Locator {
-    return this.getLocator("svg", options);
+    return this.getByLocator("svg", options);
   }
 }

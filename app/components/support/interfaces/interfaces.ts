@@ -2,7 +2,7 @@ import { Locator } from "@playwright/test";
 import { ClickOptions, CheckOptions, TextOptions } from "../types/options";
 
 export interface Clickable {
-  clickElement(element: Locator, options?: ClickOptions): void;
+  click(element: Locator, options?: ClickOptions): void;
   dbClick(element: Locator): void;
 }
 

@@ -7,7 +7,7 @@ export class Footer extends Component {
   }
 
   footer(): Locator {
-    return this.getLocator("footer");
+    return this.getByLocator("footer");
   }
 
   copyrightText(text: string): Locator {

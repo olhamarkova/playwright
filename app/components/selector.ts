@@ -12,7 +12,7 @@ export class Selector extends Component implements Clickable {
   }
 
   getByClass(className: string): Locator {
-    return this.getLocator(`select[class=".${className}"]`);
+    return this.getByLocator(`select[class=".${className}"]`);
   }
 
   async chooseOption(element: Locator, option: string): Promise<void> {

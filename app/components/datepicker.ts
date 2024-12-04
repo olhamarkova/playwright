@@ -23,7 +23,7 @@ export class Datepicker extends Component implements Clickable {
   }
 
   navigationButton(buttonAriaLabel: "Previous Month" | "Next Month"): Locator {
-    return this.button.getLocator(`button[aria-label="${buttonAriaLabel}"]`);
+    return this.button.getByLocator(`button[aria-label="${buttonAriaLabel}"]`);
   }
 
   day(day: Days): Locator {
@@ -45,6 +45,6 @@ export class Datepicker extends Component implements Clickable {
   }
 
   async chooseDayByNumber(day: Days): Promise<void> {
-    await this.button.clickElement(this.day(day));
+    await this.button.click(this.day(day));
   }
 }

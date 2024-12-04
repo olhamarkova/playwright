@@ -25,7 +25,7 @@ export class Navbar extends Component implements Clickable {
   }
 
   subitemButton(elementId: number): Locator {
-    return this.button.getLocator(`.show #item-${elementId}`);
+    return this.button.getByLocator(`.show #item-${elementId}`);
   }
 
   async validateItems(items: string[]): Promise<void> {
@@ -33,8 +33,8 @@ export class Navbar extends Component implements Clickable {
       if (el === "Book Store" || el === "Profile" || el === "Book Store API") {
         index++;
       }
-      await this.isElementVisible(this.subitem(el as NavbarItems));
-      await this.clickElement(this.subitem(el as NavbarItems));
+      await this.isVisible(this.subitem(el as NavbarItems));
+      await this.click(this.subitem(el as NavbarItems));
       if (el === "Book Store API") {
         return;
       }

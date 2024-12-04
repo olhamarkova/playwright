@@ -13,7 +13,7 @@ export class Filechooser extends Component implements Clickable {
   }
 
   chooseFileButton(): Locator {
-    return this.button.getLocator("input[type='file']");
+    return this.button.getByLocator("input[type='file']");
   }
 
   async uploadFile(button: Locator, fileName: string): Promise<void> {

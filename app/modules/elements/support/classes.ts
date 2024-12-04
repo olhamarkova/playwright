@@ -6,3 +6,9 @@ export const dynamicButtonsColor = {
 };
 
 export const activeMenuButton = "btn btn-light active";
+
+export const iconClasses = {
+  openFolder: "rct-icon rct-icon-parent-open",
+  closedFolder: "rct-icon rct-icon-parent-close",
+  halfCheckedIcon: "rct-icon rct-icon-half-check",
+};

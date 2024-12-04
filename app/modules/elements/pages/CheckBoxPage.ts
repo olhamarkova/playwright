@@ -4,7 +4,7 @@ import {
   Button,
   Checkbox,
 } from "../../../components/support/component-service";
-import { CheckboxLabels } from "../../elementsPages/support/types";
+import { CheckboxLabels } from "../../elements/support/types";
 
 export class CheckBoxPage extends BasePage {
   readonly button: Button;
@@ -39,13 +39,11 @@ export class CheckBoxPage extends BasePage {
     await this.checkbox.clickElement(this.checkboxLabel(category));
   }
 
-  async validateAllCheckboxes(toBeChecked: boolean = false): Promise<void> {
+  async validateCheckboxes(checked: boolean = false): Promise<void> {
     const checkboxes = this.checkbox.getByType();
     for (let i = 0; i < (await checkboxes.count()); i++)
-      if (!toBeChecked) {
-        await expect(checkboxes.nth(i)).not.toBeChecked();
-      } else {
-        await expect(checkboxes.nth(i)).toBeChecked();
-      }
+      checked
+        ? await expect(checkboxes.nth(i)).not.toBeChecked()
+        : await expect(checkboxes.nth(i)).toBeChecked();
   }
 }

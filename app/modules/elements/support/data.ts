@@ -15,13 +15,6 @@ export const userData = {
   permanentAddress: "test street 2",
 };
 
-//Check Box
-export const iconClasses = {
-  openFolder: "rct-icon rct-icon-parent-open",
-  closedFolder: "rct-icon rct-icon-parent-close",
-  halfCheckedIcon: "rct-icon rct-icon-half-check",
-};
-
 //Radio Buttons
 export const questionText = "Do you like the site?";
 
