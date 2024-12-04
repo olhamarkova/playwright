@@ -3,7 +3,7 @@ import {
   generateRandomPassword,
   generateRandomUsername,
 } from "../../utils/generateUserCreds.ts";
-import { BookSchema } from "../../app/modules/bookStore/apiRequests/support/models.ts";
+import { BookSchema } from "../../app/modules/book-store/api/support/models.ts";
 import Ajv from "ajv";
 
 const validateBookSchema = new Ajv().compile(BookSchema);
@@ -66,9 +66,9 @@ apiTest.describe.serial("API Tests", () => {
         expect(newUser.responseBody.username).toBe(userName);
 
         await apiTest.step("Step 4: Delete The User By ID", async () => {
-          const isDeleteUser = await user.deleteUser(token, userId);
-          expect(isDeleteUser.statusCode).toBe(204);
-          expect(isDeleteUser.statusMessage).toBe("No Content");
+          const isDeleted = await user.deleteUser(token, userId);
+          expect(isDeleted.statusCode).toBe(204);
+          expect(isDeleted.statusMessage).toBe("No Content");
         });
       });
     }
@@ -112,13 +112,10 @@ apiTest.describe.serial("API Tests", () => {
           password: userPass,
         });
         newUserId = newUser.responseBody.userID;
-        const generateTokenForNewUser = await user.generateToken(
-          userName,
-          userPass
-        );
+        const generateToken = await user.generateToken(userName, userPass);
 
         //Get a token for a new user
-        newUserToken = await generateTokenForNewUser.responseBody.token;
+        newUserToken = await generateToken.responseBody.token;
 
         //Add book to the user
         const addBook = await books.addListOfBooks(
