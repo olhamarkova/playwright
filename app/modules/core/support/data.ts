@@ -8,7 +8,7 @@ export const categories = {
   books: "Book Store Application",
 };
 
-export const sidebarItems = {
+export const navigationItems = {
   elements: [
     "Text Box",
     "Check Box",
@@ -49,7 +49,7 @@ export const sidebarItems = {
   bookStoreApplication: ["Login", "Book Store", "Profile", "Book Store API"],
 };
 
-export const pageUrls = {
+export const urls = {
   categories: {
     elements: "elements",
     forms: "forms",

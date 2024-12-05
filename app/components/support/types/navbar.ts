@@ -1,4 +1,4 @@
-export type ElementsMenuSubItems =
+export type ElementsNavbar =
   | "Text Box"
   | "Check Box"
   | "Radio Button"
@@ -9,16 +9,16 @@ export type ElementsMenuSubItems =
   | "Upload and Download"
   | "Dynamic Properties";
 
-export type FormMenuSubItems = "Practice Form";
+export type FormNavbar = "Practice Form";
 
-export type WindowsMenuSubItems =
+export type WindowsNavbar =
   | "Browser Windows"
   | "Alerts"
   | "Frames"
   | "Nested Frames"
   | "Modal Dialogs";
 
-export type WidgetsMenuSubItems =
+export type WidgetsNavbar =
   | "Accordian"
   | "Auto Complete"
   | "Date Picker"
@@ -29,23 +29,23 @@ export type WidgetsMenuSubItems =
   | "Menu"
   | "Select Menu";
 
-export type InteractionsMenuSubItems =
+export type InteractionsNavbar =
   | "Sortable"
   | "Selectable"
   | "Resizable"
   | "Droppable"
   | "Dragabble";
 
-export type BookStoreMenuItems =
+export type BookStoreNavbar =
   | "Login"
   | "Book Store"
   | "Profile"
   | "Book Store API";
 
 export type NavbarItems =
-  | ElementsMenuSubItems
-  | FormMenuSubItems
-  | WindowsMenuSubItems
-  | WidgetsMenuSubItems
-  | InteractionsMenuSubItems
-  | BookStoreMenuItems;
+  | ElementsNavbar
+  | FormNavbar
+  | WindowsNavbar
+  | WidgetsNavbar
+  | InteractionsNavbar
+  | BookStoreNavbar;

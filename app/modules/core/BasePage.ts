@@ -10,7 +10,6 @@ import {
   Footer,
   Heading,
 } from "../../components/support/component-service.ts";
-import { Headings } from "./support/types.ts";
 import { GetLocatorOptions } from "../../components/support/types/options.ts";
 
 export default class BasePage {

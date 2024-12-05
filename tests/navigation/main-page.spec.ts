@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/pagesFixture";
+import { test } from "../../fixtures/pages-fixture";
 import {
   copyRightText,
   title,
@@ -18,22 +18,22 @@ test.describe("Main Page Smoke Tests", () => {
     });
 
     await test.step("Step 2: The Page Should Have A Header", async () => {
-      await mainPage.header.isElementVisible(mainPage.header.getHeader());
+      await mainPage.header.isVisible(mainPage.header.header());
     });
 
     await test.step("Step 3: The Logo Should Be Visible", async () => {
-      await mainPage.header.isElementVisible(mainPage.logo);
+      await mainPage.header.isVisible(mainPage.logo);
     });
 
     await test.step("Step 4: The Navigation Cards Should Be Presented On The Page", async () => {
-      await mainPage.icon.areElementsVisible(mainPage.cardLogos);
-      await mainPage.heading.areElementsVisible(mainPage.cardTitles);
+      await mainPage.icon.areVisible(mainPage.cardLogos);
+      await mainPage.heading.areVisible(mainPage.cardTitles);
     });
 
     await test.step("Step 5: The Footer Be Visible And Contain Copyright Info", async () => {
-      await mainPage.footer.isElementVisible(mainPage.footer.getFooter());
-      await mainPage.footer.isElementVisible(
-        mainPage.footer.getCopyrightText(copyRightText)
+      await mainPage.footer.isVisible(mainPage.footer.footer());
+      await mainPage.footer.isVisible(
+        mainPage.footer.copyrightText(copyRightText)
       );
     });
   });
