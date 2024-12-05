@@ -1,11 +1,11 @@
 import { test } from "../../fixtures/pages-fixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 import {
-  alertMessages,
+  alertMessage,
   resultMessage,
 } from "../../app/modules/alerts-and-frames/support/data.ts";
 
-test.describe.serial("Handling Alerts", async () => {
+test.describe("Handling Alerts", async () => {
   test.beforeEach(async ({ alertsPage }) => {
     await alertsPage.visit();
   });
@@ -30,23 +30,23 @@ test.describe.serial("Handling Alerts", async () => {
   }) => {
     await alertsPage.confirmAlert(
       alertsPage.clickMeButton("alert"),
-      alertMessages.alert
+      alertMessage.alert
     );
   });
 
   test("@functional User Shall See An Alert In 5 Seconds", async ({
     alertsPage,
   }) => {
-    await alertsPage.confirmAlert(
+    await alertsPage.confirmDelayedAlert(
       alertsPage.clickMeButton("timerAlert"),
-      alertMessages.delayedAlert
+      alertMessage.delayedAlert
     );
   });
 
   test("@functional User Shall Dismiss An Alert", async ({ alertsPage }) => {
     await alertsPage.dismsissAlert(
       alertsPage.clickMeButton("confirm"),
-      alertMessages.confirmAlert
+      alertMessage.confirmAlert
     );
     await alertsPage.text.hasText(
       alertsPage.resultMessage("confirm"),
@@ -59,7 +59,7 @@ test.describe.serial("Handling Alerts", async () => {
   }) => {
     await alertsPage.confirmAlert(
       alertsPage.clickMeButton("promt"),
-      alertMessages.prompt,
+      alertMessage.prompt,
       "something"
     );
     await alertsPage.text.hasText(

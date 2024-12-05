@@ -6,7 +6,7 @@ export const newWindowsContent = {
 };
 
 //Alerts page
-export const alertMessages = {
+export const alertMessage = {
   alert: "You clicked a button",
   delayedAlert: "This alert appeared after 5 seconds",
   confirmAlert: "Do you confirm action?",

@@ -24,4 +24,17 @@ export class AlertsPage extends BasePage {
   resultMessage(msg: "confirm" | "prompt"): Locator {
     return this.text.getById(`${msg}Result`);
   }
+
+  async confirmDelayedAlert(
+    element: Locator,
+    message: string,
+    prompt?: string
+  ): Promise<void> {
+    const [dialog] = await Promise.all([
+      this.page.waitForEvent("dialog"),
+      element.click(),
+    ]);
+    expect(dialog.message()).toBe(message);
+    await dialog.accept(prompt ? prompt : "");
+  }
 }

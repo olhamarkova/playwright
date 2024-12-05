@@ -2,7 +2,7 @@ import { test, expect } from "../../fixtures/pages-fixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 import { newWindowsContent } from "../../app/modules/alerts-and-frames/support/data.ts";
 
-test.describe.serial("New Tabs And Windows", async () => {
+test.describe("New Tabs And Windows", async () => {
   test.beforeEach(async ({ windowsPage }) => {
     await windowsPage.visit();
   });
@@ -26,12 +26,8 @@ test.describe.serial("New Tabs And Windows", async () => {
 
   test("@functional The Button 'New Tab' Should Open A New Tab", async ({
     windowsPage,
-    context,
   }) => {
-    const newPage = await windowsPage.openNewTab(
-      context,
-      windowsPage.button("tab")
-    );
+    const newPage = await windowsPage.openNewTab(windowsPage.button("tab"));
     await expect(newPage.locator("h1")).toHaveText(newWindowsContent.title);
     await newPage.close();
   });

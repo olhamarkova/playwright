@@ -20,6 +20,7 @@ export default class BasePage {
   readonly footer: Footer;
   readonly navbar: Navbar;
   readonly heading: Heading;
+  readonly context: BrowserContext;
 
   constructor(page: Page, url: string = "") {
     this.page = page;
@@ -29,6 +30,7 @@ export default class BasePage {
     this.logo = new Header(this.page).logo();
     this.footer = new Footer(this.page);
     this.navbar = new Navbar(this.page);
+    this.context = this.page.context();
   }
 
   mainHeading(options?: GetLocatorOptions): Locator {
@@ -51,8 +53,8 @@ export default class BasePage {
     await expect(this.page).toHaveTitle(titleText);
   }
 
-  async openNewTab(context: BrowserContext, element: Locator): Promise<Page> {
-    const pagePromise = context.waitForEvent("page");
+  async openNewTab(element: Locator): Promise<Page> {
+    const pagePromise = this.context.waitForEvent("page");
     await element.click();
     const newPage = await pagePromise;
     await newPage.waitForLoadState();
@@ -72,21 +74,19 @@ export default class BasePage {
     message: string,
     prompt?: string
   ): Promise<void> {
-    const [dialog] = await Promise.all([
-      this.page.waitForEvent("dialog"),
-      element.click(),
-    ]);
-    expect(dialog.message()).toBe(message);
-    await dialog.accept(prompt ? prompt : "");
+    this.page.on("dialog", (dialog) => {
+      expect(dialog.message()).toBe(message);
+      dialog.accept(prompt ? prompt : "");
+    });
+    element.click();
   }
 
   async dismsissAlert(element: Locator, message?: string) {
-    const [dialog] = await Promise.all([
-      this.page.waitForEvent("dialog"),
-      element.click(),
-    ]);
-    if (message) expect(dialog.message()).toBe(message);
-    await dialog.dismiss();
+    this.page.on("dialog", (dialog) => {
+      if (message) expect(dialog.message()).toBe(message);
+      dialog.dismiss();
+    });
+    element.click();
   }
 
   async wait(time: number) {
