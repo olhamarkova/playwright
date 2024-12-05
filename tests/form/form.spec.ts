@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/pagesFixture.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
 import { headings } from "../../app/modules/core/support/data.ts";
 import {
   formTitle,
@@ -17,7 +17,7 @@ test.describe("Practice Form Tests", () => {
 
   test("@smoke The Form Should Be Visible", async ({ formPage }) => {
     await test.step("Step 1: Check The Page Heading", async () => {
-      await formPage.heading.hasText(formPage.pageTitle("h1"), headings.form);
+      await formPage.heading.hasText(formPage.mainHeading(), headings.form);
     });
 
     await test.step("Step 2: Check The Form Heading", async () => {
@@ -59,7 +59,7 @@ test.describe("Practice Form Tests", () => {
     });
 
     await test.step("Step 3: Choose Gender", async () => {
-      await formPage.radio.clickElement(formPage.genderRadio(Genders.Female));
+      await formPage.radio.click(formPage.genderRadio(Genders.Female));
       await formPage.checkbox.isChecked(
         formPage.genderRadio(Genders.Female),
         true
@@ -78,10 +78,8 @@ test.describe("Practice Form Tests", () => {
     });
 
     await test.step("Step 5: Choose The Date Of Birth", async () => {
-      await formPage.form.clickElement(formPage.formInputs("dateOfBirthInput"));
-      await formPage.datepicker.isElementVisible(
-        formPage.datepicker.getDatepicker()
-      );
+      await formPage.form.click(formPage.formInputs("dateOfBirthInput"));
+      await formPage.datepicker.isVisible(formPage.datepicker.getDatepicker());
       await formPage.datepicker.chooseYear("1990");
       await formPage.datepicker.chooseMonth(Month.June);
       await formPage.datepicker.chooseDayByNumber(25);
@@ -92,20 +90,20 @@ test.describe("Practice Form Tests", () => {
     });
 
     await test.step("Step 6: Choose The Subject", async () => {
-      await formPage.form.clickElement(formPage.subjectInput);
+      await formPage.form.click(formPage.subjectInput);
       await formPage.form.input.fillOutSequentially(
         formPage.subjectInput,
         "Ma"
       );
-      await formPage.form.clickElement(
+      await formPage.form.click(
         formPage.form.getByText(studentData.subjects[0])
       );
-      await formPage.form.clickElement(formPage.subjectInput);
+      await formPage.form.click(formPage.subjectInput);
       await formPage.form.input.fillOutSequentially(
         formPage.subjectInput,
         "Che"
       );
-      await formPage.form.clickElement(
+      await formPage.form.click(
         formPage.form.getByText(studentData.subjects[1])
       );
       await formPage.chicklet.hasText(
@@ -126,7 +124,7 @@ test.describe("Practice Form Tests", () => {
 
     await test.step("Step 8: Add A Photo", async () => {
       await formPage.filechooser.uploadFile(
-        formPage.filechooser.getChooseFileButton(),
+        formPage.filechooser.chooseFileButton(),
         studentData.picture
       );
     });
@@ -143,31 +141,27 @@ test.describe("Practice Form Tests", () => {
     });
 
     await test.step("Step 10: Select A State And A City", async () => {
-      await formPage.selector.clickElement(
-        formPage.stateAndCitySelector("state")
-      );
-      await formPage.selector.clickElement(
+      await formPage.selector.click(formPage.stateAndCitySelector("state"));
+      await formPage.selector.click(
         formPage.selector.getByText(studentData.state)
       );
 
-      await formPage.selector.clickElement(
-        formPage.stateAndCitySelector("city")
-      );
-      await formPage.selector.clickElement(
+      await formPage.selector.click(formPage.stateAndCitySelector("city"));
+      await formPage.selector.click(
         formPage.selector.getByText(studentData.city)
       );
     });
 
     await test.step("Step 11: Submit The Form", async () => {
-      await formPage.form.button.clickElement(formPage.submitBtn);
+      await formPage.form.button.click(formPage.submitBtn);
       await formPage.resultsModal.title.hasText(
         formPage.resultsModalHeading,
         resultsModalTitle
       );
       await formPage.validateResultsTable(studentInfo);
       await formPage.closeModal();
-      await formPage.resultsModal.isElementVisible(
-        formPage.resultsModal.getModal(),
+      await formPage.resultsModal.isVisible(
+        formPage.resultsModal.modal(),
         false
       );
     });

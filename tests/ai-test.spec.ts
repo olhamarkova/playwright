@@ -1,6 +1,6 @@
 //Experimental test using AI
 
-import { aiTest } from "../fixtures/aiFixture";
+import { aiTest } from "../fixtures/ai-fixture";
 
 aiTest.describe("AI Powered Test", async () => {
   aiTest("Simple AI Test", async ({ ai, page }) => {
