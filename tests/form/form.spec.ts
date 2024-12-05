@@ -141,12 +141,12 @@ test.describe("Practice Form Tests", () => {
     });
 
     await test.step("Step 10: Select A State And A City", async () => {
-      await formPage.selector.click(formPage.stateAndCitySelector("state"));
+      await formPage.selector.click(formPage.stateSelector("state"));
       await formPage.selector.click(
         formPage.selector.getByText(studentData.state)
       );
 
-      await formPage.selector.click(formPage.stateAndCitySelector("city"));
+      await formPage.selector.click(formPage.stateSelector("city"));
       await formPage.selector.click(
         formPage.selector.getByText(studentData.city)
       );

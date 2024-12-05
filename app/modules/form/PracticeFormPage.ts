@@ -44,7 +44,7 @@ export class PracticeFormPage extends BasePage {
     this.resultsTable = new Table(this.page);
 
     this.formTitle = this.heading.getByClass("practice-form-wrapper h5");
-    this.addressTextArea = this.form.input.getTextAreaById("currentAddress");
+    this.addressTextArea = this.form.input.getTextareaById("currentAddress");
     this.subjectInput = this.form.input.getByClass(
       "subjects-auto-complete__value-container"
     );
@@ -69,12 +69,12 @@ export class PracticeFormPage extends BasePage {
     return this.checkbox.getById(`hobbies-checkbox-${hobby}`);
   }
 
-  stateAndCitySelector(selectorId: "state" | "city") {
+  stateSelector(selectorId: "state" | "city") {
     return this.selector.getById(selectorId);
   }
 
-  getResultsTableCell(rowNumber: number, cellContent: string) {
-    return this.resultsTable.getLocator(
+  resultsTableCell(rowNumber: number, cellContent: string) {
+    return this.resultsTable.getByLocator(
       `//table//tr[${rowNumber}]/td[contains(.,"${cellContent}")]`
     );
   }
@@ -86,13 +86,13 @@ export class PracticeFormPage extends BasePage {
     let rowNumber = 1;
 
     for (const [label, value] of studentInfo.entries()) {
-      const isLabelValid = await this.getResultsTableCell(
+      const isLabelValid = await this.resultsTableCell(
         rowNumber,
         label
       ).isVisible();
       if (isLabelValid) {
-        await this.resultsTable.isElementVisible(
-          this.getResultsTableCell(rowNumber, value)
+        await this.resultsTable.isVisible(
+          this.resultsTableCell(rowNumber, value)
         );
       }
 
