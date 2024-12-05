@@ -18,31 +18,23 @@ export class LinksPage extends BasePage {
     this.dynamicLink = this.link.getByName("Home", false).nth(1);
   }
 
-  async validateLinks(elementNames: string[]): Promise<void> {
-    for (let i = 0; i < elementNames.length; i++) {
-      const element = this.link.getByName(elementNames[i]);
-      await this.link.isVisible(element);
-    }
-  }
-
   async validateLinkResponse(link: string, status: number): Promise<void> {
     const responsePromise = this.page.waitForResponse(
       (resp) => resp.url().includes(link) && resp.request().method() === "GET"
     );
     try {
-      let responseName: string | null;
-      const responses = responseStatuses;
-      if (responses.has(status)) {
-        responseName = responses.get(status) as string;
+      let responseText: string | null;
+      if (responseStatuses.has(status)) {
+        responseText = responseStatuses.get(status) as string;
       }
       if (status === 301) {
         await this.link.click(this.link.getByName("Moved"));
       } else {
-        await this.link.click(this.link.getByName(responseName!));
+        await this.link.click(this.link.getByName(responseText!));
       }
       const resp = await responsePromise;
       expect(resp.status()).toBe(status);
-      expect(resp.statusText()).toBe(responseName!);
+      expect(resp.statusText()).toBe(responseText!);
     } catch {
       throw new Error("Something went wrong. Please check your data");
     }

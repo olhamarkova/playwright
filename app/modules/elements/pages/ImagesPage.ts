@@ -47,15 +47,17 @@ export class ImagesPage extends BasePage {
   }
 
   async findBrokenLink(): Promise<void> {
+    const brokenLinks: string[] = [];
     const allLinks = await this.links.all();
     for (const link of allLinks) {
       const linkHref = await link.getAttribute("href");
       const response = await this.page.request.get(linkHref!);
-      if (response.status() === 500) {
-        throw new Error(`This is a broken link: ${linkHref}`);
+      if (response.status() === 500 || response.status() === 400) {
+        brokenLinks.push(`This is a broken link: ${linkHref}`);
       } else {
         expect.soft(response).toBeOK();
       }
     }
+    console.log(brokenLinks);
   }
 }

@@ -15,4 +15,11 @@ export class Link extends Component implements Clickable, Partial<Textual> {
   getByName(name: string, isExact: boolean = true): Locator {
     return this.page.getByRole("link", { name: name, exact: isExact });
   }
+
+  async validateByAnchors(anchors: string[]): Promise<void> {
+    for (let i = 0; i < anchors.length; i++) {
+      const element = this.getByName(anchors[i]);
+      await this.isVisible(element);
+    }
+  }
 }

@@ -51,7 +51,7 @@ export const subHeadings = [
   "Following links will send an api call",
 ];
 
-export const linkNames = [
+export const anchors = [
   "Home",
   "Created",
   "No Content",
@@ -63,13 +63,13 @@ export const linkNames = [
 ];
 
 export const requestLinks = {
-  created: "/created",
-  noContent: "/no-content",
-  moved: "/moved",
-  badRequest: "/bad-request",
-  unauthorized: "/unauthorized",
-  forbidden: "/forbidden",
-  notFound: "/invalid-url",
+  created: { link: "/created", code: 201 },
+  noContent: { link: "/no-content", code: 204 },
+  moved: { link: "/moved", code: 301 },
+  badRequest: { link: "/bad-request", code: 400 },
+  unauthorized: { link: "/unauthorized", code: 401 },
+  forbidden: { link: "/forbidden", code: 403 },
+  notFound: { link: "/invalid-url", code: 404 },
 };
 
 export const responseStatuses = new Map([

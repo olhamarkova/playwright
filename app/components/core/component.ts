@@ -54,8 +54,8 @@ export class Component implements Clickable {
 
   async isEnabled(element: Locator, isEnabled = true): Promise<void> {
     isEnabled
-      ? await expect(element).toBeDisabled()
-      : await expect(element).toBeEnabled();
+      ? await expect(element).toBeEnabled()
+      : await expect(element).toBeDisabled();
   }
 
   async hasCount(element: Locator, count: number): Promise<void> {
