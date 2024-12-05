@@ -39,11 +39,10 @@ export class CheckBoxPage extends BasePage {
     await this.checkbox.click(this.checkboxLabel(category));
   }
 
-  async validateCheckboxes(checked: boolean = false): Promise<void> {
-    const checkboxes = this.checkbox.getByType();
-    for (let i = 0; i < (await checkboxes.count()); i++)
+  async areChecked(checked: boolean = true): Promise<void> {
+    for (let i = 0; i < (await this.checkboxes.count()); i++)
       checked
-        ? await expect(checkboxes.nth(i)).not.toBeChecked()
-        : await expect(checkboxes.nth(i)).toBeChecked();
+        ? await expect(this.checkboxes.nth(i)).toBeChecked()
+        : await expect(this.checkboxes.nth(i)).not.toBeChecked();
   }
 }

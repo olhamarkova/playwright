@@ -44,7 +44,7 @@ test.describe("Checkbox Page Tests", () => {
     await test.step("Step 1: Expand All Categories", async () => {
       await checkboxPage.button.click(checkboxPage.expandButton("Expand"));
       await checkboxPage.checkbox.hasCount(checkboxPage.checkboxes, 17);
-      await checkboxPage.validateCheckboxes();
+      await checkboxPage.areChecked(false);
     });
 
     await test.step("Step 2: Collapse All Categories", async () => {
@@ -62,12 +62,12 @@ test.describe("Checkbox Page Tests", () => {
     await test.step("Step 1: Check All Categories", async () => {
       await checkboxPage.check(CheckboxLabels.Home);
       await checkboxPage.button.click(checkboxPage.expandButton("Expand"));
-      await checkboxPage.validateCheckboxes(true);
+      await checkboxPage.areChecked();
     });
 
     await test.step("Step 2: Uncheck All Categories", async () => {
       await checkboxPage.check(CheckboxLabels.Home);
-      await checkboxPage.validateCheckboxes();
+      await checkboxPage.areChecked(false);
     });
   });
 
@@ -108,7 +108,7 @@ test.describe("Checkbox Page Tests", () => {
         checkboxPage.getCheckbox(CheckboxLabels.Angular),
         false
       );
-      await checkboxPage.validateCheckboxes();
+      await checkboxPage.areChecked(false);
     });
   });
 });
