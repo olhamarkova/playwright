@@ -45,14 +45,6 @@ export default class BasePage {
     await this.logo.click();
   }
 
-  async hasUrl(url: string): Promise<void> {
-    await expect(this.page.url()).toContain(url);
-  }
-
-  async hasTitle(titleText: string): Promise<void> {
-    await expect(this.page).toHaveTitle(titleText);
-  }
-
   async openNewTab(element: Locator): Promise<Page> {
     const pagePromise = this.context.waitForEvent("page");
     await element.click();
@@ -95,5 +87,17 @@ export default class BasePage {
 
   async bringToFront() {
     await this.page.bringToFront();
+  }
+
+  async validateHeading(text: string): Promise<void> {
+    await this.heading.hasText(this.mainHeading(), text);
+  }
+
+  async hasUrl(url: string): Promise<void> {
+    await expect(this.page.url()).toContain(url);
+  }
+
+  async hasTitle(titleText: string): Promise<void> {
+    await expect(this.page).toHaveTitle(titleText);
   }
 }

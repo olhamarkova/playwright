@@ -52,6 +52,18 @@ export class Component implements Clickable {
     await expect(element).toBeVisible({ visible: isVisible });
   }
 
+  /**
+   * Check the visibility of group of elements by locator
+   * @param elements - locator that returns a group of similar elements (i.e., all buttons on the page)
+   */
+  async areVisible(elements: Locator): Promise<void> {
+    const qty = await this.getQuantity(elements);
+    if (qty === 1) throw new Error("There is only one element!");
+    for (let i = 0; i < qty; i++) {
+      this.isVisible(elements.nth(i));
+    }
+  }
+
   async isEnabled(element: Locator, isEnabled = true): Promise<void> {
     isEnabled
       ? await expect(element).toBeEnabled()
@@ -77,13 +89,9 @@ export class Component implements Clickable {
     await expect(element).toHaveCSS(css.property, css.value);
   }
 
-  /**
-   * Check the visibility of group of elements by locator
-   * @param elements - locator that returns a group of similar elements (i.e., all buttons on the page)
-   */
-  async areVisible(elements: Locator): Promise<void> {
-    for (let i = 0; i < (await elements.count()); i++) {
-      this.isVisible(elements.nth(i));
-    }
+  //Helpers
+  async getQuantity(elements: Locator): Promise<number> {
+    const quantity = await elements.count();
+    return quantity;
   }
 }

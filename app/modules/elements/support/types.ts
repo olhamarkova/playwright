@@ -34,3 +34,5 @@ export type TextBoxElementID =
   | "permanentAddress";
 
 export type RadioLabels = "yes" | "impressive" | "no";
+
+export type ClickMeButtons = "Double Click Me" | "Right Click Me" | "Click Me";
