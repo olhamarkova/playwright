@@ -3,7 +3,7 @@ import BasePage from "../core/BasePage";
 import { Text, Frame } from "../../components/support/component-service";
 import { Frames } from "./support/types";
 
-export class FramesPage extends BasePage {
+export class iFramesPage extends BasePage {
   readonly text: Text;
   readonly frame: Frame;
 
