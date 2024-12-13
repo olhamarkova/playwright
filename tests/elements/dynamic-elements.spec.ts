@@ -1,10 +1,9 @@
 import { test } from "../../fixtures/pages-fixture.ts";
-import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Dynamic Properties Page Tests", () => {
-  test.beforeEach(async ({ app: { dynamic } }) => {
+  test.beforeEach(async ({ app: { dynamic }, heading }) => {
     await dynamic.visit();
-    await dynamic.verifyHeading(headings.dynamic);
+    await dynamic.verifyHeading(heading.dynamic);
   });
 
   test("@smoke Verify The Text Message", async ({ app: { dynamic } }) => {

@@ -1,11 +1,10 @@
 import { test } from "../../fixtures/pages-fixture.ts";
-import { headings } from "../../app/modules/core/support/data.ts";
 import { Folders } from "../../app/modules/elements/support/types.ts";
 
 test.describe("Checkbox Page Tests", () => {
-  test.beforeEach(async ({ app: { checkboxes } }) => {
+  test.beforeEach(async ({ app: { checkboxes }, heading }) => {
     await checkboxes.visit();
-    await checkboxes.verifyHeading(headings.checkbox);
+    await checkboxes.verifyHeading(heading.checkbox);
   });
 
   test("@smoke The Checkbox Page Should Have All The Expected Elements", async ({

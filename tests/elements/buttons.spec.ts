@@ -1,10 +1,9 @@
 import { test } from "../../fixtures/pages-fixture.ts";
-import { headings } from "../../app/modules/core/support/data.ts";
 
 test.describe("Buttons Page Tests", () => {
-  test.beforeEach(async ({ app: { buttons } }) => {
+  test.beforeEach(async ({ app: { buttons }, heading }) => {
     await buttons.visit();
-    await buttons.verifyHeading(headings.buttons);
+    await buttons.verifyHeading(heading.buttons);
   });
 
   test("@functional User Shall Have The Ability To Click The Buttons", async ({
