@@ -12,7 +12,7 @@ import {
 } from "../../components/support/component-service.ts";
 import { GetLocatorOptions } from "../../components/support/types/options.ts";
 
-export default class BasePage {
+export default abstract class BasePage {
   protected page: Page;
   protected url: string;
   readonly header: Header;
@@ -53,7 +53,7 @@ export default class BasePage {
     return newPage;
   }
 
-  async openPopup(element: Locator) {
+  async openPopup(element: Locator): Promise<Page> {
     const popup = this.page.waitForEvent("popup");
     await element.click();
     const newPopup = await popup;
@@ -73,7 +73,7 @@ export default class BasePage {
     element.click();
   }
 
-  async dismsissAlert(element: Locator, message?: string) {
+  async dismsissAlert(element: Locator, message?: string): Promise<void> {
     this.page.on("dialog", (dialog) => {
       if (message) expect(dialog.message()).toBe(message);
       dialog.dismiss();
@@ -81,23 +81,24 @@ export default class BasePage {
     element.click();
   }
 
-  async wait(time: number) {
+  async wait(time: number): Promise<void> {
     await this.page.waitForTimeout(time);
   }
 
-  async bringToFront() {
+  async bringToFront(): Promise<void> {
     await this.page.bringToFront();
   }
 
-  async validateHeading(text: string): Promise<void> {
+  //Assertions
+  async verifyHeading(text: string): Promise<void> {
     await this.heading.hasText(this.mainHeading(), text);
   }
 
-  async hasUrl(url: string): Promise<void> {
+  async verifyUrl(url: string): Promise<void> {
     await expect(this.page.url()).toContain(url);
   }
 
-  async hasTitle(titleText: string): Promise<void> {
+  async verifyTitle(titleText: string): Promise<void> {
     await expect(this.page).toHaveTitle(titleText);
   }
 }

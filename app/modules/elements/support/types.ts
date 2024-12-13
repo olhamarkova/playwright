@@ -1,4 +1,4 @@
-export enum CheckboxLabels {
+export enum Folders {
   Home = "home",
   Desktop = "desktop",
   Notes = "notes",
@@ -17,6 +17,8 @@ export enum CheckboxLabels {
   Classified = "classified",
   General = "general",
 }
+
+export type ToggleLabel = "Home" | "Documents" | "WorkSpace";
 
 export enum AddRecordInputs {
   First_Name = "firstName",

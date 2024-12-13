@@ -4,7 +4,7 @@ import { MainPage } from "../modules/mainPage/MainPage";
 import { ElementsPage } from "../modules/elements/pages/ElementsPage";
 import { WebTablesPage } from "../modules/elements/pages/WebTablesPage";
 import { ButtonsPage } from "../modules/elements/pages/buttons-page";
-import { CheckBoxPage } from "../modules/elements/pages/CheckBoxPage";
+import { CheckBoxPage } from "../modules/elements/pages/checkbox-page";
 import { DynamicPage } from "../modules/elements/pages/DynamicPage";
 import { ImagesPage } from "../modules/elements/pages/ImagesPage";
 import { LinksPage } from "../modules/elements/pages/LinksPage";
