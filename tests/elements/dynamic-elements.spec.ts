@@ -1,43 +1,32 @@
-// import { test } from "../../fixtures/pages-fixture.ts";
-// import { dynamicText } from "../../app/modules/elements/support/data.ts";
-// import { headings } from "../../app/modules/core/support/data.ts";
-// import { dynamicButtonsColor } from "../../app/modules/elements/support/classes.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
+import { headings } from "../../app/modules/core/support/data.ts";
 
-// test.describe("Dynamic Properties Page Tests", () => {
-//   test.beforeEach(async ({ dynamicPage }) => {
-//     await dynamicPage.visit();
-//   });
+test.describe("Dynamic Properties Page Tests", () => {
+  test.beforeEach(async ({ app: { dynamic } }) => {
+    await dynamic.visit();
+    await dynamic.verifyHeading(headings.dynamic);
+  });
 
-//   test("@smoke The Page Should Have All The Expected Elements", async ({
-//     dynamicPage,
-//   }) => {
-//     await test.step("Step 1: Check The Page Headings", async () => {
-//       await dynamicPage.heading.hasText(
-//         dynamicPage.mainHeading(),
-//         headings.dynamic
-//       );
-//       await dynamicPage.text.isVisible(dynamicPage.text.getByText(dynamicText));
-//     });
+  test("@smoke Verify The Text Message", async ({ app: { dynamic } }) => {
+    await dynamic.verifyTextMessage();
+  });
 
-//     await test.step("Step 2: Check The Disabled Button", async () => {
-//       await dynamicPage.button.isEnabled(dynamicPage.disabledButton, false);
-//       await dynamicPage.button.hasCSS(dynamicPage.changeColorButton, {
-//         property: "color",
-//         value: dynamicButtonsColor.before,
-//       });
-//       await dynamicPage.wait(5000);
-//       await dynamicPage.button.isEnabled(dynamicPage.disabledButton);
-//       await dynamicPage.button.hasCSS(dynamicPage.changeColorButton, {
-//         property: "color",
-//         value: dynamicButtonsColor.after,
-//       });
-//     });
-//   });
+  test("@smoke Verify The Disabled Button", async ({ app: { dynamic } }) => {
+    await dynamic.verifyEnabled(false);
+    await dynamic.wait(5000);
+    await dynamic.verifyEnabled();
+  });
 
-//   test("@smoke Validate The Invisible Button", async ({ dynamicPage }) => {
-//     await test.step("Step 1: Check The Invisible Button", async () => {
-//       await dynamicPage.invisibleButton.waitFor();
-//       await dynamicPage.button.isVisible(dynamicPage.invisibleButton);
-//     });
-//   });
-// });
+  test("@smoke Verify The Changed Color Button", async ({
+    app: { dynamic },
+  }) => {
+    await dynamic.verifyColor("before");
+    await dynamic.wait(5000);
+    await dynamic.verifyColor("after");
+  });
+
+  test("@smoke Verify The Invisible Button", async ({ app: { dynamic } }) => {
+    await dynamic.waitForButton();
+    await dynamic.verifyVisible();
+  });
+});
