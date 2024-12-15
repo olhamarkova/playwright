@@ -15,29 +15,50 @@ export class Navbar extends Component implements Clickable {
     this.button = new Button(this.page);
   }
 
-  item(itemTitle: CategoryNames): Locator {
-    return this.navLink.getByText(itemTitle);
+  private category(category: CategoryNames): Locator {
+    return this.navLink.getByText(category);
   }
 
-  subitem(subitemText: NavbarItems): Locator {
-    return this.navLink.getByText(subitemText);
+  private subCategory(subCategory: NavbarItems): Locator {
+    return this.navLink.getByText(subCategory);
   }
 
-  subitemButton(elementId: number): Locator {
+  private subCategoryButton(elementId: number): Locator {
     return this.button.getByLocator(`.show #item-${elementId}`);
   }
 
-  async validateItems(items: string[]): Promise<void> {
+  private async verifySubCategoryVisible(
+    subCategory: NavbarItems
+  ): Promise<void> {
+    await this.isVisible(this.subCategory(subCategory));
+  }
+
+  private async verifyButtonClass(elementId: number) {
+    await this.hasClass(
+      this.subCategoryButton(elementId),
+      "btn btn-light active"
+    );
+  }
+
+  async openCategory(category: CategoryNames): Promise<void> {
+    await this.click(this.category(category));
+  }
+
+  async openSubCategory(subCategory: NavbarItems): Promise<void> {
+    await this.click(this.subCategory(subCategory));
+  }
+
+  async verifySubCategories(items: string[]): Promise<void> {
     for (let [index, el] of items.entries()) {
       if (el === "Book Store" || el === "Profile" || el === "Book Store API") {
         index++;
       }
-      await this.isVisible(this.subitem(el as NavbarItems));
-      await this.click(this.subitem(el as NavbarItems));
+      await this.verifySubCategoryVisible(el as NavbarItems);
+      await this.openSubCategory(el as NavbarItems);
       if (el === "Book Store API") {
         return;
       }
-      await this.hasClass(this.subitemButton(index), "btn btn-light active");
+      await this.verifyButtonClass(index);
     }
   }
 }

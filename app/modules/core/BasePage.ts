@@ -33,7 +33,7 @@ export default abstract class BasePage {
     this.context = this.page.context();
   }
 
-  mainHeading(options?: GetLocatorOptions): Locator {
+  protected mainHeading(options?: GetLocatorOptions): Locator {
     return this.heading.getHeading("h1", options);
   }
 

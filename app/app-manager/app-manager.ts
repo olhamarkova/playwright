@@ -1,7 +1,7 @@
 import { Page } from "@playwright/test";
 import { urls } from "..//modules/core/support/data";
 import { MainPage } from "../modules/mainPage/MainPage";
-import { ElementsPage } from "../modules/elements/pages/ElementsPage";
+import { ElementsPage } from "../modules/elements/pages/elements-page";
 import { WebTablesPage } from "../modules/elements/pages/WebTablesPage";
 import { ButtonsPage } from "../modules/elements/pages/buttons-page";
 import { CheckBoxPage } from "../modules/elements/pages/checkbox-page";
