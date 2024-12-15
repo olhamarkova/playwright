@@ -6,7 +6,7 @@ import { WebTablesPage } from "../modules/elements/pages/WebTablesPage";
 import { ButtonsPage } from "../modules/elements/pages/buttons-page";
 import { CheckBoxPage } from "../modules/elements/pages/checkbox-page";
 import { DynamicPage } from "../modules/elements/pages/dynamic-page";
-import { ImagesPage } from "../modules/elements/pages/ImagesPage";
+import { ImagesPage } from "../modules/elements/pages/images-page";
 import { LinksPage } from "../modules/elements/pages/LinksPage";
 import { RadioButtonPage } from "../modules/elements/pages/RadioButtonPage";
 import { TextBoxPage } from "../modules/elements/pages/TextBoxPage";

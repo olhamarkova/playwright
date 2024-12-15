@@ -1,54 +1,39 @@
-// import { test } from "../../fixtures/pages-fixture.ts";
-// import {
-//   linksText,
-//   subHeadingsText,
-// } from "../../app/modules/elements/support/data.ts";
-// import { headings } from "../../app/modules/core/support/data.ts";
+import { test } from "../../fixtures/pages-fixture.ts";
+import { linksText } from "../../app/modules/elements/support/data.ts";
 
-// test.describe("Images And Links Page Tests", () => {
-//   test.beforeEach(async ({ imagesPage }) => {
-//     await imagesPage.visit();
-//   });
+test.describe("Images And Links Page Tests", () => {
+  test.beforeEach(async ({ app: { images }, heading }) => {
+    await images.visit();
+    await images.verifyHeading(heading.images);
+  });
 
-//   test("@smoke The Images And Links Page Should Have All The Expected Elements", async ({
-//     imagesPage,
-//   }) => {
-//     await test.step("Step 1: Check The Page Headings", async () => {
-//       await imagesPage.heading.hasText(
-//         imagesPage.mainHeading(),
-//         headings.images
-//       );
-//       for (let i = 0; i < subHeadingsText.length; i++) {
-//         await imagesPage.text.isVisible(
-//           imagesPage.text.getByText(subHeadingsText[i])
-//         );
-//       }
-//     });
+  test("@smoke The Images And Links Page Should Have All The Expected Elements", async ({
+    app: { images },
+  }) => {
+    await test.step("Step 1: Verify Page Headings", async () => {
+      await images.verifySubHeadings();
+    });
 
-//     await test.step("Step 2: Check The Links", async () => {
-//       await imagesPage.link.isVisible(
-//         imagesPage.link.getByText(linksText.valid)
-//       );
-//       await imagesPage.link.isVisible(
-//         imagesPage.link.getByText(linksText.broken)
-//       );
-//     });
+    await test.step("Step 2: Verify Links", async () => {
+      await images.verifyLinkVisible(linksText.valid);
+      await images.verifyLinkVisible(linksText.broken);
+    });
 
-//     await test.step("Step 3: Check The Images", async () => {
-//       await imagesPage.image.isVisible(imagesPage.validImage);
-//       await imagesPage.image.isVisible(imagesPage.brokenImage); //pass though image is broken
-//     });
-//   });
+    await test.step("Step 3: Verify Images", async () => {
+      await images.verifyImageVisible("valid");
+      await images.verifyImageVisible("broken");
+    });
+  });
 
-//   test("@negative Validate Images", async ({ imagesPage }) => {
-//     await test.step("Step 1: Find the broken image", async () => {
-//       await imagesPage.findBrokenImage();
-//     });
-//   });
+  test("@negative Verify Images: Find the broken image", async ({
+    app: { images },
+  }) => {
+    await images.findBrokenImage();
+  });
 
-//   test("@negative Validate Links", async ({ imagesPage }) => {
-//     await test.step("Step 1: Find The Broken Link", async () => {
-//       await imagesPage.findBrokenLink();
-//     });
-//   });
-// });
+  test("@negative Verify Links: Find The Broken Link", async ({
+    app: { images },
+  }) => {
+    await images.findBrokenLink();
+  });
+});
