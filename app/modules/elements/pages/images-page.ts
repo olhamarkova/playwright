@@ -45,16 +45,6 @@ export class ImagesPage extends BasePage {
     return await element.getAttribute(attribute);
   }
 
-  private isSrcValid(src: string | null): boolean {
-    if (src || src!.length !== 0) {
-      return true;
-    } else return false;
-  }
-
-  private isSrcNotEmpty(src: string | null): boolean {
-    return src!.length > 0 ? true : false;
-  }
-
   private sendError(item: string | Locator): never {
     throw new Error(`This is a broken image: ${item}`);
   }
@@ -67,6 +57,10 @@ export class ImagesPage extends BasePage {
     expect.soft(response.status()).toBe(200);
   }
 
+  private addToList(list: string[], item: string): void {
+    list.push(`This is a broken link: ${item}`);
+  }
+
   private showInConsole(message: string | string[]): void {
     console.log(message);
   }
@@ -76,9 +70,14 @@ export class ImagesPage extends BasePage {
       return true;
     } else return false;
   }
+  private isSrcValid(src: string | null): boolean {
+    if (src || src!.length !== 0) {
+      return true;
+    } else return false;
+  }
 
-  private addToList(list: string[], item: string): void {
-    list.push(`This is a broken link: ${item}`);
+  private isSrcNotEmpty(src: string | null): boolean {
+    return src!.length > 0 ? true : false;
   }
 
   async findBrokenImage(): Promise<void> {
