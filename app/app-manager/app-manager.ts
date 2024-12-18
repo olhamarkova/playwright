@@ -7,7 +7,7 @@ import { ButtonsPage } from "../modules/elements/pages/buttons-page";
 import { CheckBoxPage } from "../modules/elements/pages/checkbox-page";
 import { DynamicPage } from "../modules/elements/pages/dynamic-page";
 import { ImagesPage } from "../modules/elements/pages/images-page";
-import { LinksPage } from "../modules/elements/pages/LinksPage";
+import { LinksPage } from "../modules/elements/pages/links-page";
 import { RadioButtonPage } from "../modules/elements/pages/RadioButtonPage";
 import { TextBoxPage } from "../modules/elements/pages/TextBoxPage";
 import { UploadPage } from "../modules/elements/pages/UploadPage";
