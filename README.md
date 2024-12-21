@@ -8,6 +8,6 @@ It is a DEMO project where I implemented a few different approaches:
 - Data-driven tests;
 - Playwright Fixtures.
 
-Please don't consider this project as real. It's my place for experiments.
+Please don't consider this project as real. It's my place for experiments, and it is for demonstration purposes only.
 
 Therefore, I reserve the right to do any nonsense here.

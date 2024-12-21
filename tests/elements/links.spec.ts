@@ -21,7 +21,6 @@ test.describe("Links Page Tests", () => {
 
     await test.step("Step 2: Verify 'Home' Dynamic Link", async () => {
       await links.verifyNewTabOpened(links.dynamicLink);
-      await links.bringToFront();
     });
   });
 

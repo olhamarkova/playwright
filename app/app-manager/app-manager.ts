@@ -8,7 +8,7 @@ import { CheckBoxPage } from "../modules/elements/pages/checkbox-page";
 import { DynamicPage } from "../modules/elements/pages/dynamic-page";
 import { ImagesPage } from "../modules/elements/pages/images-page";
 import { LinksPage } from "../modules/elements/pages/links-page";
-import { RadioButtonPage } from "../modules/elements/pages/RadioButtonPage";
+import { RadioButtonPage } from "../modules/elements/pages/radio-page";
 import { TextBoxPage } from "../modules/elements/pages/TextBoxPage";
 import { UploadPage } from "../modules/elements/pages/UploadPage";
 import { PracticeFormPage } from "../modules/form/PracticeFormPage";
