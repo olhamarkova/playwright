@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import BasePage from "../../core/BasePage";
-import { TextBoxElementID } from "../../elements/support/types";
+import { InputId, OutputElementId } from "../../elements/support/types";
 import {
   Input,
   Text,
@@ -12,13 +12,9 @@ export class TextBoxPage extends BasePage {
   readonly textBox: Text;
   readonly button: Button;
 
-  readonly fullNameInput: Locator;
-  readonly emailInput: Locator;
-  readonly currentAddressInput: Locator;
-  readonly permanentAddress: Locator;
-  readonly submitButton: Locator;
-  readonly output: Locator;
-  readonly emailBorderCss: string;
+  private readonly submitButton: Locator;
+  private readonly output: Locator;
+  public readonly errorBorderCss: string;
 
   constructor(page: Page, url: string) {
     super(page, url);
@@ -26,23 +22,35 @@ export class TextBoxPage extends BasePage {
     this.textBox = new Text(this.page);
     this.button = new Button(this.page);
 
-    this.emailBorderCss = "1px solid rgb(255, 0, 0)";
-    this.fullNameInput = this.input.getById("userName");
-    this.emailInput = this.input.getById("userEmail");
-    this.currentAddressInput = this.input.getTextareaById("currentAddress");
-    this.permanentAddress = this.input.getTextareaById("permanentAddress");
+    this.errorBorderCss = "1px solid rgb(255, 0, 0)";
     this.submitButton = this.button.getById("submit");
     this.output = this.textBox.getById("output");
   }
 
-  userInfoOutput(elementId: TextBoxElementID): Locator {
+  private userInfoOutput(elementId: OutputElementId): Locator {
     return this.output.locator(`#${elementId}`);
   }
 
-  async validateUserInfoOutput(
-    elementId: TextBoxElementID,
-    text: string
-  ): Promise<void> {
+  private inputField(id: InputId): Locator {
+    return this.input.getById(id);
+  }
+
+  async enterData(inputId: InputId, value: string): Promise<void> {
+    await this.input.fillOut(this.inputField(inputId), value);
+  }
+
+  async submitForm(): Promise<void> {
+    await this.button.click(this.submitButton);
+  }
+
+  async verifyInputBorder(inputId: InputId, cssValue: string) {
+    await this.textBox.hasCSS(this.inputField(inputId), {
+      property: "border",
+      value: cssValue,
+    });
+  }
+
+  async verifyOutput(elementId: OutputElementId, text: string): Promise<void> {
     switch (elementId) {
       case "name":
         await expect(this.userInfoOutput(elementId)).toHaveText(`Name:${text}`);

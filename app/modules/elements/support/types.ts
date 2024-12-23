@@ -29,9 +29,15 @@ export enum AddRecordInputs {
   Department = "department",
 }
 
-export type TextBoxElementID =
+export type OutputElementId =
   | "name"
   | "email"
+  | "currentAddress"
+  | "permanentAddress";
+
+export type InputId =
+  | "userName"
+  | "userEmail"
   | "currentAddress"
   | "permanentAddress";
 
