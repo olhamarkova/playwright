@@ -5,17 +5,16 @@ import { Link } from "../../../components/support/component-service";
 import { title } from "../../core/support/data";
 
 export class LinksPage extends BasePage {
-  readonly link: Link;
-  readonly links: Locator;
-  readonly subHeadings: Locator;
-  readonly dynamicLink: Locator;
-  readonly homeLink: Locator;
+  public readonly link: Link;
+
+  private readonly subHeadings: Locator;
+  public readonly dynamicLink: Locator;
+  public readonly homeLink: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
     this.link = new Link(this.page);
 
-    this.links = this.link.getByLocator("p a");
     this.subHeadings = this.heading.getHeading("h5");
     this.dynamicLink = this.link.getByName("Home", false).nth(1);
     this.homeLink = this.link.getByName("Home");
@@ -71,7 +70,7 @@ export class LinksPage extends BasePage {
   }
 
   async verifySubHeadings() {
-    await this.heading.hasText(this.heading.getHeading("h5"), subHeadings);
+    await this.heading.hasText(this.subHeadings, subHeadings);
   }
 
   async verifyNewTabOpened(link: Locator) {

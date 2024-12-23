@@ -8,9 +8,8 @@ export class RadioButtonPage extends BasePage {
   readonly radio: Radio;
   readonly textBox: Text;
 
-  readonly question: Locator;
-  readonly radioButtons: Locator;
-  readonly successMsg: Locator;
+  private readonly question: Locator;
+  private readonly successMsg: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
