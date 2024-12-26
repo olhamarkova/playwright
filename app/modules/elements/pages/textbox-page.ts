@@ -53,20 +53,26 @@ export class TextBoxPage extends BasePage {
   async verifyOutput(elementId: OutputElementId, text: string): Promise<void> {
     switch (elementId) {
       case "name":
-        await expect(this.userInfoOutput(elementId)).toHaveText(`Name:${text}`);
+        await this.textBox.hasText(
+          this.userInfoOutput(elementId),
+          `Name:${text}`
+        );
         break;
       case "email":
-        await expect(this.userInfoOutput(elementId)).toHaveText(
+        await this.textBox.hasText(
+          this.userInfoOutput(elementId),
           `Email:${text}`
         );
         break;
       case "currentAddress":
-        await expect(this.userInfoOutput(elementId)).toHaveText(
+        await this.textBox.hasText(
+          this.userInfoOutput(elementId),
           `Current Address :${text}`
         );
         break;
       case "permanentAddress":
-        await expect(this.userInfoOutput(elementId)).toHaveText(
+        await this.textBox.hasText(
+          this.userInfoOutput(elementId),
           `Permananet Address :${text}`
         );
         break;
