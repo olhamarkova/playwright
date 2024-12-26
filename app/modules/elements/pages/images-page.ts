@@ -8,9 +8,9 @@ import {
 import { imagesSrc, subHeadingsText } from "../support/data";
 
 export class ImagesPage extends BasePage {
-  readonly image: Image;
-  readonly link: Link;
-  readonly text: Text;
+  private readonly image: Image;
+  private readonly link: Link;
+  private readonly text: Text;
 
   private readonly validImage: Locator;
   private readonly brokenImage: Locator;

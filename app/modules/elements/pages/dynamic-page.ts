@@ -5,8 +5,8 @@ import { dynamicText } from "../support/data";
 import { dynamicButtonsColor } from "../support/classes";
 
 export class DynamicPage extends BasePage {
-  readonly button: Button;
-  readonly text: Text;
+  private readonly button: Button;
+  private readonly text: Text;
 
   private readonly disabledButton: Locator;
   private readonly changeColorButton: Locator;

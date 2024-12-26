@@ -4,7 +4,7 @@ import { Text } from "../../../components/support/component-service";
 import { callToAction } from "../support/data";
 
 export class ElementsPage extends BasePage {
-  readonly text: Text;
+  private readonly text: Text;
 
   constructor(page: Page, url: string) {
     super(page, url);

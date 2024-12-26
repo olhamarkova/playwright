@@ -5,8 +5,8 @@ import { RadioIds, RadioLabel } from "../support/types";
 import { questionText } from "../support/data";
 
 export class RadioButtonPage extends BasePage {
-  readonly radio: Radio;
-  readonly textBox: Text;
+  private readonly radio: Radio;
+  private readonly textBox: Text;
 
   private readonly question: Locator;
   private readonly successMsg: Locator;

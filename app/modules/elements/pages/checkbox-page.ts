@@ -8,8 +8,8 @@ import { Folders, ToggleLabel } from "../support/types";
 import { halfCheckedBox } from "../support/classes";
 
 export class CheckBoxPage extends BasePage {
-  readonly button: Button;
-  readonly checkbox: Checkbox;
+  private readonly button: Button;
+  private readonly checkbox: Checkbox;
   private readonly checkboxes: Locator;
 
   constructor(page: Page, url: string) {

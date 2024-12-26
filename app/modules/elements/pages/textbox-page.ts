@@ -8,9 +8,9 @@ import {
 } from "../../../components/support/component-service";
 
 export class TextBoxPage extends BasePage {
-  readonly input: Input;
-  readonly textBox: Text;
-  readonly button: Button;
+  private readonly input: Input;
+  private readonly textBox: Text;
+  private readonly button: Button;
 
   private readonly submitButton: Locator;
   private readonly output: Locator;

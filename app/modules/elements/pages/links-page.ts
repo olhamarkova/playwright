@@ -5,7 +5,7 @@ import { Link } from "../../../components/support/component-service";
 import { title } from "../../core/support/data";
 
 export class LinksPage extends BasePage {
-  public readonly link: Link;
+  private readonly link: Link;
 
   private readonly subHeadings: Locator;
   public readonly dynamicLink: Locator;
