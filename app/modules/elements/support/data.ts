@@ -1,13 +1,6 @@
 export const callToAction =
   "Please select an item from left to start practice.";
 
-export const userData = {
-  fullName: "test",
-  email: "test@gmail.com",
-  currentAddress: "test street 1",
-  permanentAddress: "test street 2",
-};
-
 //Radio Buttons
 export const questionText = "Do you like the site?";
 
