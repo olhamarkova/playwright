@@ -6,16 +6,16 @@ import {
   Text,
   Filechooser,
 } from "../../../components/support/component-service";
+import { pathToUploadedFile } from "../support/data";
 
 export class UploadPage extends BasePage {
-  readonly button: Button;
-  readonly textBox: Text;
-  readonly filechooser: Filechooser;
+  private readonly button: Button;
+  private readonly textBox: Text;
+  private readonly filechooser: Filechooser;
 
-  readonly selectFileLabel: Locator;
-  readonly downloadButton: Locator;
-  readonly uploadButton: Locator;
-  readonly filePath: Locator;
+  private readonly downloadButton: Locator;
+  private readonly uploadButton: Locator;
+  private readonly filePath: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
@@ -23,7 +23,6 @@ export class UploadPage extends BasePage {
     this.textBox = new Text(this.page);
     this.filechooser = new Filechooser(this.page);
 
-    this.selectFileLabel = this.textBox.getLabel("uploadFile");
     this.downloadButton = this.button.getById("downloadButton");
     this.uploadButton = this.filechooser.chooseFileButton();
     this.filePath = this.textBox.getById("uploadedFilePath");
@@ -39,5 +38,13 @@ export class UploadPage extends BasePage {
     await download.saveAs(filePath);
 
     expect(fs.existsSync(filePath)).toBeTruthy();
+  }
+
+  async uploadFile(fileName: string): Promise<void> {
+    await this.filechooser.uploadFile(this.uploadButton, fileName);
+  }
+
+  async verifyFileUploaded(): Promise<void> {
+    await this.textBox.hasText(this.filePath, pathToUploadedFile);
   }
 }
