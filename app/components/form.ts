@@ -1,9 +1,8 @@
 import { Locator, Page } from "@playwright/test";
 import { Component } from "./core/component";
-import { Writable } from "./support/interfaces/interfaces";
 import { Button, Input, Heading } from "./support/component-service";
 
-export class Form extends Component implements Partial<Writable> {
+export class Form extends Component {
   readonly button: Button;
   readonly input: Input;
   readonly heading: Heading;
@@ -15,14 +14,15 @@ export class Form extends Component implements Partial<Writable> {
     this.heading = new Heading(this.page);
   }
 
-  /**
-   * Fiil a form inputs with provided data
-   * @param element should be the locator that returns group of elements (all inputs on the form)
-   * @param value an array with string values
-   */
-  async fillOut(element: Locator, value: string[]): Promise<void> {
-    for (let i = 0; i < value.length; i++) {
-      await element.nth(i).fill(value[i]);
-    }
+  async clearInput<T>(input: T): Promise<void> {
+    await this.input.clear(input as Locator);
+  }
+
+  async verifyInputValue<T>(input: T, value: string): Promise<void> {
+    await this.input.hasValue(input as Locator, value);
+  }
+
+  async enterValue<T>(input: T, value: string): Promise<void> {
+    await this.input.fillOut(input as Locator, value);
   }
 }

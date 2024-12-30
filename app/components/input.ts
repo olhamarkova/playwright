@@ -42,4 +42,15 @@ export class Input extends Component implements Writable {
   async hasPlaceholder(input: Locator, placeholder: string): Promise<void> {
     await expect(input).toHaveAttribute("placeholder", placeholder);
   }
+
+  /**
+   * Fiil a group of inputs with provided data
+   * @param input should be the locator that returns group of inputs (i.e., all inputs on the form)
+   * @param value an array with string values
+   */
+  async fillOutInputs(input: Locator, value: string[]): Promise<void> {
+    for (let i = 0; i < value.length; i++) {
+      await input.nth(i).fill(value[i]);
+    }
+  }
 }

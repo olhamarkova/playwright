@@ -7,7 +7,7 @@ import {
   Selector,
   Text,
 } from "../../../components/support/component-service";
-import AddNewRecordForm from "../../../components/add-new-record-form";
+import { AddNewRecordForm } from "../../../components/add-new-record-form";
 
 export class WebTablesPage extends BasePage {
   readonly addNewRecord: AddNewRecordForm;
@@ -41,34 +41,40 @@ export class WebTablesPage extends BasePage {
     this.rowsSelector = this.selector.getByAriaLabel("rows per page");
   }
 
-  actionButton(name: "edit" | "delete", recordNumber: number): Locator {
-    return this.button.getByLocator(`#${name}-record-${recordNumber}`);
+  actionButton(name: "edit" | "delete", rowNumber: number): Locator {
+    return this.button.getByLocator(`#${name}-record-${rowNumber}`);
   }
 
-  async validateElementsByName(elementNames: string[]): Promise<void> {
+  async openForm(): Promise<void> {
+    await this.button.click(this.addNewRecordButton);
+  }
+
+  async openEditForm(rowNumber: number): Promise<void> {
+    await this.button.click(this.actionButton("edit", rowNumber));
+  }
+
+  async changeRowsCount(count: number): Promise<void> {
+    await this.selector.chooseOption(this.rowsSelector, `${count}`);
+  }
+
+  async verifyRowsCount(count: number): Promise<void> {
+    await this.table.hasCount(this.rows, count + 1); //table header also included
+  }
+
+  async verifyColumnHeaders(elementNames: string[]): Promise<void> {
     for (let i = 0; i < elementNames.length; i++) {
       await this.table.isVisible(this.table.getColumnheader(elementNames[i]));
     }
   }
 
-  async validateCell(
-    rowNumber: number,
-    columnNumber: number,
-    text?: string
-  ): Promise<void> {
-    if (!text) {
-      await expect(
-        this.table.getCellByRowNumber(rowNumber, columnNumber)
-      ).toBeEmpty();
-    } else
-      await expect(
-        this.table.getCellByRowNumber(rowNumber, columnNumber)
-      ).toHaveText(text!);
+  async verifyCellByContent(text: string): Promise<void> {
+    await this.table.isVisible(this.table.getCellByContent(text));
   }
 
-  async validateRow(rowNumber: number, text?: string): Promise<void> {
-    for (let i = 0; i < 7; i++) {
-      await this.validateCell(rowNumber, i, text);
-    }
+  async verifyRow(rowNumber: number, text: string[]): Promise<void> {
+    for (let i = 0; i < text.length; i++)
+      await this.table.isVisible(
+        this.table.getCellByRowNumber(rowNumber, text[i])
+      );
   }
 }

@@ -15,15 +15,15 @@ export class Table extends Component {
     return this.page.getByRole("row", options).nth(index - 1);
   }
 
-  //Refactor later
-  getCellByRowNumber(
-    rowNumber: number,
-    columnNumber: number,
-    options?: GetByRoleOptions
-  ): Locator {
-    return this.getRowByIndex(rowNumber)
-      .getByRole("gridcell", options)
-      .nth(columnNumber - 1);
+  getCellByContent(content: string): Locator {
+    return this.page.getByRole("gridcell", { name: content, exact: true });
+  }
+
+  getCellByRowNumber(index: number, content: string): Locator {
+    return this.getRowByIndex(index).getByRole("gridcell", {
+      name: content,
+      exact: true,
+    });
   }
 
   getColumnheader(columnName: string, options?: GetByRoleOptions): Locator {
