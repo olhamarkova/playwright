@@ -1,5 +1,5 @@
 import { type Page, Locator, expect } from "@playwright/test";
-import BasePage from "../../core/BasePage";
+import BasePage from "../../core/base-page";
 import fs from "fs";
 import {
   Button,

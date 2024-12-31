@@ -14,4 +14,16 @@ export class Header extends Component implements Clickable {
   logo(): Locator {
     return this.header().getByRole("img");
   }
+
+  async goToMainPage(): Promise<void> {
+    await this.click(this.logo());
+  }
+
+  async verify(): Promise<void> {
+    await this.isVisible(this.header());
+  }
+
+  async verifyLogo(): Promise<void> {
+    await this.isVisible(this.logo());
+  }
 }

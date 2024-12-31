@@ -1,6 +1,6 @@
 import { type Page, Locator, Response, expect } from "@playwright/test";
 import { responseStatuses, subHeadings } from "../support/data";
-import BasePage from "../../core/BasePage";
+import BasePage from "../../core/base-page";
 import { Link } from "../../../components/support/component-service";
 import { title } from "../../core/support/data";
 

@@ -1,5 +1,5 @@
 import { type Page } from "@playwright/test";
-import BasePage from "../../core/BasePage";
+import BasePage from "../../core/base-page";
 import { Text } from "../../../components/support/component-service";
 import { callToAction } from "../support/data";
 

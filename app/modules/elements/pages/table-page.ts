@@ -1,5 +1,5 @@
 import { type Page, expect, Locator } from "@playwright/test";
-import BasePage from "../../core/BasePage";
+import BasePage from "../../core/base-page";
 import {
   Table,
   Button,
@@ -72,7 +72,7 @@ export class WebTablesPage extends BasePage {
   async getSalaries(numberOfRows: number): Promise<string[]> {
     let salaries: string[] = [];
     for (let i = 1; i <= numberOfRows; i++) {
-      let salary = await this.getSalaryCell(i).textContent();
+      let salary = await this.table.getContent(this.getSalaryCell(i));
       salaries.push(salary as string);
     }
     return salaries;

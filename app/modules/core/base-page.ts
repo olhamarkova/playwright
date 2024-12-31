@@ -11,23 +11,23 @@ import {
   Heading,
 } from "../../components/support/component-service.ts";
 import { GetLocatorOptions } from "../../components/support/types/options.ts";
+import { title } from "./support/data.ts";
 
 export default abstract class BasePage {
   protected page: Page;
   protected url: string;
-  readonly header: Header;
-  readonly logo: Locator;
-  readonly footer: Footer;
-  readonly navbar: Navbar;
-  readonly heading: Heading;
-  readonly context: BrowserContext;
+  public readonly header: Header;
+  public readonly logo: Locator;
+  public readonly footer: Footer;
+  public readonly navbar: Navbar;
+  public readonly heading: Heading;
+  public readonly context: BrowserContext;
 
   constructor(page: Page, url: string = "") {
     this.page = page;
     this.url = `${process.env.URL!}${url}`;
     this.heading = new Heading(this.page);
     this.header = new Header(this.page);
-    this.logo = new Header(this.page).logo();
     this.footer = new Footer(this.page);
     this.navbar = new Navbar(this.page);
     this.context = this.page.context();
@@ -39,10 +39,6 @@ export default abstract class BasePage {
 
   async visit(): Promise<void> {
     await this.page.goto(this.url, { waitUntil: "domcontentloaded" });
-  }
-
-  async goToMainPage(): Promise<void> {
-    await this.logo.click();
   }
 
   async openNewTab(element: Locator): Promise<Page> {
@@ -98,7 +94,7 @@ export default abstract class BasePage {
     await expect(this.page.url()).toContain(url);
   }
 
-  async verifyTitle(titleText: string): Promise<void> {
-    await expect(this.page).toHaveTitle(titleText);
+  async verifyTitle(): Promise<void> {
+    await expect(this.page).toHaveTitle(title.mainTitle);
   }
 }

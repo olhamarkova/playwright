@@ -12,11 +12,11 @@ export class Image extends Component implements Clickable {
     return this.page.getByRole("img", options);
   }
 
-  getImageBySrc(value: string): Locator {
+  imageBySrc(value: string): Locator {
     return this.page.locator(`img[src='${value}']`);
   }
 
-  getImageByAltText(text: string): Locator {
+  imageByAltText(text: string): Locator {
     return this.page.getByAltText(text, { exact: true });
   }
 

@@ -1,5 +1,5 @@
 import { type Locator, type Page } from "@playwright/test";
-import { CategoryNames } from "../modules/mainPage/support/types";
+import { CategoryNames } from "../modules/main-page/support/types";
 import { Component } from "./core/component";
 import { Clickable } from "./support/interfaces/interfaces";
 import { NavbarItems } from "./support/types/navbar";

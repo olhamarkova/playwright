@@ -1,5 +1,5 @@
 import { type Page, Locator } from "@playwright/test";
-import BasePage from "../../core/BasePage";
+import BasePage from "../../core/base-page";
 import { Button, Text } from "../../../components/support/component-service";
 import { ClickMeButtons } from "../support/types";
 import { successMessages } from "../support/data";

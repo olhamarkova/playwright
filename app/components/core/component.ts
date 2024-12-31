@@ -47,6 +47,11 @@ export class Component implements Clickable {
     await element.dblclick(options);
   }
 
+  async getContent(element: Locator): Promise<string | null> {
+    const content = await element.textContent();
+    return content;
+  }
+
   //Assertions
   async isVisible(element: Locator, isVisible = true): Promise<void> {
     await expect(element).toBeVisible({ visible: isVisible });

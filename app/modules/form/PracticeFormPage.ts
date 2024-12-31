@@ -10,7 +10,7 @@ import {
   Modal,
   Table,
 } from "../../components/support/component-service";
-import BasePage from "../core/BasePage";
+import BasePage from "../core/base-page";
 import { FormInputIds, Genders, Hobbies } from "./support/types";
 
 export class PracticeFormPage extends BasePage {

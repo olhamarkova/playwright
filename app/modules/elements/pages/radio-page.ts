@@ -1,5 +1,5 @@
 import { expect, type Locator, type Page } from "@playwright/test";
-import BasePage from "../../core/BasePage";
+import BasePage from "../../core/base-page";
 import { Radio, Text } from "../../../components/support/component-service";
 import { RadioIds, RadioLabel } from "../support/types";
 import { questionText } from "../support/data";

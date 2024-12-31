@@ -4,9 +4,9 @@ import { Button, Input, Heading } from "./support/component-service";
 import { Writable } from "./support/interfaces/interfaces";
 
 export class Form extends Component implements Partial<Writable> {
-  protected readonly button: Button;
-  protected readonly input: Input;
-  protected readonly heading: Heading;
+  public readonly button: Button;
+  public readonly input: Input;
+  public readonly heading: Heading;
 
   constructor(page: Page) {
     super(page);

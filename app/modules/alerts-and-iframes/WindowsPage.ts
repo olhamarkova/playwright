@@ -1,5 +1,5 @@
 import { Locator, type Page } from "@playwright/test";
-import BasePage from "../core/BasePage";
+import BasePage from "../core/base-page";
 import { Button } from "../../components/support/component-service";
 
 export class WindowsPage extends BasePage {

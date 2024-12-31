@@ -1,5 +1,5 @@
 import { type Locator, type Page } from "@playwright/test";
-import BasePage from "../../core/BasePage";
+import BasePage from "../../core/base-page";
 import {
   Button,
   Checkbox,

@@ -1,5 +1,5 @@
 import { Locator, type Page, expect } from "@playwright/test";
-import BasePage from "../core/BasePage";
+import BasePage from "../core/base-page";
 import { Text, Frame } from "../../components/support/component-service";
 import { Frames } from "./support/types";
 

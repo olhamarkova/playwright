@@ -1,5 +1,5 @@
 import { type Page, APIResponse, Locator, expect } from "@playwright/test";
-import BasePage from "../../core/BasePage";
+import BasePage from "../../core/base-page";
 import {
   Image,
   Link,
@@ -23,8 +23,8 @@ export class ImagesPage extends BasePage {
     this.link = new Link(page);
     this.text = new Text(page);
 
-    this.validImage = this.image.getImageBySrc(imagesSrc.validImage).nth(1);
-    this.brokenImage = this.image.getImageBySrc(imagesSrc.brokenImage);
+    this.validImage = this.image.imageBySrc(imagesSrc.validImage).nth(1);
+    this.brokenImage = this.image.imageBySrc(imagesSrc.brokenImage);
     this.images = this.image.getByLocator("div.col-md-6").getByRole("img");
     this.links = this.link.getByLocator("div.col-md-6").getByRole("link");
   }
