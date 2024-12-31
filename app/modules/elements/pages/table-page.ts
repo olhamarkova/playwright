@@ -10,23 +10,21 @@ import {
 import { AddNewRecordForm } from "../../../components/add-new-record-form";
 
 export class WebTablesPage extends BasePage {
-  readonly addNewRecord: AddNewRecordForm;
-  readonly button: Button;
-  readonly table: Table;
-  readonly input: Input;
-  readonly selector: Selector;
-  readonly text: Text;
+  public readonly addRecordForm: AddNewRecordForm;
+  private readonly button: Button;
+  private readonly table: Table;
+  private readonly input: Input;
+  private readonly selector: Selector;
+  private readonly text: Text;
 
-  readonly rows: Locator;
-  readonly addNewRecordButton: Locator;
-  readonly searchField: Locator;
-  readonly previousButton: Locator;
-  readonly nextButton: Locator;
-  readonly rowsSelector: Locator;
+  private readonly rows: Locator;
+  private readonly addRecordButton: Locator;
+  private readonly searchField: Locator;
+  private readonly rowsSelector: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
-    this.addNewRecord = new AddNewRecordForm(this.page);
+    this.addRecordForm = new AddNewRecordForm(this.page);
     this.table = new Table(this.page);
     this.button = new Button(this.page);
     this.input = new Input(this.page);
@@ -34,11 +32,13 @@ export class WebTablesPage extends BasePage {
     this.text = new Text(this.page);
 
     this.rows = this.table.rows();
-    this.addNewRecordButton = this.button.getByName("Add");
+    this.addRecordButton = this.button.getByName("Add");
     this.searchField = this.input.getByPlaceholder("Type to search");
-    this.previousButton = this.button.getByName("Previous");
-    this.nextButton = this.button.getByName("Next");
     this.rowsSelector = this.selector.getByAriaLabel("rows per page");
+  }
+
+  private getSalaryCell(rowNumber: number) {
+    return this.table.cellByCoordinates(rowNumber, 4);
   }
 
   actionButton(name: "edit" | "delete", rowNumber: number): Locator {
@@ -46,35 +46,62 @@ export class WebTablesPage extends BasePage {
   }
 
   async openForm(): Promise<void> {
-    await this.button.click(this.addNewRecordButton);
+    await this.button.click(this.addRecordButton);
   }
 
   async openEditForm(rowNumber: number): Promise<void> {
     await this.button.click(this.actionButton("edit", rowNumber));
   }
 
+  async deleteRow(rowNumber: number): Promise<void> {
+    await this.button.click(this.actionButton("delete", rowNumber));
+  }
+
   async changeRowsCount(count: number): Promise<void> {
     await this.selector.chooseOption(this.rowsSelector, `${count}`);
   }
 
-  async verifyRowsCount(count: number): Promise<void> {
-    await this.table.hasCount(this.rows, count + 1); //table header also included
+  async sortColumn(columnName: string): Promise<void> {
+    await this.button.click(this.table.columnHeader(columnName));
   }
 
-  async verifyColumnHeaders(elementNames: string[]): Promise<void> {
-    for (let i = 0; i < elementNames.length; i++) {
-      await this.table.isVisible(this.table.getColumnheader(elementNames[i]));
+  async search(searchTerm: string): Promise<void> {
+    await this.input.fillOut(this.searchField, searchTerm);
+  }
+
+  async getSalaries(numberOfRows: number): Promise<string[]> {
+    let salaries: string[] = [];
+    for (let i = 1; i <= numberOfRows; i++) {
+      let salary = await this.getSalaryCell(i).textContent();
+      salaries.push(salary as string);
+    }
+    return salaries;
+  }
+
+  async verifySorted(data: string[], isAscending = true): Promise<void> {
+    for (let i = 2; i < data.length; i++) {
+      isAscending
+        ? expect(Number(data[i])).toBeGreaterThan(Number(data[i - 1]))
+        : expect(Number(data[i])).toBeLessThan(Number(data[i - 1]));
     }
   }
 
-  async verifyCellByContent(text: string): Promise<void> {
-    await this.table.isVisible(this.table.getCellByContent(text));
+  async verifyRowsCount(count: number): Promise<void> {
+    await this.table.hasCount(this.rows, count + 1); //table header is also counted
+  }
+
+  async verifyCellByContent(text: string, isVisible = true): Promise<void> {
+    await this.table.isVisible(this.table.cellByContent(text), isVisible);
   }
 
   async verifyRow(rowNumber: number, text: string[]): Promise<void> {
     for (let i = 0; i < text.length; i++)
       await this.table.isVisible(
-        this.table.getCellByRowNumber(rowNumber, text[i])
+        this.table.cellByRowNumber(rowNumber, text[i])
       );
+  }
+
+  async verifyMessage(text: string): Promise<void> {
+    await this.text.isVisible(this.text.getByText(text));
   }
 }

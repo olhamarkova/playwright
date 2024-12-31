@@ -29,6 +29,15 @@ export enum AddRecordInputs {
   Department = "department",
 }
 
+export type Employee = {
+  firstName: string;
+  lastName: string;
+  userEmail: string;
+  age: string;
+  salary: string;
+  department: string;
+};
+
 export type OutputElementId =
   | "name"
   | "email"

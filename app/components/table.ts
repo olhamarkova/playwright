@@ -11,22 +11,26 @@ export class Table extends Component {
     return this.page.getByRole("row");
   }
 
-  getRowByIndex(index: number, options?: GetByRoleOptions): Locator {
-    return this.page.getByRole("row", options).nth(index - 1);
+  rowByNumber(rowNumber: number, options?: GetByRoleOptions): Locator {
+    return this.page.getByRole("row", options).nth(rowNumber - 1);
   }
 
-  getCellByContent(content: string): Locator {
+  cellByContent(content: string): Locator {
     return this.page.getByRole("gridcell", { name: content, exact: true });
   }
 
-  getCellByRowNumber(index: number, content: string): Locator {
-    return this.getRowByIndex(index).getByRole("gridcell", {
+  cellByRowNumber(index: number, content: string): Locator {
+    return this.rowByNumber(index).getByRole("gridcell", {
       name: content,
       exact: true,
     });
   }
 
-  getColumnheader(columnName: string, options?: GetByRoleOptions): Locator {
+  cellByCoordinates(rowNumber: number, cellNumber: number): Locator {
+    return this.rowByNumber(rowNumber).getByRole("gridcell").nth(cellNumber);
+  }
+
+  columnHeader(columnName: string, options?: GetByRoleOptions): Locator {
     return this.page
       .getByRole("columnheader", options)
       .filter({ hasText: columnName });

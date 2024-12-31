@@ -1,3 +1,5 @@
+import { Employee } from "./types";
+
 export const callToAction =
   "Please select an item from left to start practice.";
 
@@ -15,7 +17,7 @@ export const columnHeaders = [
   "Action",
 ];
 
-export const recordData = {
+export const recordData: Employee = {
   firstName: "John",
   lastName: "Doe",
   userEmail: "johndoe@gmail.com",
