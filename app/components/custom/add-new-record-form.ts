@@ -1,9 +1,9 @@
 //Form on the Web Tables Page
 
 import { Locator, type Page } from "@playwright/test";
-import { AddRecordInputs } from "../modules/elements/support/types";
-import { Form, Modal } from "./support/component-service";
-import { Writable } from "./support/interfaces/interfaces";
+import { AddRecordInputs } from "../../modules/elements/support/types";
+import { Form, Modal } from "../support/component-service";
+import { Writable } from "../support/interfaces/interfaces";
 
 export class AddNewRecordForm extends Form implements Partial<Writable> {
   private readonly modal: Modal;

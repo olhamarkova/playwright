@@ -11,7 +11,7 @@ import { LinksPage } from "../modules/elements/pages/links-page";
 import { RadioButtonPage } from "../modules/elements/pages/radio-page";
 import { TextBoxPage } from "../modules/elements/pages/textbox-page";
 import { UploadPage } from "../modules/elements/pages/upload-page";
-import { PracticeFormPage } from "../modules/form/PracticeFormPage";
+import { PracticeFormPage } from "../modules/form/practice-form-page";
 import { WindowsPage } from "../modules/alerts-and-iframes/WindowsPage";
 import { AlertsPage } from "../modules/alerts-and-iframes/AlertsPage";
 import { iFramesPage } from "../modules/alerts-and-iframes/iFramesPage";

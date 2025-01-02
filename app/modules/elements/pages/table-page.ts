@@ -7,7 +7,7 @@ import {
   Selector,
   Text,
 } from "../../../components/support/component-service";
-import { AddNewRecordForm } from "../../../components/add-new-record-form";
+import { AddNewRecordForm } from "../../../components/custom/add-new-record-form";
 
 export class WebTablesPage extends BasePage {
   public readonly addRecordForm: AddNewRecordForm;

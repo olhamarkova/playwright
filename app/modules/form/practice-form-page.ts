@@ -7,11 +7,11 @@ import {
   Datepicker,
   Filechooser,
   Chicklet,
-  Modal,
-  Table,
 } from "../../components/support/component-service";
 import BasePage from "../core/base-page";
 import { FormInputIds, Genders, Hobbies } from "./support/types";
+import { ResultsModal } from "../../components/custom/form-results-modal";
+import { formTitle } from "./support/data";
 
 export class PracticeFormPage extends BasePage {
   readonly form: Form;
@@ -21,14 +21,12 @@ export class PracticeFormPage extends BasePage {
   readonly datepicker: Datepicker;
   readonly filechooser: Filechooser;
   readonly chicklet: Chicklet;
-  readonly resultsModal: Modal;
-  readonly resultsTable: Table;
+  readonly resultsModal: ResultsModal;
 
   readonly formTitle: Locator;
   readonly addressTextArea: Locator;
   readonly subjectInput: Locator;
   readonly subjectLabel: Locator;
-  readonly resultsModalHeading: Locator;
   readonly submitBtn: Locator;
 
   constructor(page: Page, url: string) {
@@ -40,19 +38,14 @@ export class PracticeFormPage extends BasePage {
     this.datepicker = new Datepicker(this.page);
     this.filechooser = new Filechooser(this.page);
     this.chicklet = new Chicklet(this.page);
-    this.resultsModal = new Modal(this.page);
-    this.resultsTable = new Table(this.page);
+    this.resultsModal = new ResultsModal(this.page);
 
     this.formTitle = this.heading.getByClass("practice-form-wrapper h5");
-    this.addressTextArea = this.form.input.getTextareaById("currentAddress");
     this.subjectInput = this.form.input.getByClass(
       "subjects-auto-complete__value-container"
     );
     this.subjectLabel = this.chicklet.getByClass(
       "subjects-auto-complete__multi-value__label"
-    );
-    this.resultsModalHeading = this.resultsModal.getById(
-      "example-modal-sizes-title-lg"
     );
     this.submitBtn = this.form.button.getByType("submit");
   }
@@ -73,42 +66,11 @@ export class PracticeFormPage extends BasePage {
     return this.selector.getById(selectorId);
   }
 
-  resultsTableCell(rowNumber: number, cellContent: string) {
-    return this.resultsTable.getByLocator(
-      `//table//tr[${rowNumber}]/td[contains(.,"${cellContent}")]`
-    );
+  async enterData(inputId: FormInputIds, data: string): Promise<void> {
+    await this.form.enterValue(this.formInputs(inputId), data);
   }
 
-  /**
-   * Ensures that every row contains correct columns and data
-   */
-  async validateResultsTable(studentInfo: Map<string, string>) {
-    let rowNumber = 1;
-
-    for (const [label, value] of studentInfo.entries()) {
-      const isLabelValid = await this.resultsTableCell(
-        rowNumber,
-        label
-      ).isVisible();
-      if (isLabelValid) {
-        await this.resultsTable.isVisible(
-          this.resultsTableCell(rowNumber, value)
-        );
-      }
-
-      rowNumber++;
-    }
-  }
-
-  //'Close' button is covered by advertisement and Playwright's force click doesn't work here.
-  async closeModal() {
-    await this.page.evaluate(async () => {
-      const closeButton = document.getElementById("closeLargeModal");
-      if (!closeButton) {
-        throw new Error("Such a button does not exist!");
-      } else {
-        closeButton!.click();
-      }
-    });
+  async verifyFormTitle(): Promise<void> {
+    await this.heading.hasText(this.formTitle, formTitle);
   }
 }
