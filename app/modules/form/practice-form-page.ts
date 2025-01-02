@@ -12,6 +12,7 @@ import BasePage from "../core/base-page";
 import { FormInputIds, Genders, Hobbies } from "./support/types";
 import { ResultsModal } from "../../components/custom/form-results-modal";
 import { formTitle } from "./support/data";
+import { Days, Month } from "../../components/support/types/datepicker";
 
 export class PracticeFormPage extends BasePage {
   readonly form: Form;
@@ -64,6 +65,20 @@ export class PracticeFormPage extends BasePage {
 
   stateSelector(selectorId: "state" | "city") {
     return this.selector.getById(selectorId);
+  }
+
+  async openDatepicker(): Promise<void> {
+    await this.form.click(this.formInputs("dateOfBirthInput"));
+  }
+
+  async verifyCalendarOpened(): Promise<void> {
+    await this.datepicker.isVisible(this.datepicker.getDatepicker());
+  }
+
+  async setDateOfBirth(year: string, month: Month, day: Days): Promise<void> {
+    await this.datepicker.chooseYear(year);
+    await this.datepicker.chooseMonth(month);
+    await this.datepicker.chooseDayByNumber(day);
   }
 
   async enterData(inputId: FormInputIds, data: string): Promise<void> {

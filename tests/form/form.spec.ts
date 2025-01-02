@@ -5,7 +5,8 @@ import {
   studentInfo,
 } from "../../app/modules/form/support/data.ts";
 import { Genders, Hobbies } from "../../app/modules/form/support/types.ts";
-import { Month } from "../../app/components/support/types/datepicker.ts";
+import { Days, Month } from "../../app/components/support/types/datepicker.ts";
+import { Person } from "../../utils/buildPerson.ts";
 
 test.describe("Practice Form Tests", () => {
   test.beforeEach(async ({ app: { form }, heading }) => {
@@ -21,20 +22,24 @@ test.describe("Practice Form Tests", () => {
     app: { form },
     person,
   }) => {
-    const student = person
-      .withFirstname("Janet")
-      .withLastName("Doe")
-      .withEmail("test@mail.com")
-      .withGender(Genders.Female)
-      .withMobile("1234567890")
-      .withCurrentAdress("Test str., 456, 45 apt.")
-      .withSubjects(["Maths", "Chemistry"])
-      .withBirthdate("25 June, 1990")
-      .withHobby(Hobbies.Reading)
-      .withPicture("photo.jpg")
-      .withState("Haryana")
-      .withCity("Karnal");
-    const data = student.person;
+    let data: Person = {};
+    test.step("Step 0: Prepare the test data", async () => {
+      const student = person
+        .withFirstname("Janet")
+        .withLastName("Doe")
+        .withEmail("test@mail.com")
+        .withGender(Genders.Female)
+        .withMobile("1234567890")
+        .withCurrentAdress("Test str., 456, 45 apt.")
+        .withSubjects(["Maths", "Chemistry"])
+        .withBirthdate("25 June, 1990")
+        .withHobby(Hobbies.Reading)
+        .withPicture("photo.jpg")
+        .withState("Haryana")
+        .withCity("Karnal");
+      data = student.person;
+    });
+
     await test.step("Step 1: Fill The Form Inputs", async () => {
       await form.enterData("firstName", data.firstName!);
       await form.form.enterValue(
@@ -63,13 +68,16 @@ test.describe("Practice Form Tests", () => {
       );
     });
 
-    await test.step("Step 4: Choose The Date Of Birth", async () => {
+    await test.step("Step 4: Set The Date Of Birth", async () => {
       const pickedDate = data.birthDate!.replace("e,", "");
-      await form.form.click(form.formInputs("dateOfBirthInput"));
-      await form.datepicker.isVisible(form.datepicker.getDatepicker());
-      await form.datepicker.chooseYear("1990");
-      await form.datepicker.chooseMonth(Month.June);
-      await form.datepicker.chooseDayByNumber(25);
+      const day = Number(data.birthDate!.slice(0, 2));
+      const month = data.birthDate!.slice(3, 7);
+      const year = data.birthDate!.slice(9, 13);
+
+      await form.openDatepicker();
+      await form.verifyCalendarOpened();
+      await form.setDateOfBirth(year, month as Month, day as Days);
+
       await form.form.input.hasValue(
         form.formInputs("dateOfBirthInput"),
         pickedDate
