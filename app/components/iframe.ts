@@ -1,8 +1,9 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 import { Component } from "./core/component";
 import { GetLocatorOptions } from "./support/types/options";
+import { Textual } from "./support/interfaces/interfaces";
 
-export class Frame extends Component {
+export class iFrame extends Component implements Partial<Textual> {
   constructor(page: Page) {
     super(page);
   }
@@ -12,11 +13,11 @@ export class Frame extends Component {
    * @param frame ID of the frame
    * @returns Locator
    */
-  getFrameElement(frame: string, element: string): Locator {
+  frameElement(frame: string, element: string): Locator {
     return this.page.frameLocator(`#${frame}`).locator(element);
   }
 
-  getNestedFrameElement(
+  nestedFrameElement(
     parentFrame: string,
     childFrame: string,
     element: string,
@@ -26,5 +27,9 @@ export class Frame extends Component {
       .frameLocator(`#${parentFrame}`)
       .frameLocator(`#${childFrame}`)
       .locator(element, options);
+  }
+
+  async hasText(element: Locator, text: string) {
+    await expect(element).toHaveText(text);
   }
 }

@@ -16,4 +16,4 @@ export { Modal as Modal } from "../modal";
 export { Datepicker as Datepicker } from "../datepicker";
 export { Filechooser as Filechooser } from "../filechooser";
 export { Chicklet as Chicklet } from "../chicklet";
-export { Frame as Frame } from "../frame";
+export { iFrame as iFrame } from "../iframe";

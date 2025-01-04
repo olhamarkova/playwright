@@ -14,7 +14,7 @@ import { UploadPage } from "../modules/elements/pages/upload-page";
 import { PracticeFormPage } from "../modules/form/practice-form-page";
 import { WindowsPage } from "../modules/alerts-and-iframes/WindowsPage";
 import { AlertsPage } from "../modules/alerts-and-iframes/alerts-page";
-import { iFramesPage } from "../modules/alerts-and-iframes/iFramesPage";
+import { iFramesPage } from "../modules/alerts-and-iframes/iframes-page";
 
 export class AppManager {
   protected page: Page;
