@@ -16,12 +16,12 @@ import { title } from "./support/data.ts";
 export default abstract class BasePage {
   protected page: Page;
   protected url: string;
-  public readonly header: Header;
-  public readonly logo: Locator;
-  public readonly footer: Footer;
-  public readonly navbar: Navbar;
-  public readonly heading: Heading;
-  public readonly context: BrowserContext;
+  protected readonly header: Header;
+  protected readonly logo: Locator;
+  protected readonly footer: Footer;
+  protected readonly navbar: Navbar;
+  protected readonly heading: Heading;
+  protected readonly context: BrowserContext;
 
   constructor(page: Page, url: string = "") {
     this.page = page;
@@ -57,7 +57,7 @@ export default abstract class BasePage {
     return newPopup;
   }
 
-  async confirmAlert(
+  protected async confirmAlert(
     element: Locator,
     message: string,
     prompt?: string
@@ -69,7 +69,10 @@ export default abstract class BasePage {
     element.click();
   }
 
-  async dismsissAlert(element: Locator, message?: string): Promise<void> {
+  protected async dismsissAlert(
+    element: Locator,
+    message?: string
+  ): Promise<void> {
     this.page.on("dialog", (dialog) => {
       if (message) expect(dialog.message()).toBe(message);
       dialog.dismiss();

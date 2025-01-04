@@ -1,69 +1,35 @@
 import { test } from "../../fixtures/pages-fixture.ts";
-import { headings } from "../../app/modules/core/support/data.ts";
-import {
-  alertMessage,
-  resultMessage,
-} from "../../app/modules/alerts-and-iframes/support/data.ts";
 
 test.describe("Handling Alerts", async () => {
-  test.beforeEach(async ({ app: { alerts } }) => {
+  test.beforeEach(async ({ app: { alerts }, heading }) => {
     await alerts.visit();
+    await alerts.verifyHeading(heading.alerts);
   });
 
-  test("@smoke A User Should Land To The Correct Page", async ({
+  test("@functional User Shall Be Able To Handle An Alert", async ({
     app: { alerts },
   }) => {
-    test.step("Step 1: The Page Should Have The Correct Heading", async () => {
-      await alerts.heading.hasText(alerts.mainHeading(), headings.alerts);
-    });
-
-    test.step("Step 2: All Buttons Should Be Visible", async () => {
-      await alerts.button.hasCount(alerts.buttons, 4);
-    });
+    await alerts.confirmAlertMsg();
   });
 
-  // test("@functional User Shall Be Able To Handle An Alert", async ({
-  //   app: { alerts },
-  // }) => {
-  //   await alerts.confirmAlert(
-  //     alerts.clickMeButton("alert"),
-  //     alertMessage.alert
-  //   );
-  // });
+  test("@functional User Shall See An Alert In 5 Seconds", async ({
+    app: { alerts },
+  }) => {
+    await alerts.confirmDelayed();
+  });
 
-  // test("@functional User Shall See An Alert In 5 Seconds", async ({
-  //   app: { alerts },
-  // }) => {
-  //   await alerts.confirmDelayedAlert(
-  //     alerts.clickMeButton("timerAlert"),
-  //     alertMessage.delayedAlert
-  //   );
-  // });
+  test("@functional User Shall Dismiss An Alert", async ({
+    app: { alerts },
+  }) => {
+    await alerts.dismissAlertMsg();
+    await alerts.verifyConfirmResult("Cancel");
+  });
 
-  // test("@functional User Shall Dismiss An Alert", async ({
-  //   app: { alerts },
-  // }) => {
-  //   await alerts.dismsissAlert(
-  //     alerts.clickMeButton("confirm"),
-  //     alertMessage.confirmAlert
-  //   );
-  //   await alerts.text.hasText(
-  //     alerts.resultMessage("confirm"),
-  //     resultMessage.confirm("Cancel")
-  //   );
-  // });
-
-  // test("@functional User Shall Be Able To See A Prompt Box", async ({
-  //   app: { alerts },
-  // }) => {
-  //   await alerts.confirmAlert(
-  //     alerts.clickMeButton("promt"),
-  //     alertMessage.prompt,
-  //     "something"
-  //   );
-  //   await alerts.text.hasText(
-  //     alerts.resultMessage("prompt"),
-  //     resultMessage.prompt
-  //   );
-  // });
+  test("@functional User Shall Be Able To See A Prompt Box", async ({
+    app: { alerts },
+  }) => {
+    const prompt = "something";
+    await alerts.confirmPromptBox(prompt);
+    await alerts.verifyPromptResult(prompt);
+  });
 });

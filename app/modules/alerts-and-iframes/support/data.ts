@@ -15,5 +15,5 @@ export const alertMessage = {
 
 export const resultMessage = {
   confirm: (response: "Cancel" | "OK"): string => `You selected ${response}`,
-  prompt: "You entered something",
+  prompt: (prompt: string): string => `You entered ${prompt}`,
 };
