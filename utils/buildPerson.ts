@@ -1,3 +1,5 @@
+import { Days } from "../app/components/support/types/datepicker";
+
 export type Person = {
   firstName?: string;
   lastName?: string;
@@ -20,6 +22,21 @@ export type Person = {
 
 type State = "NCR" | "Uttar Pradesh" | "Haryana" | "Rajasthan";
 type City = "Karnal" | "Panipat" | "Jaipur" | "Jaiselmer";
+type Month =
+  | "January"
+  | "February"
+  | "March"
+  | "April"
+  | "May"
+  | "June"
+  | "July"
+  | "August"
+  | "September"
+  | "October"
+  | "November"
+  | "December";
+
+export type BirthDateFormat = `${Days} ${Month}, ${number}`;
 
 export class BuildPerson {
   public person: Person;
@@ -83,7 +100,7 @@ export class BuildPerson {
     return this;
   }
 
-  withBirthdate(birthDate: string) {
+  withBirthdate(birthDate: BirthDateFormat) {
     this.person.birthDate = birthDate;
     return this;
   }
