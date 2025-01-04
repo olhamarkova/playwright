@@ -12,7 +12,7 @@ import { RadioButtonPage } from "../modules/elements/pages/radio-page";
 import { TextBoxPage } from "../modules/elements/pages/textbox-page";
 import { UploadPage } from "../modules/elements/pages/upload-page";
 import { PracticeFormPage } from "../modules/form/practice-form-page";
-import { WindowsPage } from "../modules/alerts-and-iframes/WindowsPage";
+import { WindowsPage } from "../modules/alerts-and-iframes/windows-page";
 import { AlertsPage } from "../modules/alerts-and-iframes/alerts-page";
 import { iFramesPage } from "../modules/alerts-and-iframes/iframes-page";
 

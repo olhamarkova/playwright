@@ -17,14 +17,6 @@ export class Heading extends Component implements Textual {
     return this.getByLocator(heading, options);
   }
 
-  async hasText(
-    element: Locator,
-    text: string | string[],
-    options?: TextOptions
-  ): Promise<void> {
-    await expect(element).toHaveText(text, options);
-  }
-
   async containText(
     element: Locator,
     text: string,

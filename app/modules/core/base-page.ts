@@ -37,11 +37,11 @@ export default abstract class BasePage {
     return this.heading.getHeading("h1", options);
   }
 
-  async visit(): Promise<void> {
+  public async visit(): Promise<void> {
     await this.page.goto(this.url, { waitUntil: "domcontentloaded" });
   }
 
-  async openNewTab(element: Locator): Promise<Page> {
+  protected async openNewTab(element: Locator): Promise<Page> {
     const pagePromise = this.context.waitForEvent("page");
     await element.click();
     const newPage = await pagePromise;
@@ -49,7 +49,7 @@ export default abstract class BasePage {
     return newPage;
   }
 
-  async openPopup(element: Locator): Promise<Page> {
+  protected async openPopup(element: Locator): Promise<Page> {
     const popup = this.page.waitForEvent("popup");
     await element.click();
     const newPopup = await popup;

@@ -28,8 +28,4 @@ export class iFrame extends Component implements Partial<Textual> {
       .frameLocator(`#${childFrame}`)
       .locator(element, options);
   }
-
-  async hasText(element: Locator, text: string) {
-    await expect(element).toHaveText(text);
-  }
 }

@@ -1,8 +1,12 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { ClickOptions, GetLocatorOptions } from "../support/types/options.ts";
-import { Clickable } from "../support/interfaces/interfaces.ts";
+import {
+  ClickOptions,
+  GetLocatorOptions,
+  TextOptions,
+} from "../support/types/options.ts";
+import { Clickable, Textual } from "../support/interfaces/interfaces.ts";
 
-export class Component implements Clickable {
+export class Component implements Clickable, Partial<Textual> {
   protected page: Page;
 
   constructor(page: Page) {
@@ -47,11 +51,6 @@ export class Component implements Clickable {
     await element.dblclick(options);
   }
 
-  async getContent(element: Locator): Promise<string | null> {
-    const content = await element.textContent();
-    return content;
-  }
-
   //Assertions
   async isVisible(element: Locator, isVisible = true): Promise<void> {
     await expect(element).toBeVisible({ visible: isVisible });
@@ -73,6 +72,14 @@ export class Component implements Clickable {
     isEnabled
       ? await expect(element).toBeEnabled()
       : await expect(element).toBeDisabled();
+  }
+
+  async hasText(
+    element: Locator,
+    text: string | string[],
+    options?: TextOptions
+  ): Promise<void> {
+    await expect(element).toHaveText(text, options);
   }
 
   async hasCount(element: Locator, count: number): Promise<void> {
@@ -98,5 +105,10 @@ export class Component implements Clickable {
   async getQuantity(elements: Locator): Promise<number> {
     const quantity = await elements.count();
     return quantity;
+  }
+
+  async getContent(element: Locator): Promise<string | null> {
+    const content = await element.textContent();
+    return content;
   }
 }

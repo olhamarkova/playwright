@@ -17,3 +17,5 @@ export { Datepicker as Datepicker } from "../datepicker";
 export { Filechooser as Filechooser } from "../filechooser";
 export { Chicklet as Chicklet } from "../chicklet";
 export { iFrame as iFrame } from "../iframe";
+export { Popup as Popup } from "../popup";
+export { NewWindow as NewWindow } from "../new-window";

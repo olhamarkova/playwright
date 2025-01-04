@@ -8,14 +8,6 @@ export class Text extends Component implements Textual {
     super(page);
   }
 
-  async hasText(
-    element: Locator,
-    text: string,
-    options?: TextOptions
-  ): Promise<void> {
-    await expect(element).toHaveText(text, options);
-  }
-
   async containText(
     element: Locator,
     text: string,
