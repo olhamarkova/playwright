@@ -1,9 +1,9 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { GetByRoleOptions } from "./support/types/OptionsTypes";
-import { Button, Text, Heading } from "./support/uiService";
+import { Component } from "./core/component";
+import { GetByRoleOptions } from "./support/types/options";
+import { Button, Text, Heading } from "./support/component-service";
 
-export class Modal extends UiElement {
+export class Modal extends Component {
   readonly button: Button;
   readonly text: Text;
   readonly title: Heading;
@@ -15,7 +15,7 @@ export class Modal extends UiElement {
     this.title = new Heading(this.page);
   }
 
-  getModal(options?: GetByRoleOptions): Locator {
+  modal(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("dialog", options);
   }
 }

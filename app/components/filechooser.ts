@@ -1,10 +1,10 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { Button } from "./support/uiService";
-import { Clickable } from "./support/interfaces/clickable";
+import { Component } from "./core/component";
+import { Button } from "./support/component-service";
+import { Clickable } from "./support/interfaces/interfaces";
 import path from "path";
 
-export class Filechooser extends UiElement implements Clickable {
+export class Filechooser extends Component implements Clickable {
   readonly button: Button;
 
   constructor(page: Page) {
@@ -12,8 +12,8 @@ export class Filechooser extends UiElement implements Clickable {
     this.button = new Button(this.page);
   }
 
-  getChooseFileButton(): Locator {
-    return this.button.getLocator("input[type='file']");
+  chooseFileButton(): Locator {
+    return this.button.getByLocator("input[type='file']");
   }
 
   async uploadFile(button: Locator, fileName: string): Promise<void> {

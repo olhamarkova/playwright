@@ -1,42 +1,36 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import {
-  GetByRoleOptions,
-  GetLocatorOptions,
-} from "./support/types/OptionsTypes";
+import { Component } from "./core/component";
+import { GetByRoleOptions } from "./support/types/options";
 
-export class Table extends UiElement {
+export class Table extends Component {
   constructor(page: Page) {
     super(page);
   }
 
-  getTable(): Locator {
-    return this.page.getByRole("table");
-  }
-
-  getRows(): Locator {
+  rows(): Locator {
     return this.page.getByRole("row");
   }
 
-  getRowByIndex(index: number, options?: GetByRoleOptions): Locator {
-    return this.page.getByRole("row", options).nth(index - 1);
+  rowByNumber(rowNumber: number, options?: GetByRoleOptions): Locator {
+    return this.page.getByRole("row", options).nth(rowNumber - 1);
   }
 
-  getCellByRowNumber(
-    rowNumber: number,
-    columnNumber: number,
-    options?: GetByRoleOptions
-  ): Locator {
-    return this.getRowByIndex(rowNumber)
-      .getByRole("gridcell", options)
-      .nth(columnNumber - 1);
+  cellByContent(content: string): Locator {
+    return this.page.getByRole("gridcell", { name: content, exact: true });
   }
 
-  getCellByContent(options: GetLocatorOptions): Locator {
-    return this.page.getByRole("cell").filter(options);
+  cellByRowNumber(index: number, content: string): Locator {
+    return this.rowByNumber(index).getByRole("gridcell", {
+      name: content,
+      exact: true,
+    });
   }
 
-  getColumnheader(columnName: string, options?: GetByRoleOptions): Locator {
+  cellByCoordinates(rowNumber: number, cellNumber: number): Locator {
+    return this.rowByNumber(rowNumber).getByRole("gridcell").nth(cellNumber);
+  }
+
+  columnHeader(columnName: string, options?: GetByRoleOptions): Locator {
     return this.page
       .getByRole("columnheader", options)
       .filter({ hasText: columnName });

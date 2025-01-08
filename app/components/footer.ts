@@ -1,16 +1,22 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
+import { Component } from "./core/component";
+import { copyRightText } from "../modules/core/support/data";
 
-export class Footer extends UiElement {
+export class Footer extends Component {
   constructor(page: Page) {
     super(page);
   }
 
-  getFooter(): Locator {
-    return this.getLocator("footer");
+  footer(): Locator {
+    return this.getByLocator("footer");
   }
 
-  getCopyrightText(text: string): Locator {
-    return this.getFooter().getByText(text);
+  copyrightText(text: string): Locator {
+    return this.footer().getByText(text);
+  }
+
+  async verify() {
+    await this.isVisible(this.footer());
+    await this.isVisible(this.copyrightText(copyRightText));
   }
 }

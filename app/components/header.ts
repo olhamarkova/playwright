@@ -1,17 +1,29 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { Clickable } from "./support/interfaces/clickable";
+import { Component } from "./core/component";
+import { Clickable } from "./support/interfaces/interfaces";
 
-export class Header extends UiElement implements Clickable {
+export class Header extends Component implements Clickable {
   constructor(page: Page) {
     super(page);
   }
 
-  getHeader(): Locator {
-    return this.getLocator("header");
+  header(): Locator {
+    return this.getByLocator("header");
   }
 
-  getLogo(): Locator {
-    return this.getHeader().getByRole("img");
+  logo(): Locator {
+    return this.header().getByRole("img");
+  }
+
+  async goToMainPage(): Promise<void> {
+    await this.click(this.logo());
+  }
+
+  async verify(): Promise<void> {
+    await this.isVisible(this.header());
+  }
+
+  async verifyLogo(): Promise<void> {
+    await this.isVisible(this.logo());
   }
 }

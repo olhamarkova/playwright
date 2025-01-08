@@ -1,19 +1,15 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { ClickOptions, GetByRoleOptions } from "./support/types/OptionsTypes";
-import { Clickable } from "./support/interfaces/clickable";
+import { Component } from "./core/component";
+import { ClickOptions, GetByRoleOptions } from "./support/types/options";
+import { Clickable } from "./support/interfaces/interfaces";
 
-export class Radio extends UiElement implements Clickable {
+export class Radio extends Component implements Clickable {
   constructor(page: Page) {
     super(page);
   }
 
-  getRadio(options?: GetByRoleOptions): Locator {
+  radio(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("radio", options);
-  }
-
-  getRadioByIndex(index: number, options?: GetByRoleOptions): Locator {
-    return this.page.getByRole("radio", options).nth(index - 1);
   }
 
   async clickRadioLabel(label: string, options?: ClickOptions): Promise<void> {

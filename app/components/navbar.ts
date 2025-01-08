@@ -1,12 +1,11 @@
 import { type Locator, type Page } from "@playwright/test";
-import { CategoryNames } from "../modules/mainPage/support/types";
-import { UiElement } from "./core/component";
-import { Clickable } from "./support/interfaces/clickable";
-import { activeMenuButton } from "../modules/elementsPages/support/classes";
-import { NavbarItems } from "./support/types/NavbarTypes";
-import { Link, Button } from "./support/uiService";
+import { CategoryNames } from "../modules/main-page/support/types";
+import { Component } from "./core/component";
+import { Clickable } from "./support/interfaces/interfaces";
+import { NavbarItems } from "./support/types/navbar";
+import { Link, Button } from "./support/component-service";
 
-export class Navbar extends UiElement implements Clickable {
+export class Navbar extends Component implements Clickable {
   readonly navLink: Link;
   readonly button: Button;
 
@@ -16,29 +15,50 @@ export class Navbar extends UiElement implements Clickable {
     this.button = new Button(this.page);
   }
 
-  getMenuItem(itemTitle: CategoryNames): Locator {
-    return this.navLink.getByText(itemTitle);
+  private category(category: CategoryNames): Locator {
+    return this.navLink.getByText(category);
   }
 
-  menuSubItem(subItemText: NavbarItems): Locator {
-    return this.navLink.getByText(subItemText);
+  private subCategory(subCategory: NavbarItems): Locator {
+    return this.navLink.getByText(subCategory);
   }
 
-  menuSubItemButton(elementId: number): Locator {
-    return this.button.getLocator(`.show #item-${elementId}`);
+  private subCategoryButton(elementId: number): Locator {
+    return this.button.getByLocator(`.show #item-${elementId}`);
   }
 
-  async validateMenuItems(items: string[]): Promise<void> {
+  private async verifySubCategoryVisible(
+    subCategory: NavbarItems
+  ): Promise<void> {
+    await this.isVisible(this.subCategory(subCategory));
+  }
+
+  private async verifyButtonClass(elementId: number) {
+    await this.hasClass(
+      this.subCategoryButton(elementId),
+      "btn btn-light active"
+    );
+  }
+
+  async openCategory(category: CategoryNames): Promise<void> {
+    await this.click(this.category(category));
+  }
+
+  async openSubCategory(subCategory: NavbarItems): Promise<void> {
+    await this.click(this.subCategory(subCategory));
+  }
+
+  async verifySubCategories(items: string[]): Promise<void> {
     for (let [index, el] of items.entries()) {
       if (el === "Book Store" || el === "Profile" || el === "Book Store API") {
         index++;
       }
-      await this.isElementVisible(this.menuSubItem(el as NavbarItems));
-      await this.clickElement(this.menuSubItem(el as NavbarItems));
+      await this.verifySubCategoryVisible(el as NavbarItems);
+      await this.openSubCategory(el as NavbarItems);
       if (el === "Book Store API") {
         return;
       }
-      await this.hasClass(this.menuSubItemButton(index), activeMenuButton);
+      await this.verifyButtonClass(index);
     }
   }
 }
