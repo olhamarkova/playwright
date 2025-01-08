@@ -1,13 +1,12 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { Writable } from "./support/interfaces/writable";
-import { GetByRoleOptions } from "./support/types/OptionsTypes";
-import { Button, Input, Heading } from "./support/uiService";
+import { Component } from "./core/component";
+import { Button, Input, Heading } from "./support/component-service";
+import { Writable } from "./support/interfaces/interfaces";
 
-export class Form extends UiElement implements Partial<Writable> {
-  readonly button: Button;
-  readonly input: Input;
-  readonly heading: Heading;
+export class Form extends Component implements Partial<Writable> {
+  public readonly button: Button;
+  public readonly input: Input;
+  public readonly heading: Heading;
 
   constructor(page: Page) {
     super(page);
@@ -16,18 +15,19 @@ export class Form extends UiElement implements Partial<Writable> {
     this.heading = new Heading(this.page);
   }
 
-  getForm(options?: GetByRoleOptions): Locator {
-    return this.page.getByRole("form", options);
+  async clear(input: Locator): Promise<void> {
+    await this.input.clear(input);
   }
 
-  /**
-   * Fiil a form inputs with provided data
-   * @param element should be the locator that returns group of elements (all inputs on the form)
-   * @param value an array with string values
-   */
-  async fillOut(element: Locator, value: string[]): Promise<void> {
-    for (let i = 0; i < value.length; i++) {
-      await element.nth(i).fill(value[i]);
-    }
+  async verifyInputValue(input: Locator, value: string): Promise<void> {
+    await this.input.hasValue(input, value);
+  }
+
+  async enterValue(input: Locator, value: string): Promise<void> {
+    await this.input.fillOut(input, value);
+  }
+
+  async submit(button: Locator): Promise<void> {
+    await this.button.click(button);
   }
 }

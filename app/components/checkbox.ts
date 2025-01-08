@@ -1,13 +1,9 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { Checkable } from "./support/interfaces/checkable";
-import {
-  CheckOptions,
-  GetByRoleOptions,
-  GetLocatorOptions,
-} from "./support/types/OptionsTypes";
+import { Component } from "./core/component";
+import { Checkable } from "./support/interfaces/interfaces";
+import { CheckOptions, GetLocatorOptions } from "./support/types/options";
 
-export class Checkbox extends UiElement implements Checkable {
+export class Checkbox extends Component implements Checkable {
   constructor(page: Page) {
     super(page);
   }
@@ -16,32 +12,17 @@ export class Checkbox extends UiElement implements Checkable {
     return this.page.locator("input[type='checkbox']", options);
   }
 
-  getCheckbox(options?: GetByRoleOptions): Locator {
-    return this.page.getByRole("checkbox", options);
+  async check(element: Locator, options?: CheckOptions): Promise<void> {
+    await element.check(options);
   }
 
-  async check(
-    element: Locator | string,
-    options?: CheckOptions
-  ): Promise<void> {
-    await (element as Locator).check(options);
+  async uncheck(element: Locator, options?: CheckOptions): Promise<void> {
+    await element.uncheck(options);
   }
 
-  async uncheck(
-    element: Locator | string,
-    options?: CheckOptions
-  ): Promise<void> {
-    await (element as Locator).uncheck(options);
-  }
-
-  async isChecked(
-    element: Locator | string,
-    isChecked: boolean
-  ): Promise<void> {
-    if (!isChecked) {
-      await expect(element as Locator).not.toBeChecked();
-    } else {
-      await expect(element as Locator).toBeChecked();
-    }
+  async isChecked(element: Locator, isChecked: boolean): Promise<void> {
+    isChecked
+      ? await expect(element).toBeChecked()
+      : await expect(element).not.toBeChecked();
   }
 }

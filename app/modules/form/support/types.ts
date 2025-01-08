@@ -3,7 +3,8 @@ export type FormInputIds =
   | "lastName"
   | "userEmail"
   | "userNumber"
-  | "dateOfBirthInput";
+  | "dateOfBirthInput"
+  | "currentAddress";
 
 export enum Genders {
   Male = "1",

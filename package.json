@@ -9,7 +9,9 @@
     "all": "npx playwright test tests/",
     "functional": "npx playwright test --grep '@functional'",
     "negative": "npx playwright test --grep '@negative'",
-    "test open": "npx playwright test --ui"
+    "test-open": "npx playwright test --ui",
+    "aitest": "npx playwright test tests/aiTest.spec.ts --repeat-each=3 --project=chrome",
+    "cli": "node utils/tiny-cli.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@playwright/test": "^1.41.1",
     "@types/node": "^20.11.9",
+    "@zerostep/playwright": "^0.1.5",
     "ajv": "^8.17.1",
     "playwright-qase-reporter": "^2.0.5"
   },

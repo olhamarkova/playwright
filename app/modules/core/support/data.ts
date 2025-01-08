@@ -8,7 +8,7 @@ export const categories = {
   books: "Book Store Application",
 };
 
-export const sidebarItems = {
+export const navigationItems = {
   elements: [
     "Text Box",
     "Check Box",
@@ -49,7 +49,7 @@ export const sidebarItems = {
   bookStoreApplication: ["Login", "Book Store", "Profile", "Book Store API"],
 };
 
-export const pageUrls = {
+export const urls = {
   categories: {
     elements: "elements",
     forms: "forms",
@@ -71,6 +71,11 @@ export const pageUrls = {
       dynamicProperties: "dynamic-properties",
     },
     practiceForm: "automation-practice-form",
+    alertsAndFrames: {
+      windows: "browser-windows",
+      alerts: "alerts",
+      frames: "frames",
+    },
     books: {
       bookStoreApi: "swagger/",
     },
@@ -83,4 +88,22 @@ export const copyRightText = "© 2013-2020 TOOLSQA.COM | ALL RIGHTS RESERVED.";
 //Title
 export const title = {
   mainTitle: "DEMOQA",
+};
+
+//H1 headings
+export const headings = {
+  textBox: "Text Box",
+  checkbox: "Check Box",
+  radioButton: "Radio Button",
+  webTables: "Web Tables",
+  buttons: "Buttons",
+  links: "Links",
+  images: "Broken Links - Images",
+  upload: "Upload and Download",
+  dynamic: "Dynamic Properties",
+  form: "Practice Form",
+  windows: "Browser Windows",
+  alerts: "Alerts",
+  frames: "Frames",
+  formTitle: "Student Registration Form",
 };

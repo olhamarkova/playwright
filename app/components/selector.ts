@@ -1,9 +1,8 @@
 import { Locator, Page } from "@playwright/test";
-import { UiElement } from "./core/component";
-import { Clickable } from "./support/interfaces/clickable";
-import { GetByRoleOptions } from "./support/types/OptionsTypes";
+import { Component } from "./core/component";
+import { Clickable } from "./support/interfaces/interfaces";
 
-export class Selector extends UiElement implements Clickable {
+export class Selector extends Component implements Clickable {
   constructor(page: Page) {
     super(page);
   }
@@ -13,11 +12,7 @@ export class Selector extends UiElement implements Clickable {
   }
 
   getByClass(className: string): Locator {
-    return this.getLocator(`select[class=".${className}"]`);
-  }
-
-  getCombobox(options?: GetByRoleOptions): Locator {
-    return this.page.getByRole("combobox", options);
+    return this.getByLocator(`select[class=".${className}"]`);
   }
 
   async chooseOption(element: Locator, option: string): Promise<void> {
