@@ -9,11 +9,11 @@ import Ajv from "ajv";
 const validateBookSchema = new Ajv().compile(BookSchema);
 
 let token: string;
-let myUsertoken: string;
+let myUserToken: string;
 const userName = generateRandomUsername();
 const userPass = generateRandomPassword();
 
-apiTest.describe.serial("API Tests", () => {
+apiTest.describe("API Tests", () => {
   let userId: string;
 
   apiTest(
@@ -25,10 +25,10 @@ apiTest.describe.serial("API Tests", () => {
           credentials.login,
           credentials.password
         );
-        let myUsertoken = await generateTokenResponse.responseBody.token;
+        myUserToken = await generateTokenResponse.responseBody.token;
 
         //Create a new user
-        const createdUser = await user.createUser(myUsertoken, {
+        const createdUser = await user.createUser(myUserToken, {
           userName: userName,
           password: userPass,
         });
@@ -92,22 +92,22 @@ apiTest.describe.serial("API Tests", () => {
       });
 
       await apiTest.step("Step 2: Get Book By ISBN", async () => {
-        const allBooks = await books.getBookByIsbn(isbn);
-        expect(allBooks.statusCode).toBe(200);
-        expect(allBooks.statusMessage).toBe("OK");
+        const book = await books.getBookByIsbn(isbn);
+        expect(book.statusCode).toBe(200);
+        expect(book.statusMessage).toBe("OK");
 
         //Schema validation
-        const isSchemaValid = validateBookSchema(allBooks.responseBody);
+        const isSchemaValid = validateBookSchema(book.responseBody);
         if (!isSchemaValid) {
           console.log(validateBookSchema.errors);
         }
         expect(isSchemaValid).toBe(true);
-        expect(allBooks.responseBody.isbn).toEqual(isbn);
+        expect(book.responseBody.isbn).toEqual(isbn);
       });
 
       await apiTest.step("Step 3: Add A List Of Books To A User", async () => {
         //Create a new user
-        const newUser = await user.createUser(myUsertoken, {
+        const newUser = await user.createUser(myUserToken, {
           userName: userName,
           password: userPass,
         });
@@ -180,6 +180,12 @@ apiTest.describe.serial("API Tests", () => {
         expect(updateBook.statusCode).toBe(200);
         expect(updateBook.responseBody.books[0].isbn).toEqual(newIsbn);
         expect(updateBook.responseBody.userId).toEqual(newUserId);
+      });
+
+      await apiTest.step("Step 7: Delete The User By ID", async () => {
+        const isDeleted = await user.deleteUser(newUserToken, newUserId);
+        expect(isDeleted.statusCode).toBe(204);
+        expect(isDeleted.statusMessage).toBe("No Content");
       });
     }
   );
