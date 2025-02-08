@@ -15,6 +15,7 @@ import { PracticeFormPage } from "../modules/form/practice-form-page";
 import { WindowsPage } from "../modules/alerts-and-iframes/windows-page";
 import { AlertsPage } from "../modules/alerts-and-iframes/alerts-page";
 import { iFramesPage } from "../modules/alerts-and-iframes/iframes-page";
+import { NestedFramesPage } from "../modules/alerts-and-iframes/nested-frames";
 
 export class AppManager {
   protected page: Page;
@@ -95,6 +96,13 @@ export class AppManager {
     return new iFramesPage(
       this.page,
       urls.subCategories.alertsAndFrames.frames
+    );
+  }
+
+  get nestedFrames() {
+    return new NestedFramesPage(
+      this.page,
+      urls.subCategories.alertsAndFrames.nestedFrames
     );
   }
 }
