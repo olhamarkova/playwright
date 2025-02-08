@@ -14,5 +14,6 @@ export type HeadingText = {
   windows: string;
   alerts: string;
   frames: string;
+  nestedFrames: string;
   formTitle: string;
 };

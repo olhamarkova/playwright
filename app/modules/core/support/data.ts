@@ -75,6 +75,7 @@ export const urls = {
       windows: "browser-windows",
       alerts: "alerts",
       frames: "frames",
+      nestedFrames: "nestedframes",
     },
     books: {
       bookStoreApi: "swagger/",
@@ -105,5 +106,6 @@ export const headings = {
   windows: "Browser Windows",
   alerts: "Alerts",
   frames: "Frames",
+  nestedFrames: "Nested Frames",
   formTitle: "Student Registration Form",
 };
