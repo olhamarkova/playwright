@@ -18,4 +18,24 @@ export class Modal extends Component {
   modal(options?: GetByRoleOptions): Locator {
     return this.page.getByRole("dialog", options);
   }
+
+  heading(): Locator {
+    return this.getByClass("modal-title");
+  }
+
+  body(): Locator {
+    return this.getByClass("modal-body");
+  }
+
+  xButton(): Locator {
+    return this.button.getByClass("close");
+  }
+
+  closeButton(): Locator {
+    return this.button.getByName("Close");
+  }
+
+  async closeWithXButton(): Promise<void> {
+    await this.button.click(this.xButton());
+  }
 }
