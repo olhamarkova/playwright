@@ -16,6 +16,7 @@ import { WindowsPage } from "../modules/alerts-and-iframes/windows-page";
 import { AlertsPage } from "../modules/alerts-and-iframes/alerts-page";
 import { iFramesPage } from "../modules/alerts-and-iframes/iframes-page";
 import { NestedFramesPage } from "../modules/alerts-and-iframes/nested-frames";
+import { ModalsPage } from "../modules/alerts-and-iframes/modals-page";
 
 export class AppManager {
   protected page: Page;
@@ -104,5 +105,9 @@ export class AppManager {
       this.page,
       urls.subCategories.alertsAndFrames.nestedFrames
     );
+  }
+
+  get modals() {
+    return new ModalsPage(this.page, urls.subCategories.alertsAndFrames.modals);
   }
 }

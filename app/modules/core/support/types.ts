@@ -16,4 +16,5 @@ export type HeadingText = {
   frames: string;
   nestedFrames: string;
   formTitle: string;
+  modals: string;
 };
