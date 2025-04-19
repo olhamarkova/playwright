@@ -76,6 +76,7 @@ export const urls = {
       alerts: "alerts",
       frames: "frames",
       nestedFrames: "nestedframes",
+      modals: "modal-dialogs",
     },
     books: {
       bookStoreApi: "swagger/",
@@ -108,4 +109,5 @@ export const headings = {
   frames: "Frames",
   nestedFrames: "Nested Frames",
   formTitle: "Student Registration Form",
+  modals: "Modal Dialogs",
 };
