@@ -7,4 +7,3 @@ playwright/
 /playwright/.cache/
 /logs
 .env
-zerostep.config.json
