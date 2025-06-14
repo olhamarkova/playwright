@@ -17,4 +17,5 @@ export type HeadingText = {
   nestedFrames: string;
   formTitle: string;
   modals: string;
+  accordian: string;
 };
