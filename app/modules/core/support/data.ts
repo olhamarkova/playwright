@@ -78,6 +78,9 @@ export const urls = {
       nestedFrames: "nestedframes",
       modals: "modal-dialogs",
     },
+    widgets: {
+      accordian: "accordian",
+    },
     books: {
       bookStoreApi: "swagger/",
     },
@@ -110,4 +113,5 @@ export const headings = {
   nestedFrames: "Nested Frames",
   formTitle: "Student Registration Form",
   modals: "Modal Dialogs",
+  accordian: "Accordian",
 };
