@@ -18,6 +18,7 @@ import { iFramesPage } from "../modules/alerts-and-iframes/iframes-page";
 import { NestedFramesPage } from "../modules/alerts-and-iframes/nested-frames";
 import { ModalsPage } from "../modules/alerts-and-iframes/modals-page";
 import { AccordianPage } from "../modules/widgets/accordian-page";
+import { AutocompletePage } from "../modules/widgets/autocomplete-page";
 
 export class AppManager {
   protected page: Page;
@@ -114,5 +115,12 @@ export class AppManager {
 
   get accordian() {
     return new AccordianPage(this.page, urls.subCategories.widgets.accordian);
+  }
+
+  get autocomplete() {
+    return new AutocompletePage(
+      this.page,
+      urls.subCategories.widgets.autocomplete
+    );
   }
 }

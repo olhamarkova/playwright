@@ -18,4 +18,5 @@ export type HeadingText = {
   formTitle: string;
   modals: string;
   accordian: string;
+  autocomplete: string;
 };

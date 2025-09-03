@@ -80,6 +80,7 @@ export const urls = {
     },
     widgets: {
       accordian: "accordian",
+      autocomplete: "auto-complete",
     },
     books: {
       bookStoreApi: "swagger/",
