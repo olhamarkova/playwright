@@ -22,3 +22,4 @@ export const test = base.extend<{
 
 export const describe = test.describe;
 export const expect = test.expect;
+export const step = test.step;

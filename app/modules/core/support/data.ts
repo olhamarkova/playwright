@@ -115,4 +115,5 @@ export const headings = {
   formTitle: "Student Registration Form",
   modals: "Modal Dialogs",
   accordian: "Accordian",
+  autocomplete: "Auto Complete",
 };
