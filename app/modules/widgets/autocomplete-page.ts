@@ -34,30 +34,30 @@ export class AutocompletePage extends BasePage {
     );
   }
 
-  async fillMultipleColorInput(text: string) {
+  async fillMultipleColorInput(text: string): Promise<void> {
     await this.input.fillOut(this.multipleColorInput, text);
   }
 
-  async fillSingleColorInput(text: string) {
+  async fillSingleColorInput(text: string): Promise<void> {
     await this.input.fillOut(this.singleColorInput, text);
   }
 
-  async pickColor(color: string) {
+  async pickColor(color: string): Promise<void> {
     await this.input.click(this.input.getByText(color));
   }
 
-  async verifyColorsCount(count: number) {
+  async verifyColorsCount(count: number): Promise<void> {
     await this.chicklet.hasCount(this.colorResult, count);
   }
 
-  async verifyColorValues(value: string[]) {
+  async verifyColorValues(value: string[]): Promise<void> {
     const resultsQty = await this.chicklet.getQuantity(this.colorResult);
     for (let i = 0; i < resultsQty; i++) {
       await this.chicklet.hasText(this.colorResult.nth(i), value[i]);
     }
   }
 
-  async verifySingleColorValue(value: string) {
+  async verifySingleColorValue(value: string): Promise<void> {
     await this.input.hasText(this.singleColorResult, value);
   }
 }
