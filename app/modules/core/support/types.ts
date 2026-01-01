@@ -19,4 +19,5 @@ export type HeadingText = {
   modals: string;
   accordian: string;
   autocomplete: string;
+  datePicker: string;
 };

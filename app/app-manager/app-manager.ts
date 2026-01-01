@@ -19,6 +19,7 @@ import { NestedFramesPage } from "../modules/alerts-and-iframes/nested-frames";
 import { ModalsPage } from "../modules/alerts-and-iframes/modals-page";
 import { AccordianPage } from "../modules/widgets/accordian-page";
 import { AutocompletePage } from "../modules/widgets/autocomplete-page";
+import { DatePickerPage } from "../modules/widgets/date-picker-page";
 
 export class AppManager {
   protected page: Page;
@@ -122,5 +123,9 @@ export class AppManager {
       this.page,
       urls.subCategories.widgets.autocomplete
     );
+  }
+
+  get datePicker() {
+    return new DatePickerPage(this.page, urls.subCategories.widgets.datePicker);
   }
 }

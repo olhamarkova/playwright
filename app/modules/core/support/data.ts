@@ -81,6 +81,7 @@ export const urls = {
     widgets: {
       accordian: "accordian",
       autocomplete: "auto-complete",
+      datePicker: "date-picker",
     },
     books: {
       bookStoreApi: "swagger/",
@@ -116,4 +117,5 @@ export const headings = {
   modals: "Modal Dialogs",
   accordian: "Accordian",
   autocomplete: "Auto Complete",
+  datePicker: "Date Picker",
 };
