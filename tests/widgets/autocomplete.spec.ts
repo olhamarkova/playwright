@@ -16,4 +16,15 @@ test.describe("Handling Auto Complete Inputs", async () => {
     await autocomplete.verifyColorsCount(2);
     await autocomplete.verifyColorValues(["Red", "Black"]);
   });
+
+  test("@smoke User Shall Be Able to Pick One Color Option", async ({
+    app: { autocomplete },
+  }) => {
+    await autocomplete.fillSingleColorInput("t");
+    await autocomplete.pickColor("White");
+    await autocomplete.verifySingleColorValue("White");
+    await autocomplete.fillSingleColorInput("r");
+    await autocomplete.pickColor("Red");
+    await autocomplete.verifySingleColorValue("Red");
+  });
 });

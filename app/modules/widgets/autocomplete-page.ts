@@ -15,6 +15,7 @@ export class AutocompletePage extends BasePage {
   private readonly multipleColorInput: Locator;
   private readonly singleColorInput: Locator;
   private readonly colorResult: Locator;
+  private readonly singleColorResult: Locator;
 
   constructor(page: Page, url: string) {
     super(page, url);
@@ -28,10 +29,17 @@ export class AutocompletePage extends BasePage {
     this.colorResult = this.chicklet.getByClass(
       "auto-complete__multi-value__label"
     );
+    this.singleColorResult = this.input.getByClass(
+      "auto-complete__single-value"
+    );
   }
 
   async fillMultipleColorInput(text: string) {
     await this.input.fillOut(this.multipleColorInput, text);
+  }
+
+  async fillSingleColorInput(text: string) {
+    await this.input.fillOut(this.singleColorInput, text);
   }
 
   async pickColor(color: string) {
@@ -47,5 +55,9 @@ export class AutocompletePage extends BasePage {
     for (let i = 0; i < resultsQty; i++) {
       await this.chicklet.hasText(this.colorResult.nth(i), value[i]);
     }
+  }
+
+  async verifySingleColorValue(value: string) {
+    await this.input.hasText(this.singleColorResult, value);
   }
 }
