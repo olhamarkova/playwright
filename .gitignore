@@ -1,6 +1,7 @@
 node_modules/
 playwright/
 screenshots/
+monocart-report/
 /test-results/
 /tests-examples/
 /playwright-report/

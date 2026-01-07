@@ -11,7 +11,8 @@
     "negative": "npx playwright test --grep '@negative'",
     "test-open": "npx playwright test --ui",
     "aitest": "npx playwright test tests/aiTest.spec.ts --repeat-each=3 --project=chrome",
-    "cli": "node utils/tiny-cli.ts"
+    "cli": "node utils/tiny-cli.ts",
+    "show-report": "npx monocart show-report monocart-report/index.html"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "@types/node": "^20.11.9",
     "@zerostep/playwright": "^0.1.5",
     "ajv": "^8.17.1",
+    "monocart-reporter": "^2.9.23",
     "playwright-qase-reporter": "^2.0.5"
   },
   "dependencies": {
