@@ -45,21 +45,7 @@ export class ButtonsPage extends BasePage {
   };
 
   async verifyButton(clickType: "click" | "right" | "double"): Promise<void> {
-    switch (clickType) {
-      case "click":
-        await this.doClick.click();
-        await this.verifySucessMsg(successMessages.dynamicClick);
-        break;
-      case "right":
-        await this.doClick.right();
-        await this.verifySucessMsg(successMessages.rightClick);
-        break;
-      case "double":
-        await this.doClick.double();
-        await this.verifySucessMsg(successMessages.doubleClick);
-        break;
-      default:
-        console.log(`Something went wrong. Check your data!`);
-    }
+    await this.doClick[clickType]();
+    await this.verifySucessMsg(successMessages[clickType]);
   }
 }
